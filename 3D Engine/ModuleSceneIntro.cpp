@@ -39,6 +39,8 @@ bool ModuleSceneIntro::CleanUp()
 	return true;
 }
 
+
+
 // PreUpdate
 update_status ModuleSceneIntro::PreUpdate(float dt)
 {
@@ -49,18 +51,29 @@ update_status ModuleSceneIntro::PreUpdate(float dt)
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
+	// Render grid
 	Plane p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();
 
+	// Update ImGui
+	UpdateImGui();
+
+	return UPDATE_CONTINUE;
+}
+
+bool ModuleSceneIntro::UpdateImGui()
+{
 	// IMGUI CODE
 	static bool show_test_window = false;
 
+	// Test window
 	if (show_test_window)
 	{
 		ImGui::ShowTestWindow();
 	}
 
+	// Main Bar
 	if (ImGui::BeginMainMenuBar())
 	{
 		if (ImGui::BeginMenu("File"))
@@ -71,7 +84,6 @@ update_status ModuleSceneIntro::Update(float dt)
 			ImGui::Text("Save file");
 			ImGui::EndMenu();
 		}
-
 		if (ImGui::BeginMenu("Edit"))
 		{
 			ImGui::Text("Undo");
@@ -85,13 +97,11 @@ update_status ModuleSceneIntro::Update(float dt)
 			ImGui::Text("Delete");
 			ImGui::EndMenu();
 		}
-
 		if (ImGui::BeginMenu("Assets"))
 		{
 			ImGui::Text("Import new asset");
 			ImGui::EndMenu();
 		}
-
 		if (ImGui::BeginMenu("GameObject"))
 		{
 			ImGui::Text("Create empty");
@@ -108,30 +118,26 @@ update_status ModuleSceneIntro::Update(float dt)
 			}
 			ImGui::EndMenu();
 		}
-
 		if (ImGui::BeginMenu("Component"))
 		{
 			ImGui::Text("Mesh");
 			ImGui::Text("Physics");
 			ImGui::EndMenu();
 		}
-
 		if (ImGui::BeginMenu("Window"))
 		{
 			ImGui::Checkbox("Show test window", &show_test_window);
 			ImGui::EndMenu();
 		}
-
 		if (ImGui::BeginMenu("About"))
 		{
 
 			ImGui::EndMenu();
 		}
-		
+
 		ImGui::EndMainMenuBar();
 	}
-	
-	ImGui::Render();
 
-	return UPDATE_CONTINUE;
+	ImGui::Render();
+	return true;
 }

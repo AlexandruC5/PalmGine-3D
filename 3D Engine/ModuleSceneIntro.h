@@ -20,6 +20,6 @@ public:
 	update_status PreUpdate(float dt);
 	bool CleanUp();
 
-public:
-
+private:
+	bool UpdateImGui();
 };
