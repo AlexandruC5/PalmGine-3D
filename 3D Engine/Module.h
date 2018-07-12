@@ -3,6 +3,8 @@
 class Application;
 struct PhysBody3D;
 
+class Application;
+
 class Module
 {
 private :

@@ -25,6 +25,9 @@
     <Filter Include="Sources\Tools\MathGeoLib">
       <UniqueIdentifier>{c4704acc-4420-4eed-85d1-ec564aca1278}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Tools\mmgr">
+      <UniqueIdentifier>{9a1ff903-83d2-440f-8772-3b13b497aba4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -98,12 +101,6 @@
     </ClInclude>
     <ClInclude Include="JSON\parson.h">
       <Filter>Sources\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="mmgr\mmgr.h">
-      <Filter>Sources\Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="mmgr\nommgr.h">
-      <Filter>Sources\Tools</Filter>
     </ClInclude>
     <ClInclude Include="MathGeoLib\Algorithm\GJK.h">
       <Filter>Sources\Tools\MathGeoLib</Filter>
@@ -300,6 +297,12 @@
     <ClInclude Include="ModuleConsole.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="mmgr\nommgr.h">
+      <Filter>Sources\Tools\mmgr</Filter>
+    </ClInclude>
+    <ClInclude Include="mmgr\mmgr.h">
+      <Filter>Sources\Tools\mmgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -316,9 +319,6 @@
     </ClCompile>
     <ClCompile Include="ModuleWindow.cpp">
       <Filter>Sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="log.cpp">
-      <Filter>Sources\Tools</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>Sources\Tools</Filter>
@@ -367,9 +367,6 @@
     </ClCompile>
     <ClCompile Include="JSON\parson.c">
       <Filter>Sources\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="mmgr\mmgr.cpp">
-      <Filter>Sources\Tools</Filter>
     </ClCompile>
     <ClCompile Include="MathGeoLib\Algorithm\GJK.cpp">
       <Filter>Sources\Tools\MathGeoLib</Filter>
@@ -481,6 +478,12 @@
     </ClCompile>
     <ClCompile Include="ModuleConsole.cpp">
       <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="mmgr\mmgr.cpp">
+      <Filter>Sources\Tools\mmgr</Filter>
+    </ClCompile>
+    <ClCompile Include="log.cpp">
+      <Filter>Sources\Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
