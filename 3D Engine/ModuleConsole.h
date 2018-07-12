@@ -8,7 +8,7 @@
 class ModuleConsole : public Module
 {
 public:
-	ModuleConsole(Application* app, bool start_enabled = false);
+	ModuleConsole(bool start_enabled = false);
 	~ModuleConsole();
 
 	bool Start();
