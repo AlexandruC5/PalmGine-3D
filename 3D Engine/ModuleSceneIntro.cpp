@@ -3,6 +3,7 @@
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"
 #include "PhysBody3D.h"
+#include "ModuleConsole.h"
 #include "imGUI\imgui.h"
 #include "imGUI\imgui_impl_sdl_gl3.h"
 #include "Glew\include\glew.h"
@@ -71,6 +72,11 @@ bool ModuleSceneIntro::UpdateImGui()
 	if (show_test_window)
 	{
 		ImGui::ShowTestWindow();
+	}
+
+	// Console
+	if (App->console->active == true) {
+		App->console->Draw("Console");
 	}
 
 	// Main Bar
