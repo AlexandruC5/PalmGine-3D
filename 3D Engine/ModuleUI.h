@@ -3,11 +3,11 @@
 #include "p2DynArray.h"
 #include "Globals.h"
 
-class ModuleSceneIntro : public Module
+class ModuleUI : public Module
 {
 public:
-	ModuleSceneIntro(bool start_enabled = true);
-	~ModuleSceneIntro();
+	ModuleUI(bool start_enabled = true);
+	~ModuleUI();
 
 	bool Start();
 	update_status Update(float dt);
