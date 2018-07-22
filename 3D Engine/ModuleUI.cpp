@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "ModuleConsole.h"
+#include "ModuleHardware.h"
 #include "imGUI\imgui.h"
 #include "imGUI\imgui_impl_sdl_gl3.h"
 #include "Glew\include\glew.h"
@@ -37,6 +38,11 @@ update_status ModuleUI::Update(float dt)
 	// Console
 	if (App->console->active == true) {
 		App->console->Draw("Console");
+	}
+
+	//Hardware
+	if (App->hardware->active == true) {
+		App->hardware->Draw("Hardware");
 	}
 
 	// Main Bar

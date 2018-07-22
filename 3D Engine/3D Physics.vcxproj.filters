@@ -306,6 +306,9 @@
     <ClInclude Include="ModuleUI.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleHardware.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -489,6 +492,9 @@
       <Filter>Sources\Tools</Filter>
     </ClCompile>
     <ClCompile Include="ModuleUI.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleHardware.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>

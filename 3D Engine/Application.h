@@ -11,6 +11,7 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleConsole.h"
+#include "ModuleHardware.h"
 #include "ModuleUI.h"
 
 class Application
@@ -20,6 +21,7 @@ public:
 	ModuleInput* input;
 	ModuleAudio* audio;
 	ModuleConsole* console;
+	ModuleHardware* hardware;
 	ModuleSceneIntro* scene_intro;
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;

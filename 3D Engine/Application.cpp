@@ -6,6 +6,7 @@ Application::Application()
 	input = new ModuleInput();
 	audio = new ModuleAudio();
 	console = new ModuleConsole();
+	hardware = new ModuleHardware();
 	scene_intro = new ModuleSceneIntro();
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
@@ -21,6 +22,7 @@ Application::Application()
 	AddModule(input);
 	AddModule(audio);
 	AddModule(console);
+	AddModule(hardware);
 	
 	// Scene
 	AddModule(scene_intro);
