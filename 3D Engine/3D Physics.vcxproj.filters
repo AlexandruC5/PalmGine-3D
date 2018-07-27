@@ -31,6 +31,9 @@
     <Filter Include="Sources\Tools\assimp">
       <UniqueIdentifier>{6376e9b8-214d-4a9e-a8bf-6f3fdaa13807}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Tools\Devil">
+      <UniqueIdentifier>{bc34141e-6abd-4fa9-acad-1874edec6d89}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -423,6 +426,33 @@
     <ClInclude Include="Assimp\include\port\AndroidJNI\AndroidJNIIOSystem.h">
       <Filter>Sources\Tools\assimp</Filter>
     </ClInclude>
+    <ClInclude Include="Devil\include\config.h">
+      <Filter>Sources\Tools\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\devil_internal_exports.h">
+      <Filter>Sources\Tools\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\il.h">
+      <Filter>Sources\Tools\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\il_wrap.h">
+      <Filter>Sources\Tools\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\ilu.h">
+      <Filter>Sources\Tools\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\ilu_region.h">
+      <Filter>Sources\Tools\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\ilut.h">
+      <Filter>Sources\Tools\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="Devil\include\ilut_config.h">
+      <Filter>Sources\Tools\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleFBX.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -611,6 +641,9 @@
     <ClCompile Include="ModuleHardware.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleFBX.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="MathGeoLib\Geometry\KDTree.inl">
@@ -654,6 +687,9 @@
     </None>
     <None Include="Assimp\include\vector3.inl">
       <Filter>Sources\Tools\assimp</Filter>
+    </None>
+    <None Include="Devil\include\config.h.win">
+      <Filter>Sources\Tools\Devil</Filter>
     </None>
   </ItemGroup>
 </Project>
