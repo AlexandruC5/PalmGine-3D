@@ -1,6 +1,8 @@
 #pragma once
 #include "Module.h"
 #include "Globals.h"
+#include <vector>
+#include "Glew\include\glew.h"
 
 #define MAX_MOUSE_BUTTONS 5
 
@@ -10,6 +12,13 @@ enum KEY_STATE
 	KEY_DOWN,
 	KEY_REPEAT,
 	KEY_UP
+};
+
+enum FILE_TYPE
+{
+	GEOMETRY_MODEL = 0,
+	UNKNOWN,
+	DIR_NULLPTR
 };
 
 class ModuleInput : public Module
@@ -58,6 +67,8 @@ public:
 		return mouse_y_motion;
 	}
 
+	std::string fbx_path;
+
 private:
 	KEY_STATE* keyboard;
 	KEY_STATE mouse_buttons[MAX_MOUSE_BUTTONS];
@@ -66,5 +77,7 @@ private:
 	int mouse_z;
 	int mouse_x_motion;
 	int mouse_y_motion;
+
+	const FILE_TYPE ModuleInput::GetFileType(const char * dir) const;
 	//int mouse_z_motion;
 };

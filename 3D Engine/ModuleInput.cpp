@@ -14,6 +14,7 @@ ModuleInput::ModuleInput(bool start_enabled) : Module(start_enabled)
 // Destructor
 ModuleInput::~ModuleInput()
 {
+	//fbx_path.clear;
 	delete[] keyboard;
 }
 
@@ -90,11 +91,12 @@ update_status ModuleInput::PreUpdate(float dt)
 	{
 		switch(e.type)
 		{
-			case SDL_MOUSEWHEEL:
+			FILE_TYPE file_type;
+		case SDL_MOUSEWHEEL:
 			mouse_z = e.wheel.y;
 			break;
 
-			case SDL_MOUSEMOTION:
+		case SDL_MOUSEMOTION:
 			mouse_x = e.motion.x / SCREEN_SIZE;
 			mouse_y = e.motion.y / SCREEN_SIZE;
 
@@ -102,15 +104,30 @@ update_status ModuleInput::PreUpdate(float dt)
 			mouse_y_motion = e.motion.yrel / SCREEN_SIZE;
 			break;
 
-			case SDL_QUIT:
+		case SDL_QUIT:
 			quit = true;
 			break;
 
-			case SDL_WINDOWEVENT:
+		case SDL_DROPFILE:
+			fbx_path = e.drop.file;
+			file_type = GetFileType(fbx_path.c_str());
+			if (file_type == GEOMETRY_MODEL)
 			{
-				if(e.window.event == SDL_WINDOWEVENT_RESIZED)
-					App->renderer3D->OnResize(e.window.data1, e.window.data2);
+				if (App->fbx->meshes.size() == 0)
+					App->fbx->LoadFBX(fbx_path.c_str());
+				else
+				{
+					App->fbx->ClearMeshes();
+					App->fbx->LoadFBX(fbx_path.c_str());
+				}
+				App->fbx->CentrateObjectView();
 			}
+
+		case SDL_WINDOWEVENT:
+		{
+			if (e.window.event == SDL_WINDOWEVENT_RESIZED)
+				App->renderer3D->OnResize(e.window.data1, e.window.data2);
+		}
 		}
 	}
 
@@ -126,4 +143,33 @@ bool ModuleInput::CleanUp()
 	LOG("Quitting SDL input event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
+}
+
+const FILE_TYPE ModuleInput::GetFileType(const char * dir) const
+{
+	if (dir != nullptr)
+	{
+		std::string type;
+		//From const char* to std::string
+		std::string path(dir);
+
+		//Find extension
+		type = path.substr(path.find_last_of("."));
+
+		if (type == ".fbx" || type == ".obj" ||
+			type == ".FBX" || type == ".OBJ")
+		{
+			return GEOMETRY_MODEL;
+		}
+
+		// Add texture formats and texture type
+
+		else
+		{
+			return UNKNOWN;
+		}
+	}
+
+	LOG("File directory ERROR. Is nullptr.");
+	return DIR_NULLPTR;
 }
