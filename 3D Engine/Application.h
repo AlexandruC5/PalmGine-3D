@@ -13,6 +13,7 @@
 #include "ModuleConsole.h"
 #include "ModuleHardware.h"
 #include "ModuleUI.h"
+#include "ModuleFBX.h"
 
 class Application
 {
@@ -26,6 +27,7 @@ public:
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
 	ModuleUI* ui;
+	ModuleFBX* fbx;
 
 private:
 

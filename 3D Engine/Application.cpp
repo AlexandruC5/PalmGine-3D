@@ -10,6 +10,7 @@ Application::Application()
 	scene_intro = new ModuleSceneIntro();
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
+	fbx = new ModuleFBX();
 	ui = new ModuleUI();
 
 	// The order of calls is very important!
@@ -26,6 +27,7 @@ Application::Application()
 	
 	// Scene
 	AddModule(scene_intro);
+	AddModule(fbx);
 	AddModule(ui);
 	
 	// Renderer last!
