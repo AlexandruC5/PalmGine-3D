@@ -83,11 +83,11 @@ bool ModuleRenderer3D::Init()
 
 			GLfloat LightModelAmbient[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 			glLightModelfv(GL_LIGHT_MODEL_AMBIENT, LightModelAmbient);
-
+			//Lights on scene
 			lights[0].ref = GL_LIGHT0;
-			lights[0].ambient.Set(0.25f, 0.25f, 0.25f, 1.0f);
-			lights[0].diffuse.Set(0.75f, 0.75f, 0.75f, 1.0f);
-			lights[0].SetPos(0.0f, 0.0f, 2.5f);
+			lights[0].diffuse.Set(0.5f, 0.5f, 0.5f, 1.0f);
+			lights[0].ambient.Set(0.9f, 0.9f, 0.9f, 1.0f);
+			lights[0].SetPos(0.0f, 0.5f, 0.0f);
 			lights[0].Init();
 
 			GLfloat MaterialAmbient[] = { 1.0f, 1.0f, 1.0f, 1.0f };
@@ -161,9 +161,15 @@ bool ModuleRenderer3D::DrawMeshes(const ModelConfig mesh) const
 
 	glBindBuffer(GL_ARRAY_BUFFER, mesh.id_vertices);
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
-
-
-
+	
+	// Texture
+	glBindBuffer(GL_ARRAY_BUFFER, mesh.id_uvs);
+	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+	if (App->fbx->last_texture_id == 0)
+		glBindTexture(GL_TEXTURE_2D, mesh.texture_id);
+	else
+		glBindTexture(GL_TEXTURE_2D, App->fbx->last_texture_id);
+	// End texture
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh.id_indices);
 	glDrawElements(GL_TRIANGLES, mesh.num_indices, GL_UNSIGNED_INT, NULL);
