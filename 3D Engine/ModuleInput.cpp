@@ -122,6 +122,10 @@ update_status ModuleInput::PreUpdate(float dt)
 				}
 				App->fbx->CentrateObjectView();
 			}
+			else if (file_type == TEXTURE)
+			{
+				App->fbx->ApplyTexture(fbx_path.c_str());
+			}
 
 		case SDL_WINDOWEVENT:
 		{
@@ -155,15 +159,16 @@ const FILE_TYPE ModuleInput::GetFileType(const char * dir) const
 
 		//Find extension
 		type = path.substr(path.find_last_of("."));
-
-		if (type == ".fbx" || type == ".obj" ||
+		if (type == ".png" || type == ".jpg" || type == ".bmp" || type == ".dds" ||
+			type == ".PNG" || type == ".JPG" || type == ".BMP" || type == ".DDS")
+		{
+			return TEXTURE;
+		}
+		else if (type == ".fbx" || type == ".obj" ||
 			type == ".FBX" || type == ".OBJ")
 		{
 			return GEOMETRY_MODEL;
 		}
-
-		// Add texture formats and texture type
-
 		else
 		{
 			return UNKNOWN;
