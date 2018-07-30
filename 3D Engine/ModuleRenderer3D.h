@@ -3,6 +3,7 @@
 #include "Globals.h"
 #include "glmath.h"
 #include "Light.h"
+#include "ModuleFBX.h"
 
 #define MAX_LIGHTS 8
 class Application;
@@ -15,9 +16,11 @@ public:
 
 	bool Init();
 	update_status PreUpdate(float dt);
+	update_status Update(float dt);
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
+	bool DrawMeshes(ModelConfig mesh);
 	void OnResize(int width, int height);
 
 public:

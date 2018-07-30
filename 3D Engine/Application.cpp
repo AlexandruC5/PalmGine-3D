@@ -28,10 +28,10 @@ Application::Application()
 	// Scene
 	AddModule(scene_intro);
 	AddModule(fbx);
-	AddModule(ui);
 	
 	// Renderer last!
 	AddModule(renderer3D);
+	AddModule(ui);
 }
 
 Application::~Application()
