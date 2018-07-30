@@ -35,29 +35,30 @@ bool ModuleFBX::Start()
 	return ret;
 }
 
-update_status ModuleFBX::Update(float dt)
-{
-	return UPDATE_CONTINUE;
-}
-
 void ModuleFBX::ClearMeshes()
 {
 	for (int i = meshes.size() - 1; meshes.size() != 0; i--)
 	{
 		delete[] meshes[i].indices;
 		delete[] meshes[i].vertices;
+		delete[] meshes[i].uvs;
+		delete[] meshes[i].normals;
 		meshes.pop_back();
 	}
 
+	//Geometry
 	delete data.indices;
 	delete data.vertices;
+
+	//Texture
+	delete data.uvs;
+	delete data.normals;
 }
 
 bool ModuleFBX::CleanUp()
 {
 	aiDetachAllLogStreams();
 	ClearMeshes();
-
 	return true;
 }
 
@@ -67,7 +68,7 @@ bool ModuleFBX::LoadFBX(const char* path)
 	file_name.clear();
 	this->path = path;
 	std::string name(path);
-	//Delete rest of the path to substract the name of the file
+	//Substract the name of the file
 	this->file_name = name.substr(name.find_last_of('\\') + 1); 
 	bool ret = true;
 	const aiScene* scene = aiImportFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
@@ -75,7 +76,6 @@ bool ModuleFBX::LoadFBX(const char* path)
 	if (scene != nullptr && scene->HasMeshes())
 	{
 		aiNode* rootNode = scene->mRootNode;
-
 		for (int i = 0; i < rootNode->mNumChildren; ++i)
 		{
 			LoadModel(scene, rootNode->mChildren[i], path);
