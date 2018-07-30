@@ -152,7 +152,7 @@ bool ModuleRenderer3D::CleanUp()
 	return true;
 }
 
-bool ModuleRenderer3D::DrawMeshes(ModelConfig mesh)
+bool ModuleRenderer3D::DrawMeshes(const ModelConfig mesh) const
 {
 	bool ret = true;
 	glEnableClientState(GL_VERTEX_ARRAY);

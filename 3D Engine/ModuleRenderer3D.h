@@ -20,7 +20,7 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
-	bool DrawMeshes(ModelConfig mesh);
+	bool DrawMeshes(const ModelConfig mesh) const;
 	void OnResize(int width, int height);
 
 public:
