@@ -60,6 +60,9 @@ public:
 	vec3 const GetPosition();
 	vec3 const GetRotation();
 	vec3 const GetScale();
+	float const GetNormals();
+	float const GetUvs();
+	uint const GetTextureId();
 	void const CentrateObjectView();
 
 	std::vector<ModelConfig> meshes;

@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "ModuleConsole.h"
+#include "ModuleInspector.h"
 #include "ModuleHardware.h"
 #include "imGUI\imgui.h"
 #include "imGUI\imgui_impl_sdl_gl3.h"
@@ -43,6 +44,11 @@ update_status ModuleUI::Update(float dt)
 	//Hardware
 	if (App->hardware->active == true) {
 		App->hardware->Draw("Hardware");
+	}
+
+	//Inspector
+	if (App->hardware->active == true) {
+		App->inspector->Draw("Inspector");
 	}
 
 	// Main Bar

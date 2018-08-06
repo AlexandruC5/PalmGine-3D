@@ -198,6 +198,7 @@
     <ClInclude Include="ModuleConsole.h" />
     <ClInclude Include="ModuleFBX.h" />
     <ClInclude Include="ModuleHardware.h" />
+    <ClInclude Include="ModuleInspector.h" />
     <ClInclude Include="ModulePhysics3D.h" />
     <ClInclude Include="ModuleRenderer3D.h" />
     <ClInclude Include="ModuleUI.h" />
@@ -269,6 +270,7 @@
     <ClCompile Include="ModuleFBX.cpp" />
     <ClCompile Include="ModuleHardware.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
+    <ClCompile Include="ModuleInspector.cpp" />
     <ClCompile Include="ModulePhysics3D.cpp" />
     <ClCompile Include="ModuleRenderer3D.cpp" />
     <ClCompile Include="ModuleSceneIntro.cpp" />

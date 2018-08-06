@@ -268,3 +268,18 @@ vec3 const ModuleFBX::GetScale()
 {
 	return(mesh.scale);
 }
+
+float const ModuleFBX::GetNormals()
+{
+	return(mesh.num_normals);
+}
+
+float const ModuleFBX::GetUvs()
+{
+	return(mesh.num_uvs);
+}
+
+uint const ModuleFBX::GetTextureId()
+{
+	return(mesh.texture_id);
+}
