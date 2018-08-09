@@ -63,11 +63,6 @@ bool ModuleHardware::CleanUp()
 //Function that draws all the console
 void ModuleHardware::Draw(const char* title)
 {
-	//Creates the console interface
-	ImGui::Begin(title);
-
-	ImGui::SetNextWindowSize(ImVec2(520, 600), ImGuiCond_FirstUseEver);
-
 	//SDL version
 	ImGui::Text("SDL Version: ");
 	char SDLVer[256];
@@ -153,5 +148,4 @@ void ModuleHardware::Draw(const char* title)
 	ImGui::SameLine();
 	ImGui::TextColored(ImVec4(0, 1, 0, 100), "%.2f Mb", (dedicatedMemory * 0.001));
 
-	ImGui::End();
 }

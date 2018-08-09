@@ -1,7 +1,7 @@
 #include "Application.h"
 #include "ModuleConsole.h"
 #include "ModuleInspector.h"
-#include "ModuleHardware.h"
+#include "ModuleConfig.h"
 #include "imGUI\imgui.h"
 #include "imGUI\imgui_impl_sdl_gl3.h"
 #include "Glew\include\glew.h"
@@ -41,15 +41,32 @@ update_status ModuleUI::Update(float dt)
 		App->console->Draw("Console");
 	}
 
-	//Hardware
-	if (App->hardware->active == true) {
-		App->hardware->Draw("Hardware");
+	//Inspector/Config menu
+	ImGui::Begin("");
+	ImGui::SetWindowSize(ImVec2(500, 500), 0);
+	if (ImGui::SmallButton("Inspector")) {
+		App->config->active = false;
+		App->inspector->active = true;
 	}
-
+	ImGui::SameLine();
+	if (ImGui::SmallButton("Configuration")) {
+		App->config->active = true;
+		App->inspector->active = false;
+	}
+	ImGui::Separator();
 	//Inspector
-	if (App->hardware->active == true) {
+	if (App->inspector->active == true) {
 		App->inspector->Draw("Inspector");
 	}
+	if (App->config->active == true) {
+		App->config->Draw("Inspector");
+	}
+	ImGui::End();
+
+	////Hardware
+	//if (App->hardware->active == true) {
+	//	App->hardware->Draw("Hardware");
+	//}
 
 	// Main Bar
 	if (ImGui::BeginMainMenuBar())

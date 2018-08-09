@@ -12,6 +12,7 @@
 #include "ModuleCamera3D.h"
 #include "ModuleConsole.h"
 #include "ModuleHardware.h"
+#include "ModuleConfig.h"
 #include "ModuleUI.h"
 #include "ModuleFBX.h"
 #include "ModuleInspector.h"
@@ -24,6 +25,7 @@ public:
 	ModuleAudio* audio;
 	ModuleConsole* console;
 	ModuleHardware* hardware;
+	ModuleConfig* config;
 	ModuleSceneIntro* scene_intro;
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;

@@ -26,8 +26,9 @@ bool ModuleInspector::CleanUp()
 //Function that draws all the console
 void ModuleInspector::Draw(const char* title)
 {
-	ImGui::Begin(title);
-	ImGui::SetWindowSize(ImVec2(500, 500), 0);
+	ImGui::Text("Inspector");
+	ImGui::Separator();
+	ImGui::Separator();
 
 	ImGui::Text("Model Name: %s", App->fbx->file_name);
 	ImGui::Text("Model Path: %s", App->fbx->path);
@@ -72,5 +73,5 @@ void ModuleInspector::Draw(const char* title)
 		}
 	}
 
-	ImGui::End();
+	//ImGui::End();
 }
