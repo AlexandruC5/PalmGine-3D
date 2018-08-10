@@ -20,12 +20,20 @@ public:
 
 	void SetTitle(const char* title);
 
+	void SetFullScreen(bool fullscreen);
+	void SetWindowed(bool borderless);
+	void SetWindowFullDesktop();
+
 public:
 	//The window we'll be rendering to
 	SDL_Window* window;
 
 	//The surface contained by the window
 	SDL_Surface* screen_surface;
+
+	bool fullscreen = false;
+	bool windowed = false;
+	bool full_desktop = false;
 };
 
 #endif // __ModuleWindow_H__
