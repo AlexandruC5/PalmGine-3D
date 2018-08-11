@@ -141,5 +141,96 @@ void ModuleConfig::Draw(const char* title)
 		ImGui::SameLine();
 		ImGui::TextColored({ 255, 255, 0, 255 }, "Y: %i", App->input->GetMouseY());
 	}
+	//Software Used
+	if (ImGui::CollapsingHeader("Libraries used")) {
+		if (ImGui::MenuItem("- ImGui (v1.52)"))
+		{
+			ShellExecuteA(0, 0, "chrome.exe", "https://github.com/ocornut/imgui", 0, SW_SHOWMAXIMIZED);
+		}
 
+		if (ImGui::MenuItem("- Brofiler (v1.1.2)"))
+		{
+			ShellExecuteA(0, 0, "chrome.exe", "http://www.brofiler.com/", 0, SW_SHOWMAXIMIZED);
+		}
+
+		if (ImGui::MenuItem("- Parson"))
+		{
+			ShellExecuteA(0, 0, "chrome.exe", "http://kgabis.github.io/parson/", 0, SW_SHOWMAXIMIZED);
+		}
+
+		if (ImGui::MenuItem("- MathGeoLib (v2.0)"))
+		{
+			ShellExecuteA(0, 0, "chrome.exe", "http://clb.demon.fi/MathGeoLib/nightly/", 0, SW_SHOWMAXIMIZED);
+		}
+
+		if (ImGui::MenuItem("- mmgr"))
+		{
+			ShellExecuteA(0, 0, "chrome.exe", "http://www.flipcode.com/archives/Presenting_A_Memory_Manager.shtml", 0, SW_SHOWMAXIMIZED);
+		}
+
+		if (ImGui::MenuItem("- Devil (v1.7.8)"))
+		{
+			ShellExecuteA(0, 0, "chrome.exe", " http://openil.sourceforge.net", 0, SW_SHOWMAXIMIZED);
+		}
+
+		ImGui::AlignFirstTextHeightToWidgets();
+		ImGui::Text("You can download it from"); ImGui::SameLine();
+		if (ImGui::Button("here", ImVec2(40, 20)))
+		{
+			ShellExecuteA(0, 0, "chrome.exe", "http://www.stratos-ad.com/forums/index.php?topic=9897.0", 0, SW_SHOWMAXIMIZED);
+		}
+		ImGui::Text("Just look for the first comment from the user:"); ImGui::SameLine();
+		ImGui::TextColored(ImVec4(1, 1, 0, 100), "Astat");
+
+		if (ImGui::MenuItem("- Bullet (v2.84)"))
+		{
+			ShellExecuteA(0, 0, "chrome.exe", "http://bulletphysics.org/wordpress/", 0, SW_SHOWMAXIMIZED);
+		}
+
+		if (ImGui::MenuItem("- Assimp (v3.3.1)"))
+		{
+			ShellExecuteA(0, 0, "chrome.exe", "http://assimp.sourceforge.net/", 0, SW_SHOWMAXIMIZED);
+		}
+
+		if (ImGui::MenuItem("- Glew (v2.0.0)"))
+		{
+			ShellExecuteA(0, 0, "chrome.exe", "http://glew.sourceforge.net/", 0, SW_SHOWMAXIMIZED);
+		}
+		if (ImGui::MenuItem("- GLUT (v3.7)"))
+		{
+			ShellExecuteA(0, 0, "chrome.exe", "https://www.opengl.org/resources/libraries/glut/", 0, SW_SHOWMAXIMIZED);
+		}
+
+		if (ImGui::MenuItem("- SDL (v2.0.6)"))
+		{
+			ShellExecuteA(0, 0, "chrome.exe", "https://www.libsdl.org/", 0, SW_SHOWMAXIMIZED);
+		}
+
+		if (ImGui::MenuItem("- SDL_mixer (v2.0.0)"))
+		{
+			ShellExecuteA(0, 0, "chrome.exe", "https://www.libsdl.org/projects/SDL_mixer/", 0, SW_SHOWMAXIMIZED);
+		}
+
+		if (ImGui::BeginMenu("- OpenGL info"))
+		{
+			ImGui::Text("Vendor: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(0, 1, 0, 100), "%s", glGetString(GL_VENDOR));
+
+			ImGui::Text("Renderer: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(0, 1, 0, 100), "%s", glGetString(GL_RENDERER));
+
+			ImGui::Text("OpenGL version supported: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(0, 1, 0, 100), "%s", glGetString(GL_VERSION));
+
+			ImGui::Text("GLSL: ");
+			ImGui::SameLine();
+			ImGui::TextColored(ImVec4(0, 1, 0, 100), "%s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+
+			ImGui::EndMenu();
+		}
+
+	}
 }
