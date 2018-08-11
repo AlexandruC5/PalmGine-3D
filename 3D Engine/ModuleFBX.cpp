@@ -241,7 +241,18 @@ void ModuleFBX::ApplyTexture(const char* path)
 
 void const ModuleFBX::CentrateObjectView()
 {
+	math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
+	box.Enclose((float3*)App->fbx->mesh.vertices, App->fbx->mesh.num_vertices);
 
+	App->camera->Reference.x = box.CenterPoint().x;
+	App->camera->Reference.y = box.CenterPoint().y;
+	App->camera->Reference.z = box.CenterPoint().z;
+
+	App->camera->Position.x = box.maxPoint.x * 2; // Increase the distance view
+	App->camera->Position.y = box.maxPoint.y * 2;
+	App->camera->Position.z = box.maxPoint.z * 2;
+
+	App->camera->LookAt(App->camera->Reference);
 }
 
 uint const ModuleFBX::GetIndices()
