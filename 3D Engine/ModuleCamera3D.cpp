@@ -92,6 +92,20 @@ update_status ModuleCamera3D::Update(float dt)
 		Position = Reference + Z * length(Position);
 	}
 
+	// Scroll
+	if (App->input->GetMouseZ() == 1)
+	{
+		newPos -= Z * 10 * dt;
+		Position += newPos;
+		Reference += newPos;
+	}
+	else if (App->input->GetMouseZ() == -1)
+	{
+		newPos += Z * 10 * dt;
+		Position += newPos;
+		Reference += newPos;
+	}
+
 	// Look to object
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 	{
