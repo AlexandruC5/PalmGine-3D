@@ -7,6 +7,7 @@ Application::Application()
 	audio = new ModuleAudio();
 	console = new ModuleConsole();
 	hardware = new ModuleHardware();
+	about = new ModuleAbout();
 	config = new ModuleConfig();
 	scene_intro = new ModuleSceneIntro();
 	renderer3D = new ModuleRenderer3D();
@@ -26,6 +27,7 @@ Application::Application()
 	AddModule(audio);
 	AddModule(console);
 	AddModule(hardware);
+	AddModule(about);
 
 	//Config
 	AddModule(config);

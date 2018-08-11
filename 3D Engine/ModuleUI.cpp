@@ -91,6 +91,11 @@ update_status ModuleUI::Update(float dt)
 			(ImGui::Checkbox("Inspector/Config", &configActive));
 			ImGui::EndMenu();
 		}
+		if (ImGui::BeginMenu("About"))
+		{
+			App->about->Draw();
+			ImGui::EndMenu();
+		}
 		if (ImGui::BeginMenu("Help"))
 		{
 
