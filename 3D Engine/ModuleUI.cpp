@@ -21,6 +21,7 @@ bool ModuleUI::Start()
 
 	glewInit();
 	ImGui_ImplSdlGL3_Init(App->window->window);
+	App->config->active = false;
 
 	return true;
 }
