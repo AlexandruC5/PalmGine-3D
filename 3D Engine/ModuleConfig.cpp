@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include "ModuleConfig.h"
 #include "ModuleHardware.h"
+#include "ModuleCamera3D.h"
 #include "MathGeoLib\MathGeoLib.h"
 #include "mmgr\mmgr.h"
 
@@ -128,7 +129,8 @@ void ModuleConfig::Draw(const char* title)
 
 	//Camera
 	if (ImGui::CollapsingHeader("Camera")) {
-
+		ImGui::SliderFloat("Camera Speed", &App->camera->speed, 0, 15, NULL);
+		ImGui::SliderFloat("Wheel Speed", &App->camera->wheelSpeed, 0, 15, NULL);
 	}
 
 	//Input

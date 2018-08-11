@@ -43,31 +43,28 @@ update_status ModuleUI::Update(float dt)
 	}
 
 	//Inspector/Config menu
-	ImGui::Begin("");
-	ImGui::SetWindowSize(ImVec2(500, 500), 0);
-	if (ImGui::SmallButton("Inspector")) {
-		App->config->active = false;
-		App->inspector->active = true;
+	if (configActive == true) {
+		ImGui::Begin("");
+		ImGui::SetWindowSize(ImVec2(500, 500), 0);
+		if (ImGui::SmallButton("Inspector")) {
+			App->config->active = false;
+			App->inspector->active = true;
+		}
+		ImGui::SameLine();
+		if (ImGui::SmallButton("Configuration")) {
+			App->config->active = true;
+			App->inspector->active = false;
+		}
+		ImGui::Separator();
+		//Inspector
+		if (App->inspector->active == true) {
+			App->inspector->Draw("Inspector");
+		}
+		if (App->config->active == true) {
+			App->config->Draw("Inspector");
+		}
+		ImGui::End();
 	}
-	ImGui::SameLine();
-	if (ImGui::SmallButton("Configuration")) {
-		App->config->active = true;
-		App->inspector->active = false;
-	}
-	ImGui::Separator();
-	//Inspector
-	if (App->inspector->active == true) {
-		App->inspector->Draw("Inspector");
-	}
-	if (App->config->active == true) {
-		App->config->Draw("Inspector");
-	}
-	ImGui::End();
-
-	////Hardware
-	//if (App->hardware->active == true) {
-	//	App->hardware->Draw("Hardware");
-	//}
 
 	// Main Bar
 	if (ImGui::BeginMainMenuBar())
@@ -91,6 +88,7 @@ update_status ModuleUI::Update(float dt)
 				else
 					show_test_window = true;
 			}
+			(ImGui::Checkbox("Inspector/Config", &configActive));
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Help"))
