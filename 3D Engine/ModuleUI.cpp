@@ -88,7 +88,8 @@ update_status ModuleUI::Update(float dt)
 				else
 					show_test_window = true;
 			}
-			(ImGui::Checkbox("Inspector/Config", &configActive));
+			ImGui::Checkbox("Inspector/Config", &configActive);
+			ImGui::Checkbox("Console", &App->console->active);
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("About"))
