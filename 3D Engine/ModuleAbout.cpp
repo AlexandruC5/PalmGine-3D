@@ -24,7 +24,7 @@ bool ModuleAbout::CleanUp()
 void ModuleAbout::Draw()
 {
 	ImGui::TextColored(ImVec4(1, 1, 0, 100), "=== PalGine 3D ===");
-	ImGui::Text("This is a project consistent of creating a Game Engine.\nAt this moment, you can import your model (.fbx, .obj, etc),\nload geometry and change or apply one texture on the model (.jpg or .png).\nDrop the files on the window.\nHope you like it.");
+	ImGui::Text("Palmgine 3D is a project consistent of creating a Game Engine.\nAt this moment, you can import your model (.fbx, .obj, etc),\nload geometry and change or apply one texture on the model (.jpg or .png).\nDrop the files on the window.\nHope you like it.");
 	ImGui::Separator();
 	ImGui::TextColored(ImVec4(0, 1, 1, 100), "Project links");
 	if (ImGui::MenuItem("- Link to PalmGine 3D repository"))

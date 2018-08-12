@@ -105,6 +105,29 @@ update_status ModuleCamera3D::Update(float dt)
 		Reference += newPos;
 	}
 
+	// Pan camera
+	if (App->input->GetMouseButton(SDL_BUTTON_MIDDLE) == KEY_REPEAT)
+	{
+		if (App->input->GetMouseXMotion() > 0)
+		{
+			newPos -= X * (App->input->GetMouseXMotion() * dt) * speed;
+		}
+		if (App->input->GetMouseXMotion() < 0)
+		{
+			newPos -= X * (App->input->GetMouseXMotion() * dt) * speed;
+		}
+		if (App->input->GetMouseYMotion() > 0)
+		{
+			newPos += Y * (App->input->GetMouseYMotion() * dt) * speed;
+		}
+		if (App->input->GetMouseYMotion() < 0)
+		{
+			newPos += Y * (App->input->GetMouseYMotion() * dt) * speed;
+		}
+
+		Position += newPos;
+		Reference += newPos;
+	}
 	// Look to object
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 	{
