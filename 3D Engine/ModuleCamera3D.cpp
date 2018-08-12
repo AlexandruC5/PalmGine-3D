@@ -134,6 +134,33 @@ update_status ModuleCamera3D::Update(float dt)
 		App->fbx->CentrateObjectView();
 	}
 
+	// Rotate camera with static position
+	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT &&
+		App->input->GetKey(SDL_SCANCODE_LALT) == KEY_IDLE)
+	{
+		int dx = -App->input->GetMouseXMotion();
+		int dy = -App->input->GetMouseYMotion();
+
+		float sensibility = 0.15f;
+		if (dx != 0)
+		{
+			float DeltaX = (float)dx * sensibility;
+			X = rotate(X, DeltaX, vec3(0.0f, 1.0f, 0.0f));
+			Y = rotate(Y, DeltaX, vec3(0.0f, 1.0f, 0.0f));
+			Z = rotate(Z, DeltaX, vec3(0.0f, 1.0f, 0.0f));
+		}
+		if (dy != 0)
+		{
+			float DeltaY = (float)dy * sensibility;
+			Y = rotate(Y, DeltaY, X);
+			Z = rotate(Z, DeltaY, X);
+			if (Y.y < 0.0f)
+			{
+				Z = vec3(0.0f, Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
+				Y = cross(Z, X);
+			}
+		}
+	}
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
 
