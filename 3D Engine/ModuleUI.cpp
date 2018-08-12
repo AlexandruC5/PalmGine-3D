@@ -97,11 +97,6 @@ update_status ModuleUI::Update(float dt)
 			App->about->Draw();
 			ImGui::EndMenu();
 		}
-		if (ImGui::BeginMenu("Help"))
-		{
-
-			ImGui::EndMenu();
-		}
 
 		ImGui::EndMainMenuBar();
 	}
