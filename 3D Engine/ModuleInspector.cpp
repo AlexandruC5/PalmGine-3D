@@ -30,8 +30,8 @@ void ModuleInspector::Draw(const char* title)
 	ImGui::Separator();
 	ImGui::Separator();
 
-	ImGui::Text("Model Name: %s", App->fbx->file_name);
-	ImGui::Text("Model Path: %s", App->fbx->path);
+	ImGui::Text("Model Name: %s", App->fbx->file_name.c_str());
+	ImGui::Text("Model Path: %s", App->fbx->path.c_str());
 
 	if (ImGui::CollapsingHeader("Transform"), ImGuiTreeNodeFlags_DefaultOpen) {
 		ImGui::Text("Showing read only information about the mesh transform");
