@@ -199,8 +199,8 @@ void ModuleFBX::LoadModel(const aiScene* scene, aiNode* node, const char* path)
 			LOG("Loaded mesh with %i vertices.", mesh.num_vertices);
 			LOG("Loaded mesh with %i indices.", mesh.num_indices);
 			LOG("Loaded mesh with %i triangles.", mesh.num_vertices / 3);
-			LOG("Loaded mesh with %f normals.", mesh.num_normals);
-			LOG("Loaded mesh with %f uvs.", mesh.num_uvs);
+			LOG("Loaded mesh with %i normals.", mesh.num_normals);
+			LOG("Loaded mesh with %i uvs.", mesh.num_uvs);
 		}
 	}
 
