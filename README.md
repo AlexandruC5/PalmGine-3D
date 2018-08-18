@@ -29,7 +29,7 @@ Hope you like it.
 
 ---
 
-### Palmgine 3D is under the MIT License
+### Palmgine 3D is under the Apache License 2.0
 
 #### Copyright (c) 2018 Fran Ruiz Giménez and Manel Mourelo
 
