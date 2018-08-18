@@ -162,14 +162,14 @@ bool ModuleRenderer3D::DrawMeshes(const ModelConfig mesh) const
 	glBindBuffer(GL_ARRAY_BUFFER, mesh.id_vertices);
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 	
-	// Texture
+	// --- Texture ---
 	glBindBuffer(GL_ARRAY_BUFFER, mesh.id_uvs);
 	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 	if (App->fbx->last_texture_id == 0)
 		glBindTexture(GL_TEXTURE_2D, mesh.texture_id);
 	else
 		glBindTexture(GL_TEXTURE_2D, App->fbx->last_texture_id);
-	// End texture
+	// --- End texture ---
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh.id_indices);
 	glDrawElements(GL_TRIANGLES, mesh.num_indices, GL_UNSIGNED_INT, NULL);

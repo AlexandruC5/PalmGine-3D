@@ -64,13 +64,12 @@ bool ModuleFBX::CleanUp()
 
 bool ModuleFBX::LoadFBX(const char* path)
 {
-	LOG("Loading the FBX...");
+	LOG("Loading FBX...");
 	file_name.clear();
 	this->path = path;
-	std::string name(path);
 	//Substract the name of the file
+	std::string name(path);
 	this->file_name = name.substr(name.find_last_of('\\') + 1); 
-	bool ret = true;
 	const aiScene* scene = aiImportFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
 
 	if (scene != nullptr && scene->HasMeshes())
@@ -81,13 +80,13 @@ bool ModuleFBX::LoadFBX(const char* path)
 			LoadModel(scene, rootNode->mChildren[i], path);
 		}
 
-		//Release resources
+		// ---- Release resources ----
 		aiReleaseImport(scene);
-		LOG("FBX loaded correctly --------------");
-		return ret;
+		LOG("---- FBX LOADED WITH SUCCESS ----");
+		return true;
 	}
 	else
-		LOG("ERROR, COULDN'T LOAD FBX ---------------");
+		LOG("---- ERROR, COULDN'T LOAD FBX ----");
 	return false;
 }
 
@@ -108,11 +107,12 @@ void ModuleFBX::LoadModel(const aiScene* scene, aiNode* node, const char* path)
 			mesh.vertices = new uint[mesh.num_vertices * 3];
 			memcpy(mesh.vertices, new_mesh->mVertices, sizeof(float)*mesh.num_vertices * 3);
 
+			// ---- Generate buffers ----
 			glGenBuffers(1, (GLuint*)&(mesh.id_vertices));
 			glBindBuffer(GL_ARRAY_BUFFER, mesh.id_vertices);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 3 * mesh.num_vertices, mesh.vertices, GL_STATIC_DRAW);
 			
-			// Geometry
+			// ---- Geometry ----
 			if (new_mesh->HasFaces())
 			{
 				mesh.num_indices = new_mesh->mNumFaces * 3;
@@ -134,9 +134,10 @@ void ModuleFBX::LoadModel(const aiScene* scene, aiNode* node, const char* path)
 				LOG("Mesh with %i faces can not be loaded.", new_mesh->mNumFaces);
 			}
 
-			// Texture
+			// ---- Texture ----
 			if (new_mesh->HasTextureCoords(mesh.id_uvs))
 			{
+				// ---- UVs ----
 				mesh.num_uvs = new_mesh->mNumVertices;
 				mesh.uvs = new float[mesh.num_uvs * 2];
 
@@ -152,10 +153,32 @@ void ModuleFBX::LoadModel(const aiScene* scene, aiNode* node, const char* path)
 			}
 			else
 			{
-				LOG("Can't find texture coords for the specified mesh.");
+				LOG("Texture coords couldn´t be found for the specified mesh.");
 			}
 
-			// Normals
+			// ---- Texture ID ----
+			aiMaterial* material = scene->mMaterials[new_mesh->mMaterialIndex];
+			if (material)
+			{
+				aiString path;
+				material->GetTexture(aiTextureType_DIFFUSE, 0, &path);
+
+				if (path.length > 0)
+				{
+					// ---- Find the texture on textures folder ----
+					std::string texture_folder = "Textures/";
+					std::string final_path = path.data;
+					final_path.erase(0, final_path.find_last_of("\\") + 1);
+					texture_folder += final_path;
+
+					mesh.texture_id = CreateTextureID(texture_folder.c_str());
+					LOG("Texture with path %s has been loaded.", texture_folder.c_str());
+					final_path.clear();
+					texture_folder.clear();
+				}
+			}
+
+			// ---- Normals ----
 			if (new_mesh->HasNormals())
 			{
 				mesh.num_normals = new_mesh->mNumVertices;
@@ -170,28 +193,8 @@ void ModuleFBX::LoadModel(const aiScene* scene, aiNode* node, const char* path)
 			{
 				LOG("Mesh has no normals.");
 			}
-
-			aiMaterial* material = scene->mMaterials[new_mesh->mMaterialIndex];
-
-			if (material)
-			{
-				aiString path;
-				material->GetTexture(aiTextureType_DIFFUSE, 0, &path);
-
-				if (path.length > 0)
-				{
-					std::string base_path = "Textures/";
-					std::string final_path = path.data;
-					final_path.erase(0, final_path.find_last_of("\\") + 1);
-					base_path += final_path;
-
-					mesh.texture_id = CreateTextureID(base_path.c_str());
-					LOG("Texture with path %s has been loaded.", base_path.c_str());
-					final_path.clear();
-					base_path.clear();
-				}
-			}
-
+			 
+			// ---- Push the mesh ----
 			meshes.push_back(mesh);
 			LOG("Loaded mesh with %i vertices.", mesh.num_vertices);
 			LOG("Loaded mesh with %i indices.", mesh.num_indices);
@@ -206,6 +209,7 @@ void ModuleFBX::LoadModel(const aiScene* scene, aiNode* node, const char* path)
 		LoadModel(scene, node->mChildren[i], path);
 	}
 
+	// ---- Default transformation values ----
 	mesh.position = (0.f, 0.f, 0.f);
 	mesh.rotation = (0.f, 0.f, 0.f);
 	mesh.scale = (1.f, 1.f, 1.f);

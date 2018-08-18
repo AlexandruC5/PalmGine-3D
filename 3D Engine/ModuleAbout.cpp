@@ -39,10 +39,10 @@ void ModuleAbout::Draw()
 
 	ImGui::Separator();
 	ImGui::Text("=== License ===");
-	ImGui::TextWrapped("PalmGine 3D is under The MIT License, see LICENSE for more information.");
-	if (ImGui::MenuItem("- The MIT License (MIT)"))
+	ImGui::TextWrapped("PalmGine 3D is under Apache 2.0 License, see LICENSE for more information.");
+	if (ImGui::MenuItem("- Apache License 2.0"))
 	{
-		ShellExecuteA(0, 0, "chrome.exe", "https://opensource.org/licenses/mit-license.php", 0, SW_SHOWMAXIMIZED);
+		ShellExecuteA(0, 0, "chrome.exe", "http://www.apache.org/licenses/LICENSE-2.0", 0, SW_SHOWMAXIMIZED);
 	}
 
 	ImGui::Separator();
