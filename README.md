@@ -22,10 +22,12 @@ Hope you like it.
 
 # VERSION CONTROL
 ## v.0.5
-- Configuration options (Application, Window, Hardware, Volume, Camera and Input).
+- Load and draw one .fbx or .obj file with one channel diffuse.
+- Configuration options (Application, Window, Scene, Hardware, Volume, Camera and Input).
 - Inspector shows transform propierties, mesh information and texture information.
 - Console with LOG control.
-- Drag and drop
+- Drag and drop.
+- Unity-like camera.
 
 ---
 
