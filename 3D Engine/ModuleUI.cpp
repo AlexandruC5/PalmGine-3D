@@ -45,7 +45,7 @@ update_status ModuleUI::Update(float dt)
 	//Inspector/Config menu
 	if (configActive == true) {
 		ImGui::Begin("");
-		ImGui::SetWindowSize(ImVec2(500, 500), 0);
+		ImGui::SetWindowSize(ImVec2(500, 500), ImGuiCond_FirstUseEver);
 		if (ImGui::SmallButton("Inspector")) {
 			App->config->active = false;
 			App->inspector->active = true;
