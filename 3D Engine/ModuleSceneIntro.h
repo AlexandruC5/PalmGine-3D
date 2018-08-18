@@ -15,6 +15,6 @@ public:
 	bool CleanUp();
 
 	// Variables
-	bool grid_enabled = false;
+	bool grid_enabled = true;
 	bool axis_enabled = false;
 };
