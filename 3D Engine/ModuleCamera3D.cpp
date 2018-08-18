@@ -90,12 +90,22 @@ update_status ModuleCamera3D::Update(float dt)
 		newPos -= Z * wheelSpeed * 5 * dt;
 		Position += newPos;
 		Reference += newPos;
+
+		AABB box = App->fbx->GetAABB();
+		Reference.x = box.CenterPoint().x;
+		Reference.y = box.CenterPoint().y;
+		Reference.z = box.CenterPoint().z;
 	}
 	else if (App->input->GetMouseZ() == -1)
 	{
 		newPos += Z * wheelSpeed * 5 * dt;
 		Position += newPos;
 		Reference += newPos;
+
+		AABB box = App->fbx->GetAABB();
+		Reference.x = box.CenterPoint().x;
+		Reference.y = box.CenterPoint().y;
+		Reference.z = box.CenterPoint().z;
 	}
 
 	// Pan camera
