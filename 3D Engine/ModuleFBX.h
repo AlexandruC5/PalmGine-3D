@@ -4,6 +4,7 @@
 #include "glmath.h"
 #include <vector>
 #include "Glew\include\glew.h"
+#include "MathGeoLib\Geometry\AABB.h"
 
 class aiScene;
 class aiNode;
@@ -64,6 +65,7 @@ public:
 	float const GetUvs();
 	uint const GetTextureId();
 	void const CentrateObjectView();
+	math::AABB const GetAABB();
 
 	std::vector<ModelConfig> meshes;
 

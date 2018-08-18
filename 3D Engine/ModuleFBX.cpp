@@ -259,6 +259,14 @@ void const ModuleFBX::CentrateObjectView()
 	App->camera->LookAt(App->camera->Reference);
 }
 
+math::AABB const ModuleFBX::GetAABB()
+{
+	math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
+	box.Enclose((float3*)App->fbx->mesh.vertices, App->fbx->mesh.num_vertices);
+
+	return box;
+}
+
 uint const ModuleFBX::GetIndices()
 {
 	return(mesh.num_indices);

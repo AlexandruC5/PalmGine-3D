@@ -45,7 +45,7 @@ update_status ModuleSceneIntro::Update(float dt)
 	// Render grid
 	if (grid_enabled)
 	{
-		Plane p(0, 1, 0, 0);
+		PlaneGrid p(0, 1, 0, 0);
 		if (axis_enabled)
 		{
 			p.axis = true;
