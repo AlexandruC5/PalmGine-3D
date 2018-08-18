@@ -43,9 +43,15 @@ update_status ModuleSceneIntro::PreUpdate(float dt)
 update_status ModuleSceneIntro::Update(float dt)
 {
 	// Render grid
-	Plane p(0, 1, 0, 0);
-	p.axis = true;
-	p.Render();
+	if (grid_enabled)
+	{
+		Plane p(0, 1, 0, 0);
+		if (axis_enabled)
+		{
+			p.axis = true;
+		}
+		p.Render();
+	}
 
 	return UPDATE_CONTINUE;
 }

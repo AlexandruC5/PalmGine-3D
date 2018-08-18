@@ -117,6 +117,12 @@ void ModuleConfig::Draw(const char* title)
 
 	}
 
+	//Scene
+	if (ImGui::CollapsingHeader("Scene")) {
+		ImGui::Checkbox("Show grid", &App->scene_intro->grid_enabled);
+		ImGui::Checkbox("Show axis", &App->scene_intro->axis_enabled);
+	}
+
 	//Hardware
 	if (ImGui::CollapsingHeader("Hardware")) {
 		App->hardware->Draw("Hardware");
