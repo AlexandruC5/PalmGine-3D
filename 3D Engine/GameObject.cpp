@@ -27,14 +27,14 @@ const char * GameObject::GetName() const
 	return this->name;
 }
 
-void GameObject::SetActive()
+bool GameObject::Enable()
 {
-	if (active)
-	{
-		active = false;
-	}
-	else
-		active = true;
+	return active = true;
+}
+
+bool GameObject::Disable()
+{
+	return active = false;
 }
 
 bool GameObject::IsActive()

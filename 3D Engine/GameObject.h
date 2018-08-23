@@ -13,7 +13,8 @@ public:
 	const char* GetName() const;
 
 	// State
-	void SetActive();
+	bool Enable();
+	bool Disable();
 	bool IsActive();
 
 	// Parent
