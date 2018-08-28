@@ -14,6 +14,14 @@ struct Mesh
 	uint id_indices = 0;
 	uint num_vertices = 0;
 	uint* vertices = nullptr;
+
+	uint id_normals = 0;
+	uint num_normals = 0;
+	float* normals = nullptr;
+
+	uint id_uvs = 0;
+	uint num_uvs = 0;
+	float* uvs = nullptr;
 };
 
 class GameObject;
