@@ -55,6 +55,12 @@ void ModuleFBX::ClearMeshes()
 	delete data.normals;
 }
 
+void ModuleFBX::DrawMeshes()
+{
+	for (std::vector<ModelConfig>::iterator item = App->fbx->meshes.begin(); item != App->fbx->meshes.end(); ++item)
+		App->renderer3D->DrawMeshes(*item);
+}
+
 bool ModuleFBX::CleanUp()
 {
 	aiDetachAllLogStreams();
@@ -265,6 +271,11 @@ math::AABB const ModuleFBX::GetAABB()
 	box.Enclose((float3*)App->fbx->mesh.vertices, App->fbx->mesh.num_vertices);
 
 	return box;
+}
+
+uint ModuleFBX::MeshesSize()
+{
+	return meshes.size();
 }
 
 uint const ModuleFBX::GetIndices()

@@ -113,7 +113,7 @@ update_status ModuleInput::PreUpdate(float dt)
 			file_type = GetFileType(fbx_path.c_str());
 			if (file_type == GEOMETRY_MODEL)
 			{
-				if (App->fbx->meshes.size() == 0)
+				if (App->fbx->MeshesSize() == 0)
 					App->fbx->LoadFBX(fbx_path.c_str());
 				else
 				{

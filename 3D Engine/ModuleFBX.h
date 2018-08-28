@@ -54,6 +54,7 @@ public:
 	uint CreateTextureID(const char * texture_path);
 	void ApplyTexture(const char* path);
 	void ClearMeshes();
+	void DrawMeshes();
 
 	// Read only
 	uint const GetIndices();
@@ -66,8 +67,7 @@ public:
 	uint const GetTextureId();
 	void const CentrateObjectView();
 	math::AABB const GetAABB();
-
-	std::vector<ModelConfig> meshes;
+	uint MeshesSize();
 
 public:
 	std::string path;
@@ -77,6 +77,7 @@ public:
 	GLfloat fbx_position[3] = { 0.0f, 0.0f, 0.0f };
 
 private:
+	std::vector<ModelConfig> meshes;
 	ModelConfig data;
 	ModelConfig mesh;
 };

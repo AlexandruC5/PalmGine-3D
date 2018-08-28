@@ -130,8 +130,7 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 // Update
 update_status ModuleRenderer3D::Update(float dt)
 {
-	for (std::vector<ModelConfig>::iterator item = App->fbx->meshes.begin(); item != App->fbx->meshes.end(); ++item)
-		App->renderer3D->DrawMeshes(*item);
+	App->fbx->DrawMeshes();
 	return UPDATE_CONTINUE;
 }
 
