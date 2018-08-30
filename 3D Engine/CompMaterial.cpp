@@ -7,3 +7,8 @@ CompMaterial::CompMaterial(GameObject * parent, COMP_TYPE type) : Component(pare
 CompMaterial::~CompMaterial()
 {
 }
+
+uint const CompMaterial::GetTextureId()
+{
+	return texture->id;
+}

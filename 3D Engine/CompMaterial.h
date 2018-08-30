@@ -19,6 +19,9 @@ public:
 	CompMaterial(GameObject* parent, COMP_TYPE type);
 	~CompMaterial();
 
+	// Read
+	uint const GetTextureId();
+
 private:
 	Texture* texture;
 };
