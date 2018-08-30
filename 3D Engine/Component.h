@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "GameObject.h"
 
 enum COMP_TYPE
 {

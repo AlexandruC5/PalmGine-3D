@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "Globals.h"
+#include "GameObject.h"
 #include <vector>
 #include "glmath.h"
 #include "MathGeoLib\MathGeoLib.h"
