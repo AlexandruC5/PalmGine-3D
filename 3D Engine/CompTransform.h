@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include <vector>
+#include "glmath.h"
 #include "MathGeoLib\MathGeoLib.h"
 
 struct Axis
@@ -19,6 +20,11 @@ public:
 	~CompTransform();
 
 	void SetRotation(float3 rot);
+
+	// Read
+	float3 const GetPosition();
+	float3 const GetRotation();
+	float3 const GetScale();
 
 private:
 	Axis axis;
