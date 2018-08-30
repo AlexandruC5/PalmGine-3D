@@ -1,5 +1,9 @@
 #pragma once
 #include "Globals.h"
+#include "Component.h"
+#include "CompMesh.h"
+#include "CompMaterial.h"
+#include "CompTransform.h"
 #include <vector>
 
 class GameObject
@@ -8,21 +12,26 @@ public:
 	GameObject(GameObject* parent);
 	~GameObject();
 
-	// Name utility
+	// Name --------------------------
 	void SetName(char* new_name);
 	const char* GetName() const;
 
-	// State
+	// State --------------------------
 	bool Enable();
 	bool Disable();
 	bool IsActive();
 
-	// Parent
+	// Parent -------------------------
 	const GameObject* GetParent() const;
 
-	// Childs
+	// Childs -------------------------
 	uint GetNumChilds() const;
 
+	// Components ---------------------
+	CompMesh* GetCompMesh() const;
+	CompTransform* GetCompTransform() const;
+	CompMaterial* GetCompMaterial() const;
+	Component* FindComponent(COMP_TYPE type) const;
 private:
 
 	uint id = 0;
@@ -32,5 +41,5 @@ private:
 
 	GameObject* parent = nullptr;
 	std::vector<GameObject*> childs;
-	// TODO: add the component's vector :)
+	std::vector<Component*> components;
 };

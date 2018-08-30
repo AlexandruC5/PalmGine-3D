@@ -51,3 +51,34 @@ uint GameObject::GetNumChilds() const
 {
 	return childs.size();
 }
+
+// Components -----------------------
+
+CompTransform* GameObject::GetCompTransform() const
+{
+	return (CompTransform*)FindComponent(COMP_TYPE::C_TRANSFORM);
+}
+
+CompMesh* GameObject::GetCompMesh() const
+{
+	return (CompMesh*)FindComponent(COMP_TYPE::C_MESH);
+}
+
+CompMaterial* GameObject::GetCompMaterial() const
+{
+	return (CompMaterial*)FindComponent(COMP_TYPE::C_MATERIAL);
+}
+
+Component * GameObject::FindComponent(COMP_TYPE type) const
+{
+	Component* temp_comp = nullptr;
+
+	for (uint i = 0; i < components.size(); i++)
+	{
+		if (components[i]->GetType() == type)
+		{
+			temp_comp = components[i];
+			return temp_comp;
+		}
+	}
+}
