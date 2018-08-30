@@ -59,9 +59,11 @@ public:
 	// Read only
 	uint const GetIndices();
 	uint const GetVertices();
+
 	vec3 const GetPosition();
 	vec3 const GetRotation();
 	vec3 const GetScale();
+
 	float const GetNormals();
 	float const GetUvs();
 	uint const GetTextureId();

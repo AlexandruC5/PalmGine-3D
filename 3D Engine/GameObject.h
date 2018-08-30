@@ -32,8 +32,8 @@ public:
 	CompTransform* GetCompTransform() const;
 	CompMaterial* GetCompMaterial() const;
 	Component* FindComponent(COMP_TYPE type) const;
-private:
 
+private:
 	uint id = 0;
 	char* name = "default";
 	bool active = true;

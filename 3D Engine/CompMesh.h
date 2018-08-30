@@ -32,6 +32,17 @@ public:
 	CompMesh(GameObject* parent, COMP_TYPE type);
 	~CompMesh();
 
+	void Update(float dt);
+	void Draw();
+
+	// Read
+	uint const GetIndices();
+	uint const GetVertices();
+	float const GetNormals();
+	float const GetUvs();
+	math::AABB const GetAABB();
+	uint const GetMeshesSize();
+
 private:
 	std::vector<Mesh> meshes;
 

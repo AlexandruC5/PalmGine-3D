@@ -37,7 +37,6 @@ private:
 	bool active = true;
 
 protected:
-	const char* name;
+	const char* name = nullptr;
 	GameObject* parent = nullptr;
-	const char* nameComponent = nullptr;
 };
