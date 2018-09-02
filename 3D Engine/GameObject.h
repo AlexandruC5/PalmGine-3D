@@ -1,10 +1,12 @@
 #pragma once
 #include "Globals.h"
 #include "Component.h"
-#include "CompMesh.h"
-#include "CompMaterial.h"
-#include "CompTransform.h"
 #include <vector>
+
+class Component;
+class CompMesh;
+class CompMaterial;
+class CompTransform;
 
 class GameObject
 {
@@ -28,10 +30,10 @@ public:
 	uint GetNumChilds() const;
 
 	// Components ---------------------
+	Component* FindComponent(COMP_TYPE type) const;
 	CompMesh* GetCompMesh() const;
 	CompTransform* GetCompTransform() const;
 	CompMaterial* GetCompMaterial() const;
-	Component* FindComponent(COMP_TYPE type) const;
 
 private:
 	uint id = 0;

@@ -2,6 +2,7 @@
 #include "Module.h"
 #include "p2DynArray.h"
 #include "Globals.h"
+#include "GameObject.h"
 
 class ModuleSceneIntro : public Module
 {
@@ -17,4 +18,6 @@ public:
 	// Variables
 	bool grid_enabled = true;
 	bool axis_enabled = false;
+
+	std::vector<GameObject*> gameObjects;
 };
