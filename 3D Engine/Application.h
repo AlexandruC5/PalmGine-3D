@@ -15,7 +15,7 @@
 #include "ModuleAbout.h"
 #include "ModuleConfig.h"
 #include "ModuleUI.h"
-#include "ModuleFBX.h"
+#include "ModuleImporter.h"
 #include "ModuleInspector.h"
 
 class Application
@@ -32,7 +32,7 @@ public:
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
 	ModuleUI* ui;
-	ModuleFBX* fbx;
+	ModuleImporter* fbx;
 	ModuleInspector* inspector;
 
 private:

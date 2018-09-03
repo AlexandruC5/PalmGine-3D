@@ -1,7 +1,7 @@
 #include "Application.h"
 #include "Globals.h"
 #include "ModuleInspector.h"
-#include "ModuleFBX.h"
+#include "ModuleImporter.h"
 
 ModuleInspector::ModuleInspector(bool start_enabled) : Module(start_enabled)
 {}

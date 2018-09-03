@@ -38,11 +38,11 @@ struct ModelConfig
 	vec3 scale;
 };
 
-class ModuleFBX : public Module
+class ModuleImporter : public Module
 {
 public:
-	ModuleFBX(bool start_enabled = true);
-	~ModuleFBX();
+	ModuleImporter(bool start_enabled = true);
+	~ModuleImporter();
 
 	// 
 

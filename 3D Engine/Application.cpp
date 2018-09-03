@@ -12,7 +12,7 @@ Application::Application()
 	scene_intro = new ModuleSceneIntro();
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
-	fbx = new ModuleFBX();
+	fbx = new ModuleImporter();
 	inspector = new ModuleInspector();
 	ui = new ModuleUI();
 

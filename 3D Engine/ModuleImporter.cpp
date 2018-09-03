@@ -1,5 +1,5 @@
 #include "Application.h"
-#include "ModuleFBX.h"
+#include "ModuleImporter.h"
 #include "Assimp/include/cimport.h"
 #include "Assimp/include/scene.h"
 #include "Assimp/include/postprocess.h"
@@ -14,13 +14,13 @@
 
 using namespace std;
 
-ModuleFBX::ModuleFBX(bool start_enabled) : Module(start_enabled)
+ModuleImporter::ModuleImporter(bool start_enabled) : Module(start_enabled)
 {}
 
-ModuleFBX::~ModuleFBX()
+ModuleImporter::~ModuleImporter()
 {}
 
-bool ModuleFBX::Start()
+bool ModuleImporter::Start()
 {
 	bool ret = true;
 
@@ -35,7 +35,7 @@ bool ModuleFBX::Start()
 	return ret;
 }
 
-void ModuleFBX::ClearMeshes()
+void ModuleImporter::ClearMeshes()
 {
 	for (int i = meshes.size() - 1; meshes.size() != 0; i--)
 	{
@@ -55,20 +55,20 @@ void ModuleFBX::ClearMeshes()
 	delete data.normals;
 }
 
-void ModuleFBX::DrawMeshes()
+void ModuleImporter::DrawMeshes()
 {
 	for (std::vector<ModelConfig>::iterator item = App->fbx->meshes.begin(); item != App->fbx->meshes.end(); ++item)
 		App->renderer3D->DrawMeshes(*item);
 }
 
-bool ModuleFBX::CleanUp()
+bool ModuleImporter::CleanUp()
 {
 	aiDetachAllLogStreams();
 	ClearMeshes();
 	return true;
 }
 
-bool ModuleFBX::LoadFBX(const char* path)
+bool ModuleImporter::LoadFBX(const char* path)
 {
 	LOG("Loading FBX...");
 	file_name.clear();
@@ -96,7 +96,7 @@ bool ModuleFBX::LoadFBX(const char* path)
 	return false;
 }
 
-void ModuleFBX::LoadModel(const aiScene* scene, aiNode* node, const char* path)
+void ModuleImporter::LoadModel(const aiScene* scene, aiNode* node, const char* path)
 {
 	if (node->mNumMeshes <= 0)
 	{
@@ -225,7 +225,7 @@ void ModuleFBX::LoadModel(const aiScene* scene, aiNode* node, const char* path)
 	LOG("Mesh scale: (%f, %f, %f)", mesh.scale.x, mesh.scale.y, mesh.scale.z);
 }
 
-uint ModuleFBX::CreateTextureID(const char* texture_path)
+uint ModuleImporter::CreateTextureID(const char* texture_path)
 {
 	ILuint id;
 	uint texture_id;
@@ -238,7 +238,7 @@ uint ModuleFBX::CreateTextureID(const char* texture_path)
 	return texture_id;
 }
 
-void ModuleFBX::ApplyTexture(const char* path)
+void ModuleImporter::ApplyTexture(const char* path)
 {
 	ILuint id;
 	ilGenImages(1, &id);
@@ -249,7 +249,7 @@ void ModuleFBX::ApplyTexture(const char* path)
 	LOG("Loaded and applied new texture correctly from path %s.", path);
 }
 
-void const ModuleFBX::CentrateObjectView()
+void const ModuleImporter::CentrateObjectView()
 {
 	math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
 	box.Enclose((float3*)App->fbx->mesh.vertices, App->fbx->mesh.num_vertices);
@@ -265,7 +265,7 @@ void const ModuleFBX::CentrateObjectView()
 	App->camera->LookAt(App->camera->Reference);
 }
 
-math::AABB const ModuleFBX::GetAABB()
+math::AABB const ModuleImporter::GetAABB()
 {
 	math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
 	box.Enclose((float3*)App->fbx->mesh.vertices, App->fbx->mesh.num_vertices);
@@ -273,47 +273,47 @@ math::AABB const ModuleFBX::GetAABB()
 	return box;
 }
 
-uint ModuleFBX::MeshesSize()
+uint ModuleImporter::MeshesSize()
 {
 	return meshes.size();
 }
 
-uint const ModuleFBX::GetIndices()
+uint const ModuleImporter::GetIndices()
 {
 	return(mesh.num_indices);
 }
 
-uint const ModuleFBX::GetVertices()
+uint const ModuleImporter::GetVertices()
 {
 	return(mesh.num_vertices);
 }
 
-vec3 const ModuleFBX::GetPosition()
+vec3 const ModuleImporter::GetPosition()
 {
 	return(mesh.position);
 }
 
-vec3 const ModuleFBX::GetRotation()
+vec3 const ModuleImporter::GetRotation()
 {
 	return(mesh.rotation);
 }
 
-vec3 const ModuleFBX::GetScale()
+vec3 const ModuleImporter::GetScale()
 {
 	return(mesh.scale);
 }
 
-float const ModuleFBX::GetNormals()
+float const ModuleImporter::GetNormals()
 {
 	return(mesh.num_normals);
 }
 
-float const ModuleFBX::GetUvs()
+float const ModuleImporter::GetUvs()
 {
 	return(mesh.num_uvs);
 }
 
-uint const ModuleFBX::GetTextureId()
+uint const ModuleImporter::GetTextureId()
 {
 	return(mesh.texture_id);
 }

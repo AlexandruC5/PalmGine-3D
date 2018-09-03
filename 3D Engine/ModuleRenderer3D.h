@@ -3,7 +3,7 @@
 #include "Globals.h"
 #include "glmath.h"
 #include "Light.h"
-#include "ModuleFBX.h"
+#include "ModuleImporter.h"
 
 #define MAX_LIGHTS 8
 class Application;

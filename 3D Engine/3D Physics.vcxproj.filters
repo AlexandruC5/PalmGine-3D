@@ -447,9 +447,6 @@
     <ClInclude Include="Devil\include\ilut_config.h">
       <Filter>Sources\Tools\Devil</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleFBX.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleHardware.h">
       <Filter>Sources\Modules\UI</Filter>
     </ClInclude>
@@ -479,6 +476,9 @@
     </ClInclude>
     <ClInclude Include="CompMaterial.h">
       <Filter>Sources\Modules\Scene\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleImporter.h">
+      <Filter>Sources\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -656,9 +656,6 @@
     <ClCompile Include="log.cpp">
       <Filter>Sources\Tools</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleFBX.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleHardware.cpp">
       <Filter>Sources\Modules\UI</Filter>
     </ClCompile>
@@ -688,6 +685,9 @@
     </ClCompile>
     <ClCompile Include="CompMaterial.cpp">
       <Filter>Sources\Modules\Scene\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleImporter.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
