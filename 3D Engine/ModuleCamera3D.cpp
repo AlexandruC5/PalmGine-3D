@@ -38,13 +38,7 @@ bool ModuleCamera3D::CleanUp()
 // -----------------------------------------------------------------
 update_status ModuleCamera3D::Update(float dt)
 {
-	// Implement a debug camera with keys and mouse
-	// Now we can make this movememnt frame rate independant!
-
 	vec3 newPos(0, 0, 0);
-	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
-		speed = 8.0f * dt;
-
 	Position += newPos;
 	Reference += newPos;
 
@@ -164,6 +158,34 @@ update_status ModuleCamera3D::Update(float dt)
 			}
 		}
 	}
+
+	// FPS-like movement
+	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_DOWN)
+	{
+		LOG("FPS-like camera enabled.");
+	}
+	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_UP)
+	{
+		LOG("FPS-like camera disabled.");
+	}
+	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
+	{
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) newPos -= Z * speed* dt;
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) newPos += Z * speed* dt;
+
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) newPos -= X * speed* dt;
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) newPos += X * speed* dt;
+
+		Position += newPos;
+		Reference += newPos;
+	}
+
+	// Camera speed
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN)
+		speed *= 2;
+	else if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_UP)
+		speed = speed / 2;
+
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
 
