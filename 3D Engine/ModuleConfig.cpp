@@ -3,6 +3,8 @@
 #include "ModuleConfig.h"
 #include "ModuleHardware.h"
 #include "ModuleCamera3D.h"
+#include "Light.h"
+#include "ModuleRenderer3D.h"
 #include "MathGeoLib\MathGeoLib.h"
 #include "mmgr\mmgr.h"
 
@@ -137,6 +139,18 @@ void ModuleConfig::Draw(const char* title)
 	if (ImGui::CollapsingHeader("Camera")) {
 		ImGui::SliderFloat("Camera Speed", &App->camera->speed, 0, 15, NULL);
 		ImGui::SliderFloat("Wheel Speed", &App->camera->wheelSpeed, 0, 15, NULL);
+	}
+
+	//Lights
+	if (ImGui::CollapsingHeader("Light")) {
+		col[0] = App->renderer3D->lights[0].ambient.r;
+		col[1] = App->renderer3D->lights[0].ambient.g;
+		col[2] = App->renderer3D->lights[0].ambient.b;
+		col[3] = App->renderer3D->lights[0].ambient.a;
+		ImGui::Text("Color:");
+		ImGui::SameLine();
+		ImGui::ColorEdit4("", col,0);
+		App->renderer3D->lights[0].ambient.Set(col[0], col[1], col[2], col[3]);
 	}
 
 	//Input

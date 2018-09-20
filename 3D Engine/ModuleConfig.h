@@ -31,6 +31,7 @@ private:
 	float brightness = 1.0;
 	int fpsCap = 0;
 	bool mute = false;
+	float col[4];
 	float			fps_array[GRAPH_ARRAY_SIZE];
 	float			ms_array[GRAPH_ARRAY_SIZE];
 	char                  InputBuf[256];
