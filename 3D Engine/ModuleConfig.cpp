@@ -151,6 +151,7 @@ void ModuleConfig::Draw(const char* title)
 		ImGui::SameLine();
 		ImGui::ColorEdit4("", col,0);
 		App->renderer3D->lights[0].ambient.Set(col[0], col[1], col[2], col[3]);
+		App->renderer3D->lights[0].Init();
 	}
 
 	//Input
