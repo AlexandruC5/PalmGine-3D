@@ -143,14 +143,28 @@ void ModuleConfig::Draw(const char* title)
 
 	//Lights
 	if (ImGui::CollapsingHeader("Light")) {
-		col[0] = App->renderer3D->lights[0].ambient.r;
-		col[1] = App->renderer3D->lights[0].ambient.g;
-		col[2] = App->renderer3D->lights[0].ambient.b;
-		col[3] = App->renderer3D->lights[0].ambient.a;
+		//on/off
+		lightOn = App->renderer3D->lights[0].on;
+		ImGui::Checkbox("On/Off", &lightOn);
+		//Position
+		lightPos[0] = App->renderer3D->lights[0].position.x;
+		lightPos[1] = App->renderer3D->lights[0].position.y;
+		lightPos[2] = App->renderer3D->lights[0].position.z;
+		ImGui::Text("Pos:");
+		ImGui::SameLine();
+		ImGui::InputFloat3("",lightPos);
+		//color
+		lightColour[0] = App->renderer3D->lights[0].ambient.r;
+		lightColour[1] = App->renderer3D->lights[0].ambient.g;
+		lightColour[2] = App->renderer3D->lights[0].ambient.b;
+		lightColour[3] = App->renderer3D->lights[0].ambient.a;
 		ImGui::Text("Color:");
 		ImGui::SameLine();
-		ImGui::ColorEdit4("", col,0);
-		App->renderer3D->lights[0].ambient.Set(col[0], col[1], col[2], col[3]);
+		ImGui::ColorEdit4("", lightColour,0);
+		//Apply changes
+		App->renderer3D->lights[0].Active(lightOn);
+		App->renderer3D->lights->SetPos(lightPos[0], lightPos[1], lightPos[2]);
+		App->renderer3D->lights[0].ambient.Set(lightColour[0], lightColour[1], lightColour[2], lightColour[3]);
 		App->renderer3D->lights[0].Init();
 	}
 
