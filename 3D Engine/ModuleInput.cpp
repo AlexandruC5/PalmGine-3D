@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleInput.h"
+#include "imGUI\imgui_impl_sdl_gl3.h"
 
 #define MAX_KEYS 300
 
@@ -89,6 +90,8 @@ update_status ModuleInput::PreUpdate(float dt)
 	SDL_Event e;
 	while(SDL_PollEvent(&e))
 	{
+		//ImGui_ImplSDL2_ProcessEvent(&event);
+		ImGui_ImplSdlGL3_ProcessEvent(&e);
 		switch(e.type)
 		{
 			FILE_TYPE file_type;
