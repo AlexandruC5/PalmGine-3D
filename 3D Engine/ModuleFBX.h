@@ -1,7 +1,6 @@
 #pragma once
 #include "Module.h"
 #include "Globals.h"
-#include "glmath.h"
 #include <vector>
 #include "Glew\include\glew.h"
 #include "MathGeoLib\Geometry\AABB.h"
