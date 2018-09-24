@@ -18,6 +18,6 @@ public:
 	// Variables
 	bool grid_enabled = true;
 	bool axis_enabled = false;
-
+	GameObject* AddGameObject(GameObject* parent);
 	std::vector<GameObject*> gameObjects;
 };

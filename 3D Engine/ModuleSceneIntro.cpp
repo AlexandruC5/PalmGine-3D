@@ -31,11 +31,20 @@ bool ModuleSceneIntro::CleanUp()
 	return true;
 }
 
+GameObject * ModuleSceneIntro::AddGameObject(GameObject* parent)
+{
+	GameObject* go = new GameObject(parent);
+	gameObjects.push_back(go);
+	
+	return go;
+}
+
 
 
 // PreUpdate
 update_status ModuleSceneIntro::PreUpdate(float dt)
 {
+	// TODO Preupdate go
 	return(UPDATE_CONTINUE);
 }
 
@@ -53,5 +62,6 @@ update_status ModuleSceneIntro::Update(float dt)
 		p.Render();
 	}
 
+	// TODO update go
 	return UPDATE_CONTINUE;
 }
