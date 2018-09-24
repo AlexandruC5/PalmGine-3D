@@ -31,9 +31,11 @@ public:
 
 	// Components ---------------------
 	Component* FindComponent(COMP_TYPE type) const;
+	bool CompAlreadyExists(COMP_TYPE type) const;
 	CompMesh* GetCompMesh() const;
 	CompTransform* GetCompTransform() const;
 	CompMaterial* GetCompMaterial() const;
+	Component* AddComponent(COMP_TYPE type);
 
 private:
 	uint id = 0;
