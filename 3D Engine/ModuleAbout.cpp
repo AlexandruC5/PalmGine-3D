@@ -36,6 +36,10 @@ void ModuleAbout::Draw()
 	{
 		ShellExecuteA(0, 0, "chrome.exe", "https://github.com/botttos/PalmGine/releases", 0, SW_SHOWMAXIMIZED);
 	}
+	if (ImGui::MenuItem("- Report a Bug"))
+	{
+		ShellExecuteA(0, 0, "chrome.exe", "https://github.com/botttos/PalmGine-3D/issues", 0, SW_SHOWMAXIMIZED);
+	}
 
 	ImGui::Separator();
 	ImGui::Text("=== License ===");
