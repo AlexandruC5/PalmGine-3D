@@ -121,12 +121,12 @@ void ModuleHardware::Draw(const char* title)
 	if (avx == true) {
 		ImGui::TextColored(ImVec4(0, 1, 0, 100), "AVX");
 	}
+	ImGui::Separator();
 
 	//GPU
 	ImGui::Text("GPU: ");
 	ImGui::SameLine();
 	ImGui::TextColored(ImVec4(0, 1, 0, 100), "%s", vendor);
-	ImGui::Separator();
 	//Brand
 	ImGui::Text("Brand: ");
 	ImGui::SameLine();
