@@ -71,12 +71,24 @@ void ModuleConfig::Draw(const char* title)
 		//sM Stats
 		sMStats smstats = m_getMemoryStatistics();
 
-		//Acummulated memory
-		ImGui::Text("Accumulated actual memory: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(255, 255, 0, 255), "%i", smstats.accumulatedActualMemory);
-		//Memory peak
-		ImGui::Text("Actual memory peak: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(255, 255, 0, 255), "%i", smstats.peakActualMemory);
-		//Actual memory
+		//TotalReported memory
+		ImGui::Text("Total Reported memory: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(255, 255, 0, 255), "%i", smstats.totalReportedMemory);
+		//TotalActual memory
 		ImGui::Text("Total actual memory: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(255, 255, 0, 255), "%i", smstats.totalActualMemory);
+		//PeakReported memory
+		ImGui::Text("Peak reported memory: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(255, 255, 0, 255), "%i", smstats.peakReportedMemory);
+		//PeakActual memory
+		ImGui::Text("Peak actual memory: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(255, 255, 0, 255), "%i", smstats.peakActualMemory);
+		//AccumulatedReported memory
+		ImGui::Text("Accumulated reported memory: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(255, 255, 0, 255), "%i", smstats.accumulatedReportedMemory);
+		//AccumulatedActual memory
+		ImGui::Text("Accumulated actual memory: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(255, 255, 0, 255), "%i", smstats.accumulatedActualMemory);
+		//AccumulatedAllocUnit count
+		ImGui::Text("Accumulated Alloc Unit Count: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(255, 255, 0, 255), "%i", smstats.accumulatedAllocUnitCount);
+		//TotalAllocUnit count
+		ImGui::Text("Total Alloc Unit Count: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(255, 255, 0, 255), "%i", smstats.totalActualMemory);
+		//PeakAllocUnit count
+		ImGui::Text("Peak Alloc Unit Count: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(255, 255, 0, 255), "%i", smstats.peakAllocUnitCount);
 	}
 
 	//Window
