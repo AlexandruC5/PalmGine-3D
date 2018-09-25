@@ -48,6 +48,18 @@ void ModuleConfig::Draw(const char* title)
 		ImGui::TextWrapped("App Name: PalmGine");
 		ImGui::TextWrapped("Organization: UPC CITM");
 		ImGui::Separator();
+		ImGui::SliderInt("Max FPS", &fpsCap, 0, 120);
+		ImGui::Text("Limit Framerate: ");
+		ImGui::SameLine();
+		ImGui::TextColored(ImVec4(255, 255, 0, 255), "%i", fpsCap);
+		//TODO cap fps
+		if (fpsCap == 0) {
+			
+		}
+		else {
+			
+		}
+		ImGui::Separator();
 		//FPS Graph
 		for (uint i = 0; i < GRAPH_ARRAY_SIZE; i++)
 		{
@@ -197,5 +209,15 @@ void ModuleConfig::Draw(const char* title)
 		ImGui::TextColored({ 255, 255, 0, 255 }, "X: %i ", App->input->GetMouseX());
 		ImGui::SameLine();
 		ImGui::TextColored({ 255, 255, 0, 255 }, "Y: %i", App->input->GetMouseY());
+
+		ImGui::Text("Mouse Motion: ");
+		ImGui::SameLine();
+		ImGui::TextColored({ 255, 255, 0, 255 }, "X: %i ", App->input->GetMouseXMotion());
+		ImGui::SameLine();
+		ImGui::TextColored({ 255, 255, 0, 255 }, "Y: %i", App->input->GetMouseYMotion());
+
+		ImGui::Text("Mouse Wheel: ");
+		ImGui::SameLine();
+		ImGui::TextColored({ 255, 255, 0, 255 }, "%i ", App->input->GetMouseZ());
 	}
 }
