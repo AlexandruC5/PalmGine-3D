@@ -71,6 +71,16 @@ void ModuleConfig::Draw(const char* title)
 		//sM Stats
 		sMStats smstats = m_getMemoryStatistics();
 
+		//Memory Graph
+		for (uint i = 0; i < GRAPH_ARRAY_SIZE; i++)
+		{
+			mem_array[i] = mem_array[i + 1];
+		}
+		mem_array[GRAPH_ARRAY_SIZE - 1] = smstats.totalActualMemory;
+		char mem_title[25] = "Memory Consumption";
+		//sprintf_s(ms_title, 25, "Memory Consumption %.1f", mem_title[GRAPH_ARRAY_SIZE - 1]);
+		ImGui::PlotHistogram("", mem_array, IM_ARRAYSIZE(mem_title), 30, mem_title, 0.0f, 1000000.0f, ImVec2(0, 80));
+
 		//TotalReported memory
 		ImGui::Text("Total Reported memory: "); ImGui::SameLine(); ImGui::TextColored(ImVec4(255, 255, 0, 255), "%i", smstats.totalReportedMemory);
 		//TotalActual memory

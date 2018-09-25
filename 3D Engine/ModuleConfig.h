@@ -36,6 +36,7 @@ private:
 	bool lightOn = true;
 	float			fps_array[GRAPH_ARRAY_SIZE];
 	float			ms_array[GRAPH_ARRAY_SIZE];
+	float			mem_array[GRAPH_ARRAY_SIZE];
 	char                  InputBuf[256];
 	ImVector<char*>       Items;
 	bool                  ScrollToBottom;
