@@ -8,6 +8,7 @@ Hope you like it.
 # CAMERA CONTROLS (Like Unity)
 
 - Mouse right click: Move Camera with static position
+- Mouse right click + arrow keys: Navigate arround the scene
 - Mouse left + Alt-left: Move Camera arround model pivot
 - Mouse wheel: Move Camera forward and backward
 - Mouse middle: Panning
@@ -28,8 +29,9 @@ Hope you like it.
 - Console with LOG control.
 - Drag and drop.
 - Unity-like camera.
-// ** //
+### // * NEW * //
 - Wireframe mode
+- Texture alpha tolerance
 - Light control
 
 # VERSION CONTROL
