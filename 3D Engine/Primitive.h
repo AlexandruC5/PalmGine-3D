@@ -35,8 +35,10 @@ public:
 	mat4x4 transform;
 	bool axis,wire;
 	uint my_id = 0;
-	GLfloat* vertices;
-	GLubyte* indices;
+	uint my_indices = 0;
+	float* vertices;
+	unsigned char* indices;
+	float* normals;
 
 protected:
 	PrimitiveTypes type;
@@ -49,8 +51,12 @@ public :
 	Cube();
 	Cube(float sizeX, float sizeY, float sizeZ);
 	void InnerRender() const;
+	void CreateBuffers();
 public:
 	vec3 size;
+	float sx = 0;
+	float sy = 0;
+	float sz = 0;
 };
 
 // ============================================

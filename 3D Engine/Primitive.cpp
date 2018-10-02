@@ -1,10 +1,12 @@
 
 #include "Globals.h"
+#include "Primitive.h"
+#include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
-#include "Primitive.h"
 #include "glut/glut.h"
 
+#pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
 #pragma comment (lib, "glut/glut32.lib")
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 
@@ -104,24 +106,57 @@ void Primitive::Scale(float x, float y, float z)
 Cube::Cube() : Primitive(), size(1.0f, 1.0f, 1.0f)
 {
 	type = PrimitiveTypes::Primitive_Cube;
-	//vertices[24] =  1, 1, 1,  -1, 1, 1,   -1, -1, 1,   1, -1, 1,   // v0,v1,v2,v3 (front)
-					//1, 1, 1,   1, -1, 1,  1, -1, -1,   1, 1, -1,   // v0,v3,v4,v5 (right)
-					//1, 1, 1,   1, 1, -1,  -1, 1, -1,   -1, 1, 1,   // v0,v5,v6,v1 (top)
-					//-1, 1, 1,  -1, 1, -1,  -1, -1, -1,  -1, -1, 1,   // v1,v6,v7,v2 (left)
-					//-1, -1, -1,  1, -1, -1,  1, -1, 1,  -1, -1, 1,   // v7,v4,v3,v2 (bottom)
-					//1, -1, -1,  -1, -1, -1,  -1, 1, -1,  1, 1, -1}; // v4,v7,v6,v5 (back)
+	CreateBuffers();
 }
 
 Cube::Cube(float sizeX, float sizeY, float sizeZ) : Primitive(), size(sizeX, sizeY, sizeZ)
 {
 	type = PrimitiveTypes::Primitive_Cube;
+	CreateBuffers();
+}
+
+void Cube::CreateBuffers() 
+{
+	sx = size.x * 0.5f;
+	sy = size.y * 0.5f;
+	sz = size.z * 0.5f;
+
+	GLfloat v[] ={ sx, sy, sz,   -sx, sy, sz,    -sx, -sy, sz,    sx, -sy, sz,   // v0,v1,v2,v3 (front)
+					 sx, sy, sz,    sx, -sy, sz,    sx, -sy, -sz,    sx, sy, -sz,   // v0,v3,v4,v5 (right)
+					 sx, sy, sz,     sx, sy, -sz,    -sx, sy, -sz,    -sx, sy, sz,   // v0,v5,v6,v1 (top)
+					 -sx, sy, sz,   -sx, sy, -sz,   -sx, -sy, -sz,   -sx, -sy, sz,   // v1,v6,v7,v2 (left)
+					 -sx, -sy, -sz,  sx, -sy, -sz,   sx, -sy, sz,   -sx, -sy, sz,   // v7,v4,v3,v2 (bottom)
+					  sx, -sy, -sz,  -sx, -sy, -sz,  -sx, sy, -sz,  sx, sy, -sz }; // v4,v7,v6,v5 (back)
+	vertices = v;
+
+	GLfloat n[] = { 0, 0, 1,   0, 0, 1,   0, 0, 1,   0, 0, 1,   // v0,v1,v2,v3 (front)
+				  1, 0, 0,   1, 0, 0,   1, 0, 0,   1, 0, 0,   // v0,v3,v4,v5 (right)
+		   		  0, 1, 0,   0, 1, 0,   0, 1, 0,   0, 1, 0,   // v0,v5,v6,v1 (top)
+				  -1, 0, 0,  -1, 0, 0,  -1, 0, 0,  -1, 0, 0,   // v1,v6,v7,v2 (left)
+				  0,-1, 0,   0,-1, 0,   0,-1, 0,   0,-1, 0,   // v7,v4,v3,v2 (bottom)
+				  0, 0,-1,   0, 0,-1,   0, 0,-1,   0, 0,-1 }; // v4,v7,v6,v5 (back)
+	normals = n;
+
+	GLubyte i[] = { 0, 1, 2,   2, 3, 0,      // front
+					4, 5, 6,   6, 7, 4,      // right
+					8, 9,10,  10,11, 8,      // top
+					12,13,14,  14,15,12,      // left
+					16,17,18,  18,19,16,      // bottom
+					20,21,22,  22,23,20 };    // back
+	indices = i;
+
+	
+	//glGenBuffers(1, (GLuint*) &(my_id));
+	//glBindBuffer(GL_ARRAY_BUFFER, my_id);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(float)*8 * 3, vertices, GL_STATIC_DRAW);
+
 }
 
 void Cube::InnerRender() const
 {	
-	float sx = size.x * 0.5f;
+	/*float sx = size.x * 0.5f;
 	float sy = size.y * 0.5f;
-	float sz = size.z * 0.5f;
+	float sz = size.z * 0.5f;*/
 
 	glBegin(GL_QUADS);
 
