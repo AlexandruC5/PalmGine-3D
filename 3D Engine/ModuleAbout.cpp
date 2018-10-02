@@ -144,7 +144,7 @@ void ModuleAbout::Draw()
 		ShellExecuteA(0, 0, "chrome.exe", "https://github.com/botttos", 0, SW_SHOWMAXIMIZED);
 	}
 	ImGui::Bullet(); ImGui::SameLine();
-	if (ImGui::MenuItem("Manel Mourelo"))
+	if (ImGui::MenuItem("Manel Mourelo Montero"))
 	{
 		ShellExecuteA(0, 0, "chrome.exe", "https://github.com/manelmourelo", 0, SW_SHOWMAXIMIZED);
 	}

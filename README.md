@@ -1,4 +1,4 @@
-# Palmgine 3D is a project consistent of creating a Game Engine.
+﻿# Palmgine 3D is a project consistent of creating a Game Engine.
 At this moment, you can import your model (.fbx and .obj), load geometry and change or apply one texture on the model (.jpg, .png, .bmp or .dds).
 
 To work with it you must drag and drop the files on the window.
@@ -8,17 +8,29 @@ Hope you like it.
 # CAMERA CONTROLS (Like Unity)
 
 - Mouse right click: Move Camera with static position
-- Mouse left + Alt-left: Move Camera arround object (model)
+- Mouse left + Alt-left: Move Camera arround model pivot
 - Mouse wheel: Move Camera forward and backward
-- Mouse middle: Panning.
+- Mouse middle: Panning
 - F: Center the Camera on an object
 
 # FEATURES
 
-- Configuration options (Application, window, hardware, volume, camera and input).
+- Configuration options (Application, window, scene, render, hardware, volume, camera, light and input).
 - Inspector shows transform propierties, mesh information and texture information.
 - Console with LOG control.
 - Load and visualization of geometry and textures.
+
+# VERSION CONTROL
+## v.0.5.1
+- Load and draw one .fbx or .obj file with one channel diffuse.
+- Configuration options (Application, window, scene, render, hardware, volume, camera, light and input).
+- Inspector shows transform propierties, mesh information and texture information.
+- Console with LOG control.
+- Drag and drop.
+- Unity-like camera.
+// ** //
+- Wireframe mode
+- Light control
 
 # VERSION CONTROL
 ## v.0.5
