@@ -151,6 +151,7 @@ void ModuleConfig::Draw(const char* title)
 	if (ImGui::CollapsingHeader("Render")) 
 	{
 		ImGui::Checkbox("Wireframe mode", &App->renderer3D->wireframe);
+		ImGui::SliderFloat("Alpha tolerance", &App->renderer3D->tex_alpha, 0, 1, NULL);
 	}
 	//Hardware
 	if (ImGui::CollapsingHeader("Hardware")) {

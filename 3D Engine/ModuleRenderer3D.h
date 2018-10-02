@@ -31,4 +31,5 @@ public:
 	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
 
 	bool wireframe = false;
+	float tex_alpha = 1.0f;
 };

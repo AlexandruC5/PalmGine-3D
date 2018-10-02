@@ -175,9 +175,23 @@ bool ModuleRenderer3D::DrawMeshes(const ModelConfig mesh) const
 	{
 		
 		if (App->fbx->last_texture_id == 0)
+		{
+			// Alpha
+			glEnable(GL_ALPHA_TEST);
+			glAlphaFunc(GL_GREATER, tex_alpha);
+			// -- end alpha
 			glBindTexture(GL_TEXTURE_2D, mesh.texture_id);
+		}
+			
 		else
+		{
+			// Alpha
+			glEnable(GL_ALPHA_TEST);
+			glAlphaFunc(GL_GREATER, tex_alpha);
+			// -- end alpha
 			glBindTexture(GL_TEXTURE_2D, App->fbx->last_texture_id);
+		}
+			
 	}
 	// --- End texture ---
 
@@ -188,6 +202,7 @@ bool ModuleRenderer3D::DrawMeshes(const ModelConfig mesh) const
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_ALPHA_TEST);
 
 	// Wireframe mode
 	if (wireframe)
