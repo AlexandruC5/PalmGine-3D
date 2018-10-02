@@ -118,9 +118,9 @@ Cube::Cube(float sizeX, float sizeY, float sizeZ) : Primitive(), size(sizeX, siz
 
 void Cube::CreateBuffers() 
 {
-	sx = size.x * 0.5f;
-	sy = size.y * 0.5f;
-	sz = size.z * 0.5f;
+	sx = size.x /** 0.5f*/;
+	sy = size.y /** 0.5f*/;
+	sz = size.z /** 0.5f*/;
 
 	vertices = new float[72] { sx, sy, sz,   -sx, sy, sz,    -sx, -sy, sz,    sx, -sy, sz,   // v0,v1,v2,v3 (front)
 					 sx, sy, sz,    sx, -sy, sz,    sx, -sy, -sz,    sx, sy, -sz,   // v0,v3,v4,v5 (right)
@@ -142,11 +142,18 @@ void Cube::CreateBuffers()
 					12,13,14,  14,15,12,      // left
 					16,17,18,  18,19,16,      // bottom
 					20,21,22,  22,23,20 };    // back
-
 	
 	glGenBuffers(1, (GLuint*) &(my_id));
 	glBindBuffer(GL_ARRAY_BUFFER, my_id);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float)*12 * 3, vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float)*72, vertices, GL_STATIC_DRAW);
+
+	glGenBuffers(1, (GLuint*) &(my_normals));
+	glBindBuffer(GL_ARRAY_BUFFER, my_normals);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 72, normals, GL_STATIC_DRAW);
+
+	glGenBuffers(1, (GLuint*) &(my_indices));
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint)*36, indices, GL_STATIC_DRAW);
 
 }
 
@@ -199,17 +206,21 @@ void Cube::InnerRender() const
 	glEnableClientState(GL_NORMAL_ARRAY);
 	//glEnableClientState(GL_COLOR_ARRAY);
 	glEnableClientState(GL_VERTEX_ARRAY);
+
+	glBindBuffer(GL_ARRAY_BUFFER, my_normals);
 	glNormalPointer(GL_FLOAT, 0, normals);
 	//glColorPointer(3, GL_FLOAT, 0, colors2);
+
+	glBindBuffer(GL_ARRAY_BUFFER, my_id);
 	glVertexPointer(3, GL_FLOAT, 0, vertices);
 
-	glPushMatrix();
+	//glPushMatrix();
 	//glTranslatef(-2, -2, 0);                // move to bottom-left corner
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, indices);
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, NULL);
 
-	glPopMatrix();
+	//glPopMatrix();
 
 	glDisableClientState(GL_VERTEX_ARRAY);  // disable vertex arrays
 	//glDisableClientState(GL_COLOR_ARRAY);

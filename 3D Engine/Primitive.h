@@ -36,6 +36,7 @@ public:
 	bool axis,wire;
 	uint my_id = 0;
 	uint my_indices = 0;
+	uint my_normals = 0;
 	float* vertices = nullptr;
 	uint* indices = nullptr;
 	float* normals = nullptr;
