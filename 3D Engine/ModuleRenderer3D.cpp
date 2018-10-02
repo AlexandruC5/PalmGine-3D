@@ -169,10 +169,11 @@ bool ModuleRenderer3D::DrawMeshes(const ModelConfig mesh) const
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 	
 	// --- Texture ---
+	glBindBuffer(GL_ARRAY_BUFFER, mesh.id_uvs);
+	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 	if (wireframe == false)
 	{
-		glBindBuffer(GL_ARRAY_BUFFER, mesh.id_uvs);
-		glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+		
 		if (App->fbx->last_texture_id == 0)
 			glBindTexture(GL_TEXTURE_2D, mesh.texture_id);
 		else
