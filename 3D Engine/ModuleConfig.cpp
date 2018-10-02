@@ -159,6 +159,10 @@ void ModuleConfig::Draw(const char* title)
 		ImGui::Checkbox("Show axis", &App->scene_intro->axis_enabled);
 	}
 
+	if (ImGui::CollapsingHeader("Render")) 
+	{
+		ImGui::Checkbox("Wireframe mode", &App->renderer3D->wireframe);
+	}
 	//Hardware
 	if (ImGui::CollapsingHeader("Hardware")) {
 		App->hardware->Draw("Hardware");

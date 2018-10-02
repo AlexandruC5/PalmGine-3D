@@ -39,6 +39,7 @@ bool ModuleRenderer3D::Init()
 
 		if (ret == true)
 		{
+			
 			//Use Vsync
 			if (VSYNC && SDL_GL_SetSwapInterval(1) < 0)
 				LOG("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
@@ -154,6 +155,12 @@ bool ModuleRenderer3D::CleanUp()
 bool ModuleRenderer3D::DrawMeshes(const ModelConfig mesh) const
 {
 	bool ret = true;
+	// Wireframe mode
+	if (wireframe)
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
+
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glEnable(GL_TEXTURE_2D);
@@ -162,12 +169,15 @@ bool ModuleRenderer3D::DrawMeshes(const ModelConfig mesh) const
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 	
 	// --- Texture ---
-	glBindBuffer(GL_ARRAY_BUFFER, mesh.id_uvs);
-	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
-	if (App->fbx->last_texture_id == 0)
-		glBindTexture(GL_TEXTURE_2D, mesh.texture_id);
-	else
-		glBindTexture(GL_TEXTURE_2D, App->fbx->last_texture_id);
+	if (wireframe == false)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, mesh.id_uvs);
+		glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+		if (App->fbx->last_texture_id == 0)
+			glBindTexture(GL_TEXTURE_2D, mesh.texture_id);
+		else
+			glBindTexture(GL_TEXTURE_2D, App->fbx->last_texture_id);
+	}
 	// --- End texture ---
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh.id_indices);
@@ -178,6 +188,12 @@ bool ModuleRenderer3D::DrawMeshes(const ModelConfig mesh) const
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glDisable(GL_TEXTURE_2D);
 
+	// Wireframe mode
+	if (wireframe)
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+	
 	return ret;
 }
 
