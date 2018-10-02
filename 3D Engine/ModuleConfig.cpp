@@ -187,7 +187,7 @@ void ModuleConfig::Draw(const char* title)
 		lightColour[3] = App->renderer3D->lights[0].ambient.a;
 		ImGui::Text("Color:");
 		ImGui::SameLine();
-		ImGui::ColorEdit4("", lightColour,0);
+		ImGui::ColorPicker4("", lightColour, 0);
 		//Apply changes
 		App->renderer3D->lights[0].Active(lightOn);
 		App->renderer3D->lights[0].SetPos(lightPos[0], lightPos[1], lightPos[2]);
