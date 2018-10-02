@@ -6,6 +6,7 @@
 #include "glut/glut.h"
 
 #pragma comment (lib, "glut/glut32.lib")
+#pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 
 // ------------------------------------------------------------
 Primitive::Primitive() : transform(IdentityMatrix), color(White), wire(false), axis(false), type(PrimitiveTypes::Primitive_Point)
@@ -103,6 +104,12 @@ void Primitive::Scale(float x, float y, float z)
 Cube::Cube() : Primitive(), size(1.0f, 1.0f, 1.0f)
 {
 	type = PrimitiveTypes::Primitive_Cube;
+	//vertices[24] =  1, 1, 1,  -1, 1, 1,   -1, -1, 1,   1, -1, 1,   // v0,v1,v2,v3 (front)
+					//1, 1, 1,   1, -1, 1,  1, -1, -1,   1, 1, -1,   // v0,v3,v4,v5 (right)
+					//1, 1, 1,   1, 1, -1,  -1, 1, -1,   -1, 1, 1,   // v0,v5,v6,v1 (top)
+					//-1, 1, 1,  -1, 1, -1,  -1, -1, -1,  -1, -1, 1,   // v1,v6,v7,v2 (left)
+					//-1, -1, -1,  1, -1, -1,  1, -1, 1,  -1, -1, 1,   // v7,v4,v3,v2 (bottom)
+					//1, -1, -1,  -1, -1, -1,  -1, 1, -1,  1, 1, -1}; // v4,v7,v6,v5 (back)
 }
 
 Cube::Cube(float sizeX, float sizeY, float sizeZ) : Primitive(), size(sizeX, sizeY, sizeZ)

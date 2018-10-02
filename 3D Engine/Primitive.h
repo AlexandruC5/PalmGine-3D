@@ -10,7 +10,10 @@ enum PrimitiveTypes
 	Primitive_Plane,
 	Primitive_Cube,
 	Primitive_Sphere,
-	Primitive_Cylinder
+	Primitive_Cylinder,
+	Primitive_Arrow,
+	Primitive_Axis,
+	Primitive_Ray
 };
 
 class Primitive
@@ -31,6 +34,9 @@ public:
 	Color color;
 	mat4x4 transform;
 	bool axis,wire;
+	uint my_id = 0;
+	GLfloat* vertices;
+	GLubyte* indices;
 
 protected:
 	PrimitiveTypes type;
