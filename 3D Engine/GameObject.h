@@ -14,6 +14,8 @@ public:
 	GameObject(GameObject* parent);
 	~GameObject();
 
+	void Update(float dt);
+
 	// Name --------------------------
 	void SetName(char* new_name);
 	const char* GetName() const;
@@ -36,11 +38,12 @@ public:
 	CompMesh* GetCompMesh() const;
 	CompTransform* GetCompTransform() const;
 	CompMaterial* GetCompMaterial() const;
-	Component* AddComponent(COMP_TYPE type);
+	Component* AddEmptyComponent(COMP_TYPE type);
+	void AddCompMesh(CompMesh* c_mesh);
 
 private:
 	uint id = 0;
-	char* name = "default";
+	char* name = nullptr;
 	bool active = true;
 	bool static_obj = false;
 

@@ -113,14 +113,8 @@ update_status ModuleInput::PreUpdate(float dt)
 			file_type = GetFileType(fbx_path.c_str());
 			if (file_type == GEOMETRY_MODEL)
 			{
-				if (App->fbx->MeshesSize() == 0)
-					App->fbx->LoadFBX(fbx_path.c_str());
-				else
-				{
-					App->fbx->ClearMeshes();
-					App->fbx->LoadFBX(fbx_path.c_str());
-				}
-				App->fbx->CentrateObjectView();
+				App->fbx->LoadFBX(fbx_path.c_str());
+				//App->fbx->CentrateObjectView();
 			}
 			else if (file_type == TEXTURE)
 			{

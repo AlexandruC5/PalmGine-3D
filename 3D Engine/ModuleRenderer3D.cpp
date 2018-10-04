@@ -130,7 +130,7 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 // Update
 update_status ModuleRenderer3D::Update(float dt)
 {
-	App->fbx->DrawMeshes();
+	App->scene_intro->root_gameObjects->Update(dt);
 	return UPDATE_CONTINUE;
 }
 
@@ -153,7 +153,7 @@ bool ModuleRenderer3D::CleanUp()
 
 bool ModuleRenderer3D::DrawMeshes(const ModelConfig mesh) const
 {
-	bool ret = true;
+	/*bool ret = true;
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glEnable(GL_TEXTURE_2D);
@@ -176,9 +176,9 @@ bool ModuleRenderer3D::DrawMeshes(const ModelConfig mesh) const
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glBindTexture(GL_TEXTURE_2D, 0);
-	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_TEXTURE_2D);*/
 
-	return ret;
+	return 1;
 }
 
 void ModuleRenderer3D::OnResize(int width, int height)

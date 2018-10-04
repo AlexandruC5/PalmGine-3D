@@ -34,6 +34,7 @@ public:
 
 	void Update(float dt);
 	void Draw();
+	void AddMesh(Mesh* mesh);
 
 	// Read
 	uint const GetIndices();
@@ -41,11 +42,7 @@ public:
 	float const GetNormals();
 	float const GetUvs();
 	math::AABB const GetAABB();
-	uint const GetMeshesSize();
 
 private:
-	std::vector<Mesh> meshes;
-
-	Mesh data;
-	Mesh mesh;
+	Mesh* mesh;
 };

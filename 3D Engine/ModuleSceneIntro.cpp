@@ -11,7 +11,9 @@ ModuleSceneIntro::ModuleSceneIntro(bool start_enabled) : Module(start_enabled)
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
-{}
+{
+	delete root_gameObjects;
+}
 
 // Load assets
 bool ModuleSceneIntro::Start()
@@ -20,6 +22,8 @@ bool ModuleSceneIntro::Start()
 	bool ret = true;
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
+	
+	root_gameObjects = new GameObject(nullptr);
 
 	return ret;
 }
@@ -34,7 +38,7 @@ bool ModuleSceneIntro::CleanUp()
 GameObject * ModuleSceneIntro::AddGameObject(GameObject* parent)
 {
 	GameObject* go = new GameObject(parent);
-	root_gameObjects;
+	root_gameObjects->AddChild(go);
 	
 	return go;
 }
@@ -61,7 +65,5 @@ update_status ModuleSceneIntro::Update(float dt)
 		}
 		p.Render();
 	}
-
-	// TODO update go
 	return UPDATE_CONTINUE;
 }

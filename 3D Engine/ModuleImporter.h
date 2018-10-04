@@ -50,7 +50,7 @@ public:
 	bool CleanUp();
 	
 	bool LoadFBX(const char* path);
-	void LoadModel(const aiScene* scene, aiNode* node, const char* path);
+	GameObject* LoadModel(const aiScene* scene, aiNode* node, const char* path);
 	uint CreateTextureID(const char * texture_path);
 	void ApplyTexture(const char* path);
 	void ClearMeshes();
@@ -69,7 +69,6 @@ public:
 	uint const GetTextureId();
 	void const CentrateObjectView();
 	math::AABB const GetAABB();
-	uint MeshesSize();
 
 public:
 	std::string path;
@@ -79,8 +78,8 @@ public:
 	GLfloat fbx_position[3] = { 0.0f, 0.0f, 0.0f };
 
 private:
-	std::vector<ModelConfig> meshes;
-	ModelConfig data;
+	//std::vector<ModelConfig> meshes;
+	//ModelConfig data;
 	ModelConfig mesh;
-	GameObject* temp_go;
+	
 };

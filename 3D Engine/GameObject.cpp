@@ -7,26 +7,49 @@
 
 GameObject::GameObject(GameObject* parent) : parent(parent)
 {
-	this->AddComponent(COMP_TYPE::C_TRANSFORM);
+	this->AddEmptyComponent(COMP_TYPE::C_TRANSFORM);
 	if (parent != nullptr)
 	{
 		parent->childs.push_back(this);
 	}
+	name = new char[50];
 }
 
 GameObject::~GameObject()
 {
 	RELEASE_ARRAY(name);
 	parent = nullptr;
-	// Clear components
-	for(int i = 0; childs.size)
+	for (uint i = 0; i < childs.size(); i++)
+	{
+		delete childs[i];
+	}
+	for (uint i = 0; i < components.size(); i++)
+	{
+		delete components[i];
+	}
+
 	childs.clear();
 	components.clear();
 }
 
+void GameObject::Update(float dt)
+{
+	for (uint i = 0; i < components.size(); i++)
+	{
+		components[i]->Update(dt);
+	}
+	for (uint i = 0; i < childs.size(); i++)
+	{
+		childs[i]->Update(dt);
+	}
+}
+
 void GameObject::SetName(char* new_name)
 {
-	this->name = new_name;
+	if (strcpy(name, new_name) == 0)
+	{
+		LOG("NAME IS TOO LONG");
+	}
 }
 
 const char * GameObject::GetName() const
@@ -56,6 +79,7 @@ const GameObject * GameObject::GetParent() const
 
 void GameObject::AddChild(GameObject * child)
 {
+	child->parent = this;
 	childs.push_back(child);
 }
 
@@ -81,7 +105,7 @@ CompMaterial* GameObject::GetCompMaterial() const
 	return (CompMaterial*)FindComponent(COMP_TYPE::C_MATERIAL);
 }
 
-Component * GameObject::AddComponent(COMP_TYPE type)
+Component * GameObject::AddEmptyComponent(COMP_TYPE type)
 {
 	if (CompAlreadyExists(type))
 	{
@@ -113,6 +137,14 @@ Component * GameObject::AddComponent(COMP_TYPE type)
 	return nullptr;
 }
 
+void GameObject::AddCompMesh(CompMesh * c_mesh)
+{
+	if (this->FindComponent(COMP_TYPE::C_MESH) == nullptr)
+	{
+		components.push_back(c_mesh);
+	}
+}
+
 Component * GameObject::FindComponent(COMP_TYPE type) const
 {
 	Component* temp_comp = nullptr;
@@ -124,6 +156,7 @@ Component * GameObject::FindComponent(COMP_TYPE type) const
 			return temp_comp;
 		}
 	}
+	return temp_comp;
 }
 
 bool GameObject::CompAlreadyExists(COMP_TYPE type) const
