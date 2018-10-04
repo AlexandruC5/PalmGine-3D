@@ -6,6 +6,9 @@
 #include "Devil/include/il.h"
 #include "Devil/include/ilut.h"
 #include "MathGeoLib\Geometry\AABB.h"
+#include "CompMesh.h"
+#include "CompTransform.h"
+#include "CompMaterial.h"
 
 #pragma comment (lib, "Assimp/libx86/assimp.lib")
 #pragma comment (lib, "Devil/libx86/DevIL.lib")
@@ -75,7 +78,7 @@ bool ModuleImporter::LoadFBX(const char* path)
 	this->path = path;
 	//Substract the name of the file
 	std::string name(path);
-	this->file_name = name.substr(name.find_last_of('\\') + 1); 
+	temp_go->SetName((char*)name.substr(name.find_last_of('\\') + 1).c_str()); 
 	const aiScene* scene = aiImportFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
 
 	if (scene != nullptr && scene->HasMeshes())
@@ -109,6 +112,7 @@ void ModuleImporter::LoadModel(const aiScene* scene, aiNode* node, const char* p
 		{
 			aiMesh* new_mesh = scene->mMeshes[node->mMeshes[i]];
 			mesh = ModelConfig();
+			
 			mesh.num_vertices = new_mesh->mNumVertices;
 			mesh.vertices = new uint[mesh.num_vertices * 3];
 			memcpy(mesh.vertices, new_mesh->mVertices, sizeof(float)*mesh.num_vertices * 3);

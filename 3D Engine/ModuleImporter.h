@@ -82,4 +82,5 @@ private:
 	std::vector<ModelConfig> meshes;
 	ModelConfig data;
 	ModelConfig mesh;
+	GameObject* temp_go;
 };

@@ -14,10 +14,11 @@ public:
 	update_status Update(float dt);
 	update_status PreUpdate(float dt);
 	bool CleanUp();
+	GameObject* AddGameObject(GameObject* parent);
 
 	// Variables
 	bool grid_enabled = true;
 	bool axis_enabled = false;
-	GameObject* AddGameObject(GameObject* parent);
-	std::vector<GameObject*> gameObjects;
+	
+	GameObject* root_gameObjects =  nullptr;
 };

@@ -7,6 +7,7 @@
 
 GameObject::GameObject(GameObject* parent) : parent(parent)
 {
+	this->AddComponent(COMP_TYPE::C_TRANSFORM);
 	if (parent != nullptr)
 	{
 		parent->childs.push_back(this);
@@ -18,7 +19,9 @@ GameObject::~GameObject()
 	RELEASE_ARRAY(name);
 	parent = nullptr;
 	// Clear components
+	for(int i = 0; childs.size)
 	childs.clear();
+	components.clear();
 }
 
 void GameObject::SetName(char* new_name)
@@ -49,6 +52,11 @@ bool GameObject::IsActive()
 const GameObject * GameObject::GetParent() const
 {
 	return parent;
+}
+
+void GameObject::AddChild(GameObject * child)
+{
+	childs.push_back(child);
 }
 
 uint GameObject::GetNumChilds() const

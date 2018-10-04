@@ -27,6 +27,7 @@ public:
 	const GameObject* GetParent() const;
 
 	// Childs -------------------------
+	void AddChild(GameObject* child);
 	uint GetNumChilds() const;
 
 	// Components ---------------------

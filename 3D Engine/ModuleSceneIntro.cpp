@@ -34,7 +34,7 @@ bool ModuleSceneIntro::CleanUp()
 GameObject * ModuleSceneIntro::AddGameObject(GameObject* parent)
 {
 	GameObject* go = new GameObject(parent);
-	gameObjects.push_back(go);
+	root_gameObjects;
 	
 	return go;
 }
