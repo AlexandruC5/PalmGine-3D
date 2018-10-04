@@ -118,7 +118,7 @@ update_status ModuleInput::PreUpdate(float dt)
 			}
 			else if (file_type == TEXTURE)
 			{
-				App->fbx->ApplyTexture(fbx_path.c_str());
+				//App->fbx->ApplyTexture(fbx_path.c_str());
 			}
 
 		case SDL_WINDOWEVENT:

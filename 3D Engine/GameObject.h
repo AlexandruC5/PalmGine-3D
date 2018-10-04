@@ -39,7 +39,7 @@ public:
 	CompTransform* GetCompTransform() const;
 	CompMaterial* GetCompMaterial() const;
 	Component* AddEmptyComponent(COMP_TYPE type);
-	void AddCompMesh(CompMesh* c_mesh);
+	void AddComponent(Component* comp);
 
 private:
 	uint id = 0;

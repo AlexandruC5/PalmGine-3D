@@ -112,6 +112,7 @@ GameObject* ModuleImporter::LoadModel(const aiScene* scene, aiNode* node, const 
 	{
 		CompMesh* mesh_comp = new CompMesh(temp_go, COMP_TYPE::C_MESH);
 		Mesh* temp_mesh = new Mesh();
+		CompMaterial* mat_comp = new CompMaterial(temp_go, COMP_TYPE::C_MATERIAL);
 		LOG("Loading mesh from path %s", path);
 		for (int i = 0; i < node->mNumMeshes; i++)
 		{
@@ -185,9 +186,7 @@ GameObject* ModuleImporter::LoadModel(const aiScene* scene, aiNode* node, const 
 					final_path.erase(0, final_path.find_last_of("\\") + 1);
 					texture_folder += final_path;
 
-					/*         ACABAME AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA            */
-					// Material
-					//temp_mesh->texture_id = CreateTextureID(texture_folder.c_str());
+					mat_comp->SetID(CreateTextureID(texture_folder.c_str()));
 					LOG("Texture with path %s has been loaded.", texture_folder.c_str());
 					final_path.clear();
 					texture_folder.clear();
@@ -218,7 +217,8 @@ GameObject* ModuleImporter::LoadModel(const aiScene* scene, aiNode* node, const 
 			LOG("Loaded mesh with %i normals.", temp_mesh->num_normals);
 			LOG("Loaded mesh with %i uvs.", temp_mesh->num_uvs);
 		}
-		temp_go->AddCompMesh(mesh_comp);
+		temp_go->AddComponent(mesh_comp);
+		temp_go->AddComponent(mat_comp);
 	}
 
 	for (int i = 0; i < node->mNumChildren; i++)
@@ -250,7 +250,7 @@ uint ModuleImporter::CreateTextureID(const char* texture_path)
 	return texture_id;
 }
 
-void ModuleImporter::ApplyTexture(const char* path)
+/*void ModuleImporter::ApplyTexture(const char* path)
 {
 	ILuint id;
 	ilGenImages(1, &id);
@@ -259,7 +259,7 @@ void ModuleImporter::ApplyTexture(const char* path)
 
 	last_texture_id = ilutGLBindTexImage();
 	LOG("Loaded and applied new texture correctly from path %s.", path);
-}
+}*/
 
 void const ModuleImporter::CentrateObjectView()
 {

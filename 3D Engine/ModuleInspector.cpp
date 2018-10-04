@@ -65,12 +65,12 @@ void ModuleInspector::Draw(const char* title)
 	if (ImGui::CollapsingHeader("Material"), ImGuiTreeNodeFlags_DefaultOpen) {
 		ImGui::Text("Showing read only information about the mesh material");
 		ImGui::Separator();
-		if (App->fbx->last_texture_id == 0) {
+		/*if (App->fbx->last_texture_id == 0) {
 			ImGui::Image((ImTextureID)App->fbx->GetTextureId(), ImVec2(200, 200));
 		}
 		else {
 			ImGui::Image((ImTextureID)App->fbx->last_texture_id, ImVec2(200, 200));
-		}
+		}*/
 	}
 
 	//ImGui::End();

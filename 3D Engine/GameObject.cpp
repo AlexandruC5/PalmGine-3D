@@ -137,11 +137,14 @@ Component * GameObject::AddEmptyComponent(COMP_TYPE type)
 	return nullptr;
 }
 
-void GameObject::AddCompMesh(CompMesh * c_mesh)
+void GameObject::AddComponent(Component * comp)
 {
-	if (this->FindComponent(COMP_TYPE::C_MESH) == nullptr)
+	if (comp != nullptr)
 	{
-		components.push_back(c_mesh);
+		if (CompAlreadyExists(comp->GetType()) == false)
+		{
+			components.push_back(comp);
+		}
 	}
 }
 

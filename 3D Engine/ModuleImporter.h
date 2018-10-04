@@ -52,7 +52,7 @@ public:
 	bool LoadFBX(const char* path);
 	GameObject* LoadModel(const aiScene* scene, aiNode* node, const char* path);
 	uint CreateTextureID(const char * texture_path);
-	void ApplyTexture(const char* path);
+	//void ApplyTexture(const char* path);
 	void ClearMeshes();
 	void DrawMeshes();
 
@@ -73,7 +73,7 @@ public:
 public:
 	std::string path;
 	std::string file_name;
-	uint last_texture_id = 0;
+	//uint last_texture_id = 0;
 
 	GLfloat fbx_position[3] = { 0.0f, 0.0f, 0.0f };
 
