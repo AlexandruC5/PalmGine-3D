@@ -56,12 +56,6 @@ void ModuleFBX::ClearMeshes()
 	delete data.normals;
 }
 
-//void ModuleFBX::DrawMeshes()
-//{
-//	for (std::vector<ModelConfig>::iterator item = App->fbx->meshes.begin(); item != App->fbx->meshes.end(); ++item)
-//		App->renderer3D->DrawMeshes(*item);
-//}
-
 bool ModuleFBX::CleanUp()
 {
 	aiDetachAllLogStreams();

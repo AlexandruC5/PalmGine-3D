@@ -56,7 +56,6 @@ public:
 	uint CreateTextureID(const char * texture_path);
 	void ApplyTexture(const char* path);
 	void ClearMeshes();
-	void DrawMeshes();
 
 	// Read only
 	uint const GetIndices();
@@ -70,8 +69,6 @@ public:
 	void const CentrateObjectView();
 	math::AABB const GetAABB();
 	uint const MeshesSize();
-
-	//std::vector<ModelConfig> meshes;
 
 public:
 	std::string path;
