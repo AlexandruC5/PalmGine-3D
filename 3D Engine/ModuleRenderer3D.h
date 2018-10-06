@@ -32,6 +32,7 @@ public:
 	SDL_GLContext context;
 	mat3x3 NormalMatrix;
 	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
+	std::vector<ModelConfig> meshes;
 
 	bool wireframe = false;
 	float tex_alpha = 0.0f;

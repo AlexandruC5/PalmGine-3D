@@ -71,7 +71,7 @@ public:
 	math::AABB const GetAABB();
 	uint const MeshesSize();
 
-	std::vector<ModelConfig> meshes;
+	//std::vector<ModelConfig> meshes;
 
 public:
 	std::string path;

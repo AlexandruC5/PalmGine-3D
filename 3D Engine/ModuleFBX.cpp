@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "ModuleFBX.h"
+#include "ModuleRenderer3D.h"
 #include "Assimp/include/cimport.h"
 #include "Assimp/include/scene.h"
 #include "Assimp/include/postprocess.h"
@@ -37,13 +38,13 @@ bool ModuleFBX::Start()
 
 void ModuleFBX::ClearMeshes()
 {
-	for (int i = meshes.size() - 1; meshes.size() != 0; i--)
+	for (int i = App->renderer3D->meshes.size() - 1; App->renderer3D->meshes.size() != 0; i--)
 	{
-		delete[] meshes[i].indices;
-		delete[] meshes[i].vertices;
-		delete[] meshes[i].uvs;
-		delete[] meshes[i].normals;
-		meshes.pop_back();
+		delete[] App->renderer3D->meshes[i].indices;
+		delete[] App->renderer3D->meshes[i].vertices;
+		delete[] App->renderer3D->meshes[i].uvs;
+		delete[] App->renderer3D->meshes[i].normals;
+		App->renderer3D->meshes.pop_back();
 	}
 
 	//Geometry
@@ -55,11 +56,11 @@ void ModuleFBX::ClearMeshes()
 	delete data.normals;
 }
 
-void ModuleFBX::DrawMeshes()
-{
-	for (std::vector<ModelConfig>::iterator item = App->fbx->meshes.begin(); item != App->fbx->meshes.end(); ++item)
-		App->renderer3D->DrawMeshes(*item);
-}
+//void ModuleFBX::DrawMeshes()
+//{
+//	for (std::vector<ModelConfig>::iterator item = App->fbx->meshes.begin(); item != App->fbx->meshes.end(); ++item)
+//		App->renderer3D->DrawMeshes(*item);
+//}
 
 bool ModuleFBX::CleanUp()
 {
@@ -201,7 +202,7 @@ void ModuleFBX::LoadModel(const aiScene* scene, aiNode* node, const char* path)
 			}
 			 
 			// ---- Push the mesh ----
-			meshes.push_back(mesh);
+			App->renderer3D->meshes.push_back(mesh);
 			LOG("Loaded mesh with %i vertices.", mesh.num_vertices);
 			LOG("Loaded mesh with %i indices.", mesh.num_indices);
 			LOG("Loaded mesh with %i triangles.", mesh.num_vertices / 3);
@@ -275,7 +276,7 @@ math::AABB const ModuleFBX::GetAABB()
 
 uint const ModuleFBX::MeshesSize()
 {
-	return meshes.size();
+	return App->renderer3D->meshes.size();
 }
 
 uint const ModuleFBX::GetIndices()
