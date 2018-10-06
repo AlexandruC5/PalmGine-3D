@@ -1,4 +1,7 @@
-#pragma once
+#ifndef MODULERENDERER3D_H
+#define MODULERENDERER3D_H
+
+
 #include "Module.h"
 #include "Globals.h"
 #include "glmath.h"
@@ -33,3 +36,5 @@ public:
 	bool wireframe = false;
 	float tex_alpha = 0.0f;
 };
+
+#endif // !MODULERENDERER3D_H

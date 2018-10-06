@@ -1,4 +1,7 @@
-#pragma once
+#ifndef MODULEFBX_H
+#define MODULEFBX_H
+
+
 #include "Module.h"
 #include "Globals.h"
 #include <vector>
@@ -81,3 +84,5 @@ private:
 	ModelConfig data;
 	ModelConfig mesh;
 };
+
+#endif // !MODULEFBX_H

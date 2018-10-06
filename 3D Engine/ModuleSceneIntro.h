@@ -1,4 +1,7 @@
-#pragma once
+#ifndef MODULESCENEINTRO_H
+#define MODULESCENEINTRO_H
+
+
 #include "Module.h"
 #include "Globals.h"
 
@@ -17,3 +20,6 @@ public:
 	bool grid_enabled = true;
 	bool axis_enabled = false;
 };
+
+
+#endif // !MODULESCENEINTRO_H
