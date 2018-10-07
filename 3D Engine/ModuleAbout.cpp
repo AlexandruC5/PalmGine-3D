@@ -103,10 +103,6 @@ void ModuleAbout::Draw()
 		ShellExecuteA(0, 0, "chrome.exe", "https://www.libsdl.org/", 0, SW_SHOWMAXIMIZED);
 	}
 
-	if (ImGui::MenuItem("- SDL_mixer (v2.0.0)"))
-	{
-		ShellExecuteA(0, 0, "chrome.exe", "https://www.libsdl.org/projects/SDL_mixer/", 0, SW_SHOWMAXIMIZED);
-	}
 
 	if (ImGui::BeginMenu("- OpenGL info"))
 	{
