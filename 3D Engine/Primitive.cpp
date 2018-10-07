@@ -5,10 +5,8 @@
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
-#include "glut/glut.h"
 
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
-#pragma comment (lib, "glut/glut32.lib")
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 
 // ------------------------------------------------------------
