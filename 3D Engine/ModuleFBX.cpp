@@ -273,12 +273,12 @@ uint ModuleFBX::MeshesSize()const
 	return App->renderer3D->meshes.size();
 }
 
-uint ModuleFBX::GetIndices()const
+uint ModuleFBX::GetIndicesQuantity()const
 {
 	return(mesh.num_indices);
 }
 
-uint ModuleFBX::GetVertices()const
+uint ModuleFBX::GetVerticesQuantity()const
 {
 	return(mesh.num_vertices);
 }
@@ -298,12 +298,12 @@ vec3 ModuleFBX::GetScale()const
 	return(mesh.scale);
 }
 
-float ModuleFBX::GetNormals()const
+float ModuleFBX::GetNormalsQuanity()const
 {
 	return(mesh.num_normals);
 }
 
-float ModuleFBX::GetUvs()const
+float ModuleFBX::GetUvsQuantity()const
 {
 	return(mesh.num_uvs);
 }

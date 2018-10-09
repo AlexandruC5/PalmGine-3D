@@ -58,13 +58,13 @@ public:
 	void ClearMeshes();
 
 	// Read only
-	uint GetIndices() const;
-	uint GetVertices() const;
+	uint GetIndicesQuantity() const;
+	uint GetVerticesQuantity() const;
 	vec3 GetPosition() const;
 	vec3 GetRotation() const;
 	vec3 GetScale() const;
-	float GetNormals() const;
-	float GetUvs() const;
+	float GetNormalsQuanity() const;
+	float GetUvsQuantity() const;
 	uint GetTextureId() const;
 	void CentrateObjectView() const;
 	math::AABB GetAABB() const;
