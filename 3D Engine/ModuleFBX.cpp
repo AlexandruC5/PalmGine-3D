@@ -244,7 +244,7 @@ void ModuleFBX::ApplyTexture(const char* path)
 	LOG("Loaded and applied new texture correctly from path %s.", path);
 }
 
-void const ModuleFBX::CentrateObjectView()
+void ModuleFBX::CentrateObjectView()const
 {
 	math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
 	box.Enclose((float3*)App->fbx->mesh.vertices, App->fbx->mesh.num_vertices);
@@ -260,7 +260,7 @@ void const ModuleFBX::CentrateObjectView()
 	App->camera->LookAt(App->camera->Reference);
 }
 
-math::AABB const ModuleFBX::GetAABB()
+math::AABB ModuleFBX::GetAABB()const
 {
 	math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
 	box.Enclose((float3*)App->fbx->mesh.vertices, App->fbx->mesh.num_vertices);
@@ -268,47 +268,47 @@ math::AABB const ModuleFBX::GetAABB()
 	return box;
 }
 
-uint const ModuleFBX::MeshesSize()
+uint ModuleFBX::MeshesSize()const
 {
 	return App->renderer3D->meshes.size();
 }
 
-uint const ModuleFBX::GetIndices()
+uint ModuleFBX::GetIndices()const
 {
 	return(mesh.num_indices);
 }
 
-uint const ModuleFBX::GetVertices()
+uint ModuleFBX::GetVertices()const
 {
 	return(mesh.num_vertices);
 }
 
-vec3 const ModuleFBX::GetPosition()
+vec3 ModuleFBX::GetPosition()const
 {
 	return(mesh.position);
 }
 
-vec3 const ModuleFBX::GetRotation()
+vec3 ModuleFBX::GetRotation()const
 {
 	return(mesh.rotation);
 }
 
-vec3 const ModuleFBX::GetScale()
+vec3 ModuleFBX::GetScale()const
 {
 	return(mesh.scale);
 }
 
-float const ModuleFBX::GetNormals()
+float ModuleFBX::GetNormals()const
 {
 	return(mesh.num_normals);
 }
 
-float const ModuleFBX::GetUvs()
+float ModuleFBX::GetUvs()const
 {
 	return(mesh.num_uvs);
 }
 
-uint const ModuleFBX::GetTextureId()
+uint ModuleFBX::GetTextureId()const
 {
 	return(mesh.texture_id);
 }

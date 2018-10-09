@@ -58,17 +58,17 @@ public:
 	void ClearMeshes();
 
 	// Read only
-	uint const GetIndices();
-	uint const GetVertices();
-	vec3 const GetPosition();
-	vec3 const GetRotation();
-	vec3 const GetScale();
-	float const GetNormals();
-	float const GetUvs();
-	uint const GetTextureId();
-	void const CentrateObjectView();
-	math::AABB const GetAABB();
-	uint const MeshesSize();
+	uint GetIndices() const;
+	uint GetVertices() const;
+	vec3 GetPosition() const;
+	vec3 GetRotation() const;
+	vec3 GetScale() const;
+	float GetNormals() const;
+	float GetUvs() const;
+	uint GetTextureId() const;
+	void CentrateObjectView() const;
+	math::AABB GetAABB() const;
+	uint MeshesSize() const;
 
 public:
 	std::string path;
