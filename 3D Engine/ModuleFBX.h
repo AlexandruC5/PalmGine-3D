@@ -72,6 +72,7 @@ public:
 
 public:
 	std::string path;
+	std::string texture_path;
 	std::string file_name;
 	uint last_texture_id = 0;
 

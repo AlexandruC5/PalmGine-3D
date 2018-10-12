@@ -65,6 +65,8 @@ bool ModuleFBX::CleanUp()
 {
 	aiDetachAllLogStreams();
 	ClearMeshes();
+	path.clear();
+	texture_path.clear();
 	return true;
 }
 
@@ -172,13 +174,14 @@ void ModuleFBX::LoadModel(const aiScene* scene, aiNode* node, const char* path)
 				if (path.length > 0)
 				{
 					// ---- Find the texture on textures folder ----
-					std::string texture_folder = "Textures/";
+					std::string texture_folder = "Textures\\";
 					std::string final_path = path.data;
 					final_path.erase(0, final_path.find_last_of("\\") + 1);
-					texture_folder += final_path;
+					texture_path = texture_folder + final_path;
 
-					mesh.texture_id = CreateTextureID(texture_folder.c_str());
-					LOG("Texture with path %s has been loaded.", texture_folder.c_str());
+					mesh.texture_id = CreateTextureID(texture_path.c_str());
+					ApplyTexture(texture_path.c_str());
+					LOG("Texture with path %s has been loaded.", texture_path.c_str());
 					final_path.clear();
 					texture_folder.clear();
 				}
@@ -254,6 +257,9 @@ void ModuleFBX::ApplyTexture(const char* path)
 	ilLoadImage(path);
 
 	last_texture_id = ilutGLBindTexImage();
+
+	texture_path = path;
+
 	LOG("Loaded and applied new texture correctly from path %s.", path);
 }
 
