@@ -73,6 +73,8 @@ public:
 public:
 	std::string path;
 	std::string texture_path;
+	int textureWidth = 0;
+	int textureHeight = 0;
 	std::string file_name;
 	uint last_texture_id = 0;
 

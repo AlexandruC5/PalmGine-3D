@@ -255,6 +255,8 @@ void ModuleFBX::ApplyTexture(const char* path)
 	ilGenImages(1, &id);
 	ilBindImage(id);
 	ilLoadImage(path);
+	textureWidth = ilGetInteger(IL_IMAGE_WIDTH);
+	textureHeight = ilGetInteger(IL_IMAGE_HEIGHT);
 
 	last_texture_id = ilutGLBindTexImage();
 

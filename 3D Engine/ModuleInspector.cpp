@@ -66,6 +66,8 @@ void ModuleInspector::Draw(const char* title)
 		ImGui::Text("Showing read only information about the mesh material");
 		ImGui::Separator();
 		ImGui::Text("Texture path: %s", App->fbx->texture_path.c_str());
+		ImGui::Text("Texture WIDTH: %i", App->fbx->textureWidth);
+		ImGui::Text("Texture HEIGHT: %i", App->fbx->textureHeight);
 		if (App->fbx->last_texture_id == 0) {
 			ImGui::Image((ImTextureID)App->fbx->GetTextureId(), ImVec2(200, 200));
 		}
