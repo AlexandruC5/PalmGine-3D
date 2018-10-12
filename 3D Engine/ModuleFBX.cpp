@@ -221,11 +221,11 @@ void ModuleFBX::LoadModel(const aiScene* scene, aiNode* node, const char* path)
 	aiVector3D scaling;
 	aiQuaternion rotation;
 	node->mTransformation.Decompose(scaling, rotation, translation);
-	//aiVector3D rotationEuler = rotation.GetEuler();
+	aiMatrix3x3 rotMat = rotation.GetMatrix();
+	aiVector3D rotationEuler = rotMat.GetEuler();
 
 	mesh.position = (translation.x, translation.y, translation.z);
-	//mesh.rotation = (rotationEuler.x, rotationEuler.y, rotationEuler.z);
-	mesh.rotation = (0.f, 0.f, 0.f);
+	mesh.rotation = (rotationEuler.x, rotationEuler.y, rotationEuler.z);
 	mesh.scale = (scaling.x, scaling.y, scaling.z);
 
 	LOG("Mesh position: (%f, %f, %f)", mesh.position.x, mesh.position.y, mesh.position.z);
