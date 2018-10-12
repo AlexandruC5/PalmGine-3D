@@ -158,11 +158,6 @@ void ModuleConfig::Draw(const char* title)
 		App->hardware->Draw("Hardware");
 	}
 
-	//Volume
-	if (ImGui::CollapsingHeader("Volume")) {
-		ImGui::SliderInt("Volume", &volume, 0, 100, NULL);
-	}
-
 	//Camera
 	if (ImGui::CollapsingHeader("Camera")) {
 		ImGui::SliderFloat("Camera Speed", &App->camera->speed, 0, 15, NULL);
