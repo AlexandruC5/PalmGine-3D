@@ -57,6 +57,9 @@ bool Application::Init()
 {
 	bool ret = true;
 
+	JSONconfig = json_parse_file("config.json");
+	JSONconfig_obj = json_value_get_object(JSONconfig);
+
 	// Call Init() in all modules
 	std::list<Module*>::iterator item = list_modules.begin();
 
@@ -136,6 +139,9 @@ bool Application::CleanUp()
 		ret = item._Ptr->_Myval->CleanUp();
 		item++;
 	}
+
+	json_value_free(JSONconfig);
+
 	return ret;
 }
 

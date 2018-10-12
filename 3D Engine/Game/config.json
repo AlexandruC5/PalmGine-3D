@@ -1,0 +1,15 @@
+{
+  "window": {
+    "title": "PalmGine 3D",
+    "width": 1280,
+    "height": 1024,
+    "scale": 1,
+    "fullscreen": false,
+    "resizable": true,
+    "borderless": false,
+    "fullscreen_window": false
+  },
+    "renderer3D": {
+    "vsync": true
+  }
+}

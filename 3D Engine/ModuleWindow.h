@@ -34,6 +34,11 @@ public:
 	bool fullscreen = false;
 	bool windowed = false;
 	bool full_desktop = false;
+
+	int width = 0;
+	int height = 0;
+	int scale = 0;
+
 };
 
 #endif // __ModuleWindow_H__

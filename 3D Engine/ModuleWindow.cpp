@@ -26,36 +26,40 @@ bool ModuleWindow::Init()
 	}
 	else
 	{
+
+		JSON_Object* JSONwindow_obj = json_object_get_object(App->JSONconfig_obj, "window");
+
 		//Create window
-		int width = SCREEN_WIDTH * SCREEN_SIZE;
-		int height = SCREEN_HEIGHT * SCREEN_SIZE;
+		scale = json_object_get_number(JSONwindow_obj, "scale");
+		width = json_object_get_number(JSONwindow_obj, "width") * scale;
+		height = json_object_get_number(JSONwindow_obj, "height") * scale;
 		Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN;
 
 		//Use OpenGL 2.1
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 
-		if(WIN_FULLSCREEN == true)
+		if(json_object_get_boolean(JSONwindow_obj, "fullscreen") == true)
 		{
 			flags |= SDL_WINDOW_FULLSCREEN;
 		}
 
-		if(WIN_RESIZABLE == true)
+		if(json_object_get_boolean(JSONwindow_obj, "resizable") == true)
 		{
 			flags |= SDL_WINDOW_RESIZABLE;
 		}
 
-		if(WIN_BORDERLESS == true)
+		if(json_object_get_boolean(JSONwindow_obj, "borderless") == true)
 		{
 			flags |= SDL_WINDOW_BORDERLESS;
 		}
 
-		if(WIN_FULLSCREEN_DESKTOP == true)
+		if(json_object_get_boolean(JSONwindow_obj, "fullscreen_window") == true)
 		{
 			flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
 		}
 
-		window = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
+		window = SDL_CreateWindow(json_object_get_string(JSONwindow_obj, "title"), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, flags);
 
 		if(window == NULL)
 		{
