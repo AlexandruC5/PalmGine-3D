@@ -15,6 +15,10 @@
 
 using namespace std;
 
+void myCallback(const char *msg, char *userData) {
+	LOG("%s", msg);
+}
+
 ModuleFBX::ModuleFBX(bool start_enabled) : Module(start_enabled)
 {}
 
@@ -30,8 +34,9 @@ bool ModuleFBX::Start()
 	ilutRenderer(ILUT_OPENGL);
 
 	struct aiLogStream stream = aiLogStream();
-	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
+	stream.callback = myCallback;
 	aiAttachLogStream(&stream);
+	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
 
 	return ret;
 }
