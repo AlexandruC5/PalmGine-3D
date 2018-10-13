@@ -1,27 +1,18 @@
 #include "Application.h"
 #include "Globals.h"
-#include "ModuleAbout.h"
+#include "PanelAbout.h"
 
-ModuleAbout::ModuleAbout(bool start_enabled) : Module(start_enabled)
-{}
-ModuleAbout::~ModuleAbout()
+PanelAbout::PanelAbout() : Panel("About")
+{
+	active = false;
+}
+
+PanelAbout::~PanelAbout()
 {}
 
-bool ModuleAbout::Start()
-{
-	return true;
-}
-update_status ModuleAbout::Update(float dt)
-{
-	return UPDATE_CONTINUE;
-}
-bool ModuleAbout::CleanUp()
-{
-	return true;
-}
 
 //Function that draws all the console
-void ModuleAbout::Draw()
+void PanelAbout::Draw()
 {
 	ImGui::TextColored(ImVec4(1, 1, 0, 100), "=== PalGine 3D ===");
 	ImGui::Text("Palmgine 3D is a project consistent of creating a Game Engine.\nAt this moment, you can import your model (.fbx, .obj, etc),\nload geometry and change or apply one texture on the model (.jpg or .png).\nDrop the files on the window.\nHope you like it.");

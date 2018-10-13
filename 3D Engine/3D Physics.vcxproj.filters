@@ -438,10 +438,13 @@
     <ClInclude Include="ModuleUI.h">
       <Filter>Sources\Modules\UI</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleAbout.h">
+    <ClInclude Include="ModuleConfig.h">
       <Filter>Sources\Modules\UI</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleConfig.h">
+    <ClInclude Include="Panel.h">
+      <Filter>Sources\Modules\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PanelAbout.h">
       <Filter>Sources\Modules\UI</Filter>
     </ClInclude>
   </ItemGroup>
@@ -626,10 +629,13 @@
     <ClCompile Include="ModuleUI.cpp">
       <Filter>Sources\Modules\UI</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleAbout.cpp">
+    <ClCompile Include="ModuleConfig.cpp">
       <Filter>Sources\Modules\UI</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleConfig.cpp">
+    <ClCompile Include="Panel.cpp">
+      <Filter>Sources\Modules\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PanelAbout.cpp">
       <Filter>Sources\Modules\UI</Filter>
     </ClCompile>
   </ItemGroup>

@@ -13,7 +13,6 @@
 #include "ModuleCamera3D.h"
 #include "ModuleConsole.h"
 #include "ModuleHardware.h"
-#include "ModuleAbout.h"
 #include "ModuleConfig.h"
 #include "ModuleUI.h"
 #include "ModuleFBX.h"
@@ -26,7 +25,6 @@ public:
 	ModuleInput* input;
 	ModuleConsole* console;
 	ModuleHardware* hardware;
-	ModuleAbout* about;
 	ModuleConfig* config;
 	ModuleSceneIntro* scene_intro;
 	ModuleRenderer3D* renderer3D;

@@ -1,4 +1,6 @@
 #include "Application.h"
+#include "Panel.h"
+#include "PanelAbout.h"
 #include "ModuleConsole.h"
 #include "ModuleInspector.h"
 #include "ModuleConfig.h"
@@ -22,6 +24,8 @@ bool ModuleUI::Start()
 	glewInit();
 	ImGui_ImplSdlGL3_Init(App->window->window);
 	App->config->active = false;
+
+	about = new PanelAbout();
 
 	return true;
 }
@@ -94,7 +98,8 @@ update_status ModuleUI::Update(float dt)
 		}
 		if (ImGui::BeginMenu("About"))
 		{
-			App->about->Draw();
+			//App->about->Draw();
+			about->Draw();
 			ImGui::EndMenu();
 		}
 
