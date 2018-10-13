@@ -429,9 +429,6 @@
     <ClInclude Include="ModuleHardware.h">
       <Filter>Sources\Modules\UI</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleInspector.h">
-      <Filter>Sources\Modules\UI</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleUI.h">
       <Filter>Sources\Modules\UI</Filter>
     </ClInclude>
@@ -445,6 +442,9 @@
       <Filter>Sources\Modules\UI</Filter>
     </ClInclude>
     <ClInclude Include="PanelConfig.h">
+      <Filter>Sources\Modules\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PanelInspector.h">
       <Filter>Sources\Modules\UI</Filter>
     </ClInclude>
   </ItemGroup>
@@ -620,9 +620,6 @@
     <ClCompile Include="ModuleHardware.cpp">
       <Filter>Sources\Modules\UI</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleInspector.cpp">
-      <Filter>Sources\Modules\UI</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleUI.cpp">
       <Filter>Sources\Modules\UI</Filter>
     </ClCompile>
@@ -636,6 +633,9 @@
       <Filter>Sources\Modules\UI</Filter>
     </ClCompile>
     <ClCompile Include="PanelConfig.cpp">
+      <Filter>Sources\Modules\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PanelInspector.cpp">
       <Filter>Sources\Modules\UI</Filter>
     </ClCompile>
   </ItemGroup>

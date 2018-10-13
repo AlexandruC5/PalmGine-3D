@@ -14,7 +14,6 @@
 #include "ModuleHardware.h"
 #include "ModuleUI.h"
 #include "ModuleFBX.h"
-#include "ModuleInspector.h"
 
 class Application
 {
@@ -27,7 +26,6 @@ public:
 	ModuleCamera3D* camera;
 	ModuleUI* ui;
 	ModuleFBX* fbx;
-	ModuleInspector* inspector;
 
 	JSON_Value* JSONconfig = nullptr;
 	JSON_Object* JSONconfig_obj = nullptr;

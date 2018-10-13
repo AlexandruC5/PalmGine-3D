@@ -16,7 +16,7 @@ public:
 	void AddLog(const char*, ...) IM_FMTARGS(2);
 	int GetFPS();
 
-	void Draw();
+	void Draw() override;
 
 	bool active = false;
 private:

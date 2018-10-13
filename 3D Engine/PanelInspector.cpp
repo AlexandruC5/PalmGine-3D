@@ -1,30 +1,15 @@
 #include "Application.h"
 #include "Globals.h"
-#include "ModuleInspector.h"
+#include "PanelInspector.h"
 #include "ModuleFBX.h"
 
-ModuleInspector::ModuleInspector(bool start_enabled) : Module(start_enabled)
+PanelInspector::PanelInspector() : Panel("Inspector")
 {}
-ModuleInspector::~ModuleInspector()
+PanelInspector::~PanelInspector()
 {}
-
-bool ModuleInspector::Start()
-{
-	active = true;
-
-	return true;
-}
-update_status ModuleInspector::Update(float dt)
-{
-	return UPDATE_CONTINUE;
-}
-bool ModuleInspector::CleanUp()
-{
-	return true;
-}
 
 //Function that draws all the console
-void ModuleInspector::Draw(const char* title)
+void PanelInspector::Draw()
 {
 	ImGui::Text("Inspector");
 	ImGui::Separator();

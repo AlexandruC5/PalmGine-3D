@@ -2,7 +2,7 @@
 #include "Panel.h"
 #include "PanelAbout.h"
 #include "PanelConsole.h"
-#include "ModuleInspector.h"
+#include "PanelInspector.h"
 #include "PanelConfig.h"
 #include "imGUI\imgui.h"
 #include "imGUI\imgui_impl_sdl_gl3.h"
@@ -14,6 +14,7 @@ ModuleUI::ModuleUI(bool start_enabled)
 	panels.push_back(about = new PanelAbout());
 	panels.push_back(console = new PanelConsole());
 	panels.push_back(config = new PanelConfig());
+	panels.push_back(inspector = new PanelInspector());
 }
 
 ModuleUI::~ModuleUI()
@@ -53,17 +54,17 @@ update_status ModuleUI::Update(float dt)
 		ImGui::SetWindowSize(ImVec2(500, 500), ImGuiCond_FirstUseEver);
 		if (ImGui::SmallButton("Inspector")) {
 			config->active = false;
-			App->inspector->active = true;
+			inspector->active = true;
 		}
 		ImGui::SameLine();
 		if (ImGui::SmallButton("Configuration")) {
 			config->active = true;
-			App->inspector->active = false;
+			inspector->active = false;
 		}
 		ImGui::Separator();
 		//Inspector
-		if (App->inspector->active == true) {
-			App->inspector->Draw("Inspector");
+		if (inspector->active == true) {
+			inspector->Draw();
 		}
 		if (config->active == true) {
 			config->Draw();
@@ -118,6 +119,13 @@ update_status ModuleUI::PreUpdate(float dt)
 
 bool ModuleUI::CleanUp()
 {
+
+	for (int i = 0; i < panels.size(); i++) {
+		panels.at(i)->~Panel();
+	}
+
+	panels.clear();
+
 	LOG("Unloading ImGui");
 	ImGui_ImplSdlGL3_Shutdown();
 	return true;

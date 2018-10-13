@@ -8,6 +8,7 @@ class Panel;
 class PanelAbout;
 class PanelConsole;
 class PanelConfig;
+class PanelInspector;
 
 class ModuleUI : public Module
 {
@@ -28,6 +29,7 @@ public:
 	PanelAbout* about = nullptr;
 	PanelConsole* console = nullptr;
 	PanelConfig* config = nullptr;
+	PanelInspector* inspector = nullptr;
 
 };
 
