@@ -5,8 +5,8 @@
 #include "Globals.h"
 #include "imGUI\imgui.h"
 #include "Glew\include\glew.h"
-#include "SDL/include/SDL_cpuinfo.h"
-#include "SDL/include/SDL_opengl.h"
+#include "SDL\include\SDL_cpuinfo.h"
+#include "SDL\include\SDL_opengl.h"
 
 class ModuleAbout : public Module
 {
