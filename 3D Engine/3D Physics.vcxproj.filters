@@ -282,9 +282,6 @@
     <ClInclude Include="MathGeoLib\Time\Clock.h">
       <Filter>Sources\Tools\MathGeoLib</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleConsole.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="mmgr\nommgr.h">
       <Filter>Sources\Tools\mmgr</Filter>
     </ClInclude>
@@ -445,6 +442,9 @@
       <Filter>Sources\Modules\UI</Filter>
     </ClInclude>
     <ClInclude Include="PanelAbout.h">
+      <Filter>Sources\Modules\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PanelConsole.h">
       <Filter>Sources\Modules\UI</Filter>
     </ClInclude>
   </ItemGroup>
@@ -608,9 +608,6 @@
     <ClCompile Include="MathGeoLib\Time\Clock.cpp">
       <Filter>Sources\Tools\MathGeoLib</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleConsole.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="mmgr\mmgr.cpp">
       <Filter>Sources\Tools\mmgr</Filter>
     </ClCompile>
@@ -636,6 +633,9 @@
       <Filter>Sources\Modules\UI</Filter>
     </ClCompile>
     <ClCompile Include="PanelAbout.cpp">
+      <Filter>Sources\Modules\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PanelConsole.cpp">
       <Filter>Sources\Modules\UI</Filter>
     </ClCompile>
   </ItemGroup>

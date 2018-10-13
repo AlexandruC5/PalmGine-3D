@@ -11,7 +11,6 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
-#include "ModuleConsole.h"
 #include "ModuleHardware.h"
 #include "ModuleConfig.h"
 #include "ModuleUI.h"
@@ -23,7 +22,6 @@ class Application
 public:
 	ModuleWindow* window;
 	ModuleInput* input;
-	ModuleConsole* console;
 	ModuleHardware* hardware;
 	ModuleConfig* config;
 	ModuleSceneIntro* scene_intro;

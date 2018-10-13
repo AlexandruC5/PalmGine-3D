@@ -1,42 +1,28 @@
 #include "Application.h"
 #include "Globals.h"
-#include "ModuleConsole.h"
+#include "PanelConsole.h"
 
 #define IM_ARRAYSIZE(_ARR)  ((int)(sizeof(_ARR)/sizeof(*_ARR)))
 
-ModuleConsole::ModuleConsole(bool start_enabled) : Module(start_enabled)
+PanelConsole::PanelConsole() : Panel("Console")
 {
 	ClearLog();
 	memset(inputBuf, 0, sizeof(inputBuf));
 	AddLog("Welcome to ImGui!");
+	active = true;
 }
-ModuleConsole::~ModuleConsole()
+PanelConsole::~PanelConsole()
 {}
 
-bool ModuleConsole::Start()
-{
-	active = true;
-	return true;
-}
-update_status ModuleConsole::Update(float dt)
-{
-	return UPDATE_CONTINUE;
-}
-bool ModuleConsole::CleanUp()
-{
-	ClearLog();
-	return true;
-}
-
 //Function to add a new log to the console
-void ModuleConsole::AddLog(const char* fmt, ...) IM_FMTARGS(2)
+void PanelConsole::AddLog(const char* fmt, ...) IM_FMTARGS(2)
 {
 	items.push_back(Strdup(fmt));
 	scrollToBottom = true;
 }
 
 //Function that delete all the logs in the console
-void ModuleConsole::ClearLog()
+void PanelConsole::ClearLog()
 {
 	if (items.Size > 0) {
 		for (int i = 0; i < items.Size; i++) {
@@ -48,10 +34,10 @@ void ModuleConsole::ClearLog()
 }
 
 //Function that draws all the console
-void ModuleConsole::Draw(const char* title)
+void PanelConsole::Draw()
 {
 	//Creates the console interface
-	ImGui::Begin(title);
+	ImGui::Begin("Console");
 
 	ImGui::SetNextWindowSize(ImVec2(520, 600), ImGuiCond_FirstUseEver);
 

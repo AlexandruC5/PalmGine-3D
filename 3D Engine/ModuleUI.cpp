@@ -1,7 +1,7 @@
 #include "Application.h"
 #include "Panel.h"
 #include "PanelAbout.h"
-#include "ModuleConsole.h"
+#include "PanelConsole.h"
 #include "ModuleInspector.h"
 #include "ModuleConfig.h"
 #include "imGUI\imgui.h"
@@ -11,6 +11,8 @@
 
 ModuleUI::ModuleUI(bool start_enabled)
 {
+	panels.push_back(about = new PanelAbout());
+	panels.push_back(console = new PanelConsole());
 }
 
 ModuleUI::~ModuleUI()
@@ -24,8 +26,6 @@ bool ModuleUI::Start()
 	glewInit();
 	ImGui_ImplSdlGL3_Init(App->window->window);
 	App->config->active = false;
-
-	about = new PanelAbout();
 
 	return true;
 }
@@ -42,8 +42,8 @@ update_status ModuleUI::Update(float dt)
 	}
 
 	// Console
-	if (App->console->active == true) {
-		App->console->Draw("Console");
+	if (console->active == true) {
+		console->Draw();
 	}
 
 	//Inspector/Config menu
@@ -93,12 +93,11 @@ update_status ModuleUI::Update(float dt)
 					show_test_window = true;
 			}
 			ImGui::Checkbox("Inspector/Config", &configActive);
-			ImGui::Checkbox("Console", &App->console->active);
+			ImGui::Checkbox("Console", &console->active);
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("About"))
 		{
-			//App->about->Draw();
 			about->Draw();
 			ImGui::EndMenu();
 		}

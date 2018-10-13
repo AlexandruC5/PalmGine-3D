@@ -6,6 +6,7 @@
 
 class Panel;
 class PanelAbout;
+class PanelConsole;
 
 class ModuleUI : public Module
 {
@@ -20,9 +21,11 @@ public:
 
 private:
 	bool configActive = true;
+	std::vector<Panel *> panels;
 
 public:
 	PanelAbout* about = nullptr;
+	PanelConsole* console = nullptr;
 };
 
 #endif // !MODULEUI_H

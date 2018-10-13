@@ -4,7 +4,6 @@ Application::Application()
 {
 	window = new ModuleWindow();
 	input = new ModuleInput();
-	console = new ModuleConsole();
 	hardware = new ModuleHardware();
 	config = new ModuleConfig();
 	scene_intro = new ModuleSceneIntro();
@@ -22,7 +21,6 @@ Application::Application()
 	AddModule(window);
 	AddModule(camera);
 	AddModule(input);
-	AddModule(console);
 	AddModule(hardware);
 
 	//Config
