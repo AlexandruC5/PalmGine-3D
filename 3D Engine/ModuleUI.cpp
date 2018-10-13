@@ -3,7 +3,7 @@
 #include "PanelAbout.h"
 #include "PanelConsole.h"
 #include "ModuleInspector.h"
-#include "ModuleConfig.h"
+#include "PanelConfig.h"
 #include "imGUI\imgui.h"
 #include "imGUI\imgui_impl_sdl_gl3.h"
 #include "Glew\include\glew.h"
@@ -13,6 +13,7 @@ ModuleUI::ModuleUI(bool start_enabled)
 {
 	panels.push_back(about = new PanelAbout());
 	panels.push_back(console = new PanelConsole());
+	panels.push_back(config = new PanelConfig());
 }
 
 ModuleUI::~ModuleUI()
@@ -25,7 +26,7 @@ bool ModuleUI::Start()
 
 	glewInit();
 	ImGui_ImplSdlGL3_Init(App->window->window);
-	App->config->active = false;
+	config->active = false;
 
 	return true;
 }
@@ -51,12 +52,12 @@ update_status ModuleUI::Update(float dt)
 		ImGui::Begin("");
 		ImGui::SetWindowSize(ImVec2(500, 500), ImGuiCond_FirstUseEver);
 		if (ImGui::SmallButton("Inspector")) {
-			App->config->active = false;
+			config->active = false;
 			App->inspector->active = true;
 		}
 		ImGui::SameLine();
 		if (ImGui::SmallButton("Configuration")) {
-			App->config->active = true;
+			config->active = true;
 			App->inspector->active = false;
 		}
 		ImGui::Separator();
@@ -64,8 +65,8 @@ update_status ModuleUI::Update(float dt)
 		if (App->inspector->active == true) {
 			App->inspector->Draw("Inspector");
 		}
-		if (App->config->active == true) {
-			App->config->Draw("Inspector");
+		if (config->active == true) {
+			config->Draw();
 		}
 		ImGui::End();
 	}

@@ -1,6 +1,6 @@
 #include "Application.h"
 #include "Globals.h"
-#include "ModuleConfig.h"
+#include "PanelConfig.h"
 #include "ModuleHardware.h"
 #include "ModuleCamera3D.h"
 #include "Light.h"
@@ -10,34 +10,21 @@
 
 #define IM_ARRAYSIZE(_ARR)  ((int)(sizeof(_ARR)/sizeof(*_ARR)))
 
-ModuleConfig::ModuleConfig(bool start_enabled) : Module(start_enabled)
+PanelConfig::PanelConfig() : Panel("Config")
 {
 	memset(InputBuf, 0, sizeof(InputBuf));
 	HistoryPos = -1;
-}
-ModuleConfig::~ModuleConfig()
-{}
-
-bool ModuleConfig::Start()
-{
 	active = true;
-	return true;
-}
-update_status ModuleConfig::Update(float dt)
-{
-	return UPDATE_CONTINUE;
-}
-bool ModuleConfig::CleanUp()
-{
-	return true;
 }
 
-int ModuleConfig::GetFPS() {
+PanelConfig::~PanelConfig(){}
+
+int PanelConfig::GetFPS() {
 	return fpsCap;
 }
 
 //Function that draws all the console
-void ModuleConfig::Draw(const char* title)
+void PanelConfig::Draw()
 {
 	ImGui::Text("Configuration Menu");
 	ImGui::Separator();

@@ -5,7 +5,6 @@ Application::Application()
 	window = new ModuleWindow();
 	input = new ModuleInput();
 	hardware = new ModuleHardware();
-	config = new ModuleConfig();
 	scene_intro = new ModuleSceneIntro();
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
@@ -22,9 +21,6 @@ Application::Application()
 	AddModule(camera);
 	AddModule(input);
 	AddModule(hardware);
-
-	//Config
-	AddModule(config);
 	
 	// Scene
 	AddModule(scene_intro);

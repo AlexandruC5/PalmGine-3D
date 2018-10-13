@@ -12,7 +12,6 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleHardware.h"
-#include "ModuleConfig.h"
 #include "ModuleUI.h"
 #include "ModuleFBX.h"
 #include "ModuleInspector.h"
@@ -23,7 +22,6 @@ public:
 	ModuleWindow* window;
 	ModuleInput* input;
 	ModuleHardware* hardware;
-	ModuleConfig* config;
 	ModuleSceneIntro* scene_intro;
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;

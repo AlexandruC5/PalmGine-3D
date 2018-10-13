@@ -1,25 +1,22 @@
-#ifndef __ModuleConfig_H__
-#define __ModuleConfig_H__
+#ifndef __PanelConfig_H__
+#define __PanelConfig_H__
 
 #include "Application.h"
 #include "imGUI\imgui.h"
+#include "Panel.h"
 
 #define GRAPH_ARRAY_SIZE 70
 
-class ModuleConfig : public Module
+class PanelConfig : public Panel
 {
 public:
-	ModuleConfig(bool start_enabled = false);
-	~ModuleConfig();
-
-	bool Start();
-	update_status Update(float dt);
-	bool CleanUp();
+	PanelConfig();
+	~PanelConfig();
 
 	void AddLog(const char*, ...) IM_FMTARGS(2);
 	int GetFPS();
 
-	void Draw(const char* title);
+	void Draw();
 
 	bool active = false;
 private:
