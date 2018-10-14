@@ -22,7 +22,7 @@ Hope you like it.
 - Load and visualization of geometry and textures.
 
 # VERSION CONTROL
-## v.0.5.1
+## v.0.5.2
 - Load and draw one .fbx or .obj file with one channel diffuse.
 - Configuration options (Application, window, scene, render, hardware, volume, camera, light and input).
 - Inspector shows transform propierties, mesh information and texture information.
