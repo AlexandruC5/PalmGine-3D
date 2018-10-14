@@ -29,12 +29,24 @@ Hope you like it.
 - Console with LOG control.
 - Drag and drop.
 - Unity-like camera.
+- Wireframe mode
+- Texture alpha tolerance
+- Light control
 ### // * NEW * //
+- Window settings are saved in parson
+- Code polished
+
+## v.0.5.1
+- Load and draw one .fbx or .obj file with one channel diffuse.
+- Configuration options (Application, window, scene, render, hardware, volume, camera, light and input).
+- Inspector shows transform propierties, mesh information and texture information.
+- Console with LOG control.
+- Drag and drop.
+- Unity-like camera.
 - Wireframe mode
 - Texture alpha tolerance
 - Light control
 
-# VERSION CONTROL
 ## v.0.5
 - Load and draw one .fbx or .obj file with one channel diffuse.
 - Configuration options (Application, Window, Scene, Hardware, Volume, Camera and Input).
