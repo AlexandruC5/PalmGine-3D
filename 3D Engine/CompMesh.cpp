@@ -3,6 +3,9 @@
 #include "Component.h"
 #include "Application.h"
 
+#include "Devil/include/il.h"
+#include "Devil/include/ilut.h"
+
 CompMesh::CompMesh(GameObject * parent, COMP_TYPE type) : Component(parent, type) 
 {
 }
@@ -50,6 +53,16 @@ void CompMesh::Draw()
 void CompMesh::AddMesh(Mesh * mesh)
 {
 	this->mesh = mesh;
+}
+
+void CompMesh::ApplyTexture(const char * path)
+{
+	ILuint id;
+	ilGenImages(1, &id);
+	ilBindImage(id);
+	ilLoadImage(path);
+	ilutGLBindTexImage();
+	LOG("Loaded and applied new texture correctly from path %s.", path);
 }
 
 uint const CompMesh::GetIndices()

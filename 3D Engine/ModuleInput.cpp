@@ -114,11 +114,10 @@ update_status ModuleInput::PreUpdate(float dt)
 			if (file_type == GEOMETRY_MODEL)
 			{
 				App->fbx->LoadFBX(fbx_path.c_str());
-				//App->fbx->CentrateObjectView();
 			}
 			else if (file_type == TEXTURE)
 			{
-				//App->fbx->ApplyTexture(fbx_path.c_str());
+				// Detect the GameObject's AABB and change his texture
 			}
 
 		case SDL_WINDOWEVENT:

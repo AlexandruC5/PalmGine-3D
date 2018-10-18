@@ -43,8 +43,6 @@ GameObject * ModuleSceneIntro::AddGameObject(GameObject* parent)
 	return go;
 }
 
-
-
 // PreUpdate
 update_status ModuleSceneIntro::PreUpdate(float dt)
 {

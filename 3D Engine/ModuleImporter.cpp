@@ -38,36 +38,9 @@ bool ModuleImporter::Start()
 	return ret;
 }
 
-void ModuleImporter::ClearMeshes()
-{
-	/*for (int i = meshes.size() - 1; meshes.size() != 0; i--)
-	{
-		delete[] meshes[i].indices;
-		delete[] meshes[i].vertices;
-		delete[] meshes[i].uvs;
-		delete[] meshes[i].normals;
-		meshes.pop_back();
-	}
-
-	//Geometry
-	delete data.indices;
-	delete data.vertices;
-
-	//Texture
-	delete data.uvs;
-	delete data.normals;*/
-}
-
-void ModuleImporter::DrawMeshes()
-{
-	/*for (std::vector<ModelConfig>::iterator item = App->fbx->meshes.begin(); item != App->fbx->meshes.end(); ++item)
-		App->renderer3D->DrawMeshes(*item);*/
-}
-
 bool ModuleImporter::CleanUp()
 {
 	aiDetachAllLogStreams();
-	ClearMeshes();
 	return true;
 }
 
@@ -98,10 +71,6 @@ bool ModuleImporter::LoadFBX(const char* path)
 GameObject* ModuleImporter::LoadModel(const aiScene* scene, aiNode* node, const char* path)
 {
 	GameObject* temp_go = new GameObject(nullptr);
-	/*file_name.clear();
-	this->path = path;
-	//Substract the name of the file
-	std::string name(path);*/
 	temp_go->SetName((char*)node->mName.C_Str());
 	
 	if (node->mNumMeshes <= 0)
@@ -110,9 +79,11 @@ GameObject* ModuleImporter::LoadModel(const aiScene* scene, aiNode* node, const 
 	}
 	else
 	{
+		// Setting GameObject components
 		CompMesh* mesh_comp = new CompMesh(temp_go, COMP_TYPE::C_MESH);
 		Mesh* temp_mesh = new Mesh();
 		CompMaterial* mat_comp = new CompMaterial(temp_go, COMP_TYPE::C_MATERIAL);
+
 		LOG("Loading mesh from path %s", path);
 		for (int i = 0; i < node->mNumMeshes; i++)
 		{
@@ -127,7 +98,7 @@ GameObject* ModuleImporter::LoadModel(const aiScene* scene, aiNode* node, const 
 			glBindBuffer(GL_ARRAY_BUFFER, temp_mesh->id_vertices);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 3 * temp_mesh->num_vertices, temp_mesh->vertices, GL_STATIC_DRAW);
 			
-			// ---- Geometry ----
+			// ---- Mesh ----
 			if (new_mesh->HasFaces())
 			{
 				temp_mesh->num_indices = new_mesh->mNumFaces * 3;
@@ -226,11 +197,6 @@ GameObject* ModuleImporter::LoadModel(const aiScene* scene, aiNode* node, const 
 		temp_go->AddChild(LoadModel(scene, node->mChildren[i], path));
 	}
 
-	// ---- Default transformation values ----
-	/*temp_go->position = (0.f, 0.f, 0.f);
-	mesh.rotation = (0.f, 0.f, 0.f);
-	mesh.scale = (1.f, 1.f, 1.f);*/
-
 	LOG("GameObject position: (%f, %f, %f)", temp_go->GetCompTransform()->GetPosition().x, temp_go->GetCompTransform()->GetPosition().y, temp_go->GetCompTransform()->GetPosition().z);
 	LOG("GameObject rotation: (%f, %f, %f)", temp_go->GetCompTransform()->GetRotation().x, temp_go->GetCompTransform()->GetRotation().y, temp_go->GetCompTransform()->GetRotation().z);
 	LOG("GameObject scale: (%f, %f, %f)", temp_go->GetCompTransform()->GetScale().x, temp_go->GetCompTransform()->GetScale().y, temp_go->GetCompTransform()->GetScale().z);
@@ -249,17 +215,6 @@ uint ModuleImporter::CreateTextureID(const char* texture_path)
 
 	return texture_id;
 }
-
-/*void ModuleImporter::ApplyTexture(const char* path)
-{
-	ILuint id;
-	ilGenImages(1, &id);
-	ilBindImage(id);
-	ilLoadImage(path);
-
-	last_texture_id = ilutGLBindTexImage();
-	LOG("Loaded and applied new texture correctly from path %s.", path);
-}*/
 
 void const ModuleImporter::CentrateObjectView()
 {

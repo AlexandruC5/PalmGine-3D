@@ -52,9 +52,6 @@ public:
 	bool LoadFBX(const char* path);
 	GameObject* LoadModel(const aiScene* scene, aiNode* node, const char* path);
 	uint CreateTextureID(const char * texture_path);
-	//void ApplyTexture(const char* path);
-	void ClearMeshes();
-	void DrawMeshes();
 
 	// Read only
 	uint const GetIndices();
