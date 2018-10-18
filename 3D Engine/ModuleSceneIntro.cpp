@@ -4,7 +4,7 @@
 #include "Primitive.h"
 #include "ModuleConsole.h"
 
-#pragma comment( lib, "Glew/libx86/glew32.lib" )
+#pragma comment( lib, "Glew\\libx86\\glew32.lib" )
 
 ModuleSceneIntro::ModuleSceneIntro(bool start_enabled) : Module(start_enabled)
 {

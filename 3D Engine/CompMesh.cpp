@@ -3,8 +3,8 @@
 #include "Component.h"
 #include "Application.h"
 
-#include "Devil/include/il.h"
-#include "Devil/include/ilut.h"
+#include "Devil\include\il.h"
+#include "Devil\include\ilut.h"
 
 CompMesh::CompMesh(GameObject * parent, COMP_TYPE type) : Component(parent, type) 
 {
