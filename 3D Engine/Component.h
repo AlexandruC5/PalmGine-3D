@@ -32,6 +32,9 @@ public:
 	virtual bool Enable();
 	virtual bool Disable();
 
+	// UI
+	virtual void BlitComponentInspector();
+
 private:
 	COMP_TYPE type = C_UNKNOWN;
 	bool active = true;

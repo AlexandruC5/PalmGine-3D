@@ -38,12 +38,14 @@ public:
 	void ApplyTexture(const char* path);
 
 	// Read
-	uint const GetIndices();
-	uint const GetVertices();
-	float const GetNormals();
-	float const GetUvs();
+	uint const GetNumIndices();
+	uint const GetNumVertices();
+	float const GetNumNormals();
+	float const GetNumUvs();
 	math::AABB const GetAABB();
 
+	// UI 
+	void BlitComponentInspector();
 private:
 	Mesh* mesh;
 };

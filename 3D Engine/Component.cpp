@@ -1,4 +1,5 @@
 #include "Component.h"
+#include "Application.h"
 
 Component::Component(GameObject * parent, COMP_TYPE type) : parent(parent), type(type)
 {}
@@ -41,4 +42,10 @@ bool Component::IsActive() const
 const char * Component::GetName() const
 {
 	return name;
+}
+
+void Component::BlitComponentInspector()
+{
+	ImGui::Text("Component");
+	ImGui::Checkbox("Active", &active);
 }

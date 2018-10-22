@@ -65,22 +65,22 @@ void CompMesh::ApplyTexture(const char * path)
 	LOG("Loaded and applied new texture correctly from path %s.", path);
 }
 
-uint const CompMesh::GetIndices()
+uint const CompMesh::GetNumIndices()
 {
 	return(mesh->num_indices);
 }
 
-uint const CompMesh::GetVertices()
+uint const CompMesh::GetNumVertices()
 {
 	return(mesh->num_vertices);
 }
 
-float const CompMesh::GetNormals()
+float const CompMesh::GetNumNormals()
 {
 	return(mesh->num_normals);
 }
 
-float const CompMesh::GetUvs()
+float const CompMesh::GetNumUvs()
 {
 	return(mesh->num_uvs);
 }
@@ -91,4 +91,20 @@ math::AABB const CompMesh::GetAABB()
 	box.Enclose((float3*)mesh->vertices, mesh->num_vertices);
 
 	return box;
+}
+
+void CompMesh::BlitComponentInspector()
+{
+	ImGui::Separator();
+
+	ImGui::TextColored(ImVec4(1.0f, 0.64f, 0.0f, 1.0f), "Mesh");
+
+	if (mesh == nullptr)
+		ImGui::Text("NULL MESH RESOURCE");
+
+	else
+	{
+		//Show num of Vertex
+		ImGui::Text("Vertex: %i", GetNumVertices());
+	}
 }
