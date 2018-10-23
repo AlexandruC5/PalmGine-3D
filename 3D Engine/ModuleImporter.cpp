@@ -17,6 +17,10 @@
 
 using namespace std;
 
+void myCallback(const char *msg, char *userData) {
+	LOG("%s", msg);
+}
+
 ModuleImporter::ModuleImporter(bool start_enabled) : Module(start_enabled)
 {}
 
@@ -27,13 +31,14 @@ bool ModuleImporter::Start()
 {
 	bool ret = true;
 
+	struct aiLogStream stream = aiLogStream();
+	stream.callback = myCallback;
+	aiAttachLogStream(&stream);
+	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
+
 	ilInit();
 	ilutInit();
 	ilutRenderer(ILUT_OPENGL);
-
-	struct aiLogStream stream = aiLogStream();
-	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
-	aiAttachLogStream(&stream);
 
 	return ret;
 }
