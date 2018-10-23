@@ -1,5 +1,7 @@
 
-#pragma once
+#ifndef LIGHT_H
+#define LIGHT_H
+
 #include "Color.h"
 #include "glmath.h"
 
@@ -19,3 +21,5 @@ struct Light
 	int ref;
 	bool on;
 };
+
+#endif // !LIGHT_H

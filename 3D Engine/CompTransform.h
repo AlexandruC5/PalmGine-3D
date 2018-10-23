@@ -1,4 +1,7 @@
-#pragma once
+#ifndef COMPTRANSFORM_H
+#define COMPTRANSFORM_H
+
+
 #include "Component.h"
 #include <vector>
 #include "glmath.h"
@@ -34,3 +37,5 @@ private:
 	float3 rotation = { 0, 0, 0 };
 	float3 scale = { 0, 0, 0 };
 };
+
+#endif // !COMPTRANSFORM_H

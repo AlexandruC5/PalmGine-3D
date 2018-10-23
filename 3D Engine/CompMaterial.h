@@ -1,4 +1,6 @@
-#pragma once
+#ifndef COMMATERIAL_H
+#define COMMATERIAL_H
+
 #include "Component.h"
 #include "Globals.h"
 #include <vector>
@@ -28,3 +30,5 @@ public:
 private:
 	Texture* texture;
 };
+
+#endif // !COMMATERIAL_H

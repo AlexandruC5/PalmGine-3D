@@ -1,4 +1,6 @@
-#pragma once
+#ifndef LOG
+#define LOG
+
 #include "Application.h"
 #include "Globals.h"
 
@@ -19,3 +21,5 @@ void log(const char file[], int line, const char* format, ...)
 		App->console->AddLog(tmp_string);
 	}
 }
+
+#endif // !LOG

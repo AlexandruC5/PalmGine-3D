@@ -1,4 +1,6 @@
-#pragma once
+#ifndef MODULEIMPORTER_H
+#define MODULEIMPORTER_H
+
 #include "Module.h"
 #include "Globals.h"
 #include "glmath.h"
@@ -80,3 +82,5 @@ private:
 	ModelConfig mesh;
 	
 };
+
+#endif // !MODULEIMPORTER_H

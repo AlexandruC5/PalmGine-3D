@@ -1,4 +1,6 @@
-#pragma once
+#ifndef MODULEINPUT_H
+#define MODULEINPUT_H
+
 #include "Module.h"
 #include "Globals.h"
 #include <vector>
@@ -82,3 +84,5 @@ private:
 	const FILE_TYPE ModuleInput::GetFileType(const char * dir) const;
 	//int mouse_z_motion;
 };
+
+#endif // !MODULEINPUT_H

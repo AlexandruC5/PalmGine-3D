@@ -1,4 +1,5 @@
-#pragma once
+#ifndef APPLICATON_H
+#define APPLICATON_H
 
 #include "p2List.h"
 #include "Globals.h"
@@ -58,3 +59,5 @@ private:
 };
 
 extern Application* App;
+
+#endif // !APPLICATON_H

@@ -1,4 +1,7 @@
-#pragma once
+#ifndef MODULESCENEINTRO_H
+#define MODULESCENEINTRO_H
+
+
 #include "Module.h"
 #include "p2DynArray.h"
 #include "Globals.h"
@@ -22,3 +25,5 @@ public:
 	
 	GameObject* root_gameObjects =  nullptr;
 };
+
+#endif // !MODULESCENEINTRO_H

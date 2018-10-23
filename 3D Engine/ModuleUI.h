@@ -1,4 +1,6 @@
-#pragma once
+#ifndef MODULEUI_H
+#define MODULEUI_H
+
 #include "Module.h"
 #include "p2DynArray.h"
 #include "Globals.h"
@@ -17,3 +19,5 @@ public:
 private:
 	bool configActive = true;
 };
+
+#endif // !MODULEUI_H

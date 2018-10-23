@@ -1,4 +1,6 @@
-#pragma once
+#ifndef COMPMESH_H
+#define COMPMESH_H
+
 #include "Globals.h"
 #include <vector>
 #include "glmath.h"
@@ -49,3 +51,5 @@ public:
 private:
 	Mesh* mesh;
 };
+
+#endif // !COMPMESH_H

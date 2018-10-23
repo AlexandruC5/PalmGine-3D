@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
+
 #include "Globals.h"
 #include "Component.h"
 #include <vector>
@@ -51,3 +53,5 @@ private:
 	std::vector<GameObject*> childs;
 	std::vector<Component*> components;
 };
+
+#endif // !GAMEOBJECT_H

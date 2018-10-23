@@ -1,4 +1,6 @@
-#pragma once
+#ifndef COMPONENT_H
+#define COMPONENT_H
+
 #include <string>
 
 enum COMP_TYPE
@@ -43,3 +45,5 @@ protected:
 	const char* name = nullptr;
 	GameObject* parent = nullptr;
 };
+
+#endif // !COMPONENT_H
