@@ -4,7 +4,6 @@ Application::Application()
 {
 	window = new ModuleWindow();
 	input = new ModuleInput();
-	audio = new ModuleAudio();
 	console = new ModuleConsole();
 	hardware = new ModuleHardware();
 	about = new ModuleAbout();
@@ -24,7 +23,6 @@ Application::Application()
 	AddModule(window);
 	AddModule(camera);
 	AddModule(input);
-	AddModule(audio);
 	AddModule(console);
 	AddModule(hardware);
 	AddModule(about);
