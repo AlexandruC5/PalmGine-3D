@@ -40,11 +40,11 @@ public:
 	void ApplyTexture(const char* path);
 
 	// Read
-	uint const GetNumIndices();
-	uint const GetNumVertices();
-	float const GetNumNormals();
-	float const GetNumUvs();
-	math::AABB const GetAABB();
+	uint GetNumIndices()const;
+	uint GetNumVertices()const;
+	float GetNumNormals()const;
+	float GetNumUvs()const;
+	math::AABB GetAABB()const;
 
 	// UI 
 	void BlitComponentInspector();

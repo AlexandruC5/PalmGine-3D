@@ -65,27 +65,27 @@ void CompMesh::ApplyTexture(const char * path)
 	LOG("Loaded and applied new texture correctly from path %s.", path);
 }
 
-uint const CompMesh::GetNumIndices()
+uint CompMesh::GetNumIndices()const
 {
 	return(mesh->num_indices);
 }
 
-uint const CompMesh::GetNumVertices()
+uint CompMesh::GetNumVertices()const
 {
 	return(mesh->num_vertices);
 }
 
-float const CompMesh::GetNumNormals()
+float CompMesh::GetNumNormals()const
 {
 	return(mesh->num_normals);
 }
 
-float const CompMesh::GetNumUvs()
+float CompMesh::GetNumUvs()const
 {
 	return(mesh->num_uvs);
 }
 
-math::AABB const CompMesh::GetAABB()
+math::AABB CompMesh::GetAABB()const
 {
 	math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
 	box.Enclose((float3*)mesh->vertices, mesh->num_vertices);
