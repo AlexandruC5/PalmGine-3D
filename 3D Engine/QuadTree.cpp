@@ -1,4 +1,5 @@
 #include "GameObject.h"
+#include "CompMesh.h"
 #include "QuadTree.h"
 
 #define NE 0 //NorthEast UpRight
@@ -59,7 +60,7 @@ void QuadtreeNode::Remove(GameObject* go) {
 	std::list<GameObject*>::iterator iterator = objectsInNode.begin();
 	while (iterator != objectsInNode.end()) {
 		if ((*iterator) != go) {
-			iterator++;
+			++iterator;
 		}
 		objectsInNode.erase(iterator);
 	}
@@ -102,7 +103,32 @@ void QuadtreeNode::CreateChilds() {
 //Distribute objects in actual node to new childs
 void QuadtreeNode::RedistributeChilds() {
 	for (std::list<GameObject*>::iterator iterator = objectsInNode.begin(); iterator != objectsInNode.end();  ++iterator) {
-		//AABB newBox = (*iterator)->GetCompMesh()->GetAABB();
+		AABB newBox = (*iterator)->GetCompMesh()->GetAABB();
+
+		//Redistribute objects in childs
+		bool isIntersecting[4]; //1 intersection for child
+		//Check intersections between child's box and new box
+		for (int i = 0; i < 4; ++i) {
+			isIntersecting[i] = childs[i]->box.Intersects(newBox);
+		}
+
+		if (isIntersecting[NE] == true && isIntersecting[SE] == true && isIntersecting[SW] == true && isIntersecting[NW] == true) {
+			++iterator;//it hits all so we don't move it and we pass to next gameobject
+		}
+		else {
+			//move it
+			GameObject* gameObjectToMove = *iterator;
+			objectsInNode.erase(iterator);//Remove
+			for (int i = 0; i < 4; ++i) {
+				if (isIntersecting[i] == true) {
+					childs[i]->Insert(gameObjectToMove);//Place it in the child's box it intersects first
+				}
+			}
+
+		}
+
+		
+
 	}
 }
 
