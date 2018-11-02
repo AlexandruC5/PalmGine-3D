@@ -139,6 +139,36 @@ void QuadtreeNode::RedistributeChilds() {
 //Quadtree
 
 
+Quadtree::Quadtree() {
+
+}
+
+Quadtree::~Quadtree() {
+	Clear();
+}
+
+void Quadtree::SetBoundries(const AABB& box) {
+	Clear();
+	root = new QuadtreeNode(box);
+}
+
+void Quadtree::Insert(GameObject* go) {
+	if (root != nullptr) {
+		if (go->GetCompMesh()->GetAABB().Intersects(root->box)) {
+			root->Insert(go);
+		}
+	}
+}
+
+void Quadtree::Remove(GameObject* go) {
+	if (root!=nullptr) {
+		root->Remove(go);
+	}
+}
+
+void Quadtree::Clear() {
+	RELEASE(root);
+}
 
 
 //---------------------------
@@ -146,23 +176,51 @@ void QuadtreeNode::RedistributeChilds() {
 //Quadtree CollectIntersections using map
 template<typename TYPE>
 void Quadtree::CollectIntersections(std::map<float, GameObject*>& objects, const TYPE & primitive)const {
-
+	if (root!=nullptr) {
+		root->CollectIntersections(objects, primitive);
+	}
 }
 
 //Quadtree CollectIntersections using vector
 template<typename TYPE>
 void Quadtree::CollectIntersections(std::vector<GameObject*>& objects, const TYPE & primitive)const {
-
+	if (root!=nullptr) {
+		root->CollectIntersections(objects, primitive);
+	}
 }
 
 //QuadtreeNode CollectIntersections using map
 template<typename TYPE>
 void QuadtreeNode::CollectIntersections(std::map<float, GameObject*>& objects, const TYPE& primitive) const {
-
+	if (primitive.Intersects(box) == true) {
+		float hitNear;
+		float hitFar;
+		for (std::list<GameObject*>::const_iterator iterator = this->objects.begin(); iterator != this->objects.end(); ++iterator) {
+			if (primitive.Intersects((*iterator)->GetCompMesh()->GetAABB(), hitNear, hitFar)) {
+				objects[hitNear] = *iterator;
+			}
+		}
+		for (int i = 0; i < 4; ++i) {
+			if (childs[i] != nullptr) {
+				childs[i]->CollectIntersections(objects, primitive);
+			}
+		}
+	}
 }
 
 //QuadtreeNode CollectIntersections using vector
 template<typename TYPE>
 void QuadtreeNode::CollectIntersections(std::vector<GameObject*>& objects, const TYPE& primitive) const {
-
+	if (primitive.Intersects(box) == true) {
+		for (std::list<GameObject*>::const_iterator iterator = this->objects.begin(); iterator != this->objects.end(); ++iterator) {
+			if (primitive.Intersects((*iterator)->GetCompMesh()->GetAABB())) {
+				objects.push_back(*iterator);
+			}
+		}
+		for (int i = 0; i < 4; ++i) {
+			if (childs[i] != nullptr) {
+				childs[i]->CollectIntersections(objects, primitive);
+			}
+		}
+	}
 }
