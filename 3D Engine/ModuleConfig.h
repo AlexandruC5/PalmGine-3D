@@ -2,7 +2,7 @@
 #define __ModuleConfig_H__
 
 #include "Application.h"
-#include "imGUI\imgui.h"
+#include "imGUI/imgui.h"
 
 #define GRAPH_ARRAY_SIZE 70
 

@@ -2,9 +2,9 @@
 #include "ModuleConsole.h"
 #include "ModuleInspector.h"
 #include "ModuleConfig.h"
-#include "imGUI\imgui.h"
-#include "imGUI\imgui_impl_sdl_gl3.h"
-#include "Glew\include\glew.h"
+#include "imGUI/imgui.h"
+#include "imGUI/imgui_impl_sdl_gl3.h"
+#include "Glew/include/glew.h"
 #include "ModuleUI.h"
 
 ModuleUI::ModuleUI(bool start_enabled)

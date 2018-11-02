@@ -5,7 +5,7 @@
 #include "Globals.h"
 #include <vector>
 #include "glmath.h"
-#include "MathGeoLib\MathGeoLib.h"
+#include "MathGeoLib/MathGeoLib.h"
 
 struct Texture
 {

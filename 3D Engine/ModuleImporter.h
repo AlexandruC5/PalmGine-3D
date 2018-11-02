@@ -5,8 +5,8 @@
 #include "Globals.h"
 #include "glmath.h"
 #include <vector>
-#include "Glew\include\glew.h"
-#include "MathGeoLib\Geometry\AABB.h"
+#include "Glew/include/glew.h"
+#include "MathGeoLib/Geometry/AABB.h"
 
 class aiScene;
 class aiNode;

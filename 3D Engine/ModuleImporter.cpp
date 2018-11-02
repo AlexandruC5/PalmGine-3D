@@ -1,19 +1,19 @@
 #include "Application.h"
 #include "ModuleImporter.h"
-#include "Assimp\include\cimport.h"
-#include "Assimp\include\scene.h"
-#include "Assimp\include\postprocess.h"
-#include "Devil\include\il.h"
-#include "Devil\include\ilut.h"
-#include "MathGeoLib\Geometry\AABB.h"
+#include "Assimp/include/cimport.h"
+#include "Assimp/include/scene.h"
+#include "Assimp/include/postprocess.h"
+#include "Devil/include/il.h"
+#include "Devil/include/ilut.h"
+#include "MathGeoLib/Geometry/AABB.h"
 #include "CompMesh.h"
 #include "CompTransform.h"
 #include "CompMaterial.h"
 
-#pragma comment (lib, "Assimp\\libx86\\assimp.lib")
-#pragma comment (lib, "Devil\\libx86\\DevIL.lib")
-#pragma comment ( lib, "Devil\\libx86\\ILU.lib" )
-#pragma comment ( lib, "Devil\\libx86\\ILUT.lib" )
+#pragma comment (lib, "Assimp/libx86/assimp.lib")
+#pragma comment (lib, "Devil/libx86/DevIL.lib")
+#pragma comment ( lib, "Devil/libx86/ILU.lib" )
+#pragma comment ( lib, "Devil/libx86/ILUT.lib" )
 
 using namespace std;
 

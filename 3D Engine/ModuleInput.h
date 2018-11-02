@@ -4,7 +4,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include <vector>
-#include "Glew\include\glew.h"
+#include "Glew/include/glew.h"
 
 #define MAX_MOUSE_BUTTONS 5
 
