@@ -51,15 +51,15 @@ void ModuleInspector::Draw(const char* title)
 		ImGui::Text("Showing read only information about the mesh");
 		ImGui::Separator();
 		//Mesh Triangles
-		ImGui::Text("Mesh triangles: %i", App->fbx->GetVertices()/3);
+		ImGui::Text("Mesh triangles: %i", App->fbx->GetVerticesQuantity()/3);
 		//Mesh Vertices
-		ImGui::Text("Mesh vertices: %i", App->fbx->GetVertices());
+		ImGui::Text("Mesh vertices: %i", App->fbx->GetVerticesQuantity());
 		//Mesh Indices
-		ImGui::Text("Mesh indices: %i", App->fbx->GetIndices());
+		ImGui::Text("Mesh indices: %i", App->fbx->GetIndicesQuantity());
 		//Mesh Normals
-		ImGui::Text("Mesh normals: %f", App->fbx->GetNormals());
+		ImGui::Text("Mesh normals: %f", App->fbx->GetNormalsQuantity());
 		//Mesh UVS
-		ImGui::Text("Mesh uvs: %f", App->fbx->GetUvs());
+		ImGui::Text("Mesh uvs: %f", App->fbx->GetUvsQuanity());
 	}
 
 	if (ImGui::CollapsingHeader("Material"), ImGuiTreeNodeFlags_DefaultOpen) {

@@ -56,15 +56,15 @@ public:
 	uint CreateTextureID(const char * texture_path);
 
 	// Read only
-	uint GetIndices() const;
-	uint GetVertices() const;
+	uint GetIndicesQuantity() const;
+	uint GetVerticesQuantity() const;
 
 	vec3 GetPosition() const;
 	vec3 GetRotation() const;
 	vec3 GetScale() const;
 
-	float GetNormals() const;
-	float GetUvs() const;
+	float GetNormalsQuantity() const;
+	float GetUvsQuanity() const;
 	uint GetTextureId() const;
 	void CentrateObjectView() const;
 	math::AABB GetAABB() const;

@@ -245,12 +245,12 @@ math::AABB ModuleImporter::GetAABB() const
 	return box;
 }
 
-uint ModuleImporter::GetIndices() const
+uint ModuleImporter::GetIndicesQuantity() const
 {
 	return(mesh.num_indices);
 }
 
-uint ModuleImporter::GetVertices() const
+uint ModuleImporter::GetVerticesQuantity() const
 {
 	return(mesh.num_vertices);
 }
@@ -270,12 +270,12 @@ vec3 ModuleImporter::GetScale() const
 	return(mesh.scale);
 }
 
-float ModuleImporter::GetNormals() const
+float ModuleImporter::GetNormalsQuantity() const
 {
 	return(mesh.num_normals);
 }
 
-float ModuleImporter::GetUvs() const
+float ModuleImporter::GetUvsQuanity() const
 {
 	return(mesh.num_uvs);
 }
