@@ -4,6 +4,15 @@
 #include "Module.h"
 #include "Globals.h"
 
+#include "Module.h"
+#include "Globals.h"
+
+class Panel;
+class PanelAbout;
+class PanelConsole;
+class PanelConfig;
+class PanelInspector;
+
 class ModuleUI : public Module
 {
 public:
@@ -17,6 +26,14 @@ public:
 
 private:
 	bool configActive = true;
+	std::vector<Panel *> panels;
+
+public:
+	PanelAbout* about = nullptr;
+	PanelConsole* console = nullptr;
+	PanelConfig* config = nullptr;
+	PanelInspector* inspector = nullptr;
+
 };
 
 #endif // !MODULEUI_H

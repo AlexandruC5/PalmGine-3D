@@ -10,29 +10,21 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
-#include "ModuleConsole.h"
 #include "ModuleHardware.h"
-#include "ModuleAbout.h"
-#include "ModuleConfig.h"
 #include "ModuleUI.h"
 #include "ModuleImporter.h"
-#include "ModuleInspector.h"
 
 class Application
 {
 public:
 	ModuleWindow* window;
 	ModuleInput* input;
-	ModuleConsole* console;
 	ModuleHardware* hardware;
-	ModuleAbout* about;
-	ModuleConfig* config;
 	ModuleSceneIntro* scene_intro;
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
 	ModuleUI* ui;
 	ModuleImporter* fbx;
-	ModuleInspector* inspector;
 
 private:
 

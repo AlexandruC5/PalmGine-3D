@@ -1,25 +1,22 @@
-#ifndef __ModuleConfig_H__
-#define __ModuleConfig_H__
+#ifndef __PanelConfig_H__
+#define __PanelConfig_H__
 
 #include "Application.h"
-#include "imGUI/imgui.h"
+#include "imGUI\imgui.h"
+#include "Panel.h"
 
 #define GRAPH_ARRAY_SIZE 70
 
-class ModuleConfig : public Module
+class PanelConfig : public Panel
 {
 public:
-	ModuleConfig(bool start_enabled = false);
-	~ModuleConfig();
-
-	bool Start();
-	update_status Update(float dt);
-	bool CleanUp();
+	PanelConfig();
+	~PanelConfig();
 
 	void AddLog(const char*, ...) IM_FMTARGS(2);
 	int GetFPS();
 
-	void Draw(const char* title);
+	void Draw() override;
 
 	bool active = false;
 private:
@@ -31,8 +28,12 @@ private:
 	float brightness = 1.0;
 	int fpsCap = 0;
 	bool mute = false;
+	float lightColour[4];
+	float lightPos[3];
+	bool lightOn = true;
 	float			fps_array[GRAPH_ARRAY_SIZE];
 	float			ms_array[GRAPH_ARRAY_SIZE];
+	float			mem_array[GRAPH_ARRAY_SIZE];
 	char                  InputBuf[256];
 	ImVector<char*>       Items;
 	bool                  ScrollToBottom;

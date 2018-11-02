@@ -1,7 +1,9 @@
 #include "Application.h"
-#include "ModuleConsole.h"
-#include "ModuleInspector.h"
-#include "ModuleConfig.h"
+#include "Panel.h"
+#include "PanelAbout.h"
+#include "PanelConsole.h"
+#include "PanelInspector.h"
+#include "PanelConfig.h"
 #include "imGUI/imgui.h"
 #include "imGUI/imgui_impl_sdl_gl3.h"
 #include "Glew/include/glew.h"
@@ -9,6 +11,10 @@
 
 ModuleUI::ModuleUI(bool start_enabled)
 {
+	panels.push_back(about = new PanelAbout());
+	panels.push_back(console = new PanelConsole());
+	panels.push_back(config = new PanelConfig());
+	panels.push_back(inspector = new PanelInspector());
 }
 
 ModuleUI::~ModuleUI()
@@ -21,7 +27,7 @@ bool ModuleUI::Start()
 
 	glewInit();
 	ImGui_ImplSdlGL3_Init(App->window->window);
-	App->config->active = false;
+	config->active = false;
 
 	return true;
 }
@@ -38,8 +44,8 @@ update_status ModuleUI::Update(float dt)
 	}
 
 	// Console
-	if (App->console->active == true) {
-		App->console->Draw("Console");
+	if (console->active == true) {
+		console->Draw();
 	}
 
 	//Inspector/Config menu
@@ -47,21 +53,21 @@ update_status ModuleUI::Update(float dt)
 		ImGui::Begin("");
 		ImGui::SetWindowSize(ImVec2(500, 500), ImGuiCond_FirstUseEver);
 		if (ImGui::SmallButton("Inspector")) {
-			App->config->active = false;
-			App->inspector->active = true;
+			config->active = false;
+			inspector->active = true;
 		}
 		ImGui::SameLine();
 		if (ImGui::SmallButton("Configuration")) {
-			App->config->active = true;
-			App->inspector->active = false;
+			config->active = true;
+			inspector->active = false;
 		}
 		ImGui::Separator();
 		//Inspector
-		if (App->inspector->active == true) {
-			App->inspector->Draw("Inspector");
+		if (inspector->active == true) {
+			inspector->Draw();
 		}
-		if (App->config->active == true) {
-			App->config->Draw("Inspector");
+		if (config->active == true) {
+			config->Draw();
 		}
 		ImGui::End();
 	}
@@ -89,12 +95,12 @@ update_status ModuleUI::Update(float dt)
 					show_test_window = true;
 			}
 			ImGui::Checkbox("Inspector/Config", &configActive);
-			ImGui::Checkbox("Console", &App->console->active);
+			ImGui::Checkbox("Console", &console->active);
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("About"))
 		{
-			App->about->Draw();
+			about->Draw();
 			ImGui::EndMenu();
 		}
 
@@ -113,6 +119,13 @@ update_status ModuleUI::PreUpdate(float dt)
 
 bool ModuleUI::CleanUp()
 {
+
+	for (int i = 0; i < panels.size(); i++) {
+		panels.at(i)->~Panel();
+	}
+
+	panels.clear();
+
 	LOG("Unloading ImGui");
 	ImGui_ImplSdlGL3_Shutdown();
 	return true;

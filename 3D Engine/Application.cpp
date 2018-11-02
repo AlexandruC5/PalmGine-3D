@@ -4,15 +4,11 @@ Application::Application()
 {
 	window = new ModuleWindow();
 	input = new ModuleInput();
-	console = new ModuleConsole();
 	hardware = new ModuleHardware();
-	about = new ModuleAbout();
-	config = new ModuleConfig();
 	scene_intro = new ModuleSceneIntro();
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
 	fbx = new ModuleImporter();
-	inspector = new ModuleInspector();
 	ui = new ModuleUI();
 
 	// The order of calls is very important!
@@ -23,19 +19,11 @@ Application::Application()
 	AddModule(window);
 	AddModule(camera);
 	AddModule(input);
-	AddModule(console);
 	AddModule(hardware);
-	AddModule(about);
-
-	//Config
-	AddModule(config);
 	
 	// Scene
 	AddModule(scene_intro);
 	AddModule(fbx);
-	
-	//Inspector
-	AddModule(inspector);
 
 	// Renderer last!
 	AddModule(renderer3D);

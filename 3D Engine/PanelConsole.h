@@ -1,26 +1,21 @@
-#ifndef __ModuleConsole_H__
-#define __ModuleConsole_H__
+#ifndef __PanelConsole_H__
+#define __PanelConsole_H__
 
-#include "Module.h"
+#include "Panel.h"
 #include "Globals.h"
 #include "imGUI/imgui.h"
 
-class ModuleConsole : public Module
+class PanelConsole : public Panel
 {
 public:
-	ModuleConsole(bool start_enabled = false);
-	~ModuleConsole();
-
-	bool Start();
-	update_status Update(float dt);
-	bool CleanUp();
+	PanelConsole();
+	~PanelConsole();
 
 	void AddLog(const char*, ...) IM_FMTARGS(2);
 	void ClearLog();
 
-	void Draw(const char* title);
+	void Draw() override;
 
-	bool active = true;
 private:
 
 

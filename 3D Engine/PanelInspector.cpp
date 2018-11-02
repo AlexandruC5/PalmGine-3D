@@ -1,30 +1,15 @@
 #include "Application.h"
 #include "Globals.h"
-#include "ModuleInspector.h"
+#include "PanelInspector.h"
 #include "ModuleImporter.h"
 
-ModuleInspector::ModuleInspector(bool start_enabled) : Module(start_enabled)
+PanelInspector::PanelInspector() : Panel("Inspector")
 {}
-ModuleInspector::~ModuleInspector()
+PanelInspector::~PanelInspector()
 {}
-
-bool ModuleInspector::Start()
-{
-	active = true;
-
-	return true;
-}
-update_status ModuleInspector::Update(float dt)
-{
-	return UPDATE_CONTINUE;
-}
-bool ModuleInspector::CleanUp()
-{
-	return true;
-}
 
 //Function that draws all the console
-void ModuleInspector::Draw(const char* title)
+void PanelInspector::Draw()
 {
 	ImGui::Text("Inspector");
 	ImGui::Separator();
@@ -63,14 +48,18 @@ void ModuleInspector::Draw(const char* title)
 	}
 
 	if (ImGui::CollapsingHeader("Material"), ImGuiTreeNodeFlags_DefaultOpen) {
-		ImGui::Text("Showing read only information about the mesh material");
-		ImGui::Separator();
-		/*if (App->fbx->last_texture_id == 0) {
-			ImGui::Image((ImTextureID)App->fbx->GetTextureId(), ImVec2(200, 200));
-		}
-		else {
-			ImGui::Image((ImTextureID)App->fbx->last_texture_id, ImVec2(200, 200));
-		}*/
+		//TODO modify this to add textures info in new way
+		//ImGui::Text("Showing read only information about the mesh material");
+		//ImGui::Separator();
+		//ImGui::Text("Texture path: %s", App->fbx->texture_path.c_str());
+		//ImGui::Text("Texture WIDTH: %i", App->fbx->textureWidth);
+		//ImGui::Text("Texture HEIGHT: %i", App->fbx->textureHeight);
+		//if (App->fbx->last_texture_id == 0) {
+		//	ImGui::Image((ImTextureID)App->fbx->GetTextureId(), ImVec2(200, 200));
+		//}
+		//else {
+		//	ImGui::Image((ImTextureID)App->fbx->last_texture_id, ImVec2(200, 200));
+		//}
 	}
 
 	//ImGui::End();
