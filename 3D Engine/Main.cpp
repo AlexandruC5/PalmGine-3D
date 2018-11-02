@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "Application.h"
 #include "Globals.h"
+#include "JSON/parson.h"
 
 #include "SDL/include/SDL.h"
 #pragma comment( lib, "SDL/libx86/SDL2.lib" )
@@ -20,7 +21,13 @@ Application* App = NULL;
 
 int main(int argc, char ** argv)
 {
-	LOG("Starting game '%s'...", TITLE);
+	JSON_Value* conf = nullptr;
+	JSON_Object* conf_obj = nullptr;
+	conf = json_parse_file("config.json");
+	conf_obj = json_value_get_object(conf);
+	JSON_Object* JSONwindow_obj = json_object_get_object(conf_obj, "window");
+
+	LOG("Starting game '%s'...", json_object_get_string(JSONwindow_obj, "title"));
 
 	int main_return = EXIT_FAILURE;
 	main_states state = MAIN_CREATION;
@@ -85,7 +92,8 @@ int main(int argc, char ** argv)
 		}
 	}
 
-	LOG("Exiting game '%s'...\n", TITLE);
+	LOG("Exiting game '%s'...\n", json_object_get_string(JSONwindow_obj, "title"));
+	json_value_free(conf);
 	delete App;
 	return main_return;
 }

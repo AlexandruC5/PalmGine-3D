@@ -3,6 +3,7 @@
 
 #include <list>
 #include "Globals.h"
+#include "JSON\parson.h"
 #include "Timer.h"
 #include "Module.h"
 #include "ModuleWindow.h"
@@ -25,6 +26,9 @@ public:
 	ModuleCamera3D* camera;
 	ModuleUI* ui;
 	ModuleImporter* fbx;
+
+	JSON_Value* JSONconfig = nullptr;
+	JSON_Object* JSONconfig_obj = nullptr;
 
 private:
 

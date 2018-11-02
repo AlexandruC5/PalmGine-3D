@@ -14,6 +14,7 @@ PanelConfig::PanelConfig() : Panel("Config")
 {
 	memset(InputBuf, 0, sizeof(InputBuf));
 	HistoryPos = -1;
+
 	active = true;
 }
 
@@ -123,6 +124,8 @@ void PanelConfig::Draw()
 		{
 			// Window size
 			SDL_SetWindowSize(App->window->window, width, height);
+			App->window->width = width;
+			App->window->height = height;
 			// Brigthness
 			SDL_SetWindowBrightness(App->window->window, brightness);
 		}

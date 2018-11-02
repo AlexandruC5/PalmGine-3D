@@ -32,8 +32,16 @@ public:
 	SDL_Surface* screen_surface;
 
 	bool fullscreen = false;
+	bool resizable = false;
 	bool windowed = false;
 	bool full_desktop = false;
+
+	int width = 0;
+	int height = 0;
+	int scale = 0;
+
+private:
+	JSON_Object* JSONwindow_obj;
 };
 
 #endif // __ModuleWindow_H__

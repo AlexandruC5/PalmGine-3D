@@ -40,8 +40,10 @@ bool ModuleRenderer3D::Init()
 		if (ret == true)
 		{
 			//Use Vsync
-			if (VSYNC && SDL_GL_SetSwapInterval(1) < 0)
+			JSON_Object* JSONrenderer_obj = json_object_get_object(App->JSONconfig_obj, "renderer3D");
+			if (json_object_get_boolean(JSONrenderer_obj, "vsync") && SDL_GL_SetSwapInterval(1) < 0)
 				LOG("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
+			JSONrenderer_obj = nullptr;
 
 			//Initialize Projection Matrix
 			glMatrixMode(GL_PROJECTION);
@@ -104,7 +106,7 @@ bool ModuleRenderer3D::Init()
 		}
 
 		// Projection matrix for
-		OnResize(SCREEN_WIDTH, SCREEN_HEIGHT);
+		OnResize(App->window->width, App->window->height);
 	}
 	return ret;
 }
