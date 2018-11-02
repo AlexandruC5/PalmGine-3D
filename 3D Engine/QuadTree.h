@@ -21,6 +21,8 @@ public:
 	void CreateChilds();
 	void RedistributeChilds();
 
+	void DebugDraw();
+
 	//Intersections
 	template<typename TYPE>
 	void CollectIntersections(std::map<float, GameObject*>& objects, const TYPE& primitive) const;
@@ -47,6 +49,8 @@ public:
 	void Insert(GameObject* go);
 	void Remove(GameObject* go);
 	void Clear();
+
+	void DebugDraw();
 
 	//Intersections
 	template<typename TYPE>

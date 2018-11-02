@@ -1,6 +1,7 @@
 #include "GameObject.h"
 #include "CompMesh.h"
 #include "QuadTree.h"
+#include "Primitive.h"
 
 #define NE 0 //NorthEast UpRight
 #define SE 1 //SouthEast DownRight
@@ -132,6 +133,21 @@ void QuadtreeNode::RedistributeChilds() {
 	}
 }
 
+void QuadtreeNode::DebugDraw(){
+
+	if (this != nullptr) {
+		Cube c(box.Size().x, box.Size().y, box.Size().z);
+		c.SetPos(box.CenterPoint().x, box.CenterPoint().y, box.CenterPoint().z);
+		c.wire = true;
+		c.Render();
+	}
+
+	for (int i = 0; i < 4;++i) {
+		childs[i]->DebugDraw();
+	}
+
+}
+
 
 
 //---------------------------
@@ -168,6 +184,12 @@ void Quadtree::Remove(GameObject* go) {
 
 void Quadtree::Clear() {
 	RELEASE(root);
+}
+
+void Quadtree::DebugDraw() {
+	if (root!=nullptr) {
+		root->DebugDraw();
+	}
 }
 
 
