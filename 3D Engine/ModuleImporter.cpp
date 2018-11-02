@@ -221,7 +221,7 @@ uint ModuleImporter::CreateTextureID(const char* texture_path)
 	return texture_id;
 }
 
-void const ModuleImporter::CentrateObjectView()
+void ModuleImporter::CentrateObjectView() const
 {
 	math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
 	box.Enclose((float3*)App->fbx->mesh.vertices, App->fbx->mesh.num_vertices);
@@ -237,7 +237,7 @@ void const ModuleImporter::CentrateObjectView()
 	App->camera->LookAt(App->camera->Reference);
 }
 
-math::AABB const ModuleImporter::GetAABB()
+math::AABB ModuleImporter::GetAABB() const
 {
 	math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
 	box.Enclose((float3*)App->fbx->mesh.vertices, App->fbx->mesh.num_vertices);
@@ -245,42 +245,42 @@ math::AABB const ModuleImporter::GetAABB()
 	return box;
 }
 
-uint const ModuleImporter::GetIndices()
+uint ModuleImporter::GetIndices() const
 {
 	return(mesh.num_indices);
 }
 
-uint const ModuleImporter::GetVertices()
+uint ModuleImporter::GetVertices() const
 {
 	return(mesh.num_vertices);
 }
 
-vec3 const ModuleImporter::GetPosition()
+vec3 ModuleImporter::GetPosition() const
 {
 	return(mesh.position);
 }
 
-vec3 const ModuleImporter::GetRotation()
+vec3 ModuleImporter::GetRotation() const
 {
 	return(mesh.rotation);
 }
 
-vec3 const ModuleImporter::GetScale()
+vec3 ModuleImporter::GetScale() const
 {
 	return(mesh.scale);
 }
 
-float const ModuleImporter::GetNormals()
+float ModuleImporter::GetNormals() const
 {
 	return(mesh.num_normals);
 }
 
-float const ModuleImporter::GetUvs()
+float ModuleImporter::GetUvs() const
 {
 	return(mesh.num_uvs);
 }
 
-uint const ModuleImporter::GetTextureId()
+uint ModuleImporter::GetTextureId() const
 {
 	return(mesh.texture_id);
 }
