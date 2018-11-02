@@ -2,7 +2,6 @@
 #define MODULEUI_H
 
 #include "Module.h"
-#include "p2DynArray.h"
 #include "Globals.h"
 
 class ModuleUI : public Module
