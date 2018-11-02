@@ -2,7 +2,6 @@
 #define MODULE_H
 
 class Application;
-struct PhysBody3D;
 
 class Application;
 
@@ -48,9 +47,6 @@ public:
 	{ 
 		return true; 
 	}
-
-	virtual void OnCollision(PhysBody3D* body1, PhysBody3D* body2)
-	{}
 };
 
 #endif // !MODULE_H
