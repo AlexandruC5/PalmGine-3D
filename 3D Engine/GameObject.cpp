@@ -71,7 +71,7 @@ bool GameObject::IsActive()
 	return active;
 }
 
-bool GameObject::IsRootGo()
+bool GameObject::IsRootGo() const
 {
 	return App->scene_intro->IsRootGO(this);
 }

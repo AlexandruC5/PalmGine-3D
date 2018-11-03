@@ -26,7 +26,7 @@ public:
 	bool Enable();
 	bool Disable();
 	bool IsActive();
-	bool IsRootGo();
+	bool IsRootGo() const;
 
 	// Parent -------------------------
 	const GameObject* GetParent() const;
