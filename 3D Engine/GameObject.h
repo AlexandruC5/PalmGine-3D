@@ -19,13 +19,13 @@ public:
 	void Update(float dt);
 
 	// Name --------------------------
-	void SetName(char* new_name);
-	const char* GetName() const;
+	void SetName(const char* new_name);
 
 	// State --------------------------
 	bool Enable();
 	bool Disable();
 	bool IsActive();
+	bool IsRootGo();
 
 	// Parent -------------------------
 	const GameObject* GetParent() const;
@@ -43,9 +43,13 @@ public:
 	Component* AddEmptyComponent(COMP_TYPE type);
 	void AddComponent(Component* comp);
 
+	// UI
+	void BlitGameObjectHierarchy();
+	void BlitGameObjectInspector();
+
 private:
 	uint id = 0;
-	char* name = nullptr;
+	std::string name = "Unnamed";
 	bool active = true;
 	bool static_obj = false;
 

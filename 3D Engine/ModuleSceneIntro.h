@@ -22,6 +22,9 @@ public:
 	bool grid_enabled = true;
 	bool axis_enabled = false;
 	
+	// Utility
+	bool IsRootGO(const GameObject* go) const;
+
 	GameObject* root_gameObjects =  nullptr;
 };
 

@@ -42,6 +42,11 @@ GameObject * ModuleSceneIntro::AddGameObject(GameObject* parent)
 	return go;
 }
 
+bool ModuleSceneIntro::IsRootGO(const GameObject* go) const
+{
+	return go == root_gameObjects;
+}
+
 // PreUpdate
 update_status ModuleSceneIntro::PreUpdate(float dt)
 {

@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "Globals.h"
 #include "PanelHierarchy.h"
+#include "ModuleSceneIntro.h"
 
 PanelHierarchy::PanelHierarchy() : Panel("Inspector")
 {}
@@ -15,6 +16,8 @@ void PanelHierarchy::Draw()
 		ImGuiWindowFlags_NoFocusOnAppearing |
 		ImGuiWindowFlags_HorizontalScrollbar);
 	ImGui::SetWindowSize(ImVec2(500, 500), ImGuiCond_FirstUseEver);
+	
+	App->scene_intro->root_gameObjects->BlitGameObjectHierarchy();
 
 	//ImGui::TreeNodeEx();
 

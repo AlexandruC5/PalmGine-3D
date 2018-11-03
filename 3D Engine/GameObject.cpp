@@ -3,6 +3,9 @@
 #include "CompMesh.h"
 #include "CompTransform.h"
 #include "CompMaterial.h"
+#include "imGUI\imgui.h"
+#include "Application.h"
+#include "ModuleSceneIntro.h"
 
 
 GameObject::GameObject(GameObject* parent) : parent(parent)
@@ -12,12 +15,10 @@ GameObject::GameObject(GameObject* parent) : parent(parent)
 	{
 		parent->childs.push_back(this);
 	}
-	name = new char[50];
 }
 
 GameObject::~GameObject()
 {
-	RELEASE_ARRAY(name);
 	parent = nullptr;
 	for (uint i = 0; i < childs.size(); i++)
 	{
@@ -44,17 +45,9 @@ void GameObject::Update(float dt)
 	}
 }
 
-void GameObject::SetName(char* new_name)
+void GameObject::SetName(const char* new_name)
 {
-	if (strcpy(name, new_name) == 0)
-	{
-		LOG("NAME IS TOO LONG");
-	}
-}
-
-const char * GameObject::GetName() const
-{
-	return this->name;
+	name = new_name;
 }
 
 bool GameObject::Enable()
@@ -70,6 +63,11 @@ bool GameObject::Disable()
 bool GameObject::IsActive()
 {
 	return active;
+}
+
+bool GameObject::IsRootGo()
+{
+	return App->scene_intro->IsRootGO(this);
 }
 
 const GameObject * GameObject::GetParent() const
@@ -145,6 +143,24 @@ void GameObject::AddComponent(Component * comp)
 		{
 			components.push_back(comp);
 		}
+	}
+}
+
+void GameObject::BlitGameObjectHierarchy()
+{
+	char name_str[250];
+	sprintf_s(name_str, 250, "%s##%i", name.c_str());
+	bool op = ImGui::TreeNodeEx(name_str);
+
+	if (op)
+	{
+		uint size = childs.size();
+		for (uint k = 0; k < size; k++)
+		{
+			childs[k]->BlitGameObjectHierarchy();
+		}
+
+		ImGui::TreePop();
 	}
 }
 
