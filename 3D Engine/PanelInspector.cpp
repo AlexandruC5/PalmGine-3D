@@ -3,6 +3,7 @@
 #include "PanelInspector.h"
 #include "ModuleImporter.h"
 #include "CompTransform.h"
+#include "CompMesh.h"
 
 PanelInspector::PanelInspector() : Panel("Inspector")
 {}
@@ -15,30 +16,52 @@ void PanelInspector::Draw()
 	GameObject* selected_go = App->scene_intro->GetSelectedGO();
 	if (selected_go != nullptr)
 	{
-		CompTransform* transform = selected_go->GetCompTransform();
 		ImGui::Text("Inspector");
 		ImGui::Separator();
 		ImGui::Separator();
-
-
+		// GO name
 		ImGui::Text("Model Name: %s", selected_go->GetName().c_str());
-
-		if (ImGui::CollapsingHeader("Transform"), ImGuiTreeNodeFlags_DefaultOpen) {
-			ImGui::Text("Showing read only information about the mesh transform");
-			ImGui::Separator();
-			//Position
-			ImGui::Text("Position:");
-			ImGui::Text("[%f]    [%f]    [%f]", transform->GetRotation().x, transform->GetRotation().y, transform->GetRotation().z);
-			//Rotation
-			ImGui::Text("Rotation:");
-			ImGui::Text("[%f]    [%f]    [%f]", transform->GetRotation().x, transform->GetRotation().y, transform->GetRotation().z);
-			//Scale
-			ImGui::Text("Scale:");
-			ImGui::Text("[%f]    [%f]    [%f]", transform->GetScale().x, transform->GetScale().y, transform->GetScale().z);
+		// Components
+		CompTransform* transform = selected_go->GetCompTransform();
+		CompMesh* mesh = selected_go->GetCompMesh();
+		if (ImGui::CollapsingHeader("Transform"), ImGuiTreeNodeFlags_DefaultOpen) 
+		{
+			if (transform != nullptr)
+			{
+				ImGui::Text("Showing read only information about the mesh transform");
+				ImGui::Separator();
+				//Position
+				ImGui::Text("Position:");
+				ImGui::Text("[%f]    [%f]    [%f]", transform->GetRotation().x, transform->GetRotation().y, transform->GetRotation().z);
+				//Rotation
+				ImGui::Text("Rotation:");
+				ImGui::Text("[%f]    [%f]    [%f]", transform->GetRotation().x, transform->GetRotation().y, transform->GetRotation().z);
+				//Scale
+				ImGui::Text("Scale:");
+				ImGui::Text("[%f]    [%f]    [%f]", transform->GetScale().x, transform->GetScale().y, transform->GetScale().z);
+			}
+			else
+				LOG("ERROR: COMPONENT TRANSFORM IS NULLPTR on GameObject with name %s", selected_go->GetName().c_str());
 		}
 
-		if (ImGui::CollapsingHeader("Mesh Information"), ImGuiTreeNodeFlags_DefaultOpen){}
-
+		if (mesh != nullptr)
+		{
+			if (ImGui::CollapsingHeader("Mesh Information"), ImGuiTreeNodeFlags_DefaultOpen)
+			{
+				ImGui::Text("Showing read only information about the mesh");
+				ImGui::Separator();
+				//Mesh Triangles
+				ImGui::Text("Mesh triangles: %i", mesh->GetNumVertices() / 3);
+				//Mesh Vertices
+				ImGui::Text("Mesh vertices: %i", mesh->GetNumVertices());
+				//Mesh Indices
+				ImGui::Text("Mesh indices: %i", mesh->GetNumIndices());
+				//Mesh Normals
+				ImGui::Text("Mesh normals: %f", mesh->GetNumNormals());
+				//Mesh UVS
+				ImGui::Text("Mesh uvs: %f", mesh->GetNumUvs());
+			}
+		}
 	}
 	
 		// TODO Add mesh info
