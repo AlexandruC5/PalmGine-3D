@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include "PanelInspector.h"
 #include "ModuleImporter.h"
+#include "CompTransform.h"
 
 PanelInspector::PanelInspector() : Panel("Inspector")
 {}
@@ -11,28 +12,37 @@ PanelInspector::~PanelInspector()
 //Function that draws all the console
 void PanelInspector::Draw()
 {
-	ImGui::Text("Inspector");
-	ImGui::Separator();
-	ImGui::Separator();
-
-	ImGui::Text("Model Name: %s", App->fbx->file_name.c_str());
-	ImGui::Text("Model Path: %s", App->fbx->path.c_str());
-
-	if (ImGui::CollapsingHeader("Transform"), ImGuiTreeNodeFlags_DefaultOpen) {
-		ImGui::Text("Showing read only information about the mesh transform");
+	GameObject* selected_go = App->scene_intro->GetSelectedGO();
+	if (selected_go != nullptr)
+	{
+		CompTransform* transform = selected_go->GetCompTransform();
+		ImGui::Text("Inspector");
 		ImGui::Separator();
-		//Position
-		ImGui::Text("Position:");
-		ImGui::Text("[%f]    [%f]    [%f]", App->fbx->GetPosition().x, App->fbx->GetPosition().y, App->fbx->GetPosition().z);
-		//Rotation
-		ImGui::Text("Rotation:");
-		ImGui::Text("[%f]    [%f]    [%f]", App->fbx->GetRotation().x, App->fbx->GetRotation().y, App->fbx->GetRotation().z);
-		//Scale
-		ImGui::Text("Scale:");
-		ImGui::Text("[%f]    [%f]    [%f]", App->fbx->GetScale().x, App->fbx->GetScale().y, App->fbx->GetScale().z);
-	}
+		ImGui::Separator();
 
-	if (ImGui::CollapsingHeader("Mesh Information"), ImGuiTreeNodeFlags_DefaultOpen) {
+
+		ImGui::Text("Model Name: %s", selected_go->GetName().c_str());
+
+		if (ImGui::CollapsingHeader("Transform"), ImGuiTreeNodeFlags_DefaultOpen) {
+			ImGui::Text("Showing read only information about the mesh transform");
+			ImGui::Separator();
+			//Position
+			ImGui::Text("Position:");
+			ImGui::Text("[%f]    [%f]    [%f]", transform->GetRotation().x, transform->GetRotation().y, transform->GetRotation().z);
+			//Rotation
+			ImGui::Text("Rotation:");
+			ImGui::Text("[%f]    [%f]    [%f]", transform->GetRotation().x, transform->GetRotation().y, transform->GetRotation().z);
+			//Scale
+			ImGui::Text("Scale:");
+			ImGui::Text("[%f]    [%f]    [%f]", transform->GetScale().x, transform->GetScale().y, transform->GetScale().z);
+		}
+
+		if (ImGui::CollapsingHeader("Mesh Information"), ImGuiTreeNodeFlags_DefaultOpen){}
+
+	}
+	
+		// TODO Add mesh info
+		/*{
 		ImGui::Text("Showing read only information about the mesh");
 		ImGui::Separator();
 		//Mesh Triangles
@@ -45,7 +55,7 @@ void PanelInspector::Draw()
 		ImGui::Text("Mesh normals: %f", App->fbx->GetNormalsQuantity());
 		//Mesh UVS
 		ImGui::Text("Mesh uvs: %f", App->fbx->GetUvsQuanity());
-	}
+	}*/
 
 	if (ImGui::CollapsingHeader("Material"), ImGuiTreeNodeFlags_DefaultOpen) {
 		//TODO modify this to add textures info in new way
