@@ -9,9 +9,9 @@
 
 struct Axis
 {
-	float3 x = { 1, 0, 0 };
-	float3 y = { 0, 1, 0 };
-	float3 z = { 0, 0, 1 };
+	math::float3 x = { 1, 0, 0 };
+	math::float3 y = { 0, 1, 0 };
+	math::float3 z = { 0, 0, 1 };
 };
 
 class GameObject;
@@ -22,20 +22,25 @@ public:
 	CompTransform(GameObject* parent, COMP_TYPE type);
 	~CompTransform();
 
-	void SetRotation(float3 rot);
+	void SetRotation(math::float3 rot);
 
 	// Read
-	float3 const GetPosition();
-	float3 const GetRotation();
-	float3 const GetScale();
+	math::float3 const GetPosition();
+	math::float3 const GetRotation();
+	math::float3 const GetScale();
 
 private:
 	Axis axis;
 
 	// Propierties
-	float3 position = { 0, 0, 0 };
-	float3 rotation = { 0, 0, 0 };
-	float3 scale = { 0, 0, 0 };
+	math::float3 position = { 0, 0, 0 };
+	math::float3 rotation = { 0, 0, 0 };
+	math::float3 scale = { 0, 0, 0 };
+
+	// Transform and rotation
+	math::float4x4 transform_matrix = math::float4x4::identity;
+	math::float3 euler_rotation = { 0,0,0 };
+	math::Quat quaternion_rotation = math::Quat::identity;
 };
 
 #endif // !COMPTRANSFORM_H
