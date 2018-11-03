@@ -6,6 +6,7 @@
 #include "imGUI\imgui.h"
 #include "Application.h"
 #include "ModuleSceneIntro.h"
+#include "Glew/include/glew.h"
 
 
 GameObject::GameObject(GameObject* parent) : parent(parent)
@@ -148,10 +149,15 @@ void GameObject::AddComponent(Component * comp)
 
 void GameObject::BlitGameObjectHierarchy()
 {
+	// Check flags
+	ImGuiTreeNodeFlags flag = ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_OpenOnDoubleClick;
+	if (childs.empty())flag += ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_Leaf;
+	// Blit GO name
 	char name_str[250];
 	sprintf_s(name_str, 250, "%s##%i", name.c_str());
-	bool op = ImGui::TreeNodeEx(name_str);
+	bool op = ImGui::TreeNodeEx(name_str, flag);
 
+	// Blit childs
 	if (op)
 	{
 		uint size = childs.size();
