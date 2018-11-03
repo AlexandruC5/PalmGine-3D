@@ -90,7 +90,7 @@ update_status ModuleCamera3D::Update(float dt)
 		Position += newPos;
 		Reference += newPos;
 
-		AABB box = App->fbx->GetAABB();
+		AABB box = App->importer->GetAABB();
 		Reference.x = box.CenterPoint().x;
 		Reference.y = box.CenterPoint().y;
 		Reference.z = box.CenterPoint().z;
@@ -101,7 +101,7 @@ update_status ModuleCamera3D::Update(float dt)
 		Position += newPos;
 		Reference += newPos;
 
-		AABB box = App->fbx->GetAABB();
+		AABB box = App->importer->GetAABB();
 		Reference.x = box.CenterPoint().x;
 		Reference.y = box.CenterPoint().y;
 		Reference.z = box.CenterPoint().z;
@@ -133,7 +133,7 @@ update_status ModuleCamera3D::Update(float dt)
 	// Look to object
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 	{
-		App->fbx->CentrateObjectView();
+		App->importer->CentrateObjectView();
 	}
 
 	// Rotate camera with static position

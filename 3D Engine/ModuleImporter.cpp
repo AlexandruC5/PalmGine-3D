@@ -224,7 +224,7 @@ uint ModuleImporter::CreateTextureID(const char* texture_path)
 void ModuleImporter::CentrateObjectView() const
 {
 	math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
-	box.Enclose((float3*)App->fbx->mesh.vertices, App->fbx->mesh.num_vertices);
+	box.Enclose((float3*)App->importer->mesh.vertices, App->importer->mesh.num_vertices);
 
 	App->camera->Reference.x = box.CenterPoint().x;
 	App->camera->Reference.y = box.CenterPoint().y;
@@ -240,7 +240,7 @@ void ModuleImporter::CentrateObjectView() const
 math::AABB ModuleImporter::GetAABB() const
 {
 	math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
-	box.Enclose((float3*)App->fbx->mesh.vertices, App->fbx->mesh.num_vertices);
+	box.Enclose((float3*)App->importer->mesh.vertices, App->importer->mesh.num_vertices);
 
 	return box;
 }

@@ -25,7 +25,7 @@ public:
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
 	ModuleUI* ui;
-	ModuleImporter* fbx;
+	ModuleImporter* importer;
 
 	JSON_Value* JSONconfig = nullptr;
 	JSON_Object* JSONconfig_obj = nullptr;
