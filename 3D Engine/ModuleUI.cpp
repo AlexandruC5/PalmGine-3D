@@ -4,6 +4,7 @@
 #include "PanelConsole.h"
 #include "PanelInspector.h"
 #include "PanelConfig.h"
+#include "PanelHierarchy.h"
 #include "imGUI/imgui.h"
 #include "imGUI/imgui_impl_sdl_gl3.h"
 #include "Glew/include/glew.h"
@@ -15,6 +16,7 @@ ModuleUI::ModuleUI(bool start_enabled)
 	panels.push_back(console = new PanelConsole());
 	panels.push_back(config = new PanelConfig());
 	panels.push_back(inspector = new PanelInspector());
+	panels.push_back(goHierarchy = new PanelHierarchy());
 }
 
 ModuleUI::~ModuleUI()
@@ -72,6 +74,11 @@ update_status ModuleUI::Update(float dt)
 		ImGui::End();
 	}
 
+	//Game Object Hierarchy
+	if (goHierarchy->active == true) {
+		goHierarchy->Draw();
+	}
+
 	// Main Bar
 	if (ImGui::BeginMainMenuBar())
 	{
@@ -96,6 +103,7 @@ update_status ModuleUI::Update(float dt)
 			}
 			ImGui::Checkbox("Inspector/Config", &configActive);
 			ImGui::Checkbox("Console", &console->active);
+			ImGui::Checkbox("GameObject Hierarchy", &goHierarchy->active);
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("About"))

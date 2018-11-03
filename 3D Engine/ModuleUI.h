@@ -12,6 +12,7 @@ class PanelAbout;
 class PanelConsole;
 class PanelConfig;
 class PanelInspector;
+class PanelHierarchy;
 
 class ModuleUI : public Module
 {
@@ -33,6 +34,7 @@ public:
 	PanelConsole* console = nullptr;
 	PanelConfig* config = nullptr;
 	PanelInspector* inspector = nullptr;
+	PanelHierarchy* goHierarchy = nullptr;
 
 };
 

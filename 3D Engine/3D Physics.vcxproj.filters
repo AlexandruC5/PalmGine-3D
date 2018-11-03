@@ -468,6 +468,10 @@
     <ClInclude Include="PanelInspector.h">
       <Filter>Sources\Modules\UI</Filter>
     </ClInclude>
+    <ClInclude Include="QuadTree.h" />
+    <ClInclude Include="PanelHierarchy.h">
+      <Filter>Sources\Modules\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -672,6 +676,10 @@
       <Filter>Sources\Modules\UI</Filter>
     </ClCompile>
     <ClCompile Include="PanelInspector.cpp">
+      <Filter>Sources\Modules\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadTree.cpp" />
+    <ClCompile Include="PanelHierarchy.cpp">
       <Filter>Sources\Modules\UI</Filter>
     </ClCompile>
   </ItemGroup>
