@@ -24,8 +24,11 @@ public:
 	
 	// Utility
 	bool IsRootGO(const GameObject* go) const;
+	void SetSelectedGameObject(const GameObject* target);
+	GameObject* GetSelectedGO() const;
 
 	GameObject* root_gameObjects =  nullptr;
+	GameObject* selected_gameObject = nullptr;
 };
 
 #endif // !MODULESCENEINTRO_H

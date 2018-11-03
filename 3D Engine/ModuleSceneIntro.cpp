@@ -47,6 +47,16 @@ bool ModuleSceneIntro::IsRootGO(const GameObject* go) const
 	return go == root_gameObjects;
 }
 
+void ModuleSceneIntro::SetSelectedGameObject(const GameObject * target)
+{
+	selected_gameObject = (GameObject*)target;
+}
+
+GameObject * ModuleSceneIntro::GetSelectedGO() const
+{
+	return selected_gameObject;
+}
+
 // PreUpdate
 update_status ModuleSceneIntro::PreUpdate(float dt)
 {

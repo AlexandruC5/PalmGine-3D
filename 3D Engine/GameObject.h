@@ -20,6 +20,7 @@ public:
 
 	// Name --------------------------
 	void SetName(const char* new_name);
+	std::string GetName();
 
 	// State --------------------------
 	bool Enable();

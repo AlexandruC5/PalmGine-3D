@@ -51,6 +51,11 @@ void GameObject::SetName(const char* new_name)
 	name = new_name;
 }
 
+std::string GameObject::GetName()
+{
+	return name;
+}
+
 bool GameObject::Enable()
 {
 	return active = true;
@@ -156,6 +161,17 @@ void GameObject::BlitGameObjectHierarchy()
 	char name_str[250];
 	sprintf_s(name_str, 250, "%s##%i", name.c_str());
 	bool op = ImGui::TreeNodeEx(name_str, flag);
+
+	if (!IsRootGo())
+	{
+		if (ImGui::IsItemHovered())
+		{
+			if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
+			{
+				App->scene_intro->SetSelectedGameObject(this);
+			}
+		}
+	}
 
 	// Blit childs
 	if (op)
