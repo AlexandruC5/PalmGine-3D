@@ -3,7 +3,7 @@
 #include "CompMesh.h"
 #include "CompTransform.h"
 #include "CompMaterial.h"
-#include "imGUI\imgui.h"
+#include "imGUI/imgui.h"
 #include "Application.h"
 #include "ModuleSceneIntro.h"
 #include "Glew/include/glew.h"

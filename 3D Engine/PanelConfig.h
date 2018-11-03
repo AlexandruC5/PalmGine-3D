@@ -2,7 +2,7 @@
 #define __PanelConfig_H__
 
 #include "Application.h"
-#include "imGUI\imgui.h"
+#include "imGUI/imgui.h"
 #include "Panel.h"
 
 #define GRAPH_ARRAY_SIZE 70

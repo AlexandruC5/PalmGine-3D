@@ -5,8 +5,8 @@
 #include "ModuleCamera3D.h"
 #include "Light.h"
 #include "ModuleRenderer3D.h"
-#include "MathGeoLib\MathGeoLib.h"
-#include "mmgr\mmgr.h"
+#include "MathGeoLib/MathGeoLib.h"
+#include "mmgr/mmgr.h"
 
 #define IM_ARRAYSIZE(_ARR)  ((int)(sizeof(_ARR)/sizeof(*_ARR)))
 

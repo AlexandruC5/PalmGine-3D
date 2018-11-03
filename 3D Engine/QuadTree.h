@@ -2,7 +2,7 @@
 #define _QUADTREE_H_
 
 #include "Math.h"
-#include "MathGeoLib\MathGeoLib.h"
+#include "MathGeoLib/MathGeoLib.h"
 #include <list>
 #include <map>
 
