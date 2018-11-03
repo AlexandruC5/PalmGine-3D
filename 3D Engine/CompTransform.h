@@ -22,6 +22,8 @@ public:
 	CompTransform(GameObject* parent, COMP_TYPE type);
 	~CompTransform();
 
+	// Set methods
+	void SetTransformation(math::float4x4 new_trans);
 	void SetRotation(math::float3 rot);
 
 	// Read
@@ -41,6 +43,8 @@ private:
 	math::float4x4 transform_matrix = math::float4x4::identity;
 	math::float3 euler_rotation = { 0,0,0 };
 	math::Quat quaternion_rotation = math::Quat::identity;
+	// Inherit from parent
+	math::float4x4	inhe_transform = math::float4x4::identity;
 };
 
 #endif // !COMPTRANSFORM_H
