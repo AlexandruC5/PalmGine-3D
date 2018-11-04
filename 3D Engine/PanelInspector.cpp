@@ -4,6 +4,7 @@
 #include "ModuleImporter.h"
 #include "CompTransform.h"
 #include "CompMesh.h"
+#include "CompMaterial.h"
 
 PanelInspector::PanelInspector() : Panel("Inspector")
 {}
@@ -24,6 +25,7 @@ void PanelInspector::Draw()
 		// Components
 		CompTransform* transform = selected_go->GetCompTransform();
 		CompMesh* mesh = selected_go->GetCompMesh();
+		CompMaterial* texture = selected_go->GetCompMaterial();
 		if (ImGui::CollapsingHeader("Transform"), ImGuiTreeNodeFlags_DefaultOpen) 
 		{
 			if (transform != nullptr)
@@ -62,38 +64,34 @@ void PanelInspector::Draw()
 				ImGui::Text("Mesh uvs: %f", mesh->GetNumUvs());
 			}
 		}
-	}
 	
-		// TODO Add mesh info
-		/*{
-		ImGui::Text("Showing read only information about the mesh");
-		ImGui::Separator();
-		//Mesh Triangles
-		ImGui::Text("Mesh triangles: %i", App->fbx->GetVerticesQuantity()/3);
-		//Mesh Vertices
-		ImGui::Text("Mesh vertices: %i", App->fbx->GetVerticesQuantity());
-		//Mesh Indices
-		ImGui::Text("Mesh indices: %i", App->fbx->GetIndicesQuantity());
-		//Mesh Normals
-		ImGui::Text("Mesh normals: %f", App->fbx->GetNormalsQuantity());
-		//Mesh UVS
-		ImGui::Text("Mesh uvs: %f", App->fbx->GetUvsQuanity());
-	}*/
+	
+			// TODO Add mesh info
+			/*{
+			ImGui::Text("Showing read only information about the mesh");
+			ImGui::Separator();
+			//Mesh Triangles
+			ImGui::Text("Mesh triangles: %i", App->fbx->GetVerticesQuantity()/3);
+			//Mesh Vertices
+			ImGui::Text("Mesh vertices: %i", App->fbx->GetVerticesQuantity());
+			//Mesh Indices
+			ImGui::Text("Mesh indices: %i", App->fbx->GetIndicesQuantity());
+			//Mesh Normals
+			ImGui::Text("Mesh normals: %f", App->fbx->GetNormalsQuantity());
+			//Mesh UVS
+			ImGui::Text("Mesh uvs: %f", App->fbx->GetUvsQuanity());
+		}*/
 
-	if (ImGui::CollapsingHeader("Material"), ImGuiTreeNodeFlags_DefaultOpen) {
-		//TODO modify this to add textures info in new way
-		//ImGui::Text("Showing read only information about the mesh material");
-		//ImGui::Separator();
-		//ImGui::Text("Texture path: %s", App->fbx->texture_path.c_str());
-		//ImGui::Text("Texture WIDTH: %i", App->fbx->textureWidth);
-		//ImGui::Text("Texture HEIGHT: %i", App->fbx->textureHeight);
-		//if (App->fbx->last_texture_id == 0) {
-		//	ImGui::Image((ImTextureID)App->fbx->GetTextureId(), ImVec2(200, 200));
-		//}
-		//else {
-		//	ImGui::Image((ImTextureID)App->fbx->last_texture_id, ImVec2(200, 200));
-		//}
+		if (texture != nullptr) {
+			if (ImGui::CollapsingHeader("Material"), ImGuiTreeNodeFlags_DefaultOpen) {
+				ImGui::Text("Showing read only information about the mesh material");
+				ImGui::Separator();
+				ImGui::Text("Texture path: %s", texture->GetTexturePath().c_str());
+				ImGui::Text("Texture WIDTH: %i", texture->GetTextureWidth());
+				ImGui::Text("Texture HEIGHT: %i", texture->GetTextureHeight());
+				ImGui::Image((ImTextureID)texture->GetTextureId(), ImVec2(200, 200));
+			}
+		}
 	}
-
 	//ImGui::End();
 }

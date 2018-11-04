@@ -11,6 +11,9 @@ struct Texture
 {
 	std::string name;
 	uint id;
+	std::string texture_path;
+	int textureWidth = 0;
+	int textureHeight = 0;
 };
 
 class GameObject;
@@ -22,10 +25,15 @@ public:
 	~CompMaterial();
 
 	// Set
-	void SetID(uint id);
+	void SetID(uint id, std::string path, int width, int height);
 
 	// Read
-	uint const GetTextureId();
+	uint GetTextureId() const;
+	std::string GetTexturePath() const;
+	int GetTextureWidth() const;
+	int GetTextureHeight() const;
+
+
 
 private:
 	Texture* texture;

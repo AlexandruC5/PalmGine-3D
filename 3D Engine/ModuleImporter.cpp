@@ -162,7 +162,7 @@ GameObject* ModuleImporter::LoadModel(const aiScene* scene, aiNode* node, const 
 					final_path.erase(0, final_path.find_last_of("\\") + 1);
 					texture_folder += final_path;
 
-					mat_comp->SetID(CreateTextureID(texture_folder.c_str()));
+					mat_comp->SetID(CreateTextureID(texture_folder.c_str()), texture_folder, ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT));
 					LOG("Texture with path %s has been loaded.", texture_folder.c_str());
 					final_path.clear();
 					texture_folder.clear();
