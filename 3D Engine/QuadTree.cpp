@@ -1,7 +1,9 @@
 #include "GameObject.h"
 #include "CompMesh.h"
 #include "QuadTree.h"
-#include "Primitive.h"
+
+#include "Devil/include/il.h"
+#include "Devil/include/ilut.h"
 
 #define NE 0 //NorthEast UpRight
 #define SE 1 //SouthEast DownRight
@@ -136,10 +138,16 @@ void QuadtreeNode::RedistributeChilds() {
 void QuadtreeNode::DebugDraw(){
 
 	if (this != nullptr) {
-		Cube c(box.Size().x, box.Size().y, box.Size().z);
-		c.SetPos(box.CenterPoint().x, box.CenterPoint().y, box.CenterPoint().z);
-		c.wire = true;
-		c.Render();
+		glBegin(GL_LINES);
+		glLineWidth(3.0f);
+		//glColor4f(0.25f, 1.0f, 0.0f, 1.0f);
+		for (uint i = 0; i < 12; i++)
+		{
+			glVertex3f(box.Edge(i).a.x, box.Edge(i).a.y, box.Edge(i).a.z);
+			glVertex3f(box.Edge(i).b.x, box.Edge(i).b.y, box.Edge(i).b.z);
+		}
+		glEnd();
+		//glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
 	for (int i = 0; i < 4;++i) {
