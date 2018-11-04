@@ -29,6 +29,11 @@ void CompCamera::DebugDraw() {
 	float3 vertices[8];
 	frustum.GetCornerPoints(vertices);
 
+	//glDisable(GL_LIGHTING);
+	//glDisable(GL_TEXTURE_2D);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	//glDisable(GL_CULL_FACE);
+
 	glBegin(GL_QUADS);
 
 	glVertex3fv((GLfloat*)&vertices[1]);
@@ -60,6 +65,12 @@ void CompCamera::DebugDraw() {
 	glVertex3fv((GLfloat*)&vertices[4]);
 	glVertex3fv((GLfloat*)&vertices[5]);
 	glVertex3fv((GLfloat*)&vertices[1]);
+
+	//glEnable(GL_CULL_FACE);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	//glEnable(GL_TEXTURE_2D);
+	//glEnable(GL_LIGHTING);
+	//glPopMatrix();
 
 	glEnd();
 

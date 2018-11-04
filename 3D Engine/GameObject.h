@@ -28,6 +28,8 @@ public:
 	bool Disable();
 	bool IsActive();
 	bool IsRootGo() const;
+	bool IsStatic() const;
+	void SetStatic(bool isStatic);
 
 	// Parent -------------------------
 	const GameObject* GetParent() const;
@@ -57,8 +59,10 @@ private:
 	bool static_obj = false;
 
 	GameObject* parent = nullptr;
-	std::vector<GameObject*> childs;
 	std::vector<Component*> components;
+
+public:
+	std::vector<GameObject*> childs;
 };
 
 #endif // !GAMEOBJECT_H

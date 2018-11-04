@@ -27,13 +27,13 @@ public:
 	bool IsRootGO(const GameObject* go) const;
 	void SetSelectedGameObject(const GameObject* target);
 	GameObject* GetSelectedGO() const;
+	void SetGameObjectDrawability();
 
 	GameObject* root_gameObjects =  nullptr;
 	GameObject* selected_gameObject = nullptr;
 	GameObject* camera = nullptr;
 
 	Quadtree quadtree;
-	QuadtreeNode* root = nullptr;
 };
 
 #endif // !MODULESCENEINTRO_H

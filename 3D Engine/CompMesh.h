@@ -50,6 +50,9 @@ public:
 	void BlitComponentInspector();
 private:
 	Mesh* mesh;
+
+public:
+	bool drawable = true;
 };
 
 #endif // !COMPMESH_H

@@ -4,6 +4,7 @@
 #include "Primitive.h"
 #include "CompCamera.h"
 #include "CompTransform.h"
+#include "CompMesh.h"
 #include "Component.h"
 
 #pragma comment( lib, "Glew/libx86/glew32.lib" )
@@ -28,6 +29,7 @@ bool ModuleSceneIntro::Start()
 	App->camera->LookAt(vec3(0, 0, 0));
 	
 	root_gameObjects = new GameObject(nullptr);
+	root_gameObjects->SetName("root");
 	quadtree.SetBoundries(AABB(float3(-500, 0, -500), float3(500, 30, 500)));
 	camera = new GameObject(root_gameObjects);
 	camera->SetName("MainCamera");
@@ -93,5 +95,24 @@ update_status ModuleSceneIntro::Update(float dt)
 
 	quadtree.DebugDraw();
 
+	SetGameObjectDrawability();
+
 	return UPDATE_CONTINUE;
+}
+
+void ModuleSceneIntro::SetGameObjectDrawability() {
+	if (camera->GetCompCamera()->frustum_culling == true) {
+		for (int i = 0; i < root_gameObjects->GetNumChilds(); ++i) {
+			if (root_gameObjects->childs[i]->IsActive() == true && root_gameObjects->childs[i]->IsStatic() == true) {
+				if (root_gameObjects->childs[i]->GetCompMesh() != nullptr) {
+					if (camera->GetCompCamera()->frustum.Intersects(root_gameObjects->childs[i]->GetCompMesh()->GetAABB())) {
+						root_gameObjects->childs[i]->GetCompMesh()->drawable = true;
+					}
+					else {
+						root_gameObjects->childs[i]->GetCompMesh()->drawable = false;
+					}
+				}
+			}
+		}
+	}
 }

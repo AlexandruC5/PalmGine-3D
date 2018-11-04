@@ -23,6 +23,13 @@ void PanelInspector::Draw()
 		ImGui::Separator();
 		// GO name
 		ImGui::Text("Model Name: %s", selected_go->GetName().c_str());
+
+		//SetStatic
+		bool isStatic = selected_go->IsStatic();
+		if(ImGui::Checkbox("Static", &isStatic)) {
+			selected_go->SetStatic(isStatic);
+		}
+
 		// Components
 		CompTransform* transform = selected_go->GetCompTransform();
 		CompMesh* mesh = selected_go->GetCompMesh();
