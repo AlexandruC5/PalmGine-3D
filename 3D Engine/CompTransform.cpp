@@ -10,6 +10,16 @@ CompTransform::~CompTransform()
 {
 }
 
+void CompTransform::Update(float dt)
+{
+	// Update child's transformation
+	if (!parent->GetParent()->IsRootGo() && parent->GetParent() != nullptr)
+	{
+		CompTransform* temp_transform = (CompTransform*)parent->GetParent()->FindComponent(COMP_TYPE::C_TRANSFORM);
+		inhe_transform = transform_matrix.Transposed() * temp_transform->inhe_transform;
+	}
+}
+
 void CompTransform::SetTransformation(math::float4x4 new_trans)
 {
 	transform_matrix = new_trans;

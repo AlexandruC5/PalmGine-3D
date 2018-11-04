@@ -22,6 +22,8 @@ public:
 	CompTransform(GameObject* parent, COMP_TYPE type);
 	~CompTransform();
 
+	void Update(float dt);
+
 	// Set methods
 	void SetTransformation(math::float4x4 new_trans);
 	void SetPosition(math::float3 pos);
