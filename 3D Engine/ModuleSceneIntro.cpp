@@ -101,6 +101,7 @@ update_status ModuleSceneIntro::Update(float dt)
 }
 
 void ModuleSceneIntro::SetGameObjectDrawability() {
+	//Todo Use quadtree for frustrum culling (Add quadtree.CollectIntersections to quadtree)
 	if (camera->GetCompCamera()->frustum_culling == true) {
 		for (int i = 0; i < root_gameObjects->GetNumChilds(); ++i) {
 			if (root_gameObjects->childs[i]->IsActive() == true && root_gameObjects->childs[i]->IsStatic() == true) {
