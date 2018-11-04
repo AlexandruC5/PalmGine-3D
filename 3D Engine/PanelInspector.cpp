@@ -34,7 +34,7 @@ void PanelInspector::Draw()
 				ImGui::Separator();
 				//Position
 				ImGui::Text("Position:");
-				ImGui::Text("[%f]    [%f]    [%f]", transform->GetRotation().x, transform->GetRotation().y, transform->GetRotation().z);
+				ImGui::Text("[%f]    [%f]    [%f]", transform->GetPosition().x, transform->GetPosition().y, transform->GetPosition().z);
 				//Rotation
 				ImGui::Text("Rotation:");
 				ImGui::Text("[%f]    [%f]    [%f]", transform->GetRotation().x, transform->GetRotation().y, transform->GetRotation().z);
