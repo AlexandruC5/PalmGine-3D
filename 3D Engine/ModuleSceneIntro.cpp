@@ -11,6 +11,7 @@ ModuleSceneIntro::ModuleSceneIntro(bool start_enabled) : Module(start_enabled)
 
 ModuleSceneIntro::~ModuleSceneIntro()
 {
+	quadtree.~Quadtree();
 	delete root_gameObjects;
 }
 
