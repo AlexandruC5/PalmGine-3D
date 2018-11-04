@@ -24,12 +24,14 @@ public:
 
 	// Set methods
 	void SetTransformation(math::float4x4 new_trans);
+	void SetPosition(math::float3 pos);
 	void SetRotation(math::float3 rot);
+	void SetScale(math::float3 scale);
 
 	// Read
-	math::float3 const GetPosition();
-	math::float3 const GetRotation();
-	math::float3 const GetScale();
+	math::float3 GetPosition() const;
+	math::float3 GetRotation() const;
+	math::float3 GetScale() const;
 
 private:
 	Axis axis;

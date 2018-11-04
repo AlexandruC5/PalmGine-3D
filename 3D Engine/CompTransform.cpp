@@ -28,22 +28,32 @@ void CompTransform::SetTransformation(math::float4x4 new_trans)
 	}
 }
 
+void CompTransform::SetPosition(math::float3 pos)
+{
+	position = pos;
+}
+
 void CompTransform::SetRotation(math::float3 rot)
 {
 	rotation = rot;
 }
 
-math::float3 const CompTransform::GetPosition()
+void CompTransform::SetScale(math::float3 sca)
+{
+	scale = sca;
+}
+
+math::float3 CompTransform::GetPosition()const
 {
 	return position;
 }
 
-math::float3 const CompTransform::GetRotation()
+math::float3 CompTransform::GetRotation() const
 {
 	return rotation;
 }
 
-math::float3 const CompTransform::GetScale()
+math::float3 CompTransform::GetScale() const
 {
 	return scale;
 }

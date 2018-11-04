@@ -202,6 +202,32 @@ GameObject* ModuleImporter::LoadModel(const aiScene* scene, aiNode* node, const 
 		temp_go->AddChild(LoadModel(scene, node->mChildren[i], path));
 	}
 
+	//math::float4x4 matrix;
+	//matrix.Set(node->mTransformation.a1, node->mTransformation.a2, node->mTransformation.a3, node->mTransformation.a4,
+	//	node->mTransformation.b1, node->mTransformation.b2, node->mTransformation.b3, node->mTransformation.b4,
+	//	node->mTransformation.c1, node->mTransformation.c2, node->mTransformation.c3, node->mTransformation.c4,
+	//	node->mTransformation.d1, node->mTransformation.d2, node->mTransformation.d3, node->mTransformation.d4);
+
+	//temp_go->GetCompTransform()->SetTransformation(matrix);
+
+	aiVector3D translation;
+	aiVector3D scaling;
+	aiQuaternion rotation;
+	node->mTransformation.Decompose(scaling, rotation, translation);
+	aiMatrix3x3 rotMat = rotation.GetMatrix();
+	aiVector3D rotationEuler = rotMat.GetEuler();
+
+	float3 pos;
+	pos.Set(translation.x, translation.y, translation.z);
+	float3 rot;
+	rot.Set(rotationEuler.x, rotationEuler.y, rotationEuler.z);
+	float3 scale;
+	scale.Set(scaling.x, scaling.y, scaling.z);
+
+	temp_go->GetCompTransform()->SetPosition(pos);
+	temp_go->GetCompTransform()->SetRotation(rot);
+	temp_go->GetCompTransform()->SetScale(scale);
+
 	LOG("GameObject position: (%f, %f, %f)", temp_go->GetCompTransform()->GetPosition().x, temp_go->GetCompTransform()->GetPosition().y, temp_go->GetCompTransform()->GetPosition().z);
 	LOG("GameObject rotation: (%f, %f, %f)", temp_go->GetCompTransform()->GetRotation().x, temp_go->GetCompTransform()->GetRotation().y, temp_go->GetCompTransform()->GetRotation().z);
 	LOG("GameObject scale: (%f, %f, %f)", temp_go->GetCompTransform()->GetScale().x, temp_go->GetCompTransform()->GetScale().y, temp_go->GetCompTransform()->GetScale().z);
