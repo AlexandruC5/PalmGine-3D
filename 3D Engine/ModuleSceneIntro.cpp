@@ -23,6 +23,7 @@ bool ModuleSceneIntro::Start()
 	App->camera->LookAt(vec3(0, 0, 0));
 	
 	root_gameObjects = new GameObject(nullptr);
+	quadtree.SetBoundries(AABB(float3(-500, 0, -500), float3(500, 30, 500)));
 
 	return ret;
 }
@@ -77,5 +78,8 @@ update_status ModuleSceneIntro::Update(float dt)
 		}
 		p.Render();
 	}
+
+	quadtree.DebugDraw();
+
 	return UPDATE_CONTINUE;
 }

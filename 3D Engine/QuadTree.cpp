@@ -151,7 +151,9 @@ void QuadtreeNode::DebugDraw(){
 	}
 
 	for (int i = 0; i < 4;++i) {
-		childs[i]->DebugDraw();
+		if (childs[i] != nullptr) {
+			childs[i]->DebugDraw();
+		}
 	}
 
 }

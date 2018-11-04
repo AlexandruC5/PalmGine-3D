@@ -5,6 +5,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "GameObject.h"
+#include "QuadTree.h"
 
 class ModuleSceneIntro : public Module
 {
@@ -29,6 +30,9 @@ public:
 
 	GameObject* root_gameObjects =  nullptr;
 	GameObject* selected_gameObject = nullptr;
+
+	Quadtree quadtree;
+	QuadtreeNode* root = nullptr;
 };
 
 #endif // !MODULESCENEINTRO_H
