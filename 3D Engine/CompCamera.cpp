@@ -22,7 +22,7 @@ CompCamera::~CompCamera()
 }
 
 void CompCamera::Update(float dt) {
-	DebugDraw();
+	//DebugDraw();
 }
 
 void CompCamera::DebugDraw() {

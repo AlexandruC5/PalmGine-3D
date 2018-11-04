@@ -2,6 +2,9 @@
 #include "Application.h"
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"
+#include "CompCamera.h"
+#include "CompTransform.h"
+#include "Component.h"
 
 #pragma comment( lib, "Glew/libx86/glew32.lib" )
 
@@ -12,6 +15,7 @@ ModuleSceneIntro::ModuleSceneIntro(bool start_enabled) : Module(start_enabled)
 ModuleSceneIntro::~ModuleSceneIntro()
 {
 	quadtree.~Quadtree();
+	//delete camera;
 	delete root_gameObjects;
 }
 
@@ -25,6 +29,11 @@ bool ModuleSceneIntro::Start()
 	
 	root_gameObjects = new GameObject(nullptr);
 	quadtree.SetBoundries(AABB(float3(-500, 0, -500), float3(500, 30, 500)));
+	camera = new GameObject(root_gameObjects);
+	camera->SetName("MainCamera");
+	CompCamera* cameracomp = new CompCamera(camera, COMP_TYPE::C_CAMERA);
+	camera->AddComponent(cameracomp);
+
 
 	return ret;
 }

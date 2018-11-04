@@ -30,6 +30,7 @@ public:
 
 	GameObject* root_gameObjects =  nullptr;
 	GameObject* selected_gameObject = nullptr;
+	GameObject* camera = nullptr;
 
 	Quadtree quadtree;
 	QuadtreeNode* root = nullptr;
