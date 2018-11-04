@@ -37,13 +37,25 @@ void PanelInspector::Draw()
 				ImGui::Separator();
 				//Position
 				ImGui::Text("Position:");
-				ImGui::Text("[%f]    [%f]    [%f]", transform->GetPosition().x, transform->GetPosition().y, transform->GetPosition().z);
+				float3 pos = transform->GetPosition();
+				if (ImGui::DragFloat3("Position", (float*)&pos, 0.5f)) {
+					transform->SetPosition(pos);
+				}
+				//ImGui::Text("[%f]    [%f]    [%f]", transform->GetPosition().x, transform->GetPosition().y, transform->GetPosition().z);
 				//Rotation
 				ImGui::Text("Rotation:");
-				ImGui::Text("[%f]    [%f]    [%f]", transform->GetRotation().x, transform->GetRotation().y, transform->GetRotation().z);
+				float3 rot = transform->GetRotation();
+				if (ImGui::DragFloat3("Rotation", (float*)&rot, -pi, pi)) {
+					transform->SetRotation(rot);
+				}
+				//ImGui::Text("[%f]    [%f]    [%f]", transform->GetRotation().x, transform->GetRotation().y, transform->GetRotation().z);
 				//Scale
 				ImGui::Text("Scale:");
-				ImGui::Text("[%f]    [%f]    [%f]", transform->GetScale().x, transform->GetScale().y, transform->GetScale().z);
+				float3 scale = transform->GetScale();
+				if (ImGui::DragFloat3("Scale", (float*)&scale, 0.05f)) {
+					transform->SetScale(scale);
+				}
+				//ImGui::Text("[%f]    [%f]    [%f]", transform->GetScale().x, transform->GetScale().y, transform->GetScale().z);
 			}
 			else
 				LOG("ERROR: COMPONENT TRANSFORM IS NULLPTR on GameObject with name %s", selected_go->GetName().c_str());
@@ -72,6 +84,7 @@ void PanelInspector::Draw()
 			if (ImGui::CollapsingHeader("Camera"), ImGuiTreeNodeFlags_DefaultOpen)
 			{
 				ImGui::Checkbox("Active", &camera->active);
+				ImGui::Checkbox("Frustum Culling", &camera->frustum_culling);
 				float near_plane_dis = camera->GetNearPlaneDistance();
 				if (ImGui::DragFloat("Near Plane", &near_plane_dis, 0.1f, 0.1f, 1000.0f)) {
 					camera->SetNearPlaneDistance(near_plane_dis);
