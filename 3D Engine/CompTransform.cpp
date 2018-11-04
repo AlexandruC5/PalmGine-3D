@@ -31,19 +31,19 @@ void CompTransform::SetTransformation(math::float4x4 new_trans)
 void CompTransform::SetPosition(math::float3 pos)
 {
 	position = pos;
-	inhe_transform.Translate(position);
+	transform_matrix.Translate(position);
 }
 
 void CompTransform::SetRotation(math::float3 rot)
 {
-	inhe_transform.RotateFromTo(rotation, rot);
+	transform_matrix.RotateFromTo(rotation, rot);
 	rotation = rot;
 }
 
 void CompTransform::SetScale(math::float3 sca)
 {
 	scale = sca;
-	inhe_transform.Scale(scale);
+	transform_matrix.Scale(scale);
 }
 
 math::float3 CompTransform::GetPosition()const
@@ -59,4 +59,8 @@ math::float3 CompTransform::GetRotation() const
 math::float3 CompTransform::GetScale() const
 {
 	return scale;
+}
+
+math::float4x4 CompTransform::GetTransformationMatrix() const {
+	return transform_matrix;
 }

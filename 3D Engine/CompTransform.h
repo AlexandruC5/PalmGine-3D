@@ -33,6 +33,8 @@ public:
 	math::float3 GetRotation() const;
 	math::float3 GetScale() const;
 
+	math::float4x4 GetTransformationMatrix() const;
+
 private:
 	Axis axis;
 

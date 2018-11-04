@@ -1,5 +1,6 @@
 #include "CompMesh.h"
 #include "CompMaterial.h"
+#include "CompTransform.h"
 #include "Component.h"
 #include "Application.h"
 
@@ -24,9 +25,14 @@ void CompMesh::Update(float dt)
 
 void CompMesh::Draw()
 {
+	CompTransform* trans = parent->GetCompTransform();
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glEnable(GL_TEXTURE_2D);
+
+	//glMatrixMode(GL_MODELVIEW);
+	//glPushMatrix();
+	//glLoadMatrixf(trans->GetTransformationMatrix().ptr());
 
 	glBindBuffer(GL_ARRAY_BUFFER, mesh->id_vertices);
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
@@ -48,6 +54,7 @@ void CompMesh::Draw()
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glDisable(GL_TEXTURE_2D);
+	//glPopMatrix();
 }
 
 void CompMesh::AddMesh(Mesh * mesh)
