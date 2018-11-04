@@ -62,5 +62,5 @@ math::float3 CompTransform::GetScale() const
 }
 
 math::float4x4 CompTransform::GetTransformationMatrix() const {
-	return transform_matrix;
+	return inhe_transform;
 }
