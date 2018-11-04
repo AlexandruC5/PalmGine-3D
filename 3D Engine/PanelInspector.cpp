@@ -5,6 +5,7 @@
 #include "CompTransform.h"
 #include "CompMesh.h"
 #include "CompMaterial.h"
+#include "CompCamera.h"
 
 PanelInspector::PanelInspector() : Panel("Inspector")
 {}
@@ -26,6 +27,8 @@ void PanelInspector::Draw()
 		CompTransform* transform = selected_go->GetCompTransform();
 		CompMesh* mesh = selected_go->GetCompMesh();
 		CompMaterial* texture = selected_go->GetCompMaterial();
+		CompCamera* camera = selected_go->GetCompCamera();
+
 		if (ImGui::CollapsingHeader("Transform"), ImGuiTreeNodeFlags_DefaultOpen) 
 		{
 			if (transform != nullptr)
@@ -62,6 +65,33 @@ void PanelInspector::Draw()
 				ImGui::Text("Mesh normals: %f", mesh->GetNumNormals());
 				//Mesh UVS
 				ImGui::Text("Mesh uvs: %f", mesh->GetNumUvs());
+			}
+		}
+
+		if (camera != nullptr) {
+			if (ImGui::CollapsingHeader("Camera"), ImGuiTreeNodeFlags_DefaultOpen)
+			{
+				ImGui::Checkbox("Active", &camera->active);
+				float near_plane_dis = camera->GetNearPlaneDistance();
+				float far_plane_dis = camera->GetFarPlaneDistance();
+				ImGui::DragFloat("Near Plane", &near_plane_dis, 0.1f, 0.1f, far_plane_dis-0.1f);
+				if (camera->GetNearPlaneDistance() != near_plane_dis) {
+					camera->SetNearPlaneDistance(near_plane_dis);
+				}
+				ImGui::DragFloat("Far Plane", &far_plane_dis, 0.1f, near_plane_dis + 1.0f, 1000.0f);
+				if (camera->GetFarPlaneDistance() != far_plane_dis) {
+					camera->SetFarPlaneDistance(far_plane_dis);
+				}
+				float fov = camera->GetFOV();
+				ImGui::SliderFloat("Field of View", &fov, 0.0f, 360.0f);
+				if (camera->GetFOV() != fov) {
+					camera->SetFOV(fov);
+				}
+				float aspect_ratio = camera->GetApectRatio();
+				ImGui::DragFloat("Aspect Ratio", &aspect_ratio, 0.1f, 0.0f, 2.35f);
+				if (camera->GetApectRatio() != aspect_ratio) {
+					camera->SetAspectRatio(aspect_ratio);
+				}
 			}
 		}
 	

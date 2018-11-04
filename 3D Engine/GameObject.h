@@ -9,6 +9,7 @@ class Component;
 class CompMesh;
 class CompMaterial;
 class CompTransform;
+class CompCamera;
 
 class GameObject
 {
@@ -41,6 +42,7 @@ public:
 	CompMesh* GetCompMesh() const;
 	CompTransform* GetCompTransform() const;
 	CompMaterial* GetCompMaterial() const;
+	CompCamera* GetCompCamera() const;
 	Component* AddEmptyComponent(COMP_TYPE type);
 	void AddComponent(Component* comp);
 

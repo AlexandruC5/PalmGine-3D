@@ -34,6 +34,7 @@ public:
 public:
 	Frustum frustum;
 	bool frustum_culling = false;
+	bool active = true;
 };
 
 #endif // !COMCAMERA_H

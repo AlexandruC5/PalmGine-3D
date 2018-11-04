@@ -3,6 +3,7 @@
 #include "CompMesh.h"
 #include "CompTransform.h"
 #include "CompMaterial.h"
+#include "CompCamera.h"
 #include "imGUI/imgui.h"
 #include "Application.h"
 #include "ModuleSceneIntro.h"
@@ -107,6 +108,10 @@ CompMesh* GameObject::GetCompMesh() const
 CompMaterial* GameObject::GetCompMaterial() const
 {
 	return (CompMaterial*)FindComponent(COMP_TYPE::C_MATERIAL);
+}
+
+CompCamera* GameObject::GetCompCamera() const{
+	return (CompCamera*)FindComponent(COMP_TYPE::C_CAMERA);
 }
 
 Component * GameObject::AddEmptyComponent(COMP_TYPE type)
