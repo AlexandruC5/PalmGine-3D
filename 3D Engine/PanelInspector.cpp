@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include "PanelInspector.h"
 #include "ModuleImporter.h"
+#include "ModuleSceneIntro.h"
 #include "CompTransform.h"
 #include "CompMesh.h"
 #include "CompMaterial.h"
@@ -28,6 +29,12 @@ void PanelInspector::Draw()
 		bool isStatic = selected_go->IsStatic();
 		if(ImGui::Checkbox("Static", &isStatic)) {
 			selected_go->SetStatic(isStatic);
+			if (isStatic == true) {
+				App->scene_intro->quadtree.Insert(selected_go);
+			}
+			else {
+				App->scene_intro->quadtree.Remove(selected_go);
+			}
 		}
 
 		// Components
