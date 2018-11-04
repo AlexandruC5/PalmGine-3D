@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{746CC4C3-787F-4B0E-AA66-E388FE3FF4F6}</ProjectGuid>
+    <ProjectGuid>{34982740-3F0C-4E5C-9F8B-441A16CCFA42}</ProjectGuid>
     <RootNamespace>SDLGame</RootNamespace>
     <ProjectName>PalmGine3D</ProjectName>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>

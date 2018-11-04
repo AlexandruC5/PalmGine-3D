@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PalmGine3D", "3D Physics.vcxproj", "{746CC4C3-787F-4B0E-AA66-E388FE3FF4F6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PalmGine3D", "PalmGine3D.vcxproj", "{34982740-3F0C-4E5C-9F8B-441A16CCFA42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{746CC4C3-787F-4B0E-AA66-E388FE3FF4F6}.Debug|Win32.ActiveCfg = Debug|Win32
-		{746CC4C3-787F-4B0E-AA66-E388FE3FF4F6}.Debug|Win32.Build.0 = Debug|Win32
-		{746CC4C3-787F-4B0E-AA66-E388FE3FF4F6}.Release|Win32.ActiveCfg = Release|Win32
-		{746CC4C3-787F-4B0E-AA66-E388FE3FF4F6}.Release|Win32.Build.0 = Release|Win32
+		{34982740-3F0C-4E5C-9F8B-441A16CCFA42}.Debug|Win32.ActiveCfg = Debug|Win32
+		{34982740-3F0C-4E5C-9F8B-441A16CCFA42}.Debug|Win32.Build.0 = Debug|Win32
+		{34982740-3F0C-4E5C-9F8B-441A16CCFA42}.Release|Win32.ActiveCfg = Release|Win32
+		{34982740-3F0C-4E5C-9F8B-441A16CCFA42}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
