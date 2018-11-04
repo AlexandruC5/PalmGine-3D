@@ -22,7 +22,7 @@ CompCamera::~CompCamera()
 }
 
 void CompCamera::Update(float dt) {
-	//DebugDraw();
+	DebugDraw();
 }
 
 void CompCamera::DebugDraw() {
@@ -89,7 +89,7 @@ void CompCamera::SetNearPlaneDistance(float distance) {
 
 void CompCamera::SetFarPlaneDistance(float distance) {
 	if (distance > 0.0f && distance > frustum.NearPlaneDistance()) {
-		frustum.nearPlaneDistance = distance;
+		frustum.farPlaneDistance = distance;
 	}
 }
 

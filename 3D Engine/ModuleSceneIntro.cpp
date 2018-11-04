@@ -33,6 +33,8 @@ bool ModuleSceneIntro::Start()
 	camera->SetName("MainCamera");
 	CompCamera* cameracomp = new CompCamera(camera, COMP_TYPE::C_CAMERA);
 	camera->AddComponent(cameracomp);
+	//TODO Add AABB to all game objects and uncomment this
+	//quadtree.Insert(camera);
 
 
 	return ret;

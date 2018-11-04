@@ -73,23 +73,19 @@ void PanelInspector::Draw()
 			{
 				ImGui::Checkbox("Active", &camera->active);
 				float near_plane_dis = camera->GetNearPlaneDistance();
-				float far_plane_dis = camera->GetFarPlaneDistance();
-				ImGui::DragFloat("Near Plane", &near_plane_dis, 0.1f, 0.1f, far_plane_dis-0.1f);
-				if (camera->GetNearPlaneDistance() != near_plane_dis) {
+				if (ImGui::DragFloat("Near Plane", &near_plane_dis, 0.1f, 0.1f, 1000.0f)) {
 					camera->SetNearPlaneDistance(near_plane_dis);
 				}
-				ImGui::DragFloat("Far Plane", &far_plane_dis, 0.1f, near_plane_dis + 1.0f, 1000.0f);
-				if (camera->GetFarPlaneDistance() != far_plane_dis) {
+				float far_plane_dis = camera->GetFarPlaneDistance();
+				if (ImGui::DragFloat("Far Plane", &far_plane_dis, 0.1f, 25.f, 1000.0f)) {
 					camera->SetFarPlaneDistance(far_plane_dis);
 				}
 				float fov = camera->GetFOV();
-				ImGui::SliderFloat("Field of View", &fov, 0.0f, 360.0f);
-				if (camera->GetFOV() != fov) {
+				if (ImGui::SliderFloat("Field of View", &fov, 1.0f, 179.0f)) {
 					camera->SetFOV(fov);
 				}
 				float aspect_ratio = camera->GetApectRatio();
-				ImGui::DragFloat("Aspect Ratio", &aspect_ratio, 0.1f, 0.0f, 2.35f);
-				if (camera->GetApectRatio() != aspect_ratio) {
+				if (ImGui::DragFloat("Aspect Ratio", &aspect_ratio, 0.1f, 0.1f, 1000.0f)) {
 					camera->SetAspectRatio(aspect_ratio);
 				}
 			}
