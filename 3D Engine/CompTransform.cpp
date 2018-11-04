@@ -42,18 +42,21 @@ void CompTransform::SetPosition(math::float3 pos)
 {
 	position = pos;
 	transform_matrix.Translate(position);
+	global_transform = inhe_transform*transform_matrix;
 }
 
 void CompTransform::SetRotation(math::float3 rot)
 {
 	transform_matrix.RotateFromTo(rotation, rot);
 	rotation = rot;
+	global_transform = inhe_transform*transform_matrix;
 }
 
 void CompTransform::SetScale(math::float3 sca)
 {
 	scale = sca;
 	transform_matrix.Scale(scale);
+	global_transform = inhe_transform*transform_matrix;
 }
 
 math::float3 CompTransform::GetPosition()const
@@ -72,5 +75,5 @@ math::float3 CompTransform::GetScale() const
 }
 
 math::float4x4 CompTransform::GetTransformationMatrix() const {
-	return inhe_transform;
+	return global_transform;
 }

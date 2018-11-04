@@ -51,6 +51,8 @@ private:
 	math::Quat quaternion_rotation = math::Quat::identity;
 	// Inherit from parent
 	math::float4x4	inhe_transform = math::float4x4::identity;
+
+	float4x4 global_transform = float4x4::identity;
 };
 
 #endif // !COMPTRANSFORM_H
