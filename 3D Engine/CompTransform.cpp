@@ -60,7 +60,7 @@ void CompTransform::SetPosition(math::float3 pos)
 void CompTransform::SetRotation(math::float3 rot)
 {
 	// TODO need fix
-	quaternion_rotation = math::Quat::FromEulerXYX(rot.x*DEGTORAD, rot.y*DEGTORAD, rot.z*DEGTORAD);
+	quaternion_rotation = math::Quat::FromEulerXYZ(rot.x*DEGTORAD, rot.y*DEGTORAD, rot.z*DEGTORAD);
 	transform_matrix = math::float4x4::FromQuat(quaternion_rotation);
 	transform_matrix.SetTranslatePart(position);
 	rotation = rot;
