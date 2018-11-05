@@ -284,3 +284,10 @@ void GameObject::DebugDrawBox() {
 
 	}
 }
+
+math::AABB GameObject::GetAABB() const
+{
+	CompMesh* tmp_mesh = GetCompMesh();
+	if(tmp_mesh != nullptr)
+		return tmp_mesh->GetAABB();
+}

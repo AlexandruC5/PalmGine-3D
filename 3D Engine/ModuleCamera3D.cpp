@@ -93,7 +93,7 @@ update_status ModuleCamera3D::Update(float dt)
 		Position += newPos;
 		Reference += newPos;
 
-		AABB box = App->importer->GetAABB();
+		AABB box = App->scene_intro->GetSelectedGO()->GetAABB();
 		Reference.x = box.CenterPoint().x;
 		Reference.y = box.CenterPoint().y;
 		Reference.z = box.CenterPoint().z;
@@ -104,7 +104,7 @@ update_status ModuleCamera3D::Update(float dt)
 		Position += newPos;
 		Reference += newPos;
 
-		AABB box = App->importer->GetAABB();
+		AABB box = App->scene_intro->GetSelectedGO()->GetAABB();
 		Reference.x = box.CenterPoint().x;
 		Reference.y = box.CenterPoint().y;
 		Reference.z = box.CenterPoint().z;

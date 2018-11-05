@@ -3,6 +3,7 @@
 
 #include "Globals.h"
 #include "Component.h"
+#include "CompMaterial.h"
 #include <vector>
 
 class Component;
@@ -54,6 +55,7 @@ public:
 
 	//DebugDrawBox
 	void DebugDrawBox();
+	math::AABB GetAABB()const;
 
 private:
 	uint id = 0;
