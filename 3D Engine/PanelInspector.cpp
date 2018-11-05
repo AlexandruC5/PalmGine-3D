@@ -57,7 +57,7 @@ void PanelInspector::Draw()
 			if (transform != nullptr)
 			{
 				//Enable guizmos
-				EnableGuizmos(transform);
+				EnableGuizmos(selected_go);
 
 				ImGui::Text("Showing read only information about the mesh transform");
 				ImGui::Separator();
@@ -173,11 +173,11 @@ void PanelInspector::Draw()
 	//ImGui::End();
 }
 
-void PanelInspector::EnableGuizmos(CompTransform* transformation) {
+void PanelInspector::EnableGuizmos(GameObject* selected_go) {
 	ImGuizmo::Enable(true);
 
 
-	static ImGuizmo::OPERATION mCurrentGizmoOperation(ImGuizmo::ROTATE);
+	static ImGuizmo::OPERATION mCurrentGizmoOperation(ImGuizmo::TRANSLATE);
 	static ImGuizmo::MODE mCurrentGizmoMode(ImGuizmo::WORLD);
 
 	//Swap between guizmos mode using scancodes or uibuttons
@@ -202,6 +202,15 @@ void PanelInspector::EnableGuizmos(CompTransform* transformation) {
 		mCurrentGizmoOperation = ImGuizmo::SCALE;
 	}
 
+	ImGuiIO& io = ImGui::GetIO();
+	ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
 
+	ImGuizmo::Manipulate(App->camera->GetViewMatrix(), &App->renderer3D->ProjectionMatrix, mCurrentGizmoOperation, ImGuizmo::WORLD, (float*)&selected_go->GetCompTransform()->GetTransformationMatrix()/*.Transposed()*/);
+
+	if (ImGuizmo::IsUsing() && selected_go->IsStatic() == false)
+	{
+		float4x4 matrix = selected_go->GetCompTransform()->GetTransformationMatrix();
+
+	}
 
 }

@@ -15,7 +15,7 @@ public:
 
 	void Draw() override;
 
-	void EnableGuizmos(CompTransform* transformation);
+	void EnableGuizmos(GameObject* selected_go);
 
 	bool active = true;
 private:
