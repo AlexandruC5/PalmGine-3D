@@ -74,7 +74,6 @@ void CompTransform::SetRotationWithQuat(Quat rot) {
 	quaternion_rotation = rot;
 	transform_matrix = math::float4x4::FromQuat(quaternion_rotation);
 	transform_matrix.SetTranslatePart(position);
-	transform_matrix = math::float4x4::FromTRS(position, quaternion_rotation, scale);
 	rotation = rot.ToEulerXYX();
 
 	if (parent->GetParent() != nullptr)
