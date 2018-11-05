@@ -23,7 +23,12 @@ void PanelInspector::Draw()
 		ImGui::Separator();
 		ImGui::Separator();
 		// GO name
-		ImGui::Text("Model Name: %s", selected_go->GetName().c_str());
+		char name[50];
+		strcpy_s(name, 50, selected_go->GetName().c_str());
+		//ImGui::Text("Model Name: %s", name.c_str());
+		if(ImGui::InputText("Name", name, 50, ImGuiInputTextFlags_AutoSelectAll |ImGuiInputTextFlags_EnterReturnsTrue)) {
+			selected_go->SetName(name);
+		}
 
 		//SetStatic
 		bool isStatic = selected_go->IsStatic();
