@@ -69,6 +69,24 @@ void CompTransform::SetRotation(math::float3 rot)
 	}
 }
 
+void CompTransform::SetRotationWithQuat(Quat rot) {
+	quaternion_rotation = rot;
+	transform_matrix = math::float4x4::FromQuat(quaternion_rotation);
+	transform_matrix.SetTranslatePart(position);
+	rotation = rot.ToEulerXYX();
+
+	if (parent->GetParent() != nullptr)
+	{
+		CompTransform* tmp_transform = ((CompTransform*)parent->GetParent()->FindComponent(COMP_TYPE::C_TRANSFORM));
+		if (tmp_transform != nullptr)
+			global_transform = transform_matrix * tmp_transform->GetTransformationMatrix();
+	}
+	if (parent->GetCompCamera() != nullptr) {
+		parent->GetCompCamera()->frustum.front = global_transform.WorldZ();
+		parent->GetCompCamera()->frustum.up = global_transform.WorldY();
+	}
+}
+
 void CompTransform::SetScale(math::float3 sca)
 {
 	// TODO scale

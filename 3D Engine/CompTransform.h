@@ -27,6 +27,7 @@ public:
 	void SetTransformation(math::float4x4 new_trans);
 	void SetPosition(math::float3 pos);
 	void SetRotation(math::float3 rot);
+	void SetRotationWithQuat(math::Quat rot);
 	void SetScale(math::float3 scale);
 
 	// Read
