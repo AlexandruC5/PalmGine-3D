@@ -32,9 +32,10 @@ void CompMesh::Draw()
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glEnable(GL_TEXTURE_2D);
 
+	// Adapt blit to geometry
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
-	glMultMatrixf(trans->GetTransformationMatrix().ptr());
+	glMultMatrixf(trans->GetTransformationMatrix().Transposed().ptr());
 
 	glBindBuffer(GL_ARRAY_BUFFER, mesh->id_vertices);
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
@@ -100,6 +101,11 @@ math::AABB CompMesh::GetAABB()const
 	box.Enclose((float3*)mesh->vertices, mesh->num_vertices);
 
 	return box;
+}
+
+uint * CompMesh::GetVertices() const
+{
+	return (mesh->vertices);
 }
 
 void CompMesh::BlitComponentInspector()

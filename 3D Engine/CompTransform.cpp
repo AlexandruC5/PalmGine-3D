@@ -12,12 +12,6 @@ CompTransform::~CompTransform()
 
 void CompTransform::Update(float dt)
 {
-	// Update child's transformation
-	if (!parent->GetParent()->IsRootGo() && parent->GetParent() != nullptr)
-	{
-		CompTransform* temp_transform = (CompTransform*)parent->GetParent()->FindComponent(COMP_TYPE::C_TRANSFORM);
-		inhe_transform = transform_matrix.Transposed() * temp_transform->inhe_transform;
-	}
 }
 
 void CompTransform::SetTransformation(math::float4x4 new_trans)
@@ -41,22 +35,38 @@ void CompTransform::SetTransformation(math::float4x4 new_trans)
 void CompTransform::SetPosition(math::float3 pos)
 {
 	position = pos;
-	transform_matrix.Translate(position);
-	global_transform = inhe_transform*transform_matrix;
+
+	transform_matrix.SetTranslatePart(position);
+	if (parent->GetParent() != nullptr)
+	{
+		CompTransform* tmp_transform = ((CompTransform*)parent->GetParent()->FindComponent(COMP_TYPE::C_TRANSFORM));
+		if (tmp_transform != nullptr)
+			global_transform = transform_matrix*tmp_transform->GetTransformationMatrix();
+	}	
 }
 
 void CompTransform::SetRotation(math::float3 rot)
 {
-	transform_matrix.RotateFromTo(rotation, rot);
+	// TODO need fix
+	quaternion_rotation = math::Quat::FromEulerXYX(rot.x*DEGTORAD, rot.y*DEGTORAD, rot.z*DEGTORAD);
+	transform_matrix = math::float4x4::FromQuat(quaternion_rotation);
+	transform_matrix.SetTranslatePart(position);
 	rotation = rot;
-	global_transform = inhe_transform*transform_matrix;
+
+	if (parent->GetParent() != nullptr)
+	{
+		CompTransform* tmp_transform = ((CompTransform*)parent->GetParent()->FindComponent(COMP_TYPE::C_TRANSFORM));
+		if (tmp_transform != nullptr)
+			global_transform = transform_matrix*tmp_transform->GetTransformationMatrix();
+	}
 }
 
 void CompTransform::SetScale(math::float3 sca)
 {
-	scale = sca;
+	// TODO scale
+	/*scale = sca;
 	transform_matrix.Scale(scale);
-	global_transform = inhe_transform*transform_matrix;
+	global_transform = transform_matrix*inhe_transform;*/
 }
 
 math::float3 CompTransform::GetPosition()const

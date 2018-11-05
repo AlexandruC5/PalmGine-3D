@@ -44,11 +44,15 @@ public:
 	float GetNumNormals()const;
 	float GetNumUvs()const;
 	math::AABB GetAABB()const;
+	// TODO check const
+	uint* GetVertices()const;
 
 	// UI 
 	void BlitComponentInspector();
+
+
 private:
-	Mesh* mesh;
+	Mesh* mesh = nullptr;
 
 public:
 	bool drawable = true;
