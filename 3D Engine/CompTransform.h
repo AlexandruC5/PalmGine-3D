@@ -30,6 +30,8 @@ public:
 	void SetRotationWithQuat(math::Quat rot);
 	void SetScale(math::float3 scale);
 
+	void RecalculateGlobalMatrix();
+
 	// Read
 	math::float3 GetPosition() const;
 	math::float3 GetRotation() const;

@@ -48,6 +48,13 @@ void CompTransform::SetPosition(math::float3 pos)
 	if (parent->GetCompCamera() != nullptr) {
 		parent->GetCompCamera()->frustum.SetPos(position);
 	}
+
+	if (parent->GetNumChilds() > 0) {
+		for (int i = 0; i < parent->GetNumChilds(); ++i) {
+			parent->childs[i]->GetCompTransform()->RecalculateGlobalMatrix();
+		}
+	}
+
 }
 
 void CompTransform::SetRotation(math::float3 rot)
@@ -68,6 +75,13 @@ void CompTransform::SetRotation(math::float3 rot)
 		parent->GetCompCamera()->frustum.front = global_transform.WorldZ();
 		parent->GetCompCamera()->frustum.up = global_transform.WorldY();
 	}
+
+	if (parent->GetNumChilds() > 0) {
+		for (int i = 0; i < parent->GetNumChilds(); ++i) {
+			parent->childs[i]->GetCompTransform()->RecalculateGlobalMatrix();
+		}
+	}
+
 }
 
 void CompTransform::SetRotationWithQuat(Quat rot) {
@@ -86,11 +100,35 @@ void CompTransform::SetRotationWithQuat(Quat rot) {
 		parent->GetCompCamera()->frustum.front = global_transform.WorldZ();
 		parent->GetCompCamera()->frustum.up = global_transform.WorldY();
 	}
+
+	if (parent->GetNumChilds() > 0) {
+		for (int i = 0; i < parent->GetNumChilds(); ++i) {
+			parent->childs[i]->GetCompTransform()->RecalculateGlobalMatrix();
+		}
+	}
+
 }
 
 void CompTransform::SetScale(math::float3 sca)
 {
 	scale = sca;
+	transform_matrix = math::float4x4::FromTRS(position, quaternion_rotation, scale);
+	if (parent->GetParent() != nullptr)
+	{
+		CompTransform* tmp_transform = ((CompTransform*)parent->GetParent()->FindComponent(COMP_TYPE::C_TRANSFORM));
+		if (tmp_transform != nullptr)
+			global_transform = transform_matrix*tmp_transform->GetTransformationMatrix();
+	}
+
+	if (parent->GetNumChilds() > 0) {
+		for (int i = 0; i < parent->GetNumChilds(); ++i) {
+			parent->childs[i]->GetCompTransform()->RecalculateGlobalMatrix();
+		}
+	}
+
+}
+
+void CompTransform::RecalculateGlobalMatrix() {
 	transform_matrix = math::float4x4::FromTRS(position, quaternion_rotation, scale);
 	if (parent->GetParent() != nullptr)
 	{
