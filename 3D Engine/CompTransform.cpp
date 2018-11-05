@@ -26,6 +26,7 @@ void CompTransform::SetTransformation(math::float4x4 new_trans)
 	{
 		CompTransform* tmp_transform = ((CompTransform*)parent->GetParent()->FindComponent(COMP_TYPE::C_TRANSFORM));
 		inhe_transform = transform_matrix.Transposed() * tmp_transform->inhe_transform;
+		global_transform = transform_matrix*tmp_transform->GetTransformationMatrix();
 	}
 	else
 	{
@@ -93,6 +94,15 @@ void CompTransform::SetScale(math::float3 sca)
 	/*scale = sca;
 	transform_matrix.Scale(scale);
 	global_transform = transform_matrix*inhe_transform;*/
+
+	scale = sca;
+	transform_matrix = math::float4x4::FromTRS(position, quaternion_rotation, scale);
+	if (parent->GetParent() != nullptr)
+	{
+		CompTransform* tmp_transform = ((CompTransform*)parent->GetParent()->FindComponent(COMP_TYPE::C_TRANSFORM));
+		if (tmp_transform != nullptr)
+			global_transform = transform_matrix*tmp_transform->GetTransformationMatrix();
+	}
 }
 
 math::float3 CompTransform::GetPosition()const
