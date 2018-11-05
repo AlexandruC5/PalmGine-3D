@@ -216,9 +216,15 @@ void PanelInspector::EnableGuizmos(GameObject* selected_go) {
 		Quat rot = math::Quat::identity;
 		float3 scale = transform->GetScale();
 		matrix.Decompose(pos, rot, scale);
-		transform->SetPosition(pos);
-		transform->SetRotationWithQuat(rot);
-		transform->SetScale(scale);
+		if (mCurrentGizmoOperation == ImGuizmo::TRANSLATE) {
+			transform->SetPosition(pos);
+		}
+		else if (mCurrentGizmoOperation == ImGuizmo::ROTATE) {
+			transform->SetRotationWithQuat(rot);
+		}
+		else if (mCurrentGizmoOperation == ImGuizmo::SCALE) {
+			transform->SetScale(scale);
+		}
 	}
 
 }
