@@ -33,6 +33,7 @@ public:
 	// Read
 	math::float3 GetPosition() const;
 	math::float3 GetRotation() const;
+	math::Quat GetRotationQuat() const;
 	math::float3 GetScale() const;
 
 	math::float4x4 GetTransformationMatrix() const;

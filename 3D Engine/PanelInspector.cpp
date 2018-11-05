@@ -213,7 +213,7 @@ void PanelInspector::EnableGuizmos(GameObject* selected_go) {
 	if (ImGuizmo::IsUsing() && selected_go->IsStatic() == false)
 	{
 		float3 pos = transform->GetPosition();
-		Quat rot = math::Quat::identity;
+		Quat rot = transform->GetRotationQuat();
 		float3 scale = transform->GetScale();
 		matrix.Decompose(pos, rot, scale);
 		if (mCurrentGizmoOperation == ImGuizmo::TRANSLATE) {

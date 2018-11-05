@@ -110,6 +110,11 @@ math::float3 CompTransform::GetRotation() const
 	return rotation;
 }
 
+math::Quat CompTransform::GetRotationQuat() const
+{
+	return quaternion_rotation;
+}
+
 math::float3 CompTransform::GetScale() const
 {
 	return scale;
