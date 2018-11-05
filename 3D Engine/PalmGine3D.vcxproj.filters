@@ -43,6 +43,9 @@
     <Filter Include="Sources\Modules\Scene\Components">
       <UniqueIdentifier>{f47049df-48ed-49eb-8987-b2970200fb50}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Tools\ImGuizmos">
+      <UniqueIdentifier>{2cb6cc34-3273-4d37-af9a-fbf17c48aef0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -475,6 +478,9 @@
     <ClInclude Include="CompCamera.h">
       <Filter>Sources\Modules\Scene\Components</Filter>
     </ClInclude>
+    <ClInclude Include="ImGuizmo-master\ImGuizmo.h">
+      <Filter>Sources\Tools\ImGuizmos</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -687,6 +693,9 @@
     </ClCompile>
     <ClCompile Include="CompCamera.cpp">
       <Filter>Sources\Modules\Scene\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuizmo-master\ImGuizmo.cpp">
+      <Filter>Sources\Tools\ImGuizmos</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
