@@ -247,22 +247,6 @@ uint ModuleImporter::CreateTextureID(const char* texture_path)
 	return texture_id;
 }
 
-void ModuleImporter::CentrateObjectView() const
-{
-	math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
-	box.Enclose((float3*)App->importer->mesh.vertices, App->importer->mesh.num_vertices);
-
-	App->camera->Reference.x = box.CenterPoint().x;
-	App->camera->Reference.y = box.CenterPoint().y;
-	App->camera->Reference.z = box.CenterPoint().z;
-
-	App->camera->Position.x = box.maxPoint.x * 2; // Increase the distance view
-	App->camera->Position.y = box.maxPoint.y * 2;
-	App->camera->Position.z = box.maxPoint.z * 2;
-
-	App->camera->LookAt(App->camera->Reference);
-}
-
 math::AABB ModuleImporter::GetAABB() const
 {
 	math::AABB box(float3(0, 0, 0), float3(0, 0, 0));

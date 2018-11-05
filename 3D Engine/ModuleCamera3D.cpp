@@ -1,6 +1,9 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleCamera3D.h"
+#include "CompMesh.h"
+#include "ModuleSceneIntro.h"
+#include "CompTransform.h"
 
 ModuleCamera3D::ModuleCamera3D(bool start_enabled) : Module(start_enabled)
 {
@@ -133,7 +136,7 @@ update_status ModuleCamera3D::Update(float dt)
 	// Look to object
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 	{
-		App->importer->CentrateObjectView();
+		CentrateObjectView();
 	}
 
 	// Rotate camera with static position
@@ -236,6 +239,30 @@ void ModuleCamera3D::Move(const vec3 &Movement)
 	Reference += Movement;
 
 	CalculateViewMatrix();
+}
+
+void ModuleCamera3D::CentrateObjectView()
+{
+	if (App->scene_intro->selected_gameObject != nullptr)
+	{
+		CompMesh* mesh = App->scene_intro->selected_gameObject->GetCompMesh();
+		CompTransform* transform = App->scene_intro->selected_gameObject->GetCompTransform();
+		if (mesh != nullptr && transform != nullptr)
+		{
+			math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
+			box.Enclose((float3*)mesh->GetVertices(), mesh->GetNumVertices());
+
+			App->camera->Reference.x = box.CenterPoint().x + transform->GetPosition().x;
+			App->camera->Reference.y = box.CenterPoint().y + transform->GetPosition().y;
+			App->camera->Reference.z = box.CenterPoint().z + transform->GetPosition().z;
+
+			App->camera->Position.x = box.maxPoint.x * 2 + transform->GetPosition().x; // Increase the distance view
+			App->camera->Position.y = box.maxPoint.y * 2 + transform->GetPosition().y;
+			App->camera->Position.z = box.maxPoint.z * 2 + transform->GetPosition().z;
+
+			App->camera->LookAt(App->camera->Reference);
+		}
+	}
 }
 
 // -----------------------------------------------------------------

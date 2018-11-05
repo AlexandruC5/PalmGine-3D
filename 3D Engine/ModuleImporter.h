@@ -66,7 +66,6 @@ public:
 	float GetNormalsQuantity() const;
 	float GetUvsQuanity() const;
 	uint GetTextureId() const;
-	void CentrateObjectView() const;
 	math::AABB GetAABB() const;
 
 public:
