@@ -15,6 +15,8 @@ public:
 
 	void Draw() override;
 
+	void EnableGuizmos();
+
 	bool active = true;
 private:
 

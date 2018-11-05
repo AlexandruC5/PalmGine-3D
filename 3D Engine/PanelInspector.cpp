@@ -7,6 +7,7 @@
 #include "CompMesh.h"
 #include "CompMaterial.h"
 #include "CompCamera.h"
+#include "ImGuizmo-master/ImGuizmo.h"
 
 PanelInspector::PanelInspector() : Panel("Inspector")
 {}
@@ -54,6 +55,9 @@ void PanelInspector::Draw()
 		{
 			if (transform != nullptr)
 			{
+				//Enable guizmos
+				EnableGuizmos();
+
 				ImGui::Text("Showing read only information about the mesh transform");
 				ImGui::Separator();
 				//Position
@@ -154,4 +158,8 @@ void PanelInspector::Draw()
 		}
 	}
 	//ImGui::End();
+}
+
+void PanelInspector::EnableGuizmos() {
+	ImGuizmo::Enable(true);
 }

@@ -9,6 +9,7 @@
 #include "imGUI/imgui_impl_sdl_gl3.h"
 #include "Glew/include/glew.h"
 #include "ModuleUI.h"
+#include "ImGuizmo-master/ImGuizmo.h"
 
 ModuleUI::ModuleUI(bool start_enabled)
 {
@@ -122,6 +123,8 @@ update_status ModuleUI::Update(float dt)
 update_status ModuleUI::PreUpdate(float dt)
 {
 	ImGui_ImplSdlGL3_NewFrame(App->window->window);
+	//ImGui::NewFrame();
+	ImGuizmo::BeginFrame();
 	return(UPDATE_CONTINUE);
 }
 
