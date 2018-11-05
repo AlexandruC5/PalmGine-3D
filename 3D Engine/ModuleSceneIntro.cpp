@@ -6,6 +6,8 @@
 #include "CompTransform.h"
 #include "CompMesh.h"
 #include "Component.h"
+#include "ModuleInput.h"
+#include "ImGuizmo-master/ImGuizmo.h"
 
 #pragma comment( lib, "Glew/libx86/glew32.lib" )
 
@@ -82,6 +84,22 @@ update_status ModuleSceneIntro::PreUpdate(float dt)
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
+
+	ImGuizmo::BeginFrame();
+
+	static ImGuizmo::OPERATION mCurrentGizmoOperation(ImGuizmo::ROTATE);
+	static ImGuizmo::MODE mCurrentGizmoMode(ImGuizmo::WORLD);
+
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
+		mCurrentGizmoOperation = ImGuizmo::TRANSLATE;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+		mCurrentGizmoOperation = ImGuizmo::ROTATE;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
+		mCurrentGizmoOperation = ImGuizmo::SCALE;
+	}
+
 	// Render grid
 	if (grid_enabled)
 	{
