@@ -8,6 +8,7 @@
 #include "CompMaterial.h"
 #include "CompCamera.h"
 #include "ImGuizmo-master/ImGuizmo.h"
+#include "ModuleInput.h"
 
 PanelInspector::PanelInspector() : Panel("Inspector")
 {}
@@ -56,31 +57,43 @@ void PanelInspector::Draw()
 			if (transform != nullptr)
 			{
 				//Enable guizmos
-				EnableGuizmos();
+				EnableGuizmos(transform);
 
 				ImGui::Text("Showing read only information about the mesh transform");
 				ImGui::Separator();
 				//Position
 				ImGui::Text("Position:");
-				float3 pos = transform->GetPosition();
-				if (ImGui::DragFloat3("Position", (float*)&pos, 0.5f)) {
-					transform->SetPosition(pos);
+				if (selected_go->IsStatic() == false) {
+					float3 pos = transform->GetPosition();
+					if (ImGui::DragFloat3("Position", (float*)&pos, 0.5f)) {
+						transform->SetPosition(pos);
+					}
 				}
-				//ImGui::Text("[%f]    [%f]    [%f]", transform->GetPosition().x, transform->GetPosition().y, transform->GetPosition().z);
+				else {
+					ImGui::Text("[%f]    [%f]    [%f]", transform->GetPosition().x, transform->GetPosition().y, transform->GetPosition().z);
+				}
 				//Rotation
 				ImGui::Text("Rotation:");
-				float3 rot = transform->GetRotation();
-				if (ImGui::DragFloat3("Rotation", (float*)&rot, -pi, pi)) {
-					transform->SetRotation(rot);
+				if (selected_go->IsStatic() == false) {
+					float3 rot = transform->GetRotation();
+					if (ImGui::DragFloat3("Rotation", (float*)&rot, -pi, pi)) {
+						transform->SetRotation(rot);
+					}
 				}
-				//ImGui::Text("[%f]    [%f]    [%f]", transform->GetRotation().x, transform->GetRotation().y, transform->GetRotation().z);
+				else {
+					ImGui::Text("[%f]    [%f]    [%f]", transform->GetRotation().x, transform->GetRotation().y, transform->GetRotation().z);
+				}
 				//Scale
 				ImGui::Text("Scale:");
-				float3 scale = transform->GetScale();
-				if (ImGui::DragFloat3("Scale", (float*)&scale, 0.05f)) {
-					transform->SetScale(scale);
+				if (selected_go->IsStatic() == false) {
+					float3 scale = transform->GetScale();
+					if (ImGui::DragFloat3("Scale", (float*)&scale, 0.05f)) {
+						transform->SetScale(scale);
+					}
 				}
-				//ImGui::Text("[%f]    [%f]    [%f]", transform->GetScale().x, transform->GetScale().y, transform->GetScale().z);
+				else {
+					ImGui::Text("[%f]    [%f]    [%f]", transform->GetScale().x, transform->GetScale().y, transform->GetScale().z);
+				}
 			}
 			else
 				LOG("ERROR: COMPONENT TRANSFORM IS NULLPTR on GameObject with name %s", selected_go->GetName().c_str());
@@ -160,6 +173,35 @@ void PanelInspector::Draw()
 	//ImGui::End();
 }
 
-void PanelInspector::EnableGuizmos() {
+void PanelInspector::EnableGuizmos(CompTransform* transformation) {
 	ImGuizmo::Enable(true);
+
+
+	static ImGuizmo::OPERATION mCurrentGizmoOperation(ImGuizmo::ROTATE);
+	static ImGuizmo::MODE mCurrentGizmoMode(ImGuizmo::WORLD);
+
+	//Swap between guizmos mode using scancodes or uibuttons
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
+		mCurrentGizmoOperation = ImGuizmo::TRANSLATE;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+		mCurrentGizmoOperation = ImGuizmo::ROTATE;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
+		mCurrentGizmoOperation = ImGuizmo::SCALE;
+	}
+	if (ImGui::RadioButton("Translate", mCurrentGizmoOperation == ImGuizmo::TRANSLATE)){
+		mCurrentGizmoOperation = ImGuizmo::TRANSLATE;
+	}
+	ImGui::SameLine();
+	if (ImGui::RadioButton("Rotate", mCurrentGizmoOperation == ImGuizmo::ROTATE)) {
+		mCurrentGizmoOperation = ImGuizmo::ROTATE;
+	}
+	ImGui::SameLine();
+	if (ImGui::RadioButton("Scale", mCurrentGizmoOperation == ImGuizmo::SCALE)) {
+		mCurrentGizmoOperation = ImGuizmo::SCALE;
+	}
+
+
+
 }

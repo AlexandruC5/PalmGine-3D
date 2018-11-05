@@ -15,7 +15,7 @@ public:
 
 	void Draw() override;
 
-	void EnableGuizmos();
+	void EnableGuizmos(CompTransform* transformation);
 
 	bool active = true;
 private:
