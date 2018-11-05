@@ -34,6 +34,7 @@ public:
 	GameObject* camera = nullptr;
 
 	Quadtree quadtree;
+
 };
 
 #endif // !MODULESCENEINTRO_H
