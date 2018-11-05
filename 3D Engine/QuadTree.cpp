@@ -23,6 +23,7 @@
 //QuadtreeNode
 
 QuadtreeNode::QuadtreeNode(const AABB& box) {
+	this->box = box;
 	parent = nullptr;
 	childs[NE] = nullptr;
 	childs[SE] = nullptr;
@@ -233,7 +234,7 @@ void Quadtree::Clear() {
 void Quadtree::DebugDraw() {
 	if (root!=nullptr) {
 		glBegin(GL_LINES);
-		glLineWidth(3.0f);
+		glLineWidth(5.0f);
 		root->DebugDraw();
 		glEnd();
 	}
