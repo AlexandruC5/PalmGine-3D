@@ -1,4 +1,5 @@
 #include "CompTransform.h"
+#include "CompCamera.h"
 #include "Component.h"
 #include "GameObject.h"
 
@@ -43,6 +44,9 @@ void CompTransform::SetPosition(math::float3 pos)
 		if (tmp_transform != nullptr)
 			global_transform = transform_matrix*tmp_transform->GetTransformationMatrix();
 	}	
+	if (parent->GetCompCamera() != nullptr) {
+		parent->GetCompCamera()->frustum.SetPos(position);
+	}
 }
 
 void CompTransform::SetRotation(math::float3 rot)
@@ -58,6 +62,10 @@ void CompTransform::SetRotation(math::float3 rot)
 		CompTransform* tmp_transform = ((CompTransform*)parent->GetParent()->FindComponent(COMP_TYPE::C_TRANSFORM));
 		if (tmp_transform != nullptr)
 			global_transform = transform_matrix*tmp_transform->GetTransformationMatrix();
+	}
+	if (parent->GetCompCamera() != nullptr) {
+		parent->GetCompCamera()->frustum.front = global_transform.WorldZ();
+		parent->GetCompCamera()->frustum.up = global_transform.WorldY();
 	}
 }
 

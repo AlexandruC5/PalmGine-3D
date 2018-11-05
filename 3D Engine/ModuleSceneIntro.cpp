@@ -114,6 +114,9 @@ void ModuleSceneIntro::SetGameObjectDrawability() {
 					}
 				}
 			}
+			else if(root_gameObjects->childs[i]->GetCompMesh() != nullptr) {
+				root_gameObjects->childs[i]->GetCompMesh()->drawable = true;
+			}
 		}
 	}
 }

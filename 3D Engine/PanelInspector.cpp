@@ -30,23 +30,25 @@ void PanelInspector::Draw()
 			selected_go->SetName(name);
 		}
 
-		//SetStatic
-		bool isStatic = selected_go->IsStatic();
-		if(ImGui::Checkbox("Static", &isStatic)) {
-			selected_go->SetStatic(isStatic);
-			if (isStatic == true) {
-				App->scene_intro->quadtree.Insert(selected_go);
-			}
-			else {
-				App->scene_intro->quadtree.Remove(selected_go);
-			}
-		}
-
 		// Components
 		CompTransform* transform = selected_go->GetCompTransform();
 		CompMesh* mesh = selected_go->GetCompMesh();
 		CompMaterial* texture = selected_go->GetCompMaterial();
 		CompCamera* camera = selected_go->GetCompCamera();
+
+		if (mesh != nullptr) {
+			//SetStatic
+			bool isStatic = selected_go->IsStatic();
+			if (ImGui::Checkbox("Static", &isStatic)) {
+				selected_go->SetStatic(isStatic);
+				if (isStatic == true) {
+					App->scene_intro->quadtree.Insert(selected_go);
+				}
+				else {
+					App->scene_intro->quadtree.Remove(selected_go);
+				}
+			}
+		}
 
 		if (ImGui::CollapsingHeader("Transform"), ImGuiTreeNodeFlags_DefaultOpen) 
 		{
