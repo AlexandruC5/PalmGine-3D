@@ -52,6 +52,9 @@ public:
 	void BlitGameObjectHierarchy();
 	void BlitGameObjectInspector();
 
+	//DebugDrawBox
+	void DebugDrawBox();
+
 private:
 	uint id = 0;
 	std::string name = "Unnamed";

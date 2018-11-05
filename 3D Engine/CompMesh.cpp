@@ -97,8 +97,14 @@ float CompMesh::GetNumUvs()const
 
 math::AABB CompMesh::GetAABB()const
 {
+	CompTransform* transformation = parent->GetCompTransform();
 	math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
 	box.Enclose((float3*)mesh->vertices, mesh->num_vertices);
+
+	OBB boundingBox(box);
+	boundingBox.Transform(transformation->GetTransformationMatrix());
+
+	box = boundingBox.MinimalEnclosingAABB();
 
 	return box;
 }

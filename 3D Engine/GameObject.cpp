@@ -8,6 +8,7 @@
 #include "Application.h"
 #include "ModuleSceneIntro.h"
 #include "Glew/include/glew.h"
+#include "ModuleSceneIntro.h"
 
 
 GameObject::GameObject(GameObject* parent) : parent(parent)
@@ -45,6 +46,11 @@ void GameObject::Update(float dt)
 	{
 		childs[i]->Update(dt);
 	}
+
+	if (App->scene_intro->selected_gameObject == this) {
+		DebugDrawBox();
+	}
+
 }
 
 void GameObject::SetName(const char* new_name)
@@ -224,4 +230,57 @@ bool GameObject::CompAlreadyExists(COMP_TYPE type) const
 		}
 	}
 	return false;
+}
+
+void GameObject::DebugDrawBox() {
+	if (GetCompMesh() != nullptr) {
+		float3 vertices[8];
+		GetCompMesh()->GetAABB().GetCornerPoints(vertices);
+
+		//glDisable(GL_LIGHTING);
+		//glDisable(GL_TEXTURE_2D);
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		//glDisable(GL_CULL_FACE);
+
+		glBegin(GL_QUADS);
+
+		glVertex3fv((GLfloat*)&vertices[1]);
+		glVertex3fv((GLfloat*)&vertices[5]);
+		glVertex3fv((GLfloat*)&vertices[7]);
+		glVertex3fv((GLfloat*)&vertices[3]);
+
+		glVertex3fv((GLfloat*)&vertices[4]);
+		glVertex3fv((GLfloat*)&vertices[0]);
+		glVertex3fv((GLfloat*)&vertices[2]);
+		glVertex3fv((GLfloat*)&vertices[6]);
+
+		glVertex3fv((GLfloat*)&vertices[5]);
+		glVertex3fv((GLfloat*)&vertices[4]);
+		glVertex3fv((GLfloat*)&vertices[6]);
+		glVertex3fv((GLfloat*)&vertices[7]);
+
+		glVertex3fv((GLfloat*)&vertices[0]);
+		glVertex3fv((GLfloat*)&vertices[1]);
+		glVertex3fv((GLfloat*)&vertices[3]);
+		glVertex3fv((GLfloat*)&vertices[2]);
+
+		glVertex3fv((GLfloat*)&vertices[3]);
+		glVertex3fv((GLfloat*)&vertices[7]);
+		glVertex3fv((GLfloat*)&vertices[6]);
+		glVertex3fv((GLfloat*)&vertices[2]);
+
+		glVertex3fv((GLfloat*)&vertices[0]);
+		glVertex3fv((GLfloat*)&vertices[4]);
+		glVertex3fv((GLfloat*)&vertices[5]);
+		glVertex3fv((GLfloat*)&vertices[1]);
+
+		//glEnable(GL_CULL_FACE);
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		//glEnable(GL_TEXTURE_2D);
+		//glEnable(GL_LIGHTING);
+		//glPopMatrix();
+
+		glEnd();
+
+	}
 }
