@@ -234,53 +234,17 @@ bool GameObject::CompAlreadyExists(COMP_TYPE type) const
 
 void GameObject::DebugDrawBox() {
 	if (GetCompMesh() != nullptr) {
-		float3 vertices[8];
-		GetCompMesh()->GetAABB().GetCornerPoints(vertices);
 
-		//glDisable(GL_LIGHTING);
-		//glDisable(GL_TEXTURE_2D);
-		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		//glDisable(GL_CULL_FACE);
+		glBegin(GL_LINES);
+		glLineWidth(5.0f);
+		glColor4f(1.f, 1.f, 0.f, 1.f);
+		
+		for (int i = 0; i < 12; ++i) {
+			glVertex3f(GetCompMesh()->GetAABB().Edge(i).a.x, GetCompMesh()->GetAABB().Edge(i).a.y, GetCompMesh()->GetAABB().Edge(i).a.z);
+			glVertex3f(GetCompMesh()->GetAABB().Edge(i).b.x, GetCompMesh()->GetAABB().Edge(i).b.y, GetCompMesh()->GetAABB().Edge(i).b.z);
+		}
 
-		glBegin(GL_QUADS);
-
-		glVertex3fv((GLfloat*)&vertices[1]);
-		glVertex3fv((GLfloat*)&vertices[5]);
-		glVertex3fv((GLfloat*)&vertices[7]);
-		glVertex3fv((GLfloat*)&vertices[3]);
-
-		glVertex3fv((GLfloat*)&vertices[4]);
-		glVertex3fv((GLfloat*)&vertices[0]);
-		glVertex3fv((GLfloat*)&vertices[2]);
-		glVertex3fv((GLfloat*)&vertices[6]);
-
-		glVertex3fv((GLfloat*)&vertices[5]);
-		glVertex3fv((GLfloat*)&vertices[4]);
-		glVertex3fv((GLfloat*)&vertices[6]);
-		glVertex3fv((GLfloat*)&vertices[7]);
-
-		glVertex3fv((GLfloat*)&vertices[0]);
-		glVertex3fv((GLfloat*)&vertices[1]);
-		glVertex3fv((GLfloat*)&vertices[3]);
-		glVertex3fv((GLfloat*)&vertices[2]);
-
-		glVertex3fv((GLfloat*)&vertices[3]);
-		glVertex3fv((GLfloat*)&vertices[7]);
-		glVertex3fv((GLfloat*)&vertices[6]);
-		glVertex3fv((GLfloat*)&vertices[2]);
-
-		glVertex3fv((GLfloat*)&vertices[0]);
-		glVertex3fv((GLfloat*)&vertices[4]);
-		glVertex3fv((GLfloat*)&vertices[5]);
-		glVertex3fv((GLfloat*)&vertices[1]);
-
-		//glEnable(GL_CULL_FACE);
-		//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		//glEnable(GL_TEXTURE_2D);
-		//glEnable(GL_LIGHTING);
-		//glPopMatrix();
-
+		glColor4f(1.f, 1.f, 1.f, 1.f);
 		glEnd();
-
 	}
 }

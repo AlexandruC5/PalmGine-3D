@@ -27,52 +27,17 @@ void CompCamera::Update(float dt) {
 }
 
 void CompCamera::DebugDraw() {
-	float3 vertices[8];
-	frustum.GetCornerPoints(vertices);
 
-	//glDisable(GL_LIGHTING);
-	//glDisable(GL_TEXTURE_2D);
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	//glDisable(GL_CULL_FACE);
+	glBegin(GL_LINES);
+	glLineWidth(5.0f);
+	glColor4f(1.f, 1.f, 0.f, 1.f);
 
-	glBegin(GL_QUADS);
+	for (int i = 0; i < 12; ++i) {
+		glVertex3f(frustum.Edge(i).a.x, frustum.Edge(i).a.y, frustum.Edge(i).a.z);
+		glVertex3f(frustum.Edge(i).b.x, frustum.Edge(i).b.y, frustum.Edge(i).b.z);
+	}
 
-	glVertex3fv((GLfloat*)&vertices[1]);
-	glVertex3fv((GLfloat*)&vertices[5]);
-	glVertex3fv((GLfloat*)&vertices[7]);
-	glVertex3fv((GLfloat*)&vertices[3]);
-
-	glVertex3fv((GLfloat*)&vertices[4]);
-	glVertex3fv((GLfloat*)&vertices[0]);
-	glVertex3fv((GLfloat*)&vertices[2]);
-	glVertex3fv((GLfloat*)&vertices[6]);
-
-	glVertex3fv((GLfloat*)&vertices[5]);
-	glVertex3fv((GLfloat*)&vertices[4]);
-	glVertex3fv((GLfloat*)&vertices[6]);
-	glVertex3fv((GLfloat*)&vertices[7]);
-
-	glVertex3fv((GLfloat*)&vertices[0]);
-	glVertex3fv((GLfloat*)&vertices[1]);
-	glVertex3fv((GLfloat*)&vertices[3]);
-	glVertex3fv((GLfloat*)&vertices[2]);
-
-	glVertex3fv((GLfloat*)&vertices[3]);
-	glVertex3fv((GLfloat*)&vertices[7]);
-	glVertex3fv((GLfloat*)&vertices[6]);
-	glVertex3fv((GLfloat*)&vertices[2]);
-
-	glVertex3fv((GLfloat*)&vertices[0]);
-	glVertex3fv((GLfloat*)&vertices[4]);
-	glVertex3fv((GLfloat*)&vertices[5]);
-	glVertex3fv((GLfloat*)&vertices[1]);
-
-	//glEnable(GL_CULL_FACE);
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	//glEnable(GL_TEXTURE_2D);
-	//glEnable(GL_LIGHTING);
-	//glPopMatrix();
-
+	glColor4f(1.f, 1.f, 1.f, 1.f);
 	glEnd();
 
 }
