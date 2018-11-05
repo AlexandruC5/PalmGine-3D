@@ -246,3 +246,51 @@ uint ModuleImporter::CreateTextureID(const char* texture_path)
 
 	return texture_id;
 }
+
+math::AABB ModuleImporter::GetAABB() const
+{
+	math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
+	box.Enclose((float3*)App->importer->mesh.vertices, App->importer->mesh.num_vertices);
+
+	return box;
+}
+
+uint ModuleImporter::GetIndicesQuantity() const
+{
+	return(mesh.num_indices);
+}
+
+uint ModuleImporter::GetVerticesQuantity() const
+{
+	return(mesh.num_vertices);
+}
+
+vec3 ModuleImporter::GetPosition() const
+{
+	return(mesh.position);
+}
+
+vec3 ModuleImporter::GetRotation() const
+{
+	return(mesh.rotation);
+}
+
+vec3 ModuleImporter::GetScale() const
+{
+	return(mesh.scale);
+}
+
+float ModuleImporter::GetNormalsQuantity() const
+{
+	return(mesh.num_normals);
+}
+
+float ModuleImporter::GetUvsQuanity() const
+{
+	return(mesh.num_uvs);
+}
+
+uint ModuleImporter::GetTextureId() const
+{
+	return(mesh.texture_id);
+}
