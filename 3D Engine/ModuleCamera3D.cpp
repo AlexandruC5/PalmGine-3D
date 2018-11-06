@@ -93,10 +93,13 @@ update_status ModuleCamera3D::Update(float dt)
 		Position += newPos;
 		Reference += newPos;
 
-		AABB box = App->scene_intro->GetSelectedGO()->GetAABB();
-		Reference.x = box.CenterPoint().x;
-		Reference.y = box.CenterPoint().y;
-		Reference.z = box.CenterPoint().z;
+		if (App->scene_intro->GetSelectedGO() != nullptr)
+		{
+			AABB box = App->scene_intro->GetSelectedGO()->GetAABB();
+			Reference.x = box.CenterPoint().x;
+			Reference.y = box.CenterPoint().y;
+			Reference.z = box.CenterPoint().z;
+		}
 	}
 	else if (App->input->GetMouseZ() == -1)
 	{
@@ -104,10 +107,14 @@ update_status ModuleCamera3D::Update(float dt)
 		Position += newPos;
 		Reference += newPos;
 
-		AABB box = App->scene_intro->GetSelectedGO()->GetAABB();
-		Reference.x = box.CenterPoint().x;
-		Reference.y = box.CenterPoint().y;
-		Reference.z = box.CenterPoint().z;
+		if (App->scene_intro->GetSelectedGO() != nullptr)
+		{
+			AABB box = App->scene_intro->GetSelectedGO()->GetAABB();
+			Reference.x = box.CenterPoint().x;
+			Reference.y = box.CenterPoint().y;
+			Reference.z = box.CenterPoint().z;
+		}
+		
 	}
 
 	// Pan camera
