@@ -89,6 +89,11 @@ bool GameObject::IsStatic() const {
 
 void GameObject::SetStatic(bool isStatic) {
 	static_obj = isStatic;
+	if (GetNumChilds() > 0) {
+		for (int i = 0; i < GetNumChilds(); ++i) {
+			childs[i]->SetStatic(isStatic);
+		}
+	}
 }
 
 const GameObject * GameObject::GetParent() const
