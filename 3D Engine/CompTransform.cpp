@@ -141,6 +141,8 @@ void CompTransform::SetScale(math::float3 sca)
 		if (tmp_transform != nullptr)
 			global_transform = transform_matrix*tmp_transform->GetTransformationMatrix();
 	}
+	else
+		global_transform = transform_matrix;
 
 	if (parent->GetNumChilds() > 0) {
 		for (int i = 0; i < parent->GetNumChilds(); ++i) {

@@ -176,7 +176,6 @@ void PanelInspector::Draw()
 void PanelInspector::EnableGuizmos(GameObject* selected_go) {
 	ImGuizmo::Enable(true);
 
-
 	static ImGuizmo::OPERATION mCurrentGizmoOperation(ImGuizmo::TRANSLATE);
 	static ImGuizmo::MODE mCurrentGizmoMode(ImGuizmo::WORLD);
 

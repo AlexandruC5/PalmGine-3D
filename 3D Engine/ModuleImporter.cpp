@@ -226,9 +226,9 @@ GameObject* ModuleImporter::LoadModel(const aiScene* scene, aiNode* node, const 
 	float3 scale;
 	scale.Set(scaling.x, scaling.y, scaling.z);
 
-	temp_go->GetCompTransform()->SetPosition(pos);
 	temp_go->GetCompTransform()->SetRotation(rot);
 	temp_go->GetCompTransform()->SetScale(scale);
+	temp_go->GetCompTransform()->SetPosition(pos);
 
 	LOG("GameObject position: (%f, %f, %f)", temp_go->GetCompTransform()->GetPosition().x, temp_go->GetCompTransform()->GetPosition().y, temp_go->GetCompTransform()->GetPosition().z);
 	LOG("GameObject rotation: (%f, %f, %f)", temp_go->GetCompTransform()->GetRotation().x, temp_go->GetCompTransform()->GetRotation().y, temp_go->GetCompTransform()->GetRotation().z);
