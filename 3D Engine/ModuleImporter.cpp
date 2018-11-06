@@ -60,9 +60,11 @@ bool ModuleImporter::LoadFBX(const char* path)
 		aiNode* rootNode = scene->mRootNode;
 		for (int i = 0; i < rootNode->mNumChildren; ++i)
 		{
-			App->scene_intro->root_gameObjects->AddChild(LoadModel(scene, rootNode->mChildren[i], path));
+			GameObject* tmp = LoadModel(scene, rootNode->mChildren[i], path);
+			App->scene_intro->root_gameObjects->AddChild(tmp);
+			App->scene_intro->SetSelectedGameObject(tmp);
 		}
-
+		
 		// ---- Release resources ----
 		aiReleaseImport(scene);
 		LOG("---- FBX LOADED WITH SUCCESS ----");
@@ -245,52 +247,4 @@ uint ModuleImporter::CreateTextureID(const char* texture_path)
 	texture_id = ilutGLBindTexImage();
 
 	return texture_id;
-}
-
-math::AABB ModuleImporter::GetAABB() const
-{
-	math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
-	box.Enclose((float3*)App->importer->mesh.vertices, App->importer->mesh.num_vertices);
-
-	return box;
-}
-
-uint ModuleImporter::GetIndicesQuantity() const
-{
-	return(mesh.num_indices);
-}
-
-uint ModuleImporter::GetVerticesQuantity() const
-{
-	return(mesh.num_vertices);
-}
-
-float3 ModuleImporter::GetPosition() const
-{
-	return(mesh.position);
-}
-
-float3 ModuleImporter::GetRotation() const
-{
-	return(mesh.rotation);
-}
-
-float3 ModuleImporter::GetScale() const
-{
-	return(mesh.scale);
-}
-
-float ModuleImporter::GetNormalsQuantity() const
-{
-	return(mesh.num_normals);
-}
-
-float ModuleImporter::GetUvsQuanity() const
-{
-	return(mesh.num_uvs);
-}
-
-uint ModuleImporter::GetTextureId() const
-{
-	return(mesh.texture_id);
 }
