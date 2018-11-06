@@ -55,7 +55,7 @@ public:
 
 	//DebugDrawBox
 	void DebugDrawBox();
-	math::AABB GetAABB()const;
+	math::AABB GetAABB();
 
 private:
 	uint id = 0;

@@ -109,7 +109,7 @@ void ModuleSceneIntro::SetGameObjectDrawability() {
 			for (int i = 0; i < root_gameObjects->GetNumChilds(); ++i) {
 				if (root_gameObjects->childs[i]->IsActive() == true && root_gameObjects->childs[i]->IsStatic() == true) {
 					if (root_gameObjects->childs[i]->GetCompMesh() != nullptr) {
-						if (camera->GetCompCamera()->frustum.Intersects(root_gameObjects->childs[i]->GetCompMesh()->GetAABB())) {
+						if (camera->GetCompCamera()->frustum.Intersects(root_gameObjects->childs[i]->GetAABB())) {
 							root_gameObjects->childs[i]->GetCompMesh()->drawable = true;
 						}
 						else {

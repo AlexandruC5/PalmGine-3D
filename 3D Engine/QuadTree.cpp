@@ -1,5 +1,4 @@
 #include "GameObject.h"
-#include "CompMesh.h"
 #include "QuadTree.h"
 
 #include "Devil/include/il.h"
@@ -107,7 +106,7 @@ void QuadtreeNode::RedistributeChilds() {
 	{
 		GameObject* go = *it;
 
-		OBB b = go->GetCompMesh()->GetAABB();
+		OBB b = go->GetAABB();
 		AABB new_box(b.MinimalEnclosingAABB());
 
 		// Now distribute this new gameobject onto the childs
@@ -205,7 +204,7 @@ void Quadtree::SetBoundries(const AABB& box) {
 
 void Quadtree::Insert(GameObject* go) {
 	if (root != nullptr) {
-		if (go->GetCompMesh()->GetAABB().Intersects(root->box)) {
+		if (go->GetAABB().Intersects(root->box)) {
 			root->Insert(go);
 		}
 	}
@@ -256,7 +255,7 @@ void QuadtreeNode::CollectIntersections(std::map<float, GameObject*>& objects, c
 		float hitNear;
 		float hitFar;
 		for (std::list<GameObject*>::const_iterator iterator = this->objects.begin(); iterator != this->objects.end(); ++iterator) {
-			if (primitive.Intersects((*iterator)->GetCompMesh()->GetAABB(), hitNear, hitFar)) {
+			if (primitive.Intersects((*iterator)->GetAABB(), hitNear, hitFar)) {
 				objects[hitNear] = *iterator;
 			}
 		}
@@ -273,7 +272,7 @@ template<typename TYPE>
 void QuadtreeNode::CollectIntersections(std::vector<GameObject*>& objects, const TYPE& primitive) const {
 	if (primitive.Intersects(box) == true) {
 		for (std::list<GameObject*>::const_iterator iterator = this->objects.begin(); iterator != this->objects.end(); ++iterator) {
-			if (primitive.Intersects((*iterator)->GetCompMesh()->GetAABB())) {
+			if (primitive.Intersects((*iterator)->GetAABB())) {
 				objects.push_back(*iterator);
 			}
 		}
