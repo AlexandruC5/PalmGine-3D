@@ -256,9 +256,9 @@ void ModuleCamera3D::CentrateObjectView()
 			App->camera->Reference.y = box.CenterPoint().y + transform->GetPosition().y;
 			App->camera->Reference.z = box.CenterPoint().z + transform->GetPosition().z;
 
-			App->camera->Position.x = box.maxPoint.x * 2 + transform->GetPosition().x; // Increase the distance view
-			App->camera->Position.y = box.maxPoint.y * 2 + transform->GetPosition().y;
-			App->camera->Position.z = box.maxPoint.z * 2 + transform->GetPosition().z;
+			App->camera->Position.x = (box.maxPoint.x * transform->GetScale().x) + transform->GetPosition().x; // Increase the distance view
+			App->camera->Position.y = (box.maxPoint.y * transform->GetScale().y) + transform->GetPosition().y;
+			App->camera->Position.z = (box.maxPoint.z * transform->GetScale().z) + transform->GetPosition().z;
 
 			App->camera->LookAt(App->camera->Reference);
 		}
