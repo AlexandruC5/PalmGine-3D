@@ -17,7 +17,7 @@
 -----------
 */
 
-#define QUADTREE_MAX_ITEMS 8
+#define QUADTREE_MAX_ITEMS 1
 #define QUADTREE_MIN_SIZE 10.0f 
 
 //QuadtreeNode
@@ -106,33 +106,27 @@ void QuadtreeNode::CreateChilds() {
 
 //Distribute objects in actual node to new childs
 void QuadtreeNode::RedistributeChilds() {
-	for (std::list<GameObject*>::iterator iterator = objectsInNode.begin(); iterator != objectsInNode.end();  ++iterator) {
-		AABB newBox = (*iterator)->GetCompMesh()->GetAABB();
+	// Now redistribute ALL objects
+	for (std::list<GameObject*>::iterator it = objectsInNode.begin(); it != objectsInNode.end();)
+	{
+		GameObject* go = *it;
 
-		//Redistribute objects in childs
-		bool isIntersecting[4]; //1 intersection for child
-		//Check intersections between child's box and new box
-		for (int i = 0; i < 4; ++i) {
-			isIntersecting[i] = childs[i]->box.Intersects(newBox);
+		OBB b = go->GetCompMesh()->GetAABB();
+		AABB new_box(b.MinimalEnclosingAABB());
+
+		// Now distribute this new gameobject onto the childs
+		bool intersects[4];
+		for (int i = 0; i < 4; ++i)
+			intersects[i] = childs[i]->box.Intersects(new_box);
+
+		if (intersects[0] && intersects[1] && intersects[2] && intersects[3])
+			++it; // if it hits all childs, better to just keep it here
+		else
+		{
+			it = objectsInNode.erase(it);
+			for (int i = 0; i < 4; ++i)
+				if (intersects[i]) childs[i]->Insert(go);
 		}
-
-		if (isIntersecting[NE] == true && isIntersecting[SE] == true && isIntersecting[SW] == true && isIntersecting[NW] == true) {
-			++iterator;//it hits all so we don't move it and we pass to next gameobject
-		}
-		else {
-			//move it
-			GameObject* gameObjectToMove = *iterator;
-			objectsInNode.erase(iterator);//Remove
-			for (int i = 0; i < 4; ++i) {
-				if (isIntersecting[i] == true) {
-					childs[i]->Insert(gameObjectToMove);//Place it in the child's box it intersects first
-				}
-			}
-
-		}
-
-		
-
 	}
 }
 
