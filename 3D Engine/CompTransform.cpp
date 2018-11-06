@@ -61,11 +61,21 @@ void CompTransform::SetRotation(math::float3 rot)
 {
 	// TODO need fix
 	quaternion_rotation = math::Quat::FromEulerXYZ(rot.x*DEGTORAD, rot.y*DEGTORAD, rot.z*DEGTORAD);
-	//transform_matrix = math::float4x4::FromQuat(quaternion_rotation);
-	//transform_matrix.SetRotatePart(quaternion_rotation.ToFloat3x3());
-	//transform_matrix.SetTranslatePart(position);
-	transform_matrix = float4x4::FromTRS(position, quaternion_rotation, scale);
-	rotation = rot;
+	if (parent->GetCompCamera() == nullptr) {
+		//transform_matrix = math::float4x4::FromQuat(quaternion_rotation);
+		//transform_matrix.SetRotatePart(quaternion_rotation.ToFloat3x3());
+		//transform_matrix.SetTranslatePart(position);
+		transform_matrix = float4x4::FromTRS(position, quaternion_rotation, scale);
+		rotation = rot;
+	}
+	else {
+		transform_matrix = math::float4x4::FromQuat(quaternion_rotation);
+		//transform_matrix.SetRotatePart(quaternion_rotation.ToFloat3x3());
+		//transform_matrix.SetTranslatePart(position);
+		//transform_matrix = float4x4::FromTRS(position, quaternion_rotation, scale);
+		rotation = rot;
+	}
+
 
 	if (parent->GetParent() != nullptr)
 	{
@@ -88,9 +98,18 @@ void CompTransform::SetRotation(math::float3 rot)
 
 void CompTransform::SetRotationWithQuat(Quat rot) {
 	quaternion_rotation = rot;
-	//transform_matrix = math::float4x4::FromQuat(quaternion_rotation);
-	//transform_matrix.SetTranslatePart(position);
-	transform_matrix = float4x4::FromTRS(position, quaternion_rotation, scale);
+	if (parent->GetCompCamera() == nullptr) {
+		//transform_matrix = math::float4x4::FromQuat(quaternion_rotation);
+		//transform_matrix.SetRotatePart(quaternion_rotation.ToFloat3x3());
+		//transform_matrix.SetTranslatePart(position);
+		transform_matrix = float4x4::FromTRS(position, quaternion_rotation, scale);
+	}
+	else {
+		transform_matrix = math::float4x4::FromQuat(quaternion_rotation);
+		//transform_matrix.SetRotatePart(quaternion_rotation.ToFloat3x3());
+		transform_matrix.SetTranslatePart(position);
+		//transform_matrix = float4x4::FromTRS(position, quaternion_rotation, scale);
+	}
 	rotation = rot.ToEulerXYX();
 
 	if (parent->GetParent() != nullptr)
