@@ -55,6 +55,7 @@ bool ModuleImporter::LoadFBX(const char* path)
 	
 	const aiScene* scene = aiImportFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
 
+	ImportFBX(scene, path, "temporal :(");
 	if (scene != nullptr && scene->HasMeshes())
 	{
 		aiNode* rootNode = scene->mRootNode;
@@ -247,4 +248,133 @@ uint ModuleImporter::CreateTextureID(const char* texture_path)
 	texture_id = ilutGLBindTexImage();
 
 	return texture_id;
+}
+
+void ModuleImporter::ImportFBX(const aiScene * scene, const char * path, const char * name)
+{
+	if (scene != nullptr && scene->HasMeshes())
+	{
+		CreateBinary(scene, path, name);
+	}
+}
+
+void ModuleImporter::CreateBinary(const aiScene * scene, const char * path, const char * name)
+{
+	//Get scene size to alloc memory
+	uint size = BinarySize(scene);
+	char* data = nullptr;
+	data = new char[size];
+
+	char* cursor = data;
+
+}
+
+void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const char * name, const aiScene* scene, const char*path)
+{
+	aiMesh* mesh;
+	uint bytes = 0;
+	char mesh_name[50] = "";
+	char mesh_path[50] = "";
+	char texture_name[50] = "";
+	aiVector3D translation = { 0,0,0 };
+	aiVector3D scale = { 1,1,1 };
+	aiQuaternion rotation = { 0,0,0,0 };
+	int num_mesh = 0;
+
+	bytes = sizeof(uint);
+	memcpy(cursor[0], &node->mNumMeshes, bytes);
+	cursor[0] += bytes;
+	do
+	{
+		if (node->mNumMeshes > 0)
+		{
+			mesh = scene->mMeshes[node->mMeshes[num_mesh]];
+		}
+
+		uint range[4] = { mesh->mNumVertices, mesh->mNumFaces*3,mesh->HasTextureCoords(0),mesh->HasNormals()};
+
+		for (uint i = 0; i < mesh->mNumFaces; i++)
+		{
+			if (mesh->mFaces[i].mNumIndices != 3)
+			{
+				LOG("WARNING, geometry face with != 3 faces");
+				range[i] = 0;
+			}
+		}
+		bytes = sizeof(range);
+		memcpy(cursor[0], &range, bytes);
+		cursor[0] += bytes;
+
+		//TOCHECK
+		//Copy mesh name
+		bytes = sizeof(node->mName);
+		memcpy(mesh_name, &node->mName, bytes);
+		memcpy(cursor[0], &mesh_name, bytes);
+		cursor[0] += bytes;
+		//Copy mesh path
+		bytes = sizeof(path);
+		memcpy(cursor[0], &path, bytes);
+		cursor[0] += bytes;
+		//Copy texture name
+		bytes = sizeof(node->mMeshes);
+		memcpy(cursor[0], &path, bytes);
+		cursor[0] += bytes;
+
+		node->mTransformation.Decompose(scale, rotation, translation);
+		//Copy translation
+		bytes = sizeof(aiVector3D);
+		memcpy(cursor[0], &translation, bytes);
+		cursor[0] += bytes;
+		//Copy rotaiton
+		bytes = sizeof(aiQuaternion);
+		memcpy(cursor[0], &rotation, bytes);
+		cursor[0] += bytes;
+		//Copy scale
+		bytes = sizeof(aiVector3D);
+		memcpy(cursor[0], &scale, bytes);
+		cursor[0] += bytes;
+		
+		
+		num_mesh++;
+	} while (num_mesh < node->mNumMeshes);
+
+}
+
+uint ModuleImporter::BinarySize(const aiScene * scene)
+{
+	uint size = 0;
+	aiNode* root_node = scene->mRootNode;
+
+	return size = GetRecursiveSize(root_node, scene);
+}
+
+uint ModuleImporter::GetRecursiveSize(const aiNode * root_node, const aiScene * scene)
+{
+	uint size = 0;
+	uint iterator = 0;
+
+	do
+	{
+		uint range[4] = { 0,0,0,0 };
+		size += sizeof(range);
+
+		//Position and rotation
+		size += sizeof(aiVector3D) * 2 + sizeof(aiQuaternion);
+		//Mesh name, mesh path, texture path 
+		size += sizeof(char) * 50;
+		size += sizeof(char) * 50;
+		size += sizeof(char) * 50;
+		//Number of childs
+		size += sizeof(uint);
+
+		for (int i = 0; i < root_node->mNumChildren; i++)
+		{
+			size += GetRecursiveSize(root_node->mChildren[i], scene);
+		}
+		iterator++;
+	} while (iterator < root_node->mNumMeshes);
+	
+	size += sizeof(uint);
+	
+	return size;
 }

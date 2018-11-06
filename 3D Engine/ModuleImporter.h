@@ -25,11 +25,18 @@ public:
 	bool LoadFBX(const char* path);
 	GameObject* LoadModel(const aiScene* scene, aiNode* node, const char* path);
 	uint CreateTextureID(const char * texture_path);
-	uint GetTextureId() const;
 
+	// Binary
+	void ImportFBX(const aiScene* scene, const char* path, const char* name);
+	void CreateBinary(const aiScene* scene, const char* path, const char* name);
+	void WriteBinaryRecursive(aiNode* node, char** cursor, const char* name, const aiScene* scene, const char*path);
+	//Size
+	uint BinarySize(const aiScene* scene);
+	uint GetRecursiveSize(const aiNode* root_node, const aiScene* scene);
+	
 public:
+	// TODO delete this
 	std::string path;
-	//std::string file_name;
 };
 
 #endif // !MODULEIMPORTER_H
