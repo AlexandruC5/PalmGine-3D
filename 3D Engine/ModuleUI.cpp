@@ -39,11 +39,16 @@ update_status ModuleUI::Update(float dt)
 {
 	// IMGUI CODE
 	static bool show_test_window = false;
+	static bool show_style_editor = false;
 
 	// Test window
 	if (show_test_window)
 	{
 		ImGui::ShowTestWindow();
+	}
+
+	if (show_style_editor) {
+		ImGui::ShowStyleEditor();
 	}
 
 	// Console
@@ -102,6 +107,7 @@ update_status ModuleUI::Update(float dt)
 				else
 					show_test_window = true;
 			}
+			ImGui::Checkbox("StyleEditor", &show_style_editor);
 			ImGui::Checkbox("Inspector/Config", &configActive);
 			ImGui::Checkbox("Console", &console->active);
 			ImGui::Checkbox("GameObject Hierarchy", &goHierarchy->active);
