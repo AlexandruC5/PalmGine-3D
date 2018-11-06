@@ -253,3 +253,11 @@ void GameObject::DebugDrawBox() {
 		glEnd();
 	}
 }
+
+math::AABB GameObject::GetAABB() const
+{
+	CompMesh* tmp_mesh = GetCompMesh();
+	if (tmp_mesh != nullptr)
+		return tmp_mesh->GetAABB();
+	LOG("ERROR: Game Object doesn't have mesh. Error getting the AABB on GameObject with name: %s", name.c_str());
+}
