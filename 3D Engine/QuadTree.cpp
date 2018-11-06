@@ -17,7 +17,7 @@
 -----------
 */
 
-#define QUADTREE_MAX_ITEMS 1
+#define QUADTREE_MAX_ITEMS 8
 #define QUADTREE_MIN_SIZE 10.0f 
 
 //QuadtreeNode
@@ -61,13 +61,9 @@ void QuadtreeNode::Insert(GameObject* go) {
 }
 
 void QuadtreeNode::Remove(GameObject* go) {
-	std::list<GameObject*>::iterator iterator = objectsInNode.begin();
-	while (iterator != objectsInNode.end()) {
-		if ((*iterator) != go) {
-			++iterator;
-		}
-		objectsInNode.erase(iterator);
-	}
+	std::list<GameObject*>::iterator it = std::find(objectsInNode.begin(), objectsInNode.end(), go);
+	if (it != objectsInNode.end())
+		objectsInNode.erase(it);
 
 	if (IsLeaf() == false) {
 		for (int i = 0; i < 4; ++i) {
