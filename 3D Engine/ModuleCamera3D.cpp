@@ -252,13 +252,14 @@ void ModuleCamera3D::CentrateObjectView()
 			math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
 			box.Enclose((float3*)mesh->GetVertices(), mesh->GetNumVertices());
 
-			App->camera->Reference.x = box.CenterPoint().x + transform->GetPosition().x;
-			App->camera->Reference.y = box.CenterPoint().y + transform->GetPosition().y;
-			App->camera->Reference.z = box.CenterPoint().z + transform->GetPosition().z;
+			App->camera->Reference.x = box.CenterPoint().x* transform->GetScale().x + transform->GetPosition().x;
+			// Divide Y reference because the console covers the geometry. This way we can see the GameObject.
+			App->camera->Reference.y = (box.CenterPoint().y* transform->GetScale().y) / 2 + transform->GetPosition().y;
+			App->camera->Reference.z = box.CenterPoint().z* transform->GetScale().z + transform->GetPosition().z;
 
-			App->camera->Position.x = (box.maxPoint.x * transform->GetScale().x) + transform->GetPosition().x; // Increase the distance view
-			App->camera->Position.y = (box.maxPoint.y * transform->GetScale().y) + transform->GetPosition().y;
-			App->camera->Position.z = (box.maxPoint.z * transform->GetScale().z) + transform->GetPosition().z;
+			App->camera->Position.x = (box.maxPoint.x * transform->GetScale().x)*2 + transform->GetPosition().x;
+			App->camera->Position.y = (box.maxPoint.y * transform->GetScale().y)*2 + transform->GetPosition().y;
+			App->camera->Position.z = (box.maxPoint.z * transform->GetScale().z)*2 + transform->GetPosition().z;
 
 			App->camera->LookAt(App->camera->Reference);
 		}
