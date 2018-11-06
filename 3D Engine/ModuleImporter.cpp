@@ -265,17 +265,17 @@ uint ModuleImporter::GetVerticesQuantity() const
 	return(mesh.num_vertices);
 }
 
-vec3 ModuleImporter::GetPosition() const
+float3 ModuleImporter::GetPosition() const
 {
 	return(mesh.position);
 }
 
-vec3 ModuleImporter::GetRotation() const
+float3 ModuleImporter::GetRotation() const
 {
 	return(mesh.rotation);
 }
 
-vec3 ModuleImporter::GetScale() const
+float3 ModuleImporter::GetScale() const
 {
 	return(mesh.scale);
 }

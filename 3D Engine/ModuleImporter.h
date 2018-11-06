@@ -3,7 +3,6 @@
 
 #include "Module.h"
 #include "Globals.h"
-#include "glmath.h"
 #include <vector>
 #include "Glew/include/glew.h"
 #include "MathGeoLib/Geometry/AABB.h"
@@ -35,9 +34,9 @@ struct ModelConfig
 	uint texture_id = 0;
 
 	//Transformation
-	vec3 position;
-	vec3 rotation;
-	vec3 scale;
+	float3 position;
+	float3 rotation;
+	float3 scale;
 };
 
 class ModuleImporter : public Module
@@ -59,9 +58,9 @@ public:
 	uint GetIndicesQuantity() const;
 	uint GetVerticesQuantity() const;
 
-	vec3 GetPosition() const;
-	vec3 GetRotation() const;
-	vec3 GetScale() const;
+	float3 GetPosition() const;
+	float3 GetRotation() const;
+	float3 GetScale() const;
 
 	float GetNormalsQuantity() const;
 	float GetUvsQuanity() const;
