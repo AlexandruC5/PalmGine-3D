@@ -55,7 +55,13 @@ bool ModuleImporter::LoadFBX(const char* path)
 	
 	const aiScene* scene = aiImportFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
 
-	ImportFBX(scene, path, "temporal");
+	std::string binary_path = ImportFBX(scene, path, "temporal");
+
+	char* data = LoadData(binary_path.c_str());
+	char* cursor = data;
+
+	LoadRecursiveHierarchy(&cursor, App->scene_intro->root_gameObjects);
+
 	if (scene != nullptr && scene->HasMeshes())
 	{
 		aiNode* rootNode = scene->mRootNode;
@@ -239,6 +245,7 @@ GameObject* ModuleImporter::LoadModel(const aiScene* scene, aiNode* node, const 
 
 uint ModuleImporter::CreateTextureID(const char* texture_path)
 {
+	//DELETE THIS PLS
 	ILuint id;
 	uint texture_id;
 	ilGenImages(1, &id);
@@ -250,16 +257,17 @@ uint ModuleImporter::CreateTextureID(const char* texture_path)
 	return texture_id;
 }
 
-void ModuleImporter::ImportFBX(const aiScene * scene, const char * path, const char * name)
+std::string ModuleImporter::ImportFBX(const aiScene * scene, const char * path, const char * name)
 {
 	if (scene != nullptr && scene->HasMeshes())
 	{
-		CreateBinary(scene, path, name);
+		return CreateBinary(scene, path, name);
 	}
 }
 
-void ModuleImporter::CreateBinary(const aiScene * scene, const char * path, const char * name)
+std::string ModuleImporter::CreateBinary(const aiScene * scene, const char * path, const char * name)
 {
+	std::string binary_path;
 	//Get scene size to alloc memory
 	uint size = BinarySize(scene);
 	char* data = nullptr;
@@ -269,11 +277,13 @@ void ModuleImporter::CreateBinary(const aiScene * scene, const char * path, cons
 	//Write in memory
 	WriteBinaryRecursive(scene->mRootNode, &cursor, name, scene, path);
 	//Write the file
-	WriteFileInMemory(data, name, path, size, ".hierarchy");
+	binary_path = WriteFileInMemory(data, name, path, size, ".hierarchy");
 	//Create bynary meshes
 	CreateBinaryMesh(scene, path);
 	//Free the data
 	RELEASE_ARRAY(data);
+
+	return binary_path;
 }
 
 void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const char * name, const aiScene* scene, const char* path)
@@ -320,8 +330,6 @@ void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const c
 		memcpy(cursor[0], &range, bytes);
 		cursor[0] += bytes;
 
-	
-		//TOCHECK
 		//Copy mesh name
 		bytes = sizeof(char)*64;
 		strcpy(mesh_name, node->mName.C_Str());
@@ -367,7 +375,7 @@ void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const c
 	}
 }
 
-void ModuleImporter::WriteFileInMemory(char * data, const char * name, const char * path, uint size, char* extension_name)
+std::string ModuleImporter::WriteFileInMemory(char * data, const char * name, const char * path, uint size, char* extension_name)
 {
 	std::string bin_path;
 	FILE * pFile;
@@ -380,6 +388,8 @@ void ModuleImporter::WriteFileInMemory(char * data, const char * name, const cha
 		fwrite(data, sizeof(char), size, pFile);
 		fclose(pFile);
 	}
+	
+	return bin_path;
 }
 
 void ModuleImporter::CreateBinaryMesh(const aiScene * scene, const char * path)
@@ -520,4 +530,113 @@ uint ModuleImporter::GetRecursiveSize(const aiNode * root_node, const aiScene * 
 	size += sizeof(uint);
 	
 	return size;
+}
+
+GameObject* ModuleImporter::ReadBinaryHierarchy(char** cursor, uint* num_childs, GameObject* parent)
+{
+
+	uint bytes = 0;
+	uint range[4] = { 0, 0, 0, 0 };
+	int num_meshes = 0;
+	uint iterator = 0;
+
+	GameObject* go;
+	//Iterate all meshes and read them
+	bytes = sizeof(uint);
+	memcpy(&num_meshes, cursor[0], bytes);
+	cursor[0] += bytes;
+	do
+	{
+		//Variables
+		char* name = new char[64];
+		char* path_name = new char[128];
+		char* texture_name = new char[64];
+		aiVector3D translation = { 0,0,0 };
+		aiVector3D scale = { 0,0,0 };
+		aiQuaternion rotation = { 0,0,0,0 };		
+
+		//Range
+		bytes = sizeof(range);
+		memcpy(range, cursor[0], bytes);
+		cursor[0] += bytes;
+
+		//Copy mesh name
+		bytes = sizeof(char) * 64;
+		memcpy(name, cursor[0], bytes);
+		cursor[0] += bytes;
+		//Copy mesh path
+		bytes = sizeof(char) * 128;
+		memcpy(path_name, cursor[0], bytes);
+		cursor[0] += bytes;
+		//Copy texture name
+		bytes = sizeof(char) * 64;
+		memcpy(texture_name, cursor[0], bytes);
+		cursor[0] += bytes;
+
+		//Copy translation
+		bytes = sizeof(aiVector3D);
+		memcpy(&translation, cursor[0], bytes);
+		cursor[0] += bytes;
+		//Copy rotation
+		bytes = sizeof(aiQuaternion);
+		memcpy(&rotation, cursor[0], bytes);
+		cursor[0] += bytes;
+		//Copy scale
+		bytes = sizeof(aiVector3D);
+		memcpy(&scale, cursor[0], bytes);
+		cursor[0] += bytes;
+
+		//Num childs
+		bytes = sizeof(uint);
+		memcpy(num_childs, cursor[0], bytes);
+		cursor[0] += bytes;
+
+
+		go = new GameObject(parent);
+		go->SetName(name);
+
+		iterator++;
+	} while (iterator < num_meshes);
+	return go;
+}
+
+char * ModuleImporter::LoadData(const char * path)
+{
+	FILE * pFile;
+	long lSize;
+	char * buffer;
+	size_t result;
+
+	pFile = fopen(path, "rb");
+	if (pFile == NULL) { fputs("File error", stderr); exit(1); }
+
+	// obtain file size:
+	fseek(pFile, 0, SEEK_END);
+	lSize = ftell(pFile);
+	rewind(pFile);
+
+	// allocate memory to contain the whole file:
+	buffer = new char[lSize];// (char*)malloc(sizeof(char)*lSize);
+	if (buffer == NULL) { fputs("Memory error", stderr); exit(2); }
+
+	// copy the file into the buffer:
+	result = fread(buffer, 1, lSize, pFile);
+	if (result != lSize) { fputs("Reading error", stderr); exit(3); }
+
+	fclose(pFile);
+
+	return buffer;
+}
+
+void ModuleImporter::LoadRecursiveHierarchy(char** cursor, GameObject* parent)
+{
+	uint num_childs = 0;
+	GameObject* go = ReadBinaryHierarchy(cursor, &num_childs, parent);
+
+	for (int i = 0; i < num_childs; i++)
+	{
+		LoadRecursiveHierarchy(cursor, go);
+
+	}
+
 }

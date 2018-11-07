@@ -15,9 +15,7 @@ GameObject::GameObject(GameObject* parent) : parent(parent)
 {
 	this->AddEmptyComponent(COMP_TYPE::C_TRANSFORM);
 	if (parent != nullptr)
-	{
 		parent->childs.push_back(this);
-	}
 }
 
 GameObject::~GameObject()
