@@ -143,13 +143,6 @@ void CompTransform::SetScale(math::float3 sca)
 	}
 	else
 		global_transform = transform_matrix;
-
-	if (parent->GetNumChilds() > 0) {
-		for (int i = 0; i < parent->GetNumChilds(); ++i) {
-			parent->childs[i]->GetCompTransform()->RecalculateGlobalMatrix();
-		}
-	}
-
 }
 
 void CompTransform::RecalculateGlobalMatrix() {
@@ -159,6 +152,12 @@ void CompTransform::RecalculateGlobalMatrix() {
 		CompTransform* tmp_transform = ((CompTransform*)parent->GetParent()->FindComponent(COMP_TYPE::C_TRANSFORM));
 		if (tmp_transform != nullptr)
 			global_transform = transform_matrix*tmp_transform->GetTransformationMatrix();
+	}
+
+	if (parent->GetNumChilds() > 0) {
+		for (int i = 0; i < parent->GetNumChilds(); ++i) {
+			parent->childs[i]->GetCompTransform()->RecalculateGlobalMatrix();
+		}
 	}
 
 	if (parent->GetNumChilds() > 0) {
