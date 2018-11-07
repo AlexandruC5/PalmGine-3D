@@ -230,6 +230,7 @@
     <ClCompile Include="CompTransform.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="glmath.cpp" />
+    <ClCompile Include="Globals.cpp" />
     <ClCompile Include="ImGuizmo-master\ImGuizmo.cpp" />
     <ClCompile Include="imGUI\imgui.cpp" />
     <ClCompile Include="imGUI\imgui_demo.cpp" />

@@ -697,6 +697,9 @@
     <ClCompile Include="ImGuizmo-master\ImGuizmo.cpp">
       <Filter>Sources\Tools\ImGuizmos</Filter>
     </ClCompile>
+    <ClCompile Include="Globals.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="MathGeoLib\Geometry\KDTree.inl">
