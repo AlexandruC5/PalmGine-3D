@@ -30,8 +30,9 @@ public:
 	void ImportFBX(const aiScene* scene, const char* path, const char* name);
 	void CreateBinary(const aiScene* scene, const char* path, const char* name);
 	void WriteBinaryRecursive(aiNode* node, char** cursor, const char* name, const aiScene* scene, const char*path);
-	void WriteFileInMemory(char* data, const char* name, const char* path, uint size);
-	//Size
+	void WriteFileInMemory(char* data, const char* name, const char* path, uint size, char* extension_name);
+	void CreateBinaryMesh(const aiScene* scene, const char* path);
+	// Binary Size
 	uint BinarySize(const aiScene* scene);
 	uint GetRecursiveSize(const aiNode* root_node, const aiScene* scene);
 	

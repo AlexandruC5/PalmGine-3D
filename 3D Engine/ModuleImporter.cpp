@@ -264,13 +264,16 @@ void ModuleImporter::CreateBinary(const aiScene * scene, const char * path, cons
 	uint size = BinarySize(scene);
 	char* data = nullptr;
 	data = new char[size];
-
+	//Create the cursor, wich points to the memory data 
 	char* cursor = data;
+	//Write in memory
 	WriteBinaryRecursive(scene->mRootNode, &cursor, name, scene, path);
-	int* test = new int();
-	WriteFileInMemory(data, name, path, size);
-
-	delete[] data;
+	//Write the file
+	WriteFileInMemory(data, name, path, size, ".hierarchy");
+	//Create bynary meshes
+	CreateBinaryMesh(scene, path);
+	//Free the data
+	RELEASE_ARRAY(data);
 }
 
 void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const char * name, const aiScene* scene, const char* path)
@@ -364,18 +367,119 @@ void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const c
 	}
 }
 
-void ModuleImporter::WriteFileInMemory(char * data, const char * name, const char * path, uint size)
+void ModuleImporter::WriteFileInMemory(char * data, const char * name, const char * path, uint size, char* extension_name)
 {
 	std::string bin_path;
 	FILE * pFile;
-	bin_path = "Library/Meshes/";
+	bin_path = BINARY_MESH_PATH;
 	bin_path += name;
-	bin_path += ".binpe";
+	bin_path += extension_name;
 	if (!FileExist(bin_path.c_str()))
 	{
 		pFile = fopen(bin_path.c_str(), "wb");
 		fwrite(data, sizeof(char), size, pFile);
 		fclose(pFile);
+	}
+}
+
+void ModuleImporter::CreateBinaryMesh(const aiScene * scene, const char * path)
+{
+	for (uint i = 0; i < scene->mNumMeshes; i++)
+	{
+		aiMesh* mesh = scene->mMeshes[i];
+		uint size = 0;
+		uint bytes = 0;
+		char* data = nullptr;
+		char* cursor = nullptr;
+
+		//Num faces
+		size += sizeof(uint);
+		//Num vertices
+		size += sizeof(uint);
+		//Text coords
+		size += sizeof(int);
+		//Num normals
+		size += sizeof(int);
+		//Faces
+		if (mesh->HasFaces())
+			size += sizeof(uint)*mesh->mNumFaces * 3;
+		//Vertices
+		size += sizeof(float)*(mesh->mNumVertices * 3);
+		//Coords
+		if(mesh->HasTextureCoords(0))
+			size += sizeof(float)*(mesh->mNumVertices * 2);
+		//Normals
+		if(mesh->HasNormals())
+			size += sizeof(float)*(mesh->mNumVertices * 3);
+
+		data = new char[size];
+		cursor = data;
+
+		//Num faces
+		uint num_faces = mesh->mNumFaces * 3;
+		bytes = sizeof(uint);
+		memcpy(cursor, &num_faces, bytes);
+		cursor += bytes;
+		//Num vertices
+		uint num_vertices = mesh->mNumVertices * 3;
+		bytes = sizeof(uint);
+		memcpy(cursor, &num_vertices, bytes);
+		cursor += bytes;
+		//Text coords
+		bytes = sizeof(int);
+		int has_tex_coords = mesh->HasTextureCoords(0) ? 1 : 0;
+		memcpy(cursor, &has_tex_coords, bytes);
+		cursor += bytes;
+		//Num normals
+		bytes = sizeof(int);
+		int has_normals = mesh->HasNormals() ? 1 : 0;
+		memcpy(cursor, &has_normals, bytes);
+		cursor += bytes;
+		//Faces
+		// Iterate all faces and check if indices are valid, else clean memory and go next geometry
+		bool invalid_geometry = false;
+		uint* indices = new uint[mesh->mNumFaces * 3];
+		for (uint j = 0; j < mesh->mNumFaces; j++)
+		{
+			if (mesh->mFaces[j].mNumIndices != 3)
+			{
+				LOG("WARNING: FACE HAVE != 3 INDICES");
+				invalid_geometry = true;
+				break;
+			}
+			else
+				memcpy(&indices[j * 3], mesh->mFaces[j].mIndices, sizeof(uint) * 3);
+		}
+		if (invalid_geometry)
+		{
+			RELEASE_ARRAY(indices);
+			RELEASE_ARRAY(data);
+			//Continue with next geometry
+			continue;
+		}
+		bytes = sizeof(uint)*mesh->mNumFaces*3;
+		memcpy(cursor, indices, bytes);
+		cursor += bytes;
+		//Vertices
+		bytes = sizeof(float)*mesh->mNumVertices*3;
+		memcpy(cursor, mesh->mVertices, bytes);
+		cursor += bytes;
+		//Coords
+		if (mesh->HasTextureCoords(0))
+		{
+			bytes = sizeof(float)*mesh->mNumVertices * 2;
+			memcpy(cursor, mesh->mTextureCoords, bytes);
+			cursor += bytes;
+		}
+		//Normals
+		if (mesh->HasNormals())
+		{
+			bytes = sizeof(float)*mesh->mNumVertices * 3;
+			memcpy(cursor, mesh->mNormals, bytes);
+			cursor += bytes;
+		}
+		// Write file
+		WriteFileInMemory(data, mesh->mName.C_Str(), path, size, ".geometry");
 	}
 }
 
