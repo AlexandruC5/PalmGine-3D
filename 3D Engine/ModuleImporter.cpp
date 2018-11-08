@@ -9,6 +9,7 @@
 #include "CompMesh.h"
 #include "CompTransform.h"
 #include "CompMaterial.h"
+#include <string>
 
 #pragma comment (lib, "Assimp/libx86/assimp.lib")
 #pragma comment (lib, "Devil/libx86/DevIL.lib")
@@ -298,6 +299,7 @@ void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const c
 	aiQuaternion rotation = { 0,0,0,0 };
 	int num_mesh = 0;
 	uint range[4] = { 0, 0, 0, 0 };
+	string compare_name = node->mName.C_Str();
 
 	bytes = sizeof(uint);
 	memcpy(cursor[0], &node->mNumMeshes, bytes);
@@ -332,7 +334,11 @@ void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const c
 
 		//Copy mesh name
 		bytes = sizeof(char)*64;
-		strcpy(mesh_name, node->mName.C_Str());
+		// If set the file name to root node
+		if (!compare_name.compare("RootNode"))
+			strcpy(mesh_name, GetFileNameFromPath(path).c_str());
+		else
+			strcpy(mesh_name, node->mName.C_Str());
 		memcpy(cursor[0], mesh_name, bytes);
 		cursor[0] += bytes;
 		//Copy mesh path
@@ -340,12 +346,10 @@ void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const c
 		strcpy(mesh_path, path);
 		memcpy(cursor[0], mesh_path, bytes);
 		cursor[0] += bytes;
-		
 		//Copy texture name
 		bytes = sizeof(char)*64;
 		memcpy(cursor[0], texture_name, bytes);
 		cursor[0] += bytes;
-
 		node->mTransformation.Decompose(scale, rotation, translation);
 		//Copy translation
 		bytes = sizeof(aiVector3D);
@@ -359,7 +363,6 @@ void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const c
 		bytes = sizeof(aiVector3D);
 		memcpy(cursor[0], &scale, bytes);
 		cursor[0] += bytes;
-		
 		//Num childs
 		bytes = sizeof(uint);
 		memcpy(cursor[0], &node->mNumChildren, bytes);
