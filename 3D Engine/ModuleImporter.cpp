@@ -595,7 +595,7 @@ GameObject* ModuleImporter::ReadBinaryHierarchy(char** cursor, uint* num_childs,
 		memcpy(num_childs, cursor[0], bytes);
 		cursor[0] += bytes;
 
-		SetBinaryMesh(name, path_name, texture_name, translation, scale, rotation);
+		//SetBinaryMesh(name, path_name, texture_name, translation, scale, rotation);
 		//Create the game object
 		go = new GameObject(parent);
 		go->SetName(name);
@@ -605,10 +605,10 @@ GameObject* ModuleImporter::ReadBinaryHierarchy(char** cursor, uint* num_childs,
 	return go;
 }
 
-void ModuleImporter::SetBinaryMesh(const char * name, const char * path, const char * texture_name, aiVector3D translation, aiVector3D scale, aiQuaternion rotation)
+/*void ModuleImporter::SetBinaryMesh(const char * name, const char * path, const char * texture_name, aiVector3D translation, aiVector3D scale, aiQuaternion rotation)
 {
 
-}
+}*/
 
 
 

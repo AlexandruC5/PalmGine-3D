@@ -37,7 +37,7 @@ public:
 	uint GetRecursiveSize(const aiNode* root_node, const aiScene* scene);
 	// READ BINARY
 	GameObject* ReadBinaryHierarchy(char** cursor, uint* num_childs, GameObject* parent);
-	void SetBinaryMesh(const char* name, const char* path, const char* texture_name, aiVector3D translation, aiVector3D scale, aiQuaternion rotation);
+	//void SetBinaryMesh(const char* name, const char* path, const char* texture_name, aiVector3D translation, aiVector3D scale, aiQuaternion rotation);
 	char* LoadData(const char* path);
 	void LoadRecursiveHierarchy(char** cursor, GameObject* parent);
 };
