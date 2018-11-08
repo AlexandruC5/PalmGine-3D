@@ -388,7 +388,14 @@ std::string ModuleImporter::WriteFileInMemory(char * data, const char * name, co
 		fwrite(data, sizeof(char), size, pFile);
 		fclose(pFile);
 	}
-	
+	else
+	{
+		DeleteFileA(bin_path.c_str());
+		pFile = fopen(bin_path.c_str(), "wb");
+		fwrite(data, sizeof(char), size, pFile);
+		fclose(pFile);
+	}
+
 	return bin_path;
 }
 
@@ -534,7 +541,6 @@ uint ModuleImporter::GetRecursiveSize(const aiNode * root_node, const aiScene * 
 
 GameObject* ModuleImporter::ReadBinaryHierarchy(char** cursor, uint* num_childs, GameObject* parent)
 {
-
 	uint bytes = 0;
 	uint range[4] = { 0, 0, 0, 0 };
 	int num_meshes = 0;
@@ -609,7 +615,7 @@ char * ModuleImporter::LoadData(const char * path)
 
 	pFile = fopen(path, "rb");
 	if (pFile == NULL) { fputs("File error", stderr); exit(1); }
-
+	
 	// obtain file size:
 	fseek(pFile, 0, SEEK_END);
 	lSize = ftell(pFile);
