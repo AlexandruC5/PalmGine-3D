@@ -40,10 +40,6 @@ public:
 	void ReadBinaryMesh();
 	char* LoadData(const char* path);
 	void LoadRecursiveHierarchy(char** cursor, GameObject* parent);
-	
-public:
-	// TODO delete this
-	std::string path;
 };
 
 #endif // !MODULEIMPORTER_H

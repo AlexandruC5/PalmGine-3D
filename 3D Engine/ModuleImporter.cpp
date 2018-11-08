@@ -434,7 +434,6 @@ void ModuleImporter::CreateBinaryMesh(const aiScene * scene, const char * path)
 
 		data = new char[size];
 		cursor = data;
-
 		//Num faces
 		uint num_faces = mesh->mNumFaces * 3;
 		bytes = sizeof(uint);
@@ -456,7 +455,7 @@ void ModuleImporter::CreateBinaryMesh(const aiScene * scene, const char * path)
 		memcpy(cursor, &has_normals, bytes);
 		cursor += bytes;
 		//Faces
-		// Iterate all faces and check if indices are valid, else clean memory and go next geometry
+		//Iterate all faces and check if indices are valid, else clean memory and go next geometry
 		bool invalid_geometry = false;
 		uint* indices = new uint[mesh->mNumFaces * 3];
 		for (uint j = 0; j < mesh->mNumFaces; j++)
@@ -484,7 +483,7 @@ void ModuleImporter::CreateBinaryMesh(const aiScene * scene, const char * path)
 		bytes = sizeof(float)*mesh->mNumVertices*3;
 		memcpy(cursor, mesh->mVertices, bytes);
 		cursor += bytes;
-		//Coords
+		//Texture coords
 		if (mesh->HasTextureCoords(0))
 		{
 			bytes = sizeof(float)*mesh->mNumVertices * 2;
@@ -563,12 +562,10 @@ GameObject* ModuleImporter::ReadBinaryHierarchy(char** cursor, uint* num_childs,
 		aiVector3D translation = { 0,0,0 };
 		aiVector3D scale = { 0,0,0 };
 		aiQuaternion rotation = { 0,0,0,0 };		
-
 		//Range
 		bytes = sizeof(range);
 		memcpy(range, cursor[0], bytes);
 		cursor[0] += bytes;
-
 		//Copy mesh name
 		bytes = sizeof(char) * 64;
 		memcpy(name, cursor[0], bytes);
@@ -581,7 +578,6 @@ GameObject* ModuleImporter::ReadBinaryHierarchy(char** cursor, uint* num_childs,
 		bytes = sizeof(char) * 64;
 		memcpy(texture_name, cursor[0], bytes);
 		cursor[0] += bytes;
-
 		//Copy translation
 		bytes = sizeof(aiVector3D);
 		memcpy(&translation, cursor[0], bytes);
@@ -594,13 +590,12 @@ GameObject* ModuleImporter::ReadBinaryHierarchy(char** cursor, uint* num_childs,
 		bytes = sizeof(aiVector3D);
 		memcpy(&scale, cursor[0], bytes);
 		cursor[0] += bytes;
-
 		//Num childs
 		bytes = sizeof(uint);
 		memcpy(num_childs, cursor[0], bytes);
 		cursor[0] += bytes;
 
-
+		//Create the game object
 		go = new GameObject(parent);
 		go->SetName(name);
 
@@ -619,16 +614,16 @@ char * ModuleImporter::LoadData(const char * path)
 	pFile = fopen(path, "rb");
 	if (pFile == NULL) { fputs("File error", stderr); exit(1); }
 	
-	// obtain file size:
+	//Obtain file size:
 	fseek(pFile, 0, SEEK_END);
 	lSize = ftell(pFile);
 	rewind(pFile);
 
-	// allocate memory to contain the whole file:
+	//Allocate memory to contain the whole file:
 	buffer = new char[lSize];// (char*)malloc(sizeof(char)*lSize);
 	if (buffer == NULL) { fputs("Memory error", stderr); exit(2); }
 
-	// copy the file into the buffer:
+	//Copy the file into the buffer:
 	result = fread(buffer, 1, lSize, pFile);
 	if (result != lSize) { fputs("Reading error", stderr); exit(3); }
 
@@ -647,5 +642,4 @@ void ModuleImporter::LoadRecursiveHierarchy(char** cursor, GameObject* parent)
 		LoadRecursiveHierarchy(cursor, go);
 
 	}
-
 }
