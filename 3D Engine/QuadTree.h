@@ -63,4 +63,56 @@ public:
 
 };
 
+//Quadtree CollectIntersections using map
+template<typename TYPE>
+void Quadtree::CollectIntersections(std::map<float, GameObject*>& objects, const TYPE & primitive)const {
+	if (root != nullptr) {
+		root->CollectIntersections(objects, primitive);
+	}
+}
+
+//Quadtree CollectIntersections using vector
+template<typename TYPE>
+void Quadtree::CollectIntersections(std::vector<GameObject*>& objects, const TYPE & primitive)const {
+	if (root != nullptr) {
+		root->CollectIntersections(objects, primitive);
+	}
+}
+
+//QuadtreeNode CollectIntersections using map
+template<typename TYPE>
+void QuadtreeNode::CollectIntersections(std::map<float, GameObject*>& objects, const TYPE& primitive) const {
+	if (primitive.Intersects(box) == true) {
+		float hitNear;
+		float hitFar;
+		for (std::list<GameObject*>::const_iterator iterator = this->objectsInNode.begin(); iterator != this->objectsInNode.end(); ++iterator) {
+			if (primitive.Intersects((*iterator)->GetAABB(), hitNear, hitFar)) {
+				objects[hitNear] = *iterator;
+			}
+		}
+		for (int i = 0; i < 4; ++i) {
+			if (childs[i] != nullptr) {
+				childs[i]->CollectIntersections(objects, primitive);
+			}
+		}
+	}
+}
+
+//QuadtreeNode CollectIntersections using vector
+template<typename TYPE>
+void QuadtreeNode::CollectIntersections(std::vector<GameObject*>& objects, const TYPE& primitive) const {
+	if (primitive.Intersects(box) == true) {
+		for (std::list<GameObject*>::const_iterator iterator = this->objectsInNode.begin(); iterator != this->objectsInNode.end(); ++iterator) {
+			if (primitive.Intersects((*iterator)->GetAABB())) {
+				objects.push_back(*iterator);
+			}
+		}
+		for (int i = 0; i < 4; ++i) {
+			if (childs[i] != nullptr) {
+				childs[i]->CollectIntersections(objects, primitive);
+			}
+		}
+	}
+}
+
 #endif // !_QUADTREE_H_

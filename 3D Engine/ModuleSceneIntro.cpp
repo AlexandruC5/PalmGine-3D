@@ -101,7 +101,6 @@ update_status ModuleSceneIntro::Update(float dt)
 }
 
 void ModuleSceneIntro::SetGameObjectDrawability() {
-	//Todo Use quadtree for frustrum culling (Add quadtree.CollectIntersections to quadtree)
 
 	if (quadtree.root == nullptr) {
 		//FrustumCulling without quadtree
@@ -110,28 +109,29 @@ void ModuleSceneIntro::SetGameObjectDrawability() {
 				if (root_gameObjects->childs[i]->IsActive() == true && root_gameObjects->childs[i]->IsStatic() == true) {
 					if (root_gameObjects->childs[i]->GetCompMesh() != nullptr) {
 						if (camera->GetCompCamera()->frustum.Intersects(root_gameObjects->childs[i]->GetAABB())) {
-							root_gameObjects->childs[i]->GetCompMesh()->drawable = true;
+							root_gameObjects->childs[i]->GetCompMesh()->Draw();
 						}
-						else {
-							root_gameObjects->childs[i]->GetCompMesh()->drawable = false;
-						}
+						//else {
+						//	root_gameObjects->childs[i]->GetCompMesh()->drawable = false;
+						//}
 					}
 				}
 				else if (root_gameObjects->childs[i]->GetCompMesh() != nullptr) {
-					root_gameObjects->childs[i]->GetCompMesh()->drawable = true;
+					root_gameObjects->childs[i]->GetCompMesh()->Draw();
 				}
 			}
 		}
 	}
 	else {
 		//FrustumCulling with quadtree
-		//if (camera->GetCompCamera()->frustum_culling == true) {
-		//	std::map<float, GameObject*> objects_colliding;
-		//	quadtree.CollectIntersections(objects_colliding, camera->GetCompCamera()->frustum);
-		//	for (std::map<float, GameObject*>::reverse_iterator iterator = objects_colliding.rbegin(); iterator != objects_colliding.rend(); ++iterator) {
-		//		//TODO finish frustum culling with quadtree
-		//	}
-		//}
+		if (camera->GetCompCamera()->frustum_culling == true) {
+			std::map<float, GameObject*> objects_colliding;
+			quadtree.CollectIntersections(objects_colliding, camera->GetCompCamera()->frustum);
+			for (std::map<float, GameObject*>::reverse_iterator iterator = objects_colliding.rbegin(); iterator != objects_colliding.rend(); ++iterator) {
+				//TODO finish frustum culling with quadtree
+				(*iterator).second->GetCompMesh()->Draw();
+			}
+		}
 	}
 
 

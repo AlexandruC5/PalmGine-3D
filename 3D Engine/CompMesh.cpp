@@ -19,7 +19,10 @@ void CompMesh::Update(float dt)
 {
 	if (this->IsActive())
 	{
-		if (drawable == true) {
+		//if (drawable == true) {
+		//	Draw();
+		//}
+		if (parent->IsStatic() == false) {
 			Draw();
 		}
 	}

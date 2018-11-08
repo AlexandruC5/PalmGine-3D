@@ -53,9 +53,6 @@ public:
 
 private:
 	Mesh* mesh = nullptr;
-
-public:
-	bool drawable = true;
 };
 
 #endif // !COMPMESH_H
