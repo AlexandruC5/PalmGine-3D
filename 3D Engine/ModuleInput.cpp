@@ -156,8 +156,8 @@ const FILE_TYPE ModuleInput::GetFileType(const char * dir) const
 		// TODO use tolower func to verify format
 		//Find extension
 		type = path.substr(path.find_last_of("."));
-		if (type == ".png" || type == ".jpg" || type == ".bmp" || type == ".dds" ||
-			type == ".PNG" || type == ".JPG" || type == ".BMP" || type == ".DDS")
+		if (type == ".png" || type == ".jpg" || type == ".bmp" || type == ".dds" || type == ".tga" ||
+			type == ".PNG" || type == ".JPG" || type == ".BMP" || type == ".DDS" ||  type == ".TGA")
 		{
 			return TEXTURE;
 		}
