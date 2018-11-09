@@ -118,6 +118,11 @@ float * CompMesh::GetVertices() const
 	return (mesh->vertices);
 }
 
+Mesh * CompMesh::GetMesh() const
+{
+	return mesh;
+}
+
 void CompMesh::BlitComponentInspector()
 {
 	ImGui::Separator();

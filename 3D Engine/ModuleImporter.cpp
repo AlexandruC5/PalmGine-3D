@@ -63,7 +63,7 @@ bool ModuleImporter::LoadFBX(const char* path)
 
 	LoadRecursiveHierarchy(&cursor, App->scene_intro->root_gameObjects);
 
-	if (scene != nullptr && scene->HasMeshes())
+	/*if (scene != nullptr && scene->HasMeshes())
 	{
 		aiNode* rootNode = scene->mRootNode;
 		for (int i = 0; i < rootNode->mNumChildren; ++i)
@@ -79,7 +79,7 @@ bool ModuleImporter::LoadFBX(const char* path)
 		return true;
 	}
 	else
-		LOG("---- ERROR, COULDN'T LOAD FBX ----");
+		LOG("---- ERROR, COULDN'T LOAD FBX ----");*/
 	return false;
 }
 
@@ -618,36 +618,6 @@ GameObject* ModuleImporter::ReadBinaryHierarchy(char** cursor, uint* num_childs,
 
 		SetBinaryMesh(path_name, go);
 
-		/*
-
-		temp_mesh->num_vertices = num_vertices;
-		temp_mesh->vertices = new uint[num_vertices * 3];
-		memcpy(temp_mesh->vertices, vertices, sizeof(float)*temp_mesh->num_vertices * 3);
-
-		//Check if geometry have faces
-		if (new_mesh->HasFaces())
-		{
-			temp_mesh->num_indices = new_mesh->mNumFaces * 3;
-			temp_mesh->indices = new uint[temp_mesh->num_indices];
-			for (uint j = 0; j < new_mesh->mNumFaces; j++)
-			{
-				if (new_mesh->mFaces[j].mNumIndices == 3)
-				{
-					memcpy(&temp_mesh->indices[j * 3], new_mesh->mFaces[j].mIndices, 3 * sizeof(uint));
-				}
-			}
-
-			glGenBuffers(1, (GLuint*)&(temp_mesh->id_indices));
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, temp_mesh->id_indices);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * temp_mesh->num_indices, temp_mesh->indices, GL_STATIC_DRAW);
-		}
-		else
-		{
-			LOG("Mesh with %i faces can not be loaded.", new_mesh->mNumFaces);
-		}
-
-		*/
-
 		iterator++;
 	} while (iterator < num_meshes);
 	return go;
@@ -718,6 +688,8 @@ void ModuleImporter::SetBinaryMesh(const char * path, GameObject* go)
 		cursor += bytes;
 	}
 	mesh_comp->SetMesh(mesh);
+	//Gen buffers for geometry
+	GenBuffers(mesh_comp);
 }
 
 char * ModuleImporter::LoadData(const char * path)
@@ -756,5 +728,36 @@ void ModuleImporter::LoadRecursiveHierarchy(char** cursor, GameObject* parent)
 	for (int i = 0; i < num_childs; i++)
 	{
 		LoadRecursiveHierarchy(cursor, go);
+	}
+}
+
+void ModuleImporter::GenBuffers(CompMesh * comp_mesh)
+{
+	Mesh* mesh = comp_mesh->GetMesh();
+
+	glGenBuffers(1, (GLuint*)&(mesh->id_vertices));
+	glBindBuffer(GL_ARRAY_BUFFER, mesh->id_vertices);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 3 * mesh->num_vertices, mesh->vertices, GL_STATIC_DRAW);
+
+	glGenBuffers(1, (GLuint*)&(mesh->id_indices));
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->id_indices);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * mesh->num_indices, mesh->indices, GL_STATIC_DRAW);
+
+	if (mesh->num_uvs > 0)
+	{
+		glGenBuffers(1, (GLuint*)&(mesh->id_uvs));
+		glBindBuffer(GL_ARRAY_BUFFER, mesh->id_uvs);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 2 * mesh->num_uvs, mesh->uvs, GL_STATIC_DRAW);
+	}
+	else
+	{
+		LOG("Texture coords couldn´t be found for the specified mesh.");
+	}
+
+	if (mesh->num_normals > 0)
+	{
+		glGenBuffers(1, (GLuint*)&(mesh->id_normals));
+		glBindBuffer(GL_ARRAY_BUFFER, mesh->id_normals);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 3 * mesh->num_normals, mesh->normals, GL_STATIC_DRAW);
 	}
 }

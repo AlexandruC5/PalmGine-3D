@@ -46,7 +46,7 @@ public:
 	math::AABB GetAABB()const;
 	// TODO check const
 	float* GetVertices()const;
-
+	Mesh* GetMesh()const;
 	// UI 
 	void BlitComponentInspector();
 

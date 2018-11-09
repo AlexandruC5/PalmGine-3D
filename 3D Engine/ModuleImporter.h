@@ -40,6 +40,9 @@ public:
 	void SetBinaryMesh(const char* path, GameObject* go);
 	char* LoadData(const char* path);
 	void LoadRecursiveHierarchy(char** cursor, GameObject* parent);
+	
+	void GenBuffers(CompMesh* mesh);
+
 };
 
 #endif // !MODULEIMPORTER_H
