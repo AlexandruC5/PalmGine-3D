@@ -105,7 +105,7 @@ GameObject* ModuleImporter::LoadModel(const aiScene* scene, aiNode* node, const 
 			aiMesh* new_mesh = scene->mMeshes[node->mMeshes[i]];
 			
 			temp_mesh->num_vertices = new_mesh->mNumVertices;
-			temp_mesh->vertices = new uint[temp_mesh->num_vertices * 3];
+			temp_mesh->vertices = new float[temp_mesh->num_vertices * 3];
 			memcpy(temp_mesh->vertices, new_mesh->mVertices, sizeof(float)*temp_mesh->num_vertices * 3);
 
 			// ---- Generate buffers ----
@@ -196,7 +196,7 @@ GameObject* ModuleImporter::LoadModel(const aiScene* scene, aiNode* node, const 
 			}
 			 
 			// ---- Push the mesh ----
-			mesh_comp->AddMesh(temp_mesh);
+			mesh_comp->SetMesh(temp_mesh);
 			LOG("Loaded mesh with %i vertices.", temp_mesh->num_vertices);
 			LOG("Loaded mesh with %i indices.", temp_mesh->num_indices);
 			LOG("Loaded mesh with %i triangles.", temp_mesh->num_vertices / 3);
@@ -306,6 +306,7 @@ void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const c
 	cursor[0] += bytes;
 	do
 	{
+		std::string path_name = "empty_mesh";
 		if (node->mNumMeshes > 0)
 		{
 			mesh = scene->mMeshes[node->mMeshes[num_mesh]];
@@ -326,6 +327,13 @@ void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const c
 			aiString tmp_path;
 			scene->mMaterials[mesh->mMaterialIndex]->GetTexture(aiTextureType_DIFFUSE, 0, &tmp_path);
 			strcpy(texture_name, tmp_path.C_Str());
+			
+			path_name = GetFileNameFromPath(path).c_str();
+			path_name += "_";
+			char* num_path = new char[4];
+			itoa(node->mMeshes[num_mesh], num_path, 10);
+			path_name += num_path;
+			path_name += ".geometry";
 		}
 
 		bytes = sizeof(range);
@@ -341,9 +349,10 @@ void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const c
 			strcpy(mesh_name, node->mName.C_Str());
 		memcpy(cursor[0], mesh_name, bytes);
 		cursor[0] += bytes;
+
 		//Copy mesh path
 		bytes = sizeof(char) * 128;
-		strcpy(mesh_path, path);
+		strcpy(mesh_path, path_name.c_str());
 		memcpy(cursor[0], mesh_path, bytes);
 		cursor[0] += bytes;
 		//Copy texture name
@@ -412,7 +421,7 @@ void ModuleImporter::CreateBinaryMesh(const aiScene * scene, const char * path)
 		char* data = nullptr;
 		char* cursor = nullptr;
 
-		//Num faces
+		//Num indices
 		size += sizeof(uint);
 		//Num vertices
 		size += sizeof(uint);
@@ -434,7 +443,7 @@ void ModuleImporter::CreateBinaryMesh(const aiScene * scene, const char * path)
 
 		data = new char[size];
 		cursor = data;
-		//Num faces
+		//Num indices
 		uint num_faces = mesh->mNumFaces * 3;
 		bytes = sizeof(uint);
 		memcpy(cursor, &num_faces, bytes);
@@ -454,7 +463,7 @@ void ModuleImporter::CreateBinaryMesh(const aiScene * scene, const char * path)
 		int has_normals = mesh->HasNormals() ? 1 : 0;
 		memcpy(cursor, &has_normals, bytes);
 		cursor += bytes;
-		//Faces
+		//Indices
 		//Iterate all faces and check if indices are valid, else clean memory and go next geometry
 		bool invalid_geometry = false;
 		uint* indices = new uint[mesh->mNumFaces * 3];
@@ -498,7 +507,13 @@ void ModuleImporter::CreateBinaryMesh(const aiScene * scene, const char * path)
 			cursor += bytes;
 		}
 		// Write file
-		WriteFileInMemory(data, mesh->mName.C_Str(), path, size, ".geometry");
+		std::string path_name = GetFileNameFromPath(path).c_str();
+		path_name += "_";
+		char* num_path = new char[4];
+		itoa(i, num_path, 10);
+		path_name += num_path;
+
+		WriteFileInMemory(data, path_name.c_str(), path, size, ".geometry");
 	}
 }
 
@@ -640,16 +655,19 @@ GameObject* ModuleImporter::ReadBinaryHierarchy(char** cursor, uint* num_childs,
 
 void ModuleImporter::SetBinaryMesh(const char * path, GameObject* go)
 {
-	CompMesh* mat_comp = new CompMesh(go, COMP_TYPE::C_MESH);
+	if (!strcmp(path, "empty_mesh"))
+		return;
+	CompMesh* mesh_comp = new CompMesh(go, COMP_TYPE::C_MESH);
 	uint bytes = 0;
-	char* data = LoadData(path);
+	std::string complete_path = BINARY_MESH_PATH;
+	complete_path += path;
+	char* data = LoadData(complete_path.c_str());
 	char* cursor = data;
-	uint num_vertices = 0;
-	bool has_tex_coords = false;
-	bool has_normals = false;
+	int has_tex_coords = 0;
+	int has_normals = 0;
 	Mesh* mesh = new Mesh();
 	
-	//Num faces
+	//Num indices
 	bytes = sizeof(uint);
 	memcpy(&mesh->num_indices, cursor, bytes);
 	cursor += bytes;
@@ -662,8 +680,44 @@ void ModuleImporter::SetBinaryMesh(const char * path, GameObject* go)
 	memcpy(&has_tex_coords, cursor, bytes);
 	cursor += bytes;
 	if (has_tex_coords)
-		mesh->num_uvs = mesh->num_vertices * 2;
+		mesh->num_uvs = mesh->num_vertices;
+	else
+		mesh->num_uvs = 0;
 	//Num normals
+	bytes = sizeof(int);
+	memcpy(&has_normals, cursor, bytes);
+	cursor += bytes;
+	if (has_normals)
+		mesh->num_normals = mesh->num_vertices;
+	else
+		mesh->num_normals = 0;
+	//Indices
+	bytes = sizeof(uint)*mesh->num_indices;
+	mesh->indices = new uint[mesh->num_indices];
+	memcpy(mesh->indices, cursor, bytes);
+	cursor += bytes;
+	//Vertices
+	bytes = sizeof(float)*mesh->num_vertices*3;
+	mesh->vertices = new float[mesh->num_vertices*3];
+	memcpy(mesh->vertices, cursor, bytes);
+	cursor += bytes;
+	//Texture coords
+	if (has_tex_coords)
+	{
+		bytes = sizeof(float)*mesh->num_uvs * 2;
+		mesh->uvs = new float[mesh->num_uvs * 2];
+		memcpy(mesh->uvs, cursor, bytes);
+		cursor += bytes;
+	}
+	//Normales
+	if (has_normals)
+	{
+		bytes = sizeof(float)*mesh->num_normals * 3;
+		mesh->normals = new float[mesh->num_normals * 3];
+		memcpy(mesh->normals, cursor, bytes);
+		cursor += bytes;
+	}
+	mesh_comp->SetMesh(mesh);
 }
 
 char * ModuleImporter::LoadData(const char * path)

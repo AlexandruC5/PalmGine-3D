@@ -14,7 +14,7 @@ struct Mesh
 
 	uint id_indices = 0;
 	uint num_vertices = 0;
-	uint* vertices = nullptr;
+	float* vertices = nullptr;
 
 	uint id_normals = 0;
 	uint num_normals = 0;
@@ -35,7 +35,7 @@ public:
 
 	void Update(float dt);
 	void Draw();
-	void AddMesh(Mesh* mesh);
+	void SetMesh(Mesh* mesh);
 	void ApplyTexture(const char* path);
 
 	// Read
@@ -45,7 +45,7 @@ public:
 	float GetNumUvs()const;
 	math::AABB GetAABB()const;
 	// TODO check const
-	uint* GetVertices()const;
+	float* GetVertices()const;
 
 	// UI 
 	void BlitComponentInspector();

@@ -9,6 +9,7 @@
 
 CompMesh::CompMesh(GameObject * parent, COMP_TYPE type) : Component(parent, type) 
 {
+	parent->AddComponent(this);
 }
 
 CompMesh::~CompMesh()
@@ -63,7 +64,7 @@ void CompMesh::Draw()
 	glPopMatrix();
 }
 
-void CompMesh::AddMesh(Mesh * mesh)
+void CompMesh::SetMesh(Mesh * mesh)
 {
 	this->mesh = mesh;
 }
@@ -112,7 +113,7 @@ math::AABB CompMesh::GetAABB()const
 	return box;
 }
 
-uint * CompMesh::GetVertices() const
+float * CompMesh::GetVertices() const
 {
 	return (mesh->vertices);
 }
