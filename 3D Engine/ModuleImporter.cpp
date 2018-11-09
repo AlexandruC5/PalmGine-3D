@@ -440,7 +440,7 @@ void ModuleImporter::CreateBinaryMesh(const aiScene * scene, const char * path)
 		memcpy(cursor, &num_faces, bytes);
 		cursor += bytes;
 		//Num vertices
-		uint num_vertices = mesh->mNumVertices * 3;
+		uint num_vertices = mesh->mNumVertices;
 		bytes = sizeof(uint);
 		memcpy(cursor, &num_vertices, bytes);
 		cursor += bytes;
@@ -562,6 +562,8 @@ GameObject* ModuleImporter::ReadBinaryHierarchy(char** cursor, uint* num_childs,
 		aiVector3D translation = { 0,0,0 };
 		aiVector3D scale = { 0,0,0 };
 		aiQuaternion rotation = { 0,0,0,0 };		
+		
+
 		//Range
 		bytes = sizeof(range);
 		memcpy(range, cursor[0], bytes);
@@ -595,22 +597,74 @@ GameObject* ModuleImporter::ReadBinaryHierarchy(char** cursor, uint* num_childs,
 		memcpy(num_childs, cursor[0], bytes);
 		cursor[0] += bytes;
 
-		//SetBinaryMesh(name, path_name, texture_name, translation, scale, rotation);
-		//Create the game object
+		// *-- CREATE GAME OBJECT --*
 		go = new GameObject(parent);
 		go->SetName(name);
+
+		SetBinaryMesh(path_name, go);
+
+		/*
+
+		temp_mesh->num_vertices = num_vertices;
+		temp_mesh->vertices = new uint[num_vertices * 3];
+		memcpy(temp_mesh->vertices, vertices, sizeof(float)*temp_mesh->num_vertices * 3);
+
+		//Check if geometry have faces
+		if (new_mesh->HasFaces())
+		{
+			temp_mesh->num_indices = new_mesh->mNumFaces * 3;
+			temp_mesh->indices = new uint[temp_mesh->num_indices];
+			for (uint j = 0; j < new_mesh->mNumFaces; j++)
+			{
+				if (new_mesh->mFaces[j].mNumIndices == 3)
+				{
+					memcpy(&temp_mesh->indices[j * 3], new_mesh->mFaces[j].mIndices, 3 * sizeof(uint));
+				}
+			}
+
+			glGenBuffers(1, (GLuint*)&(temp_mesh->id_indices));
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, temp_mesh->id_indices);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * temp_mesh->num_indices, temp_mesh->indices, GL_STATIC_DRAW);
+		}
+		else
+		{
+			LOG("Mesh with %i faces can not be loaded.", new_mesh->mNumFaces);
+		}
+
+		*/
 
 		iterator++;
 	} while (iterator < num_meshes);
 	return go;
 }
 
-/*void ModuleImporter::SetBinaryMesh(const char * name, const char * path, const char * texture_name, aiVector3D translation, aiVector3D scale, aiQuaternion rotation)
+void ModuleImporter::SetBinaryMesh(const char * path, GameObject* go)
 {
-
-}*/
-
-
+	CompMesh* mat_comp = new CompMesh(go, COMP_TYPE::C_MESH);
+	uint bytes = 0;
+	char* data = LoadData(path);
+	char* cursor = data;
+	uint num_vertices = 0;
+	bool has_tex_coords = false;
+	bool has_normals = false;
+	Mesh* mesh = new Mesh();
+	
+	//Num faces
+	bytes = sizeof(uint);
+	memcpy(&mesh->num_indices, cursor, bytes);
+	cursor += bytes;
+	//Num vertices
+	bytes = sizeof(uint);
+	memcpy(&mesh->num_vertices, cursor, bytes);
+	cursor += bytes;
+	//Text coords
+	bytes = sizeof(int);
+	memcpy(&has_tex_coords, cursor, bytes);
+	cursor += bytes;
+	if (has_tex_coords)
+		mesh->num_uvs = mesh->num_vertices * 2;
+	//Num normals
+}
 
 char * ModuleImporter::LoadData(const char * path)
 {
