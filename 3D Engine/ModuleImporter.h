@@ -35,12 +35,13 @@ public:
 	uint GetRecursiveSize(const aiNode* root_node, const aiScene* scene);
 	// READ BINARY
 	GameObject* ReadBinaryHierarchy(char** cursor, uint* num_childs, GameObject* parent);
-	void SetBinaryMesh(const char* path, GameObject* go);
+	void ReadBinaryMesh(const char* path, GameObject* go);
 	char* LoadData(const char* path);
 	void LoadRecursiveHierarchy(char** cursor, GameObject* parent);
 	
 	void GenBuffers(CompMesh* mesh);
 	void ImportImage(const char* path /*PNG Path*/);
+	void LoadDDS(const char* path /*DDS Path*/, GameObject* go);
 };
 
 #endif // !MODULEIMPORTER_H

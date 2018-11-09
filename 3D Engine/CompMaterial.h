@@ -32,8 +32,6 @@ public:
 	int GetTextureWidth() const;
 	int GetTextureHeight() const;
 
-
-
 private:
 	Texture* texture;
 };

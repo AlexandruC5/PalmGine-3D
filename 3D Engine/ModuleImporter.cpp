@@ -286,6 +286,7 @@ void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const c
 	int num_mesh = 0;
 	uint range[4] = { 0, 0, 0, 0 };
 	string compare_name = node->mName.C_Str();
+	std::string dds_texture_path = "empty_texture";
 
 	bytes = sizeof(uint);
 	memcpy(cursor[0], &node->mNumMeshes, bytes);
@@ -315,7 +316,11 @@ void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const c
 			if (tex_exists == aiReturn_SUCCESS)
 				ImportImage(tmp_path.C_Str());
 			strcpy(texture_name, tmp_path.C_Str());
-			
+			//Save dds path for texture
+			dds_texture_path = DDS_IMAGES_PATH;
+			dds_texture_path += GetFileNameFromPath(texture_name);
+			dds_texture_path += ".dds";
+
 			path_name = GetFileNameFromPath(path).c_str();
 			path_name += "_";
 			char* num_path = new char[4];
@@ -343,7 +348,7 @@ void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const c
 		cursor[0] += bytes;
 		//Copy texture name
 		bytes = sizeof(char)*64;
-		memcpy(cursor[0], texture_name, bytes);
+		memcpy(cursor[0], dds_texture_path.c_str(), bytes);
 		cursor[0] += bytes;
 		node->mTransformation.Decompose(scale, rotation, translation);
 		//Copy translation
@@ -439,7 +444,7 @@ void ModuleImporter::CreateBinaryMesh(const aiScene * scene, const char * path)
 		bytes = sizeof(uint);
 		memcpy(cursor, &num_vertices, bytes);
 		cursor += bytes;
-		//Text coords
+		//Has text coords
 		bytes = sizeof(int);
 		int has_tex_coords = mesh->HasTextureCoords(0) ? 1 : 0;
 		memcpy(cursor, &has_tex_coords, bytes);
@@ -481,8 +486,16 @@ void ModuleImporter::CreateBinaryMesh(const aiScene * scene, const char * path)
 		//Texture coords
 		if (mesh->HasTextureCoords(0))
 		{
+			float* new_uvs = new float[num_vertices * 2];
+
+			for (int j = 0; j < num_vertices; ++j)
+			{
+				memcpy(&new_uvs[j * 2], &mesh->mTextureCoords[0][j].x, sizeof(float));
+				memcpy(&new_uvs[(j * 2) + 1], &mesh->mTextureCoords[0][j].y, sizeof(float));
+			}
+
 			bytes = sizeof(float)*mesh->mNumVertices * 2;
-			memcpy(cursor, mesh->mTextureCoords, bytes);
+			memcpy(cursor, new_uvs, bytes);
 			cursor += bytes;
 		}
 		//Normals
@@ -564,7 +577,6 @@ GameObject* ModuleImporter::ReadBinaryHierarchy(char** cursor, uint* num_childs,
 		aiVector3D scale = { 0,0,0 };
 		aiQuaternion rotation = { 0,0,0,0 };		
 		
-
 		//Range
 		bytes = sizeof(range);
 		memcpy(range, cursor[0], bytes);
@@ -601,15 +613,15 @@ GameObject* ModuleImporter::ReadBinaryHierarchy(char** cursor, uint* num_childs,
 		// *-- CREATE GAME OBJECT --*
 		go = new GameObject(parent);
 		go->SetName(name);
-
-		SetBinaryMesh(path_name, go);
+		LoadDDS(texture_name, go);
+		ReadBinaryMesh(path_name, go);
 
 		iterator++;
 	} while (iterator < num_meshes);
 	return go;
 }
 
-void ModuleImporter::SetBinaryMesh(const char * path, GameObject* go)
+void ModuleImporter::ReadBinaryMesh(const char * path, GameObject* go)
 {
 	if (!strcmp(path, "empty_mesh"))
 		return;
@@ -788,4 +800,18 @@ void ModuleImporter::ImportImage(const char * path)
 		}
 	}
 	texture_id = ilutGLBindTexImage();
+}
+
+void ModuleImporter::LoadDDS(const char * path, GameObject* go)
+{
+	if (!strcmp(path, "empty_texture"))
+		return;
+	CompMaterial* material = new CompMaterial(go, C_MATERIAL);
+	ILuint id;
+	uint texture_id;
+	ilGenImages(1, &id);
+	ilBindImage(id);
+	ilLoadImage(path);
+	texture_id = ilutGLBindTexImage();
+	material->SetID(texture_id, path, ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT));
 }

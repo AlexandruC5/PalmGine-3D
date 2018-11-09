@@ -1,8 +1,10 @@
 #include "CompMaterial.h"
+#include "GameObject.h"
 
 CompMaterial::CompMaterial(GameObject * parent, COMP_TYPE type) : Component(parent, type)
 {
 	texture = new Texture();
+	parent->AddComponent(this);
 }
 
 CompMaterial::~CompMaterial()
