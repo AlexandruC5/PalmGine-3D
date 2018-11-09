@@ -83,7 +83,7 @@ bool ModuleImporter::LoadFBX(const char* path)
 	return false;
 }
 
-GameObject* ModuleImporter::LoadModel(const aiScene* scene, aiNode* node, const char* path)
+/*GameObject* ModuleImporter::LoadModel(const aiScene* scene, aiNode* node, const char* path)
 {
 	GameObject* temp_go = new GameObject(nullptr);
 	temp_go->SetName((char*)node->mName.C_Str());
@@ -242,21 +242,7 @@ GameObject* ModuleImporter::LoadModel(const aiScene* scene, aiNode* node, const 
 	LOG("GameObject rotation: (%f, %f, %f)", temp_go->GetCompTransform()->GetRotation().x, temp_go->GetCompTransform()->GetRotation().y, temp_go->GetCompTransform()->GetRotation().z);
 	LOG("GameObject scale: (%f, %f, %f)", temp_go->GetCompTransform()->GetScale().x, temp_go->GetCompTransform()->GetScale().y, temp_go->GetCompTransform()->GetScale().z);
 	return temp_go;
-}
-
-uint ModuleImporter::CreateTextureID(const char* texture_path)
-{
-	//DELETE THIS PLS
-	ILuint id;
-	uint texture_id;
-	ilGenImages(1, &id);
-	ilBindImage(id);
-	ilLoadImage(texture_path);
-
-	texture_id = ilutGLBindTexImage();
-
-	return texture_id;
-}
+}*/
 
 std::string ModuleImporter::ImportFBX(const aiScene * scene, const char * path, const char * name)
 {
@@ -325,7 +311,9 @@ void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const c
 				}
 			}
 			aiString tmp_path;
-			scene->mMaterials[mesh->mMaterialIndex]->GetTexture(aiTextureType_DIFFUSE, 0, &tmp_path);
+			aiReturn tex_exists = scene->mMaterials[mesh->mMaterialIndex]->GetTexture(aiTextureType_DIFFUSE, 0, &tmp_path);
+			if (tex_exists == aiReturn_SUCCESS)
+				ImportImage(tmp_path.C_Str());
 			strcpy(texture_name, tmp_path.C_Str());
 			
 			path_name = GetFileNameFromPath(path).c_str();
@@ -339,7 +327,6 @@ void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const c
 		bytes = sizeof(range);
 		memcpy(cursor[0], &range, bytes);
 		cursor[0] += bytes;
-
 		//Copy mesh name
 		bytes = sizeof(char)*64;
 		// If set the file name to root node
@@ -349,7 +336,6 @@ void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const c
 			strcpy(mesh_name, node->mName.C_Str());
 		memcpy(cursor[0], mesh_name, bytes);
 		cursor[0] += bytes;
-
 		//Copy mesh path
 		bytes = sizeof(char) * 128;
 		strcpy(mesh_path, path_name.c_str());
@@ -760,4 +746,46 @@ void ModuleImporter::GenBuffers(CompMesh * comp_mesh)
 		glBindBuffer(GL_ARRAY_BUFFER, mesh->id_normals);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 3 * mesh->num_normals, mesh->normals, GL_STATIC_DRAW);
 	}
+}
+
+void ModuleImporter::ImportImage(const char * path)
+{
+	ILuint id;
+	uint texture_id;
+	ilGenImages(1, &id);
+	ilBindImage(id);
+
+	std::string complete_path = TEXTURES_PATH;
+	complete_path += path;
+	if (ilLoadImage(complete_path.c_str()) == IL_TRUE)
+	{
+		ILinfo ImageInfo;
+		iluGetImageInfo(&ImageInfo);
+		std::string name;
+
+		ILuint size;
+		ILubyte *data;
+		ilSetInteger(IL_DXTC_FORMAT, IL_DXT5);
+		size = ilSaveL(IL_DDS, NULL, 0); 
+		if (size > 0) 
+		{
+			data = new ILubyte[size]; //allocate data
+			if (ilSaveL(IL_DDS, data, size) > 0) 
+			{ 
+				FILE * pFile;
+
+				name = DDS_IMAGES_PATH;
+				name += GetFileNameFromPath(path);
+				name += ".dds";
+				if (!FileExist(name.c_str())) 
+				{
+					pFile = fopen(name.c_str(), "wb");
+					fwrite(data, sizeof(char), size, pFile);
+					fclose(pFile);
+				}
+			}
+			RELEASE_ARRAY(data);
+		}
+	}
+	texture_id = ilutGLBindTexImage();
 }

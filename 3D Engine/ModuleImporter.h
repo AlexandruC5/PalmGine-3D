@@ -23,8 +23,6 @@ public:
 	
 	// Utility
 	bool LoadFBX(const char* path);
-	GameObject* LoadModel(const aiScene* scene, aiNode* node, const char* path);
-	uint CreateTextureID(const char * texture_path);
 
 	// Binary
 	std::string ImportFBX(const aiScene* scene, const char* path, const char* name);
@@ -42,7 +40,7 @@ public:
 	void LoadRecursiveHierarchy(char** cursor, GameObject* parent);
 	
 	void GenBuffers(CompMesh* mesh);
-
+	void ImportImage(const char* path /*PNG Path*/);
 };
 
 #endif // !MODULEIMPORTER_H
