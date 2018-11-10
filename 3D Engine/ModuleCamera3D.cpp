@@ -71,22 +71,13 @@ update_status ModuleCamera3D::Update(float dt)
 	{
 		float3 newPos = float3::zero;
 
-		if (App->input->GetMouseXMotion() > 0)
-		{
-			newPos -= engine_camera->frustum.WorldRight() * (App->input->GetMouseXMotion() * dt) * speed;
-		}
-		if (App->input->GetMouseXMotion() < 0)
-		{
-			newPos -= engine_camera->frustum.WorldRight() * (App->input->GetMouseXMotion() * dt) * speed;
-		}
-		if (App->input->GetMouseYMotion() > 0)
-		{
-			newPos += engine_camera->frustum.front * (App->input->GetMouseYMotion() * dt) * speed;
-		}
-		if (App->input->GetMouseYMotion() < 0)
-		{
-			newPos += engine_camera->frustum.front * (App->input->GetMouseYMotion() * dt) * speed;
-		}
+		int dx = -App->input->GetMouseXMotion();
+		int dy = App->input->GetMouseYMotion();
+		float sensibility = 2.0f * dt;
+		newPos += engine_camera->frustum.WorldRight() * dx * sensibility;
+		newPos += engine_camera->frustum.up * dy *  sensibility;
+
+		//dummy_camera->frustum.pos += new_pos;
 		
 		engine_camera->frustum.Translate(newPos);
 	}
