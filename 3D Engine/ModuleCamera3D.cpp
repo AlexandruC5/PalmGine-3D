@@ -18,6 +18,7 @@ ModuleCamera3D::ModuleCamera3D(bool start_enabled) : Module(start_enabled)
 	//Reference = vec3(0.0f, 0.0f, 0.0f);
 
 	engine_camera = new CompCamera(nullptr, C_CAMERA);
+	engine_camera->SetFarPlaneDistance(1000.0f);
 
 }
 
@@ -46,7 +47,6 @@ bool ModuleCamera3D::CleanUp()
 }
 
 // -----------------------------------------------------------------
-//TODO Update controlls
 update_status ModuleCamera3D::Update(float dt)
 {
 	// Implement a debug camera with keys and mouse
@@ -56,9 +56,13 @@ update_status ModuleCamera3D::Update(float dt)
 		speed = 8.0f * dt;
 
 	// Scroll
-	if (App->input->GetMouseZ() != 1)
+	if (App->input->GetMouseZ() == 1)
 	{
-		float3 newPos = engine_camera->frustum.front * App->input->GetMouseZ() * (wheelSpeed * dt);
+		float3 newPos = engine_camera->frustum.front  * (wheelSpeed * dt);
+		engine_camera->frustum.Translate(newPos);
+	}
+	else if (App->input->GetMouseZ() == -1) {
+		float3 newPos = engine_camera->frustum.front  * -(wheelSpeed * dt);
 		engine_camera->frustum.Translate(newPos);
 	}
 
@@ -66,27 +70,22 @@ update_status ModuleCamera3D::Update(float dt)
 	if (App->input->GetMouseButton(SDL_BUTTON_MIDDLE) == KEY_REPEAT)
 	{
 		float3 newPos = float3::zero;
-		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) newPos += engine_camera->frustum.front * speed* dt;
-		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) newPos -= engine_camera->frustum.front * speed* dt;
-
-		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) newPos -= engine_camera->frustum.WorldRight() * speed* dt;
-		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) newPos += engine_camera->frustum.WorldRight() * speed* dt;
 
 		if (App->input->GetMouseXMotion() > 0)
 		{
-			newPos -= engine_camera->frustum.front * (App->input->GetMouseXMotion() * dt) * speed;
+			newPos -= engine_camera->frustum.WorldRight() * (App->input->GetMouseXMotion() * dt) * speed;
 		}
 		if (App->input->GetMouseXMotion() < 0)
 		{
-			newPos -= engine_camera->frustum.front * (App->input->GetMouseXMotion() * dt) * speed;
+			newPos -= engine_camera->frustum.WorldRight() * (App->input->GetMouseXMotion() * dt) * speed;
 		}
 		if (App->input->GetMouseYMotion() > 0)
 		{
-			newPos += engine_camera->frustum.WorldRight() * (App->input->GetMouseYMotion() * dt) * speed;
+			newPos += engine_camera->frustum.front * (App->input->GetMouseYMotion() * dt) * speed;
 		}
 		if (App->input->GetMouseYMotion() < 0)
 		{
-			newPos += engine_camera->frustum.WorldRight() * (App->input->GetMouseYMotion() * dt) * speed;
+			newPos += engine_camera->frustum.front * (App->input->GetMouseYMotion() * dt) * speed;
 		}
 		
 		engine_camera->frustum.Translate(newPos);
@@ -104,11 +103,11 @@ update_status ModuleCamera3D::Update(float dt)
 		int dx = -App->input->GetMouseXMotion();
 		int dy = -App->input->GetMouseYMotion();
 
-		float sensibility = 0.15f *dt;
+		float sensibility = 2.0f * dt;
 		if (dx != 0 || dy != 0)
 		{
-			float cameraRotationSpeed = sensibility;
-			RotateAroundReference(engine_camera->frustum.pos, dx * sensibility, dy * sensibility);
+			float cameraRotationSpeed = speed * sensibility;
+			RotateAroundReference(engine_camera->frustum.pos, dx * cameraRotationSpeed, dy * cameraRotationSpeed);
 		}
 	}
 

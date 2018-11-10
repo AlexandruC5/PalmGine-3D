@@ -58,7 +58,7 @@ void PanelAbout::Draw()
 		ShellExecuteA(0, 0, "chrome.exe", "http://kgabis.github.io/parson/", 0, SW_SHOWMAXIMIZED);
 	}
 
-	if (ImGui::MenuItem("- MathGeoLib (v2.0)"))
+	if (ImGui::MenuItem("- MathGeoLib (v1.5)"))
 	{
 		ShellExecuteA(0, 0, "chrome.exe", "http://clb.demon.fi/MathGeoLib/nightly/", 0, SW_SHOWMAXIMIZED);
 	}
