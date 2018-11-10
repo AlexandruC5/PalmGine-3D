@@ -18,7 +18,7 @@ ModuleCamera3D::ModuleCamera3D(bool start_enabled) : Module(start_enabled)
 	//Reference = vec3(0.0f, 0.0f, 0.0f);
 
 	engine_camera = new CompCamera(nullptr, C_CAMERA);
-	engine_camera->SetFarPlaneDistance(1000.0f);
+	engine_camera->SetFarPlaneDistance(100.0f);
 
 }
 

@@ -138,12 +138,6 @@ void PanelConfig::Draw()
 		ImGui::Checkbox("Show axis", &App->scene_intro->axis_enabled);
 	}
 
-	//if (ImGui::CollapsingHeader("Render")) 
-	//{
-	//	//TODO add this
-	//	//ImGui::Checkbox("Wireframe mode", &App->renderer3D->wireframe);
-	//	//ImGui::SliderFloat("Alpha tolerance", &App->renderer3D->tex_alpha, 0, 1, NULL);
-	//}
 	//Hardware
 	if (ImGui::CollapsingHeader("Hardware")) {
 		App->hardware->Draw("Hardware");

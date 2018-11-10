@@ -214,7 +214,7 @@ void PanelInspector::EnableGuizmos(GameObject* selected_go) {
 	float4x4 matrix = selected_go->GetCompTransform()->GetTransformationMatrix().Transposed();
 	CompTransform* transform = selected_go->GetCompTransform();
 	//TODO change matrix for gizmos
-	ImGuizmo::Manipulate(App->camera->GetViewMatrix(), &App->renderer3D->ProjectionMatrix, mCurrentGizmoOperation, ImGuizmo::WORLD, (float*)&matrix/*.Transposed()*/);
+	ImGuizmo::Manipulate(App->camera->GetViewMatrix(), (float*)&App->camera->GetProjectionMatrix(), mCurrentGizmoOperation, ImGuizmo::WORLD, (float*)&matrix);
 
 	if (ImGuizmo::IsUsing() && selected_go->IsStatic() == false)
 	{

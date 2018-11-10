@@ -14,8 +14,8 @@ CompCamera::CompCamera(GameObject * parent, COMP_TYPE type) : Component(parent, 
 	frustum.nearPlaneDistance = 0.1f;
 	//frustum.farPlaneDistance = 1000.0f;
 	frustum.farPlaneDistance = 1.0f;
-	frustum.verticalFov = DEGTORAD * 60.0f;
-	SetAspectRatio(2.0f * atanf(tanf(frustum.verticalFov / 2.0f) * 1.3f));
+	frustum.verticalFov = math::DegToRad(60.0f);
+	SetAspectRatio(2 * atanf(1.3 * tanf(frustum.verticalFov * 0.5)));
 }
 
 CompCamera::~CompCamera()

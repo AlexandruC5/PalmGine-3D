@@ -35,9 +35,6 @@ bool ModuleSceneIntro::Start()
 	camera->SetName("MainCamera");
 	CompCamera* cameracomp = new CompCamera(camera, COMP_TYPE::C_CAMERA);
 	camera->AddComponent(cameracomp);
-	//TODO Add AABB to all game objects and uncomment this
-	//quadtree.Insert(camera);
-
 
 	return ret;
 }
@@ -128,7 +125,6 @@ void ModuleSceneIntro::SetGameObjectDrawability() {
 			std::map<float, GameObject*> objects_colliding;
 			quadtree.CollectIntersections(objects_colliding, camera->GetCompCamera()->frustum);
 			for (std::map<float, GameObject*>::reverse_iterator iterator = objects_colliding.rbegin(); iterator != objects_colliding.rend(); ++iterator) {
-				//TODO finish frustum culling with quadtree
 				(*iterator).second->GetCompMesh()->Draw();
 			}
 		}
