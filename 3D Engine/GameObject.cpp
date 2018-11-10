@@ -176,7 +176,7 @@ void GameObject::AddComponent(Component * comp)
 void GameObject::BlitGameObjectHierarchy()
 {
 	// Check flags
-	ImGuiTreeNodeFlags flag = ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_OpenOnDoubleClick;
+	ImGuiTreeNodeFlags flag = 0;
 	if (childs.empty())flag += ImGuiTreeNodeFlags_::ImGuiTreeNodeFlags_Leaf;
 	// Blit GO name
 	char name_str[250];
