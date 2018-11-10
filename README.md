@@ -1,10 +1,9 @@
 # Palmgine 3D is a project consistent of creating a Game Engine.
-At this moment, you can import your model (.fbx and .obj), load geometry and change or apply one texture on the model (.jpg, .png, .bmp or .dds).
 
-To work with it you must drag and drop the files on the window.
+To work with PalmGine 3D you must drag and drop the files on the window.
 
-To see the code of this assignment check branch called "Assignment1"
-Link: https://github.com/botttos/PalmGine-3D/tree/Assignment1
+To see the code of this assignment check branch called "Assignment2"
+Link: https://github.com/botttos/PalmGine-3D/tree/Assignment2
 
 Hope you like it.  
 
@@ -20,9 +19,34 @@ Hope you like it.
 # FEATURES
 
 - Configuration options (Application, window, scene, render, hardware, volume, camera, light and input).
+- Inspector shows and applies transform propierties, mesh information and texture information.
+- Console with LOG control.
+- Game object hierarchy.
+- Own file format.
+- Quadtree.
+- Camera (frustum culling, near/far plane, FOV and aspect ratio).
+- Guizmos.
+
+# VERSION CONTROL
+## v.0.7
+- Load and draw one .fbx or .obj file with one channel diffuse.
+- Configuration options (Application, window, scene, render, hardware, volume, camera, light and input).
 - Inspector shows transform propierties, mesh information and texture information.
 - Console with LOG control.
-- Load and visualization of geometry and textures.
+- Drag and drop.
+- Unity-like camera.
+- Wireframe mode
+- Texture alpha tolerance
+- Light control
+- Window settings are saved in parson
+### // * NEW * //
+- Game Object hierarchy implemented with components.
+- Transformations can be applied to game objects
+- When a new item is dropped, the system will generate a binary file (engine own format) and read the item from here.
+- Textures are written and readed in DDS format.
+- Quadtree optimization.
+- Camera uses frustrum culling, far/near plane, FOV and aspect ratio.
+- Guizmos implemented.
 
 # VERSION CONTROL
 ## v.0.5.2
@@ -35,7 +59,6 @@ Hope you like it.
 - Wireframe mode
 - Texture alpha tolerance
 - Light control
-### // * NEW * //
 - Window settings are saved in parson
 - Code polished
 
