@@ -29,7 +29,7 @@ bool ModuleSceneIntro::Start()
 	App->camera->LookAt(vec3(0, 0, 0));
 	
 	root_gameObjects = new GameObject(nullptr);
-	root_gameObjects->SetName("root");
+	root_gameObjects->SetName("Root");
 	quadtree.SetBoundries(AABB(float3(-500, 0, -500), float3(500, 30, 500)));
 	camera = new GameObject(root_gameObjects);
 	camera->SetName("MainCamera");

@@ -210,11 +210,11 @@ void GameObject::BlitGameObjectHierarchy()
 Component * GameObject::FindComponent(COMP_TYPE type) const
 {
 	Component* temp_comp = nullptr;
-	for (uint i = 0; i < components.size(); i++)
+	for (auto item = components.begin();item != components.end(); item++ )
 	{
-		if (components[i]->GetType() == type)
+		if ((*item)->GetType() == type)
 		{
-			temp_comp = components[i];
+			temp_comp = (*item);
 			return temp_comp;
 		}
 	}

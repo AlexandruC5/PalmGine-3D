@@ -435,6 +435,10 @@ GameObject* ModuleImporter::ReadBinaryHierarchy(char** cursor, uint* num_childs,
 		// *-- CREATE GAME OBJECT --*
 		go = new GameObject(parent);
 		go->SetName(name);
+		CompTransform* transform = go->GetCompTransform();
+		transform->SetPosition(float3(translation.x, translation.y, translation.z));
+		transform->SetScale(float3(scale.x,scale.y,scale.z));
+		transform->SetRotation(float3(rotation.x, rotation.y, rotation.z));
 		LoadDDS(texture_name, go);
 		if(range[0] != 0)
 			ReadBinaryMesh(path_name, go);

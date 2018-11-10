@@ -188,6 +188,16 @@ math::float3 CompTransform::GetScale() const
 	return scale;
 }
 
+math::float4x4 CompTransform::GetLocalTransform() const
+{
+	return transform_matrix;
+}
+
 math::float4x4 CompTransform::GetTransformationMatrix() const {
-	return global_transform;
+	if (parent->GetParent() != nullptr)
+	{
+		CompTransform* trans = parent->GetParent()->GetCompTransform();
+		return trans->GetTransformationMatrix()* transform_matrix;
+	}
+	return transform_matrix;
 }
