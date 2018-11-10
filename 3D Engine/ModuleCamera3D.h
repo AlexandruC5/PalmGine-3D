@@ -20,7 +20,7 @@ public:
 	void RotateAroundReference(const math::float3& reference, float ArroundX, float ArroundY) const;
 	void LookAt(const float3 &Spot);
 	void CentrateObjectView();
-	float* GetViewMatrix() const;
+	float4x4 GetViewMatrix() const;
 	float4x4 GetProjectionMatrix() const;
 
 	float3 GetCameraPos()const;

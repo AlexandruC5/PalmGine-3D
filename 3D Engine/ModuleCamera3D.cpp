@@ -184,8 +184,8 @@ void ModuleCamera3D::CentrateObjectView()
 	}
 }
 
-float* ModuleCamera3D::GetViewMatrix() const {
-	return (float*)&engine_camera->GetViewMatrix();
+float4x4 ModuleCamera3D::GetViewMatrix() const {
+	return /*(float*)&*/engine_camera->GetViewMatrix();
 }
 
 float4x4 ModuleCamera3D::GetProjectionMatrix() const {
