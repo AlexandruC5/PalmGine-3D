@@ -101,6 +101,13 @@ void PanelInspector::Draw()
 
 		if (mesh != nullptr)
 		{
+			if (ImGui::CollapsingHeader("Renderer Options"), ImGuiTreeNodeFlags_DefaultOpen)
+			{
+				ImGui::Checkbox("Wireframe mode", &mesh->wireframe);
+				if (texture != nullptr) {
+					ImGui::SliderFloat("Alpha tolerance", &mesh->tex_alpha, 0, 1, NULL);
+				}
+			}
 			if (ImGui::CollapsingHeader("Mesh Information"), ImGuiTreeNodeFlags_DefaultOpen)
 			{
 				ImGui::Text("Showing read only information about the mesh");

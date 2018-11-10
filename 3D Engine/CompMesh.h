@@ -53,6 +53,9 @@ public:
 
 private:
 	Mesh* mesh = nullptr;
+public:
+	bool wireframe = false;
+	float tex_alpha = 0.0f;
 };
 
 #endif // !COMPMESH_H

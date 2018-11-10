@@ -32,6 +32,13 @@ void CompMesh::Update(float dt)
 void CompMesh::Draw()
 {
 	CompTransform* trans = parent->GetCompTransform();
+
+	// Wireframe mode
+	if (wireframe)
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	}
+
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glEnable(GL_TEXTURE_2D);
@@ -51,8 +58,13 @@ void CompMesh::Draw()
 		glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 	}
 	CompMaterial* temp = parent->GetCompMaterial();
-	if (temp != nullptr)
+	if (temp != nullptr) {
+		// Alpha
+		glEnable(GL_ALPHA_TEST);
+		glAlphaFunc(GL_GREATER, tex_alpha);
+		// -- end alpha
 		glBindTexture(GL_TEXTURE_2D, temp->GetTextureId());
+	}
 	else
 		LOG("Texture doesn't found. Add a component material to the GameObject and add the texture.");
 	// --- End texture ---
@@ -64,7 +76,14 @@ void CompMesh::Draw()
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_ALPHA_TEST);
 	glPopMatrix();
+
+	if (wireframe)
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
+
 }
 
 void CompMesh::SetMesh(Mesh * mesh)
