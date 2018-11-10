@@ -435,7 +435,7 @@ GameObject* ModuleImporter::ReadBinaryHierarchy(char** cursor, uint* num_childs,
 		// *-- CREATE GAME OBJECT --*
 		go = new GameObject(parent);
 		go->SetName(name);
-		//LoadDDS(texture_name, go);
+		LoadDDS(texture_name, go);
 		if(range[0] != 0)
 			ReadBinaryMesh(path_name, go);
 

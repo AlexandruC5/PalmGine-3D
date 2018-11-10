@@ -45,8 +45,11 @@ void CompMesh::Draw()
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 	
 	// --- Texture ---
-	glBindBuffer(GL_ARRAY_BUFFER, mesh->id_uvs);
-	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+	if (mesh->num_uvs > 0)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, mesh->id_uvs);
+		glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+	}
 	CompMaterial* temp = parent->GetCompMaterial();
 	if (temp != nullptr)
 		glBindTexture(GL_TEXTURE_2D, temp->GetTextureId());
