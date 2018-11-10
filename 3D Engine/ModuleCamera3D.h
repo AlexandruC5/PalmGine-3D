@@ -18,11 +18,9 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
-	//void Look(const float3 &Position, const float3 &Reference, bool RotateAroundReference = false);
 	void RotateAroundReference(const math::float3& reference, float ArroundX, float ArroundY) const;
 	void LookAt(const float3 &Spot);
-	//void Move(const vec3 &Movement);
-	//void CentrateObjectView();
+	void CentrateObjectView();
 	float* GetViewMatrix() const;
 	float4x4 GetProjectionMatrix() const;
 

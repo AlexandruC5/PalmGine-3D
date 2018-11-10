@@ -76,15 +76,13 @@ update_status ModuleCamera3D::Update(float dt)
 		float sensibility = 2.0f * dt;
 		newPos += engine_camera->frustum.WorldRight() * dx * sensibility;
 		newPos += engine_camera->frustum.up * dy *  sensibility;
-
-		//dummy_camera->frustum.pos += new_pos;
 		
 		engine_camera->frustum.Translate(newPos);
 	}
 	// Look to object
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN)
 	{
-		//CentrateObjectView();
+		CentrateObjectView();
 	}
 
 	// Rotate camera with static position
@@ -148,39 +146,43 @@ void ModuleCamera3D::RotateAroundReference(const math::float3& reference, float 
 // -----------------------------------------------------------------
 void ModuleCamera3D::LookAt(const float3 &Spot)
 {
-	math::float3 Z = -(engine_camera->frustum.pos - Spot).Normalized(); // Direction the camera is looking at (reverse direction of what the camera is targeting)
-	math::float3 X = math::Cross(math::float3(0.0f, 1.0f, 0.0f), Z).Normalized(); // X is perpendicular to vectors Y and Z
-	math::float3 Y = math::Cross(Z, X); // Y is perpendicular to vectors Z and X
+	math::float3 Z = -(engine_camera->frustum.pos - Spot).Normalized();
+	math::float3 X = math::Cross(math::float3(0.0f, 1.0f, 0.0f), Z).Normalized();
+	math::float3 Y = math::Cross(Z, X);
 
 	engine_camera->frustum.front = Z;
 	engine_camera->frustum.up = Y;
 }
 
-//TODO ReDo this
-//void ModuleCamera3D::CentrateObjectView()
-//{
-//	if (App->scene_intro->selected_gameObject != nullptr)
-//	{
-//		CompMesh* mesh = App->scene_intro->selected_gameObject->GetCompMesh();
-//		CompTransform* transform = App->scene_intro->selected_gameObject->GetCompTransform();
-//		if (mesh != nullptr && transform != nullptr)
-//		{
-//			math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
-//			box.Enclose((float3*)mesh->GetVertices(), mesh->GetNumVertices());
-//
-//			App->camera->Reference.x = box.CenterPoint().x* transform->GetScale().x + transform->GetPosition().x;
-//			// Divide Y reference because the console covers the geometry. This way we can see the GameObject.
-//			App->camera->Reference.y = (box.CenterPoint().y* transform->GetScale().y) / 2 + transform->GetPosition().y;
-//			App->camera->Reference.z = box.CenterPoint().z* transform->GetScale().z + transform->GetPosition().z;
-//
-//			App->camera->Position.x = (box.maxPoint.x * transform->GetScale().x)*2 + transform->GetPosition().x;
-//			App->camera->Position.y = (box.maxPoint.y * transform->GetScale().y)*2 + transform->GetPosition().y;
-//			App->camera->Position.z = (box.maxPoint.z * transform->GetScale().z)*2 + transform->GetPosition().z;
-//
-//			App->camera->LookAt(App->camera->Reference);
-//		}
-//	}
-//}
+
+void ModuleCamera3D::CentrateObjectView()
+{
+	if (App->scene_intro->selected_gameObject != nullptr)
+	{
+		CompMesh* mesh = App->scene_intro->selected_gameObject->GetCompMesh();
+		CompTransform* transform = App->scene_intro->selected_gameObject->GetCompTransform();
+		if (mesh != nullptr && transform != nullptr)
+		{
+			math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
+			box.Enclose((float3*)mesh->GetVertices(), mesh->GetNumVertices());
+
+			float3 Reference = float3::zero;
+
+			Reference.x = box.CenterPoint().x* transform->GetScale().x + transform->GetPosition().x;
+			// Divide Y reference because the console covers the geometry. This way we can see the GameObject.
+			Reference.y = (box.CenterPoint().y* transform->GetScale().y) / 2 + transform->GetPosition().y;
+			Reference.z = box.CenterPoint().z* transform->GetScale().z + transform->GetPosition().z;
+
+			float3 Position = float3::zero;
+			Position.x = (box.maxPoint.x * transform->GetScale().x)*2 + transform->GetPosition().x;
+			Position.y = (box.maxPoint.y * transform->GetScale().y)*2 + transform->GetPosition().y;
+			Position.z = (box.maxPoint.z * transform->GetScale().z)*2 + transform->GetPosition().z;
+
+			engine_camera->frustum.Translate(Position);
+			App->camera->LookAt(Reference);
+		}
+	}
+}
 
 float* ModuleCamera3D::GetViewMatrix() const {
 	return (float*)&engine_camera->GetViewMatrix();
