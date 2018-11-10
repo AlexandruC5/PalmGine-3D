@@ -55,12 +55,9 @@ bool ModuleImporter::LoadFBX(const char* path)
 	LOG("Loading FBX...");
 	
 	const aiScene* scene = aiImportFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
-
 	std::string binary_path = ImportFBX(scene, path, GetFileNameFromPath(path).c_str());
-
 	char* data = LoadData(binary_path.c_str());
 	char* cursor = data;
-
 	LoadRecursiveHierarchy(&cursor, App->scene_intro->root_gameObjects);
 
 	return false;
@@ -86,7 +83,7 @@ std::string ModuleImporter::CreateBinary(const aiScene * scene, const char * pat
 	//Write in memory
 	WriteBinaryRecursive(scene->mRootNode, &cursor, name, scene, path);
 	//Write the file
-	binary_path = WriteFileInMemory(data, name, path, size, ".hierarchy");
+	binary_path = WriteFile(data, name, path, size, ".hierarchy");
 	//Create bynary meshes
 	CreateBinaryMesh(scene, path);
 	//Free the data
@@ -200,7 +197,7 @@ void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const c
 	}
 }
 
-std::string ModuleImporter::WriteFileInMemory(char * data, const char * name, const char * path, uint size, char* extension_name)
+std::string ModuleImporter::WriteFile(char * data, const char * name, const char * path, uint size, char* extension_name)
 {
 	std::string bin_path;
 	FILE * pFile;
@@ -334,7 +331,7 @@ void ModuleImporter::CreateBinaryMesh(const aiScene * scene, const char * path)
 		itoa(i, num_path, 10);
 		path_name += num_path;
 
-		WriteFileInMemory(data, path_name.c_str(), path, size, ".geometry");
+		WriteFile(data, path_name.c_str(), path, size, ".geometry");
 	}
 }
 
