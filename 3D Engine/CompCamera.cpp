@@ -12,10 +12,10 @@ CompCamera::CompCamera(GameObject * parent, COMP_TYPE type) : Component(parent, 
 	frustum.up = float3::unitY;
 
 	frustum.nearPlaneDistance = 0.1f;
-	//frustum.farPlaneDistance = 1000.0f;
-	frustum.farPlaneDistance = 1.0f;
+	frustum.farPlaneDistance = 1000.0f;
+	//frustum.farPlaneDistance = 1.0f;
 	frustum.verticalFov = DEGTORAD * 60.0f;
-	SetAspectRatio(1.3f);
+	SetAspectRatio(2.0f * atanf(tanf(frustum.verticalFov / 2.0f) * 1.3f));
 }
 
 CompCamera::~CompCamera()
@@ -43,47 +43,41 @@ void CompCamera::DebugDraw() {
 }
 
 float CompCamera::GetNearPlaneDistance() const{
-	return frustum.NearPlaneDistance();
+	return frustum.nearPlaneDistance;
 }
 
 float CompCamera::GetFarPlaneDistance() const {
-	return frustum.FarPlaneDistance();
+	return frustum.farPlaneDistance;
 }
 
 float CompCamera::GetFOV() const {
-	return frustum.VerticalFov() * RADTODEG;
+	return frustum.verticalFov * RADTODEG;
 }
 
 float CompCamera::GetApectRatio() const {
 	return frustum.AspectRatio();
 }
 
-float* CompCamera::GetViewMatrix() const
+float4x4 CompCamera::GetViewMatrix() const
 {
-	static math::float4x4 matrix;
-	matrix = frustum.ViewMatrix();
-	//matrix.Transpose();
-
-	return (float*)matrix.v;
+	math::float4x4 matrix = frustum.ViewMatrix();
+	return matrix.Transposed();
 }
 
 float4x4 CompCamera::GetProjectionMatrix() const
 {
-	static math::float4x4 matrix;
-	matrix = frustum.ProjectionMatrix();
-	matrix.Transpose();
-
-	return matrix;
+	math::float4x4 matrix = frustum.ProjectionMatrix();
+	return matrix.Transposed();
 }
 
 void CompCamera::SetNearPlaneDistance(float distance) {
-	if (distance > 0.0f && distance < frustum.FarPlaneDistance()) {
+	if (distance > 0.0f && distance < frustum.farPlaneDistance) {
 		frustum.nearPlaneDistance = distance;
 	}
 }
 
 void CompCamera::SetFarPlaneDistance(float distance) {
-	if (distance > 0.0f && distance > frustum.NearPlaneDistance()) {
+	if (distance > 0.0f && distance > frustum.nearPlaneDistance) {
 		frustum.farPlaneDistance = distance;
 	}
 }

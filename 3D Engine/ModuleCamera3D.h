@@ -4,6 +4,9 @@
 #include "Module.h"
 #include "Globals.h"
 #include "glmath.h"
+#include "MathGeoLib/MathGeoLib.h"
+
+class CompCamera;
 
 class ModuleCamera3D : public Module
 {
@@ -15,26 +18,26 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
-	void Look(const vec3 &Position, const vec3 &Reference, bool RotateAroundReference = false);
-	void LookAt(const vec3 &Spot);
-	void Move(const vec3 &Movement);
-	void CentrateObjectView();
-	float* GetViewMatrix();
+	//void Look(const float3 &Position, const float3 &Reference, bool RotateAroundReference = false);
+	void RotateAroundReference(const math::float3& reference, float ArroundX, float ArroundY) const;
+	void LookAt(const float3 &Spot);
+	//void Move(const vec3 &Movement);
+	//void CentrateObjectView();
+	float* GetViewMatrix() const;
+	float4x4 GetProjectionMatrix() const;
+
+	float3 GetCameraPos()const;
 
 private:
 
-	void CalculateViewMatrix();
+	//void CalculateViewMatrix();
 
 public:
-	
-	vec3 X, Y, Z, Position, Reference;
 
 	float speed = 3.0f;
 	float wheelSpeed = 3.0f;
 
-private:
-
-	mat4x4 ViewMatrix, ViewMatrixInverse;
+	CompCamera* engine_camera = nullptr;
 };
 
 #endif // !MODULECAMERA3D_H

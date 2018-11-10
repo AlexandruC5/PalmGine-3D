@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "glmath.h"
+#include "MathGeoLib/MathGeoLib.h"
 #include "Light.h"
 #include "ModuleImporter.h"
 

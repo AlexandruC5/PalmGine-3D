@@ -46,7 +46,7 @@ void CompTransform::SetPosition(math::float3 pos)
 			global_transform = transform_matrix*tmp_transform->GetTransformationMatrix();
 	}	
 	if (parent->GetCompCamera() != nullptr) {
-		parent->GetCompCamera()->frustum.SetPos(position);
+		parent->GetCompCamera()->frustum.pos = position;
 	}
 
 	if (parent->GetNumChilds() > 0) {
