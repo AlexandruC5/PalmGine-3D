@@ -58,6 +58,24 @@ float CompCamera::GetApectRatio() const {
 	return frustum.AspectRatio();
 }
 
+float* CompCamera::GetViewMatrix() const
+{
+	static math::float4x4 matrix;
+	matrix = frustum.ViewMatrix();
+	//matrix.Transpose();
+
+	return (float*)matrix.v;
+}
+
+float4x4 CompCamera::GetProjectionMatrix() const
+{
+	static math::float4x4 matrix;
+	matrix = frustum.ProjectionMatrix();
+	matrix.Transpose();
+
+	return matrix;
+}
+
 void CompCamera::SetNearPlaneDistance(float distance) {
 	if (distance > 0.0f && distance < frustum.FarPlaneDistance()) {
 		frustum.nearPlaneDistance = distance;

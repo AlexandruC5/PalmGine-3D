@@ -23,6 +23,9 @@ public:
 	float GetFOV() const;
 	float GetApectRatio() const;
 
+	float* GetViewMatrix() const;
+	float4x4 GetProjectionMatrix() const;
+
 	//Setters
 	void SetNearPlaneDistance(float distance);
 	void SetFarPlaneDistance(float distance);
