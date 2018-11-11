@@ -142,6 +142,8 @@ GameObject* ModuleSceneIntro::TestRayWithAllGO(const LineSegment& picker) const 
 	std::vector<GameObject*> posible_GOs_picked;
 	quadtree.CollectIntersections(posible_GOs_picked, picker);
 
+	float lower_hit_distance = inf;
+
 	for (uint i = 0; i < root_gameObjects->GetNumChilds(); ++i) {
 		TestGOOutOfQuad(posible_GOs_picked, root_gameObjects->childs[i]);
 	}
@@ -178,7 +180,10 @@ GameObject* ModuleSceneIntro::TestRayWithAllGO(const LineSegment& picker) const 
 					float hit_distance = 0.0f;
 
 					if (picker_in_local.Intersects(nearestTriangle, &hit_distance, &hit_point)) {
-						posibleGO = posible_GOs_picked[i];
+						if (hit_distance < lower_hit_distance) {
+							lower_hit_distance = hit_distance;
+							posibleGO = posible_GOs_picked[i];
+						}
 					}
 				}
 			}
