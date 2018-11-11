@@ -30,7 +30,8 @@ public:
 	void SetGameObjectDrawability();
 
 	void PickGO(const LineSegment picker);
-	void TestRayWithAllGO(const LineSegment& picker, float& distance, GameObject** bestposibleGO) const;
+	GameObject* TestRayWithAllGO(const LineSegment& picker) const;
+	void TestGOOutOfQuad(std::vector<GameObject*> &posible_GOs_picked, GameObject* posibleGO) const;
 
 public:
 

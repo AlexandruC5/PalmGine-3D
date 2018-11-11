@@ -133,15 +133,70 @@ void ModuleSceneIntro::SetGameObjectDrawability() {
 }
 
 void ModuleSceneIntro::PickGO(const LineSegment picker) {
-	float distance = inf;
-	GameObject* posibleGO = nullptr;
-
 	//Test GO to see which one is the one that the mouse is picking
-	TestRayWithAllGO(picker, distance, &posibleGO);
-
-	selected_gameObject = posibleGO;
+	selected_gameObject = TestRayWithAllGO(picker);
 }
 
-void ModuleSceneIntro::TestRayWithAllGO(const LineSegment& picker, float& distance, GameObject** bestposibleGO) const {
+GameObject* ModuleSceneIntro::TestRayWithAllGO(const LineSegment& picker) const {
+	GameObject* posibleGO = nullptr;
+	std::vector<GameObject*> posible_GOs_picked;
+	quadtree.CollectIntersections(posible_GOs_picked, picker);
 
+	for (uint i = 0; i < root_gameObjects->GetNumChilds(); ++i) {
+		TestGOOutOfQuad(posible_GOs_picked, root_gameObjects->childs[i]);
+	}
+
+	Mesh* GOMesh = nullptr;
+	CompMesh* GOCompMesh = nullptr;
+	CompTransform* GOTrans = nullptr;
+
+	for (uint i = 0; i < posible_GOs_picked.size(); ++i) {
+		math::Triangle nearestTriangle;
+		math::LineSegment picker_in_local(picker);
+
+		GOTrans = posible_GOs_picked[i]->GetCompTransform();
+
+		if (GOTrans != nullptr) {
+			//Pass ray to localPos
+			picker_in_local.Transform(GOTrans->GetTransformationMatrix().Inverted());
+
+			GOCompMesh = posible_GOs_picked[i]->GetCompMesh();
+
+			if (GOCompMesh != nullptr) {
+				GOMesh = GOCompMesh->GetMesh();
+
+				for (uint iterator = 0; iterator < GOMesh->num_indices; ++iterator) {
+					//Set triangle
+					nearestTriangle.a = { GOMesh->vertices[GOMesh->indices[iterator] * 3], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 1], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 2] };
+					iterator++;
+					nearestTriangle.b = { GOMesh->vertices[GOMesh->indices[iterator] * 3], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 1], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 2] };
+					iterator++;
+					nearestTriangle.c = { GOMesh->vertices[GOMesh->indices[iterator] * 3], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 1], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 2] };
+					iterator++;
+
+					float3 hit_point = float3::zero;
+					float hit_distance = 0.0f;
+
+					if (picker_in_local.Intersects(nearestTriangle, &hit_distance, &hit_point)) {
+						posibleGO = posible_GOs_picked[i];
+					}
+				}
+			}
+		}
+	}
+	return posibleGO;
 }
+
+//Used to insert GO that aren't in quadtree but are in frustrum
+void ModuleSceneIntro::TestGOOutOfQuad(std::vector<GameObject*> &posible_GOs_picked, GameObject* posibleGO) const {
+	if (posibleGO->IsActive() == true && posibleGO->IsStatic() == false) {
+		if (App->camera->engine_camera->frustum.Contains(posibleGO->GetAABB()) == true) {
+			posible_GOs_picked.push_back(posibleGO);
+		}
+
+		for (uint i = 0; i <posibleGO->GetNumChilds(); ++i) {
+			TestGOOutOfQuad(posible_GOs_picked, posibleGO->childs[i]);
+		}
+	}
+}
+
