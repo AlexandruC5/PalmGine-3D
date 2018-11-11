@@ -29,6 +29,11 @@ public:
 	GameObject* GetSelectedGO() const;
 	void SetGameObjectDrawability();
 
+	void PickGO(const LineSegment picker);
+	void TestRayWithAllGO(const LineSegment& picker, float& distance, GameObject** bestposibleGO) const;
+
+public:
+
 	GameObject* root_gameObjects =  nullptr;
 	GameObject* selected_gameObject = nullptr;
 	GameObject* camera = nullptr;

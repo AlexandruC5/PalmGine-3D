@@ -7,6 +7,7 @@
 #include "ModuleRenderer3D.h"
 #include "MathGeoLib/MathGeoLib.h"
 #include "mmgr/mmgr.h"
+#include "CompCamera.h"
 
 #define IM_ARRAYSIZE(_ARR)  ((int)(sizeof(_ARR)/sizeof(*_ARR)))
 
@@ -150,6 +151,11 @@ void PanelConfig::Draw()
 	if (ImGui::CollapsingHeader("Camera")) {
 		ImGui::SliderFloat("Camera Speed", &App->camera->speed, 0, 15, NULL);
 		ImGui::SliderFloat("Wheel Speed", &App->camera->wheelSpeed, 0, 15, NULL);
+		float fov = App->camera->engine_camera->GetFOV();
+		if (ImGui::SliderFloat("Field of View", &fov, 1.0f, 179.0f)) {
+			App->camera->engine_camera->SetFOV(fov);
+			App->renderer3D->OnResize(App->window->width, App->window->height);
+		}
 	}
 
 	//Lights

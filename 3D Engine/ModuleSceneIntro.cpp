@@ -6,6 +6,7 @@
 #include "CompTransform.h"
 #include "CompMesh.h"
 #include "Component.h"
+#include "MathGeoLib/MathGeoLib.h"
 
 #pragma comment( lib, "Glew/libx86/glew32.lib" )
 
@@ -129,6 +130,18 @@ void ModuleSceneIntro::SetGameObjectDrawability() {
 			}
 		}
 	}
+}
 
+void ModuleSceneIntro::PickGO(const LineSegment picker) {
+	float distance = inf;
+	GameObject* posibleGO = nullptr;
+
+	//Test GO to see which one is the one that the mouse is picking
+	TestRayWithAllGO(picker, distance, &posibleGO);
+
+	selected_gameObject = posibleGO;
+}
+
+void ModuleSceneIntro::TestRayWithAllGO(const LineSegment& picker, float& distance, GameObject** bestposibleGO) const {
 
 }

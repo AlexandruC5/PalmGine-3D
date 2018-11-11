@@ -5,6 +5,7 @@
 #include "ModuleSceneIntro.h"
 #include "CompTransform.h"
 #include "CompCamera.h"
+#include "ImGuizmo-master/ImGuizmo.h"
 
 ModuleCamera3D::ModuleCamera3D(bool start_enabled) : Module(start_enabled)
 {
@@ -121,14 +122,21 @@ update_status ModuleCamera3D::Update(float dt)
 		engine_camera->frustum.Translate(newPos);
 	}
 
-	if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) {
-		float width = (float)App->window->screen_surface->w;
-		float height = (float)App->window->screen_surface->h;
-		int mouseX = App->input->GetMouseX();
-		int mouseY = App->input->GetMouseY();
-		picker = engine_camera->frustum.UnProjectLineSegment(mouseX, mouseY);
-	}
+	if (ImGui::IsMouseHoveringAnyWindow() == false && ImGuizmo::IsOver() == false) {
+		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) {
+			float window_width = (float)App->window->screen_surface->w;
+			float window_height = (float)App->window->screen_surface->h;
+			int mouseX = App->input->GetMouseX();
+			int mouseY = App->input->GetMouseY();
 
+			float mouseX_normalized = -(1.0f - (float(mouseX) * 2.0f) / window_width);
+			float mouseY_normalized = 1.0f - (float(mouseY) * 2.0f) / window_height;
+
+			picker = engine_camera->frustum.UnProjectLineSegment(mouseX_normalized, mouseY_normalized);
+
+			App->scene_intro->PickGO(picker);
+		}
+	}
 	DebugDrawPicker();
 
 	// Camera speed
