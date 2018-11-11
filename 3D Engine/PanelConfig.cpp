@@ -92,15 +92,17 @@ void PanelConfig::Draw()
 
 	//Window
 	if (ImGui::CollapsingHeader("Window")) {
+		width = App->window->width;
+		height = App->window->height;
 		//Alpha
 		ImGuiStyle& style = ImGui::GetStyle();
 		ImGui::DragFloat("Global Alpha", &style.Alpha, 0.005f, 0.20f, 1.0f, "%.2f");
 		//Brightness
 		ImGui::SliderFloat("Brightness", &brightness, 0, 2, NULL);
 		//Width
-		ImGui::SliderInt("Width", &width, 0, 1920, NULL);
+		ImGui::SliderInt("Width", &App->window->width, 0, 1920, NULL);
 		//Height
-		ImGui::SliderInt("Height", &height, 0, 1080, NULL);
+		ImGui::SliderInt("Height", &App->window->height, 0, 1080, NULL);
 		
 		//Screen
 		if (ImGui::Checkbox("Fullscreen", &App->window->fullscreen))
@@ -128,6 +130,7 @@ void PanelConfig::Draw()
 			App->window->height = height;
 			// Brigthness
 			SDL_SetWindowBrightness(App->window->window, brightness);
+			App->renderer3D->OnResize(width,height);
 		}
 
 	}
@@ -160,7 +163,11 @@ void PanelConfig::Draw()
 		lightPos[2] = App->renderer3D->lights[0].position.z;
 		ImGui::Text("Pos:");
 		ImGui::SameLine();
-		ImGui::InputFloat3("",lightPos);
+		ImGui::Text("     %f", lightPos[0]);
+		ImGui::SameLine();
+		ImGui::Text("     %f", lightPos[1]);
+		ImGui::SameLine();
+		ImGui::Text("     %f", lightPos[2]);
 		//color
 		lightColour[0] = App->renderer3D->lights[0].ambient.r;
 		lightColour[1] = App->renderer3D->lights[0].ambient.g;

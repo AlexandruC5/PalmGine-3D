@@ -121,6 +121,16 @@ update_status ModuleCamera3D::Update(float dt)
 		engine_camera->frustum.Translate(newPos);
 	}
 
+	if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) {
+		float width = (float)App->window->screen_surface->w;
+		float height = (float)App->window->screen_surface->h;
+		int mouseX = App->input->GetMouseX();
+		int mouseY = App->input->GetMouseY();
+		picker = engine_camera->frustum.UnProjectLineSegment(mouseX, mouseY);
+	}
+
+	DebugDrawPicker();
+
 	// Camera speed
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN)
 		speed *= 2;
@@ -194,4 +204,17 @@ float4x4 ModuleCamera3D::GetProjectionMatrix() const {
 
 float3 ModuleCamera3D::GetCameraPos()const {
 	return engine_camera->frustum.pos;
+}
+
+void ModuleCamera3D::DebugDrawPicker() {
+	glBegin(GL_LINES);
+	glLineWidth(5.0f);
+	glColor4f(1.f, 0.f, 0.f, 1.f);
+
+	picker.a.x;
+	glVertex3f(picker.a.x, picker.a.y, picker.a.z);
+	glVertex3f(picker.b.x, picker.b.y, picker.b.z);
+
+	glColor4f(1.f, 1.f, 1.f, 1.f);
+	glEnd();
 }

@@ -25,9 +25,7 @@ public:
 
 	float3 GetCameraPos()const;
 
-private:
-
-	//void CalculateViewMatrix();
+	void DebugDrawPicker();
 
 public:
 
@@ -35,6 +33,11 @@ public:
 	float wheelSpeed = 3.0f;
 
 	CompCamera* engine_camera = nullptr;
+
+
+private:
+	LineSegment picker;
+
 };
 
 #endif // !MODULECAMERA3D_H
