@@ -481,6 +481,9 @@
     <ClInclude Include="MathGeoLib\Algorithm\Random\LCG.h">
       <Filter>Sources\Tools\MathGeoLib\Algorithm\Random</Filter>
     </ClInclude>
+    <ClInclude Include="PanelTimeManagement.h">
+      <Filter>Sources\Modules\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -684,6 +687,9 @@
     </ClCompile>
     <ClCompile Include="MathGeoLib\Algorithm\Random\LCG.cpp">
       <Filter>Sources\Tools\MathGeoLib\Algorithm\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="PanelTimeManagement.cpp">
+      <Filter>Sources\Modules\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

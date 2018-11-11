@@ -13,6 +13,7 @@ class PanelConsole;
 class PanelConfig;
 class PanelInspector;
 class PanelHierarchy;
+class PanelTimeManagement;
 
 class ModuleUI : public Module
 {
@@ -35,6 +36,7 @@ public:
 	PanelConfig* config = nullptr;
 	PanelInspector* inspector = nullptr;
 	PanelHierarchy* goHierarchy = nullptr;
+	PanelTimeManagement* time_management = nullptr;
 
 };
 

@@ -5,6 +5,7 @@
 #include "PanelInspector.h"
 #include "PanelConfig.h"
 #include "PanelHierarchy.h"
+#include "PanelTimeManagement.h"
 #include "imGUI/imgui.h"
 #include "imGUI/imgui_impl_sdl_gl3.h"
 #include "Glew/include/glew.h"
@@ -18,6 +19,7 @@ ModuleUI::ModuleUI(bool start_enabled)
 	panels.push_back(config = new PanelConfig());
 	panels.push_back(inspector = new PanelInspector());
 	panels.push_back(goHierarchy = new PanelHierarchy());
+	panels.push_back(time_management = new PanelTimeManagement());
 }
 
 ModuleUI::~ModuleUI()
@@ -40,6 +42,11 @@ update_status ModuleUI::Update(float dt)
 	// IMGUI CODE
 	static bool show_test_window = false;
 	static bool show_style_editor = false;
+
+	//TimeManagement
+	if (time_management->active == true) {
+		time_management->Draw();
+	}
 
 	// Test window
 	if (show_test_window)
