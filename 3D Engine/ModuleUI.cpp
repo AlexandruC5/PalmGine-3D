@@ -65,9 +65,9 @@ update_status ModuleUI::Update(float dt)
 
 	//Inspector/Config menu
 	if (configActive == true) {
-		ImGui::Begin("", &configActive,ImGuiWindowFlags_NoResize);
-		ImGui::SetWindowPos({(float) App->window->width - 500, 20.0f });
-		ImGui::SetWindowSize(ImVec2(500, 500), ImGuiCond_FirstUseEver);
+		ImGui::Begin("", &configActive,ImGuiWindowFlags_NoResize | ImGuiWindowFlags_HorizontalScrollbar);
+		ImGui::SetWindowPos({(float) App->window->width - ((500*App->window->width)/1280), 20.0f });
+		ImGui::SetWindowSize(ImVec2((500*App->window->width)/1280, (700*App->window->height)/1024), ImGuiCond_Always);
 		if (ImGui::SmallButton("Inspector")) {
 			config->active = false;
 			inspector->active = true;
