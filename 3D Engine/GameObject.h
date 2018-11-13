@@ -58,7 +58,7 @@ public:
 	math::AABB GetAABB();
 
 private:
-	uint id = 0;
+	uint uuid = 0;
 	std::string name = "Unnamed";
 	bool active = true;
 	bool static_obj = false;

@@ -33,6 +33,8 @@ public:
 	GameObject* TestRayWithAllGO(const LineSegment& picker) const;
 	void TestGOOutOfQuad(std::vector<GameObject*> &posible_GOs_picked, GameObject* posibleGO) const;
 
+	// Serialization
+
 public:
 
 	GameObject* root_gameObjects =  nullptr;

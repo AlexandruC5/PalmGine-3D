@@ -39,11 +39,11 @@ public:
 
 private:
 	COMP_TYPE type = C_UNKNOWN;
-	bool active = true;
 
 protected:
 	const char* name = nullptr;
 	GameObject* parent = nullptr;
+	bool active = true;
 };
 
 #endif // !COMPONENT_H

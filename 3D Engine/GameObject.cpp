@@ -9,10 +9,18 @@
 #include "ModuleSceneIntro.h"
 #include "Glew/include/glew.h"
 #include "ModuleSceneIntro.h"
-
+#include <time.h>
+#include <random>
+#include <limits>
 
 GameObject::GameObject(GameObject* parent) : parent(parent)
 {
+	// TODO MAKE FUNCTION ON GLOBALS
+	std::random_device rd;     
+	std::mt19937_64 eng(rd()); 							   
+	std::uniform_int_distribution<uint> distr;
+	uuid = distr(eng);
+
 	this->AddEmptyComponent(COMP_TYPE::C_TRANSFORM);
 	if (parent != nullptr)
 		parent->childs.push_back(this);
