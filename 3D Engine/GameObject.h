@@ -31,6 +31,9 @@ public:
 	bool IsRootGo() const;
 	bool IsStatic() const;
 	void SetStatic(bool isStatic);
+	void SetUUID(uint uuid);
+	void SetParentUUID(uint uuid);
+	void SetActive(bool set);
 
 	// Parent -------------------------
 	const GameObject* GetParent() const;
@@ -58,8 +61,10 @@ public:
 	math::AABB GetAABB();
 
 	uint GetUUID()const;
+	uint GetParentUUID()const;
 private:
 	uint uuid = 0;
+	uint parent_uuid = 0;
 	std::string name = "Unnamed";
 	bool active = true;
 	bool static_obj = false;

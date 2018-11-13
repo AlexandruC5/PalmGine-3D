@@ -91,7 +91,7 @@ update_status ModuleUI::Update(float dt)
 		}
 		ImGui::SameLine();
 		if (ImGui::SmallButton("Load scene")) {
-			App->scene_intro->SerializeScene("TEST_SERIALIZED_SCENE");
+			App->scene_intro->LoadSceneData("Assets/Scenes/TEST_SERIALIZED_SCENE.binaryscene");
 		}
 		ImGui::SameLine();
 		ImGui::End();

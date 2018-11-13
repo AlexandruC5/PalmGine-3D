@@ -101,6 +101,21 @@ void GameObject::SetStatic(bool isStatic) {
 	}
 }
 
+void GameObject::SetUUID(uint uuid)
+{
+	this->uuid = uuid;
+}
+
+void GameObject::SetParentUUID(uint uuid)
+{
+	this->parent_uuid = uuid;
+}
+
+void GameObject::SetActive(bool set)
+{
+	active = set;
+}
+
 const GameObject * GameObject::GetParent() const
 {
 	return parent;
@@ -285,4 +300,9 @@ math::AABB GameObject::GetAABB()
 uint GameObject::GetUUID() const
 {
 	return uuid;
+}
+
+uint GameObject::GetParentUUID() const
+{
+	return parent_uuid;
 }

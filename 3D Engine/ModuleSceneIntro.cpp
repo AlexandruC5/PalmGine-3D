@@ -209,20 +209,28 @@ void ModuleSceneIntro::SerializeScene(const char * name)
 {
 	char* data = nullptr;
 	char* cursor = nullptr;
-	uint size = 0;
+	uint size = sizeof(uint); // First, the num of GO we will have
+	uint go_num = 0;
+	uint bytes = 0;
 
-	size = GetSceneSize(root_gameObjects);
+	size += GetSceneSize(root_gameObjects, &go_num);
 	data = new char[size];
 	cursor = data;
 	
+	// Number of GameObjects
+	bytes = sizeof(uint);
+	memcpy(cursor, &go_num, bytes);
+	cursor += bytes;
+
 	CreateData(&cursor, root_gameObjects);
 
 	CreateFileData(name, data, size);
 }
 
-uint ModuleSceneIntro::GetSceneSize(GameObject* go)
+uint ModuleSceneIntro::GetSceneSize(GameObject* go, uint* go_num)
 {
 	uint size = 0;
+	go_num[0] += 1;
 	size = GetGameObjectSceneSize(go);
 	for (uint i = 0; i < go->components.size(); i++)
 	{
@@ -252,7 +260,7 @@ uint ModuleSceneIntro::GetSceneSize(GameObject* go)
 	}
 	for (uint i = 0; i < go->GetNumChilds(); i++)
 	{
-		size += GetSceneSize(go->childs[i]);
+		size += GetSceneSize(go->childs[i], go_num);
 	}
 	return size;
 }
@@ -287,7 +295,7 @@ void ModuleSceneIntro::CreateData(char ** cursor, GameObject * go)
 
 	// UUID 
 	bytes = sizeof(uint);
-	uint uuid = go->GetUUID();
+	uint uuid = 2;// go->GetUUID();
 	memcpy(cursor[0], &uuid, bytes);
 	cursor[0] += bytes;
 	// UUID PARENT
@@ -328,14 +336,14 @@ void ModuleSceneIntro::CreateData(char ** cursor, GameObject * go)
 			((CompTransform*)go->components[i])->WriteComponentData(cursor);
 			break;
 		}
-		case COMP_TYPE::C_MESH:
-		{
-			((CompMesh*)go->components[i])->WriteComponentData(cursor);
-			break;
-		}
 		case COMP_TYPE::C_MATERIAL:
 		{
 			((CompMaterial*)go->components[i])->WriteComponentData(cursor);
+			break;
+		}
+		case COMP_TYPE::C_MESH:
+		{
+			((CompMesh*)go->components[i])->WriteComponentData(cursor);
 			break;
 		}
 		case COMP_TYPE::C_CAMERA:
@@ -375,6 +383,143 @@ void ModuleSceneIntro::CreateFileData(const char * name, char* data, uint size)
 
 void ModuleSceneIntro::LoadSceneData(char * path)
 {
+	char* data = ReadBinaryScene(path);
+	char* cursor = data;
+	uint bytes = 0;
+	uint num_go = 0;
+	std::list<GameObject*> go_list;
+	
+	bytes = sizeof(uint);
+	memcpy(&num_go, cursor, bytes);
+	cursor += bytes;
+
+	for (uint i = 0; i < num_go; i++)
+	{
+		uint uuid = 0;
+		uint parent_uuid = 0;
+		char* name = new char[64];
+		int is_active = 0;
+		int is_static = 0;
+		uint num_comp = 0;
+		GameObject* go = new GameObject(nullptr);
+
+		// UUID
+		bytes = sizeof(uint);
+		memcpy(&uuid, cursor, bytes);
+		go->SetUUID(uuid);
+		cursor += bytes;
+		// PARENT UUID
+		bytes = sizeof(uint);
+		memcpy(&parent_uuid, cursor, bytes);
+		go->SetParentUUID(parent_uuid);
+		cursor += bytes;
+		// NAME
+		bytes = sizeof(char)*64;
+		memcpy(name, cursor, bytes);
+		go->SetName(name);
+		cursor += bytes;
+		// IS ACTIVE
+		bytes = sizeof(int);
+		memcpy(&is_active, cursor, bytes);
+		go->SetActive((bool)is_active);
+		cursor += bytes;
+		// IS STATIC
+		bytes = sizeof(int);
+		memcpy(&is_static, cursor, bytes);
+		go->SetStatic((bool)is_static);
+		cursor += bytes;
+		// NUM COMPONENTS
+		bytes = sizeof(uint);
+		memcpy(&num_comp, cursor, bytes);
+		cursor += bytes;
+
+		for (uint j = 0; j < num_comp; j++)
+		{
+			int comp_type = 0;
+			int comp_active = 0;
+
+			// COMPONENT TYPE
+			bytes = sizeof(int);
+			memcpy(&comp_type, cursor, bytes);
+			cursor += bytes;
+			// IS ACTIVE
+			bytes = sizeof(int);
+			memcpy(&comp_active, cursor, bytes);
+			cursor += bytes;
+
+			switch (comp_type)
+			{
+			case COMP_TYPE::C_TRANSFORM:
+			{
+				CompTransform* comp_trans = go->GetCompTransform();
+				float3 translation = { 0,0,0 };
+				float3 rotation = { 0,0,0 };
+				float3 scale = { 0,0,0 };
+				// TRANSLATION
+				bytes = sizeof(float3);
+				memcpy(&translation, cursor, bytes);
+				cursor += bytes;
+				// ROTATION
+				bytes = sizeof(float3);
+				memcpy(&rotation, cursor, bytes);
+				cursor += bytes;
+				// SCALE
+				bytes = sizeof(float3);
+				memcpy(&scale, cursor, bytes);
+				cursor += bytes;
+				// set values to component
+				comp_trans->SetPosition(translation);
+				comp_trans->SetRotation(rotation);
+				comp_trans->SetScale(scale);
+				break;
+			}
+			case COMP_TYPE::C_MESH:
+			{
+				char* path = new char[128];
+				// PATH
+				bytes = sizeof(char) * 128;
+				memcpy(path, cursor, bytes);
+				cursor += bytes;
+				App->importer->ReadBinaryMesh(path, go);
+				break;
+			}
+			case COMP_TYPE::C_MATERIAL:
+			{
+				char* path = new char[128];
+				// PATH
+				bytes = sizeof(char) * 128;
+				memcpy(path, cursor, bytes);
+				cursor += bytes;
+				App->importer->LoadDDS(path, go);
+				break;
+			}
+			case COMP_TYPE::C_CAMERA:
+			{
+				CompCamera* comp_camera = new CompCamera(go, COMP_TYPE::C_CAMERA);
+				Frustum frustum = Frustum();
+				int frustum_culling = 0;
+				// FRUSTRUM
+				bytes = sizeof(Frustum);
+				memcpy(&frustum, cursor, bytes);
+				cursor += bytes;
+				// FRUSTRUM CULLING ACTIVE
+				bytes = sizeof(int);
+				memcpy(&frustum_culling, cursor, bytes);
+				cursor += bytes;
+				// set values to component
+				comp_camera->frustum = frustum;
+				comp_camera->frustum_culling = frustum_culling;
+				go->AddComponent(comp_camera);
+				break;
+			}
+			}	
+		}
+		// List pushback
+	}
+}
+
+char * ModuleSceneIntro::ReadBinaryScene(char * path)
+{
 	FILE * pFile;
 	long lSize;
 	char * data;
@@ -397,5 +542,7 @@ void ModuleSceneIntro::LoadSceneData(char * path)
 	if (result != lSize) { fputs("Reading error", stderr); exit(3); }
 
 	fclose(pFile);
+
+	return data;
 }
 

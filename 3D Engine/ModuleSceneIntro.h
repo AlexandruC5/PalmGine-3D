@@ -35,12 +35,13 @@ public:
 
 	// Binary Serialization
 	void SerializeScene(const char* name);
-	uint GetSceneSize(GameObject* go);
+	uint GetSceneSize(GameObject* go, uint* go_num);
 	uint GetGameObjectSceneSize(GameObject* go);
 	void CreateData(char** cursor, GameObject* go);
 	void CreateFileData(const char* name, char* data, uint size);
 
 	void LoadSceneData(char* path);
+	char* ReadBinaryScene(char*path);
 
 public:
 

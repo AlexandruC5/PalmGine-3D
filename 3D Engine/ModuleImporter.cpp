@@ -519,7 +519,7 @@ char * ModuleImporter::LoadData(const char * path)
 {
 	FILE * pFile;
 	long lSize;
-	char * buffer;
+	char * data;
 	size_t result;
 
 	pFile = fopen(path, "rb");
@@ -531,16 +531,16 @@ char * ModuleImporter::LoadData(const char * path)
 	rewind(pFile);
 
 	//Allocate memory to contain the whole file:
-	buffer = new char[lSize];// (char*)malloc(sizeof(char)*lSize);
-	if (buffer == NULL) { fputs("Memory error", stderr); exit(2); }
+	data = new char[lSize];// (char*)malloc(sizeof(char)*lSize);
+	if (data == NULL) { fputs("Memory error", stderr); exit(2); }
 
 	//Copy the file into the buffer:
-	result = fread(buffer, 1, lSize, pFile);
+	result = fread(data, 1, lSize, pFile);
 	if (result != lSize) { fputs("Reading error", stderr); exit(3); }
 
 	fclose(pFile);
 
-	return buffer;
+	return data;
 }
 
 void ModuleImporter::LoadRecursiveHierarchy(char** cursor, GameObject* parent)
