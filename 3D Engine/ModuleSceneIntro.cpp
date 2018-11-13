@@ -514,7 +514,7 @@ void ModuleSceneIntro::LoadSceneData(char * path)
 			}
 			}	
 		}
-		// List pushback
+		go_list.push_back(go);
 	}
 }
 
