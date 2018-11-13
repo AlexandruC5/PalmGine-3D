@@ -44,8 +44,16 @@ const char * Component::GetName() const
 	return name;
 }
 
+uint Component::GetSize() 
+{
+	return 0;
+}
+
 void Component::BlitComponentInspector()
 {
 	ImGui::Text("Component");
 	ImGui::Checkbox("Active", &active);
 }
+
+void Component::WriteComponentData(char ** cursor)
+{}

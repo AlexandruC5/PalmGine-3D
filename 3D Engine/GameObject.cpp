@@ -281,3 +281,8 @@ math::AABB GameObject::GetAABB()
 
 	return newbox;
 }
+
+uint GameObject::GetUUID() const
+{
+	return uuid;
+}

@@ -2,7 +2,7 @@
 #define COMPONENT_H
 
 #include <string>
-
+#include "Globals.h"
 enum COMP_TYPE
 {
 	C_UNKNOWN = 0,
@@ -29,6 +29,7 @@ public:
 	COMP_TYPE GetType() const;
 	bool IsActive() const;
 	const char* GetName() const;
+	uint GetSize();
 
 	// Utility
 	virtual bool Enable();
@@ -37,13 +38,14 @@ public:
 	// UI
 	virtual void BlitComponentInspector();
 
-private:
-	COMP_TYPE type = C_UNKNOWN;
+	// Write data
+	void WriteComponentData(char** cursor);
 
 protected:
 	const char* name = nullptr;
 	GameObject* parent = nullptr;
 	bool active = true;
+	COMP_TYPE type = C_UNKNOWN;
 };
 
 #endif // !COMPONENT_H

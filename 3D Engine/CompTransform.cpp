@@ -201,3 +201,49 @@ math::float4x4 CompTransform::GetTransformationMatrix() const {
 	}
 	return transform_matrix;
 }
+
+uint CompTransform::GetSize() 
+{
+	// GET SIZE FOR SERIALIZATION
+	uint size = 0;
+
+	// COMPONENT TYPE
+	size += sizeof(int);
+	// IS ACTIVE
+	size += sizeof(int);
+	// POSITION
+	size += sizeof(float3);
+	// ROTATION
+	size += sizeof(float3);
+	// SCALE
+	size += sizeof(float3);
+
+	return size;
+}
+
+void CompTransform::WriteComponentData(char ** cursor)
+{
+	uint bytes = 0;
+
+	// COMPONENT TYPE
+	bytes = sizeof(int);
+	memcpy(cursor[0], &type, bytes);
+	cursor[0] += bytes;
+	// IS ACTIVE
+	bytes = sizeof(int);
+	int tmp_active = (int)active;
+	memcpy(cursor[0], &tmp_active, bytes);
+	cursor[0] += bytes;
+	// POSITION
+	bytes = sizeof(float3);
+	memcpy(cursor[0], &position, bytes);
+	cursor[0] += bytes;
+	// ROTATION
+	bytes = sizeof(float3);
+	memcpy(cursor[0], &rotation, bytes);
+	cursor[0] += bytes;
+	// SCALE
+	bytes = sizeof(float3);
+	memcpy(cursor[0], &scale, bytes);
+	cursor[0] += bytes;
+}

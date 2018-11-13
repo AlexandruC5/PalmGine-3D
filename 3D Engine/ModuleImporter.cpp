@@ -459,6 +459,7 @@ void ModuleImporter::ReadBinaryMesh(const char * path, GameObject* go)
 	int has_normals = 0;
 	Mesh* mesh = new Mesh();
 	
+	mesh_comp->binary_path = (char*)path;
 	//Num indices
 	bytes = sizeof(uint);
 	memcpy(&mesh->num_indices, cursor, bytes);
@@ -631,6 +632,7 @@ void ModuleImporter::LoadDDS(const char * path, GameObject* go)
 	if (!strcmp(path, "empty_texture"))
 		return;
 	CompMaterial* material = new CompMaterial(go, C_MATERIAL);
+	material->binary_path = (char*)path;
 	ILuint id;
 	uint texture_id;
 	ilGenImages(1, &id);

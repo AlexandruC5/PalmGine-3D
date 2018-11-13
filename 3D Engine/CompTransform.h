@@ -39,7 +39,10 @@ public:
 	math::float3 GetScale() const;
 	math::float4x4 GetLocalTransform()const;
 	math::float4x4 GetTransformationMatrix() const;
+	uint GetSize();
 
+	// Write
+	void WriteComponentData(char** cursor);
 private:
 	Axis axis;
 

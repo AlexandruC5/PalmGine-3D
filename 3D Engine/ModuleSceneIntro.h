@@ -33,7 +33,14 @@ public:
 	GameObject* TestRayWithAllGO(const LineSegment& picker) const;
 	void TestGOOutOfQuad(std::vector<GameObject*> &posible_GOs_picked, GameObject* posibleGO) const;
 
-	// Serialization
+	// Binary Serialization
+	void SerializeScene(const char* name);
+	uint GetSceneSize(GameObject* go);
+	uint GetGameObjectSceneSize(GameObject* go);
+	void CreateData(char** cursor, GameObject* go);
+	void CreateFileData(const char* name, char* data, uint size);
+
+	void LoadSceneData(char* path);
 
 public:
 

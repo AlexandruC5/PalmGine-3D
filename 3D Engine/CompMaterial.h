@@ -31,9 +31,14 @@ public:
 	std::string GetTexturePath() const;
 	int GetTextureWidth() const;
 	int GetTextureHeight() const;
+	uint GetSize();
+	
+	void WriteComponentData(char ** cursor);
 
 private:
 	Texture* texture;
+public:
+	char* binary_path = nullptr;
 };
 
 #endif // !COMMATERIAL_H

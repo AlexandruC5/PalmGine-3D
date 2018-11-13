@@ -205,3 +205,197 @@ void ModuleSceneIntro::TestGOOutOfQuad(std::vector<GameObject*> &posible_GOs_pic
 	}
 }
 
+void ModuleSceneIntro::SerializeScene(const char * name)
+{
+	char* data = nullptr;
+	char* cursor = nullptr;
+	uint size = 0;
+
+	size = GetSceneSize(root_gameObjects);
+	data = new char[size];
+	cursor = data;
+	
+	CreateData(&cursor, root_gameObjects);
+
+	CreateFileData(name, data, size);
+}
+
+uint ModuleSceneIntro::GetSceneSize(GameObject* go)
+{
+	uint size = 0;
+	size = GetGameObjectSceneSize(go);
+	for (uint i = 0; i < go->components.size(); i++)
+	{
+		switch (go->components[i]->GetType())
+		{
+		case COMP_TYPE::C_TRANSFORM:
+		{
+			size += ((CompTransform*)go->components[i])->GetSize();
+			break;
+		}
+		case COMP_TYPE::C_MESH:
+		{
+			size += ((CompMesh*)go->components[i])->GetSize();
+			break;
+		}
+		case COMP_TYPE::C_MATERIAL:
+		{
+			size += ((CompMaterial*)go->components[i])->GetSize();
+			break;
+		}
+		case COMP_TYPE::C_CAMERA:
+		{
+			size += ((CompCamera*)go->components[i])->GetSize();
+			break;
+		}
+		}
+	}
+	for (uint i = 0; i < go->GetNumChilds(); i++)
+	{
+		size += GetSceneSize(go->childs[i]);
+	}
+	return size;
+}
+
+uint ModuleSceneIntro::GetGameObjectSceneSize(GameObject* go)
+{
+	uint size = 0;
+
+	// UUID 
+	size += sizeof(uint);
+	// UUID PARENT
+	size += sizeof(uint);
+	// NAME
+	size += sizeof(char)*64;
+	// ACTIVE
+	size += sizeof(int);
+	// STATIC
+	size += sizeof(int);
+	// NUM COMPONENTS
+	size += sizeof(uint);
+
+	for (uint i = 0; i < go->components.size(); i++)
+	{
+		size += go->components[i]->GetSize();
+	}
+	return size;
+}
+
+void ModuleSceneIntro::CreateData(char ** cursor, GameObject * go)
+{
+	uint bytes = 0;
+
+	// UUID 
+	bytes = sizeof(uint);
+	uint uuid = go->GetUUID();
+	memcpy(cursor[0], &uuid, bytes);
+	cursor[0] += bytes;
+	// UUID PARENT
+	bytes = sizeof(uint);
+	uint tmp_uuid = 0;
+	if (go->GetParent() != nullptr)
+		tmp_uuid = go->GetParent()->GetUUID();	
+	memcpy(cursor[0], &tmp_uuid, bytes);	
+	cursor[0] += bytes;
+	// NAME
+	bytes = sizeof(char) * 64;
+	char* name = new char[64];
+	strcpy(name, go->GetName().c_str());
+	memcpy(cursor[0], name, bytes);
+	cursor[0] += bytes;
+	// ACTIVE
+	bytes = sizeof(int);
+	int is_active = ((int)go->IsActive());
+	memcpy(cursor[0], &is_active, bytes);
+	cursor[0] += bytes;
+	// STATIC
+	bytes = sizeof(int);
+	int is_static = ((int)go->IsStatic());
+	memcpy(cursor[0], &is_static, bytes);
+	cursor[0] += bytes;
+	// NUM COMPONENTS
+	bytes = sizeof(uint);
+	uint num_comps = (uint)go->components.size();
+	memcpy(cursor[0], &num_comps, bytes);
+	cursor[0] += bytes;
+
+	for (uint i = 0; i < go->components.size(); i++)
+	{
+		switch (go->components[i]->GetType())
+		{
+		case COMP_TYPE::C_TRANSFORM:
+		{
+			((CompTransform*)go->components[i])->WriteComponentData(cursor);
+			break;
+		}
+		case COMP_TYPE::C_MESH:
+		{
+			((CompMesh*)go->components[i])->WriteComponentData(cursor);
+			break;
+		}
+		case COMP_TYPE::C_MATERIAL:
+		{
+			((CompMaterial*)go->components[i])->WriteComponentData(cursor);
+			break;
+		}
+		case COMP_TYPE::C_CAMERA:
+		{
+			((CompCamera*)go->components[i])->WriteComponentData(cursor);
+			break;
+		}
+		}
+	}
+	for (uint i = 0; i < go->childs.size(); i++)
+	{
+		CreateData(cursor, go->childs[i]);
+	}
+}
+
+void ModuleSceneIntro::CreateFileData(const char * name, char* data, uint size)
+{
+	std::string bin_path;
+	FILE * pFile;
+	bin_path = BINARY_SCENE_PATH;
+	bin_path += name;
+	bin_path += ".binaryscene";
+	if (!FileExist(bin_path.c_str()))
+	{
+		pFile = fopen(bin_path.c_str(), "wb");
+		fwrite(data, sizeof(char), size, pFile);
+		fclose(pFile);
+	}
+	else
+	{
+		DeleteFileA(bin_path.c_str());
+		pFile = fopen(bin_path.c_str(), "wb");
+		fwrite(data, sizeof(char), size, pFile);
+		fclose(pFile);
+	}
+}
+
+void ModuleSceneIntro::LoadSceneData(char * path)
+{
+	FILE * pFile;
+	long lSize;
+	char * data;
+	size_t result;
+
+	pFile = fopen(path, "rb");
+	if (pFile == NULL) { fputs("File error", stderr); exit(1); }
+
+	//Obtain file size:
+	fseek(pFile, 0, SEEK_END);
+	lSize = ftell(pFile);
+	rewind(pFile);
+
+	//Allocate memory to contain the whole file:
+	data = new char[lSize];// (char*)malloc(sizeof(char)*lSize);
+	if (data == NULL) { fputs("Memory error", stderr); exit(2); }
+
+	//Copy the file into the buffer:
+	result = fread(data, 1, lSize, pFile);
+	if (result != lSize) { fputs("Reading error", stderr); exit(3); }
+
+	fclose(pFile);
+}
+

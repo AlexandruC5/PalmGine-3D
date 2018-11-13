@@ -73,6 +73,7 @@ update_status ModuleUI::Update(float dt)
 			inspector->active = true;
 		}
 		ImGui::SameLine();
+		
 		if (ImGui::SmallButton("Configuration")) {
 			config->active = true;
 			inspector->active = false;
@@ -85,6 +86,14 @@ update_status ModuleUI::Update(float dt)
 		if (config->active == true) {
 			config->Draw();
 		}
+		if (ImGui::SmallButton("Serialize scene")) {
+			App->scene_intro->SerializeScene("TEST_SERIALIZED_SCENE");
+		}
+		ImGui::SameLine();
+		if (ImGui::SmallButton("Load scene")) {
+			App->scene_intro->SerializeScene("TEST_SERIALIZED_SCENE");
+		}
+		ImGui::SameLine();
 		ImGui::End();
 	}
 

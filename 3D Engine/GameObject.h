@@ -57,6 +57,7 @@ public:
 	void DebugDrawBox();
 	math::AABB GetAABB();
 
+	uint GetUUID()const;
 private:
 	uint uuid = 0;
 	std::string name = "Unnamed";
@@ -64,10 +65,10 @@ private:
 	bool static_obj = false;
 
 	GameObject* parent = nullptr;
-	std::vector<Component*> components;
 
 public:
 	std::vector<GameObject*> childs;
+	std::vector<Component*> components;
 };
 
 #endif // !GAMEOBJECT_H

@@ -19,6 +19,7 @@ void log(const char file[], int line, const char* format, ...);
 #define RADTODEG 57.295779513082320876f
 #define HAVE_M_PI
 #define BINARY_MESH_PATH "Library/Meshes/"
+#define BINARY_SCENE_PATH "Assets/Scenes/"
 #define DDS_IMAGES_PATH "Library/Images/"
 #define MODELS_PATH "Models/"
 #define TEXTURES_PATH "Textures/"

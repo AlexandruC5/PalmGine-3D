@@ -58,6 +58,48 @@ float CompCamera::GetApectRatio() const {
 	return frustum.AspectRatio();
 }
 
+uint CompCamera::GetSize() 
+{
+	// GET SIZE FOR SERIALIZATION
+	uint size = 0;
+
+	// COMPONENT TYPE
+	size += sizeof(int);
+	// IS ACTIVE
+	size += sizeof(int);
+	// FRUSTUM
+	size += sizeof(Frustum);
+	// FRUSTUM CULLING ACTIVE
+	size += sizeof(int);
+
+	return size;
+}
+
+void CompCamera::WriteComponentData(char ** cursor)
+{
+	uint bytes = 0;
+
+	// COMPONENT TYPE
+	bytes = sizeof(int);
+	memcpy(cursor[0], &type, bytes);
+	cursor[0] += bytes;
+	// IS ACTIVE
+	bytes = sizeof(int);
+	int tmp_active = (int)active;
+	memcpy(cursor[0], &tmp_active, bytes);
+	cursor[0] += bytes;
+	// FRUSTUM
+	bytes = sizeof(Frustum);
+	memcpy(cursor[0], &frustum, bytes);
+	cursor[0] += bytes;
+	// FRUSTUM CULLING ACTIVE
+	bytes = sizeof(int);
+	int fc = (int)frustum_culling;
+	memcpy(cursor[0], &fc, bytes);
+	cursor[0] += bytes;
+
+}
+
 float4x4 CompCamera::GetViewMatrix() const
 {
 	math::float4x4 matrix = frustum.ViewMatrix();
@@ -100,3 +142,5 @@ void CompCamera::Look(const float3& position) {
 	frustum.front = m.MulDir(frustum.front).Normalized();
 	frustum.up = m.MulDir(frustum.up).Normalized();
 }
+
+

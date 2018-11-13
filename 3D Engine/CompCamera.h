@@ -22,7 +22,7 @@ public:
 	float GetFarPlaneDistance() const;
 	float GetFOV() const;
 	float GetApectRatio() const;
-
+	uint GetSize();
 	float4x4 GetViewMatrix() const;
 	float4x4 GetProjectionMatrix() const;
 
@@ -34,6 +34,7 @@ public:
 
 	void Look(const float3& position);
 
+	void WriteComponentData(char** cursor);
 public:
 	Frustum frustum;
 	bool frustum_culling = false;

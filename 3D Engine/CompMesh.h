@@ -44,6 +44,8 @@ public:
 	float GetNumNormals()const;
 	float GetNumUvs()const;
 	math::AABB GetAABB()const;
+	uint GetSize();
+	void WriteComponentData(char ** cursor);
 	// TODO check const
 	float* GetVertices()const;
 	Mesh* GetMesh()const;
@@ -56,6 +58,7 @@ private:
 public:
 	bool wireframe = false;
 	float tex_alpha = 0.0f;
+	char* binary_path = nullptr;
 };
 
 #endif // !COMPMESH_H
