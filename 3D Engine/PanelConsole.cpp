@@ -39,9 +39,10 @@ void PanelConsole::ClearLog()
 void PanelConsole::Draw()
 {
 	//Creates the console interface
-	ImGui::Begin("Console");
+	ImGui::Begin("Console", &active, ImGuiWindowFlags_NoResize);
 
-	ImGui::SetNextWindowSize(ImVec2(520, 600), ImGuiCond_FirstUseEver);
+	ImGui::SetWindowPos({0.0f, (float)App->window->height-225});
+	ImGui::SetWindowSize(ImVec2(App->window->width, 225), ImGuiCond_Always);
 
 	if (ImGui::SmallButton("Clear")) {
 		ClearLog();

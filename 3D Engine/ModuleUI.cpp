@@ -65,7 +65,8 @@ update_status ModuleUI::Update(float dt)
 
 	//Inspector/Config menu
 	if (configActive == true) {
-		ImGui::Begin("");
+		ImGui::Begin("", &configActive,ImGuiWindowFlags_NoResize);
+		ImGui::SetWindowPos({(float) App->window->width - 500, 20.0f });
 		ImGui::SetWindowSize(ImVec2(500, 500), ImGuiCond_FirstUseEver);
 		if (ImGui::SmallButton("Inspector")) {
 			config->active = false;
@@ -118,6 +119,7 @@ update_status ModuleUI::Update(float dt)
 			ImGui::Checkbox("Inspector/Config", &configActive);
 			ImGui::Checkbox("Console", &console->active);
 			ImGui::Checkbox("GameObject Hierarchy", &goHierarchy->active);
+			ImGui::Checkbox("Time Manager", &time_management->active);
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("About"))

@@ -13,8 +13,9 @@ PanelTimeManagement::~PanelTimeManagement()
 void PanelTimeManagement::Draw()
 {
 	//Creates the console interface
-	ImGui::Begin("Time Management");
+	ImGui::Begin("Time Management", &active, ImGuiWindowFlags_NoResize);
 
+	ImGui::SetWindowPos({250.0f,20.0f});
 	ImGui::SetNextWindowSize(ImVec2(520, 600), ImGuiCond_FirstUseEver);
 
 	//Buttons

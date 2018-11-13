@@ -15,6 +15,8 @@ void PanelHierarchy::Draw()
 		ImGuiWindowFlags_NoResize |
 		ImGuiWindowFlags_NoFocusOnAppearing |
 		ImGuiWindowFlags_HorizontalScrollbar);
+
+	ImGui::SetWindowPos({ 0.0f, 20.0f });
 	ImGui::SetWindowSize(ImVec2(600, 500), ImGuiCond_FirstUseEver);
 	
 	App->scene_intro->root_gameObjects->BlitGameObjectHierarchy();
