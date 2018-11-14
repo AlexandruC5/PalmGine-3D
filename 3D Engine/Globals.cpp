@@ -1,4 +1,5 @@
 #include "Globals.h"
+#include <random>
 
 // ~~ FUNCTIONS ~~
 bool FileExist(const std::string & name)
@@ -32,4 +33,15 @@ std::string GetFileNameFromPath(const char * path)
 	}
 
 	return filename;
+}
+
+uint GenRandomNumber()
+{
+	uint number = 0;
+	std::random_device rd;
+	std::mt19937_64 eng(rd());
+	std::uniform_int_distribution<uint> distr;
+	number = distr(eng);
+	
+	return number;
 }

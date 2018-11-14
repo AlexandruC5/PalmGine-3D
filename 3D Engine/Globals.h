@@ -56,6 +56,7 @@ enum update_status
 // ~~ FUNCTIONS ~~
 bool FileExist(const std::string & name);
 std::string GetFileNameFromPath(const char* path);
+uint GenRandomNumber();
 // Configuration -----------
 //#define SCREEN_WIDTH 1280
 //#define SCREEN_HEIGHT 1024
