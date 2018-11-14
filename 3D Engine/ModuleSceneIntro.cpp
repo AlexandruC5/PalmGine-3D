@@ -7,6 +7,7 @@
 #include "CompMesh.h"
 #include "Component.h"
 #include "MathGeoLib/MathGeoLib.h"
+#include <list>
 
 #pragma comment( lib, "Glew/libx86/glew32.lib" )
 
@@ -295,7 +296,7 @@ void ModuleSceneIntro::CreateData(char ** cursor, GameObject * go)
 
 	// UUID 
 	bytes = sizeof(uint);
-	uint uuid = 2;// go->GetUUID();
+	uint uuid = go->GetUUID();
 	memcpy(cursor[0], &uuid, bytes);
 	cursor[0] += bytes;
 	// UUID PARENT
@@ -387,7 +388,7 @@ void ModuleSceneIntro::LoadSceneData(char * path)
 	char* cursor = data;
 	uint bytes = 0;
 	uint num_go = 0;
-	std::list<GameObject*> go_list;
+	std::vector<GameObject*> go_list;
 	
 	bytes = sizeof(uint);
 	memcpy(&num_go, cursor, bytes);
@@ -510,12 +511,34 @@ void ModuleSceneIntro::LoadSceneData(char * path)
 				comp_camera->frustum = frustum;
 				comp_camera->frustum_culling = frustum_culling;
 				go->AddComponent(comp_camera);
+				// Set as scene camera
+				if(go->IsActive())
+					camera = go;
 				break;
 			}
 			}	
 		}
 		go_list.push_back(go);
 	}
+	
+	// Fill childs
+	for (uint i = 0; i < go_list.size(); i++)
+	{
+		uint current_uuid = go_list[i]->GetUUID();
+		GameObject* item2 = go_list[0];
+		for (uint j = 0; j < go_list.size(); j++)
+		{
+			if (go_list[j]->GetParentUUID() == current_uuid)
+			{
+				go_list[i]->AddChild(go_list[j]);
+			}
+		}
+	}
+
+	// Delete current hierarchy and add the loaded scene
+	root_gameObjects->~GameObject();
+	selected_gameObject = nullptr;
+	root_gameObjects = go_list[0];
 }
 
 char * ModuleSceneIntro::ReadBinaryScene(char * path)
