@@ -46,8 +46,16 @@ void GameObject::Update(float dt)
 		childs[i]->Update(dt);
 	}
 
-	if (App->scene_intro->selected_gameObject == this) {
+	if (App->scene_intro->selected_gameObject == this) 
+	{
+		glBegin(GL_LINES);
+		glLineWidth(5.0f);
+		glColor4f(1.f, 1.f, 0.f, 1.f);
+
 		DebugDrawBox();
+
+		glColor4f(1.f, 1.f, 1.f, 1.f);
+		glEnd();
 	}
 }
 
@@ -251,39 +259,30 @@ bool GameObject::CompAlreadyExists(COMP_TYPE type) const
 }
 
 void GameObject::DebugDrawBox() {
-
-	glBegin(GL_LINES);
-	glLineWidth(5.0f);
-	glColor4f(1.f, 1.f, 0.f, 1.f);
-	
-	for (int i = 0; i < 12; ++i) {
+	for (int i = 0; i < 12; ++i) 
+	{
 		glVertex3f(GetAABB().Edge(i).a.x, GetAABB().Edge(i).a.y, GetAABB().Edge(i).a.z);
 		glVertex3f(GetAABB().Edge(i).b.x, GetAABB().Edge(i).b.y, GetAABB().Edge(i).b.z);
 	}
-
-	glColor4f(1.f, 1.f, 1.f, 1.f);
-	glEnd();
-
+	for (uint i = 0; i < childs.size(); i++)
+	{
+		childs[i]->DebugDrawBox();
+	}
 }
 
 math::AABB GameObject::GetAABB()
 {
-	//CompMesh* tmp_mesh = GetCompMesh();
-	//if (tmp_mesh != nullptr)
-	//	return tmp_mesh->GetAABB();
-	//LOG("ERROR: Game Object doesn't have mesh. Error getting the AABB on GameObject with name: %s", name.c_str());
 	math::AABB newbox(float3(-0.25, 0, -0.25), float3(0.25, 0.25, 0.25));
-	if (GetCompMesh() == nullptr) {
+	if (GetCompMesh() == nullptr && childs.size() <= 0) 
+	{
 		CompTransform* transformation = GetCompTransform();
-		//math::AABB newbox(float3(-0.5, 0, -1), float3(0.5, 0.5, 0.5));
-		//newbox.Enclose((float3*)mesh->vertices, mesh->num_vertices);
 		OBB boundingBox(newbox);
 		boundingBox.Transform(transformation->GetTransformationMatrix());
 
 		newbox = boundingBox.MinimalEnclosingAABB();
 	}
-
-	else {
+	else if(GetCompMesh() != nullptr)
+	{
 		newbox = GetCompMesh()->GetAABB();
 	}
 

@@ -16,7 +16,7 @@ CompMesh::~CompMesh()
 {
 	rmesh->already_loaded--;
 	if (rmesh->already_loaded <= 0)
-		RELEASE(rtexture);
+		RELEASE(rmesh);
 }
 
 void CompMesh::Update(float dt)
@@ -126,10 +126,9 @@ math::AABB CompMesh::GetAABB()const
 	CompTransform* transformation = parent->GetCompTransform();
 	math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
 	box.Enclose((float3*)rmesh->mesh->vertices, rmesh->mesh->num_vertices);
-
+	
 	OBB boundingBox(box);
-	boundingBox.Transform(transformation->GetTransformationMatrix());
-
+	boundingBox.Transform(transformation->GetTransformationMatrix());	
 	box = boundingBox.MinimalEnclosingAABB();
 
 	return box;
