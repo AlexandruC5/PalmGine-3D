@@ -86,14 +86,6 @@ update_status ModuleUI::Update(float dt)
 		if (config->active == true) {
 			config->Draw();
 		}
-		if (ImGui::SmallButton("Serialize scene")) {
-			App->scene_intro->SerializeScene("TEST_SERIALIZED_SCENE");
-		}
-		ImGui::SameLine();
-		if (ImGui::SmallButton("Load scene")) {
-			App->scene_intro->LoadSceneData("Assets/Scenes/TEST_SERIALIZED_SCENE.binaryscene");
-		}
-		ImGui::SameLine();
 		ImGui::End();
 	}
 
@@ -110,6 +102,12 @@ update_status ModuleUI::Update(float dt)
 			if (ImGui::MenuItem("Exit"))
 			{
 				return UPDATE_STOP;
+			}
+			if (ImGui::MenuItem("Save scene")) {
+				App->scene_intro->SerializeScene("TEST_SERIALIZED_SCENE");
+			}
+			if (ImGui::MenuItem("Load scene")) {
+				App->scene_intro->LoadSceneData("Assets/Scenes/TEST_SERIALIZED_SCENE.binaryscene");
 			}
 			ImGui::EndMenu();
 		}
