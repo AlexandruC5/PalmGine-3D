@@ -13,6 +13,7 @@
 
 ModuleSceneIntro::ModuleSceneIntro(bool start_enabled) : Module(start_enabled)
 {
+	last_scene_name = new char[64];
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -20,6 +21,7 @@ ModuleSceneIntro::~ModuleSceneIntro()
 	quadtree.~Quadtree();
 	//delete camera;
 	delete root_gameObjects;
+	delete last_scene_name;
 }
 
 // Load assets
@@ -226,6 +228,8 @@ void ModuleSceneIntro::SerializeScene(const char * name)
 	CreateData(&cursor, root_gameObjects);
 
 	CreateFileData(name, data, size);
+
+	strcpy(last_scene_name, name);
 }
 
 uint ModuleSceneIntro::GetSceneSize(GameObject* go, uint* go_num)

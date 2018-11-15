@@ -48,8 +48,8 @@ public:
 	GameObject* root_gameObjects =  nullptr;
 	GameObject* selected_gameObject = nullptr;
 	GameObject* camera = nullptr;
-
 	Quadtree quadtree;
+	char* last_scene_name = nullptr;
 };
 
 #endif // !MODULESCENEINTRO_H

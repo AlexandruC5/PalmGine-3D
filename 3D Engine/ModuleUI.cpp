@@ -6,6 +6,7 @@
 #include "PanelConfig.h"
 #include "PanelHierarchy.h"
 #include "PanelTimeManagement.h"
+#include "PanelSaveScene.h"
 #include "imGUI/imgui.h"
 #include "imGUI/imgui_impl_sdl_gl3.h"
 #include "Glew/include/glew.h"
@@ -20,6 +21,7 @@ ModuleUI::ModuleUI(bool start_enabled)
 	panels.push_back(inspector = new PanelInspector());
 	panels.push_back(goHierarchy = new PanelHierarchy());
 	panels.push_back(time_management = new PanelTimeManagement());
+	panels.push_back(save_scene = new PanelSaveScene());
 }
 
 ModuleUI::~ModuleUI()
@@ -94,6 +96,8 @@ update_status ModuleUI::Update(float dt)
 		goHierarchy->Draw();
 	}
 
+	if (save_scene->active == true)
+		save_scene->Draw();
 	// Main Bar
 	if (ImGui::BeginMainMenuBar())
 	{
@@ -103,11 +107,13 @@ update_status ModuleUI::Update(float dt)
 			{
 				return UPDATE_STOP;
 			}
-			if (ImGui::MenuItem("Save scene")) {
-				App->scene_intro->SerializeScene("TEST_SERIALIZED_SCENE");
+			if (ImGui::MenuItem("Save scene")) 
+			{
+				save_scene->active = true;
 			}
-			if (ImGui::MenuItem("Load scene")) {
-				App->scene_intro->LoadSceneData("Assets/Scenes/TEST_SERIALIZED_SCENE.binaryscene");
+			if (ImGui::MenuItem("Load scene")) 
+			{
+				App->scene_intro->LoadSceneData("Assets/Scenes/serialized_scene.binaryscene");
 			}
 			ImGui::EndMenu();
 		}

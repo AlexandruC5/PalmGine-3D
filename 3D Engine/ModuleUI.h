@@ -14,6 +14,7 @@ class PanelConfig;
 class PanelInspector;
 class PanelHierarchy;
 class PanelTimeManagement;
+class PanelSaveScene;
 
 class ModuleUI : public Module
 {
@@ -37,7 +38,7 @@ public:
 	PanelInspector* inspector = nullptr;
 	PanelHierarchy* goHierarchy = nullptr;
 	PanelTimeManagement* time_management = nullptr;
-
+	PanelSaveScene* save_scene = nullptr;
 };
 
 #endif // !MODULEUI_H

@@ -484,6 +484,9 @@
     <ClInclude Include="PanelTimeManagement.h">
       <Filter>Sources\Modules\UI</Filter>
     </ClInclude>
+    <ClInclude Include="PanelSaveScene.h">
+      <Filter>Sources\Modules\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -689,6 +692,9 @@
       <Filter>Sources\Tools\MathGeoLib\Algorithm\Random</Filter>
     </ClCompile>
     <ClCompile Include="PanelTimeManagement.cpp">
+      <Filter>Sources\Modules\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PanelSaveScene.cpp">
       <Filter>Sources\Modules\UI</Filter>
     </ClCompile>
   </ItemGroup>

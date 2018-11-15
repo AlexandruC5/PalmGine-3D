@@ -211,6 +211,7 @@
     <ClInclude Include="PanelConsole.h" />
     <ClInclude Include="PanelHierarchy.h" />
     <ClInclude Include="PanelInspector.h" />
+    <ClInclude Include="PanelSaveScene.h" />
     <ClInclude Include="PanelTimeManagement.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="QuadTree.h" />
@@ -282,6 +283,7 @@
     <ClCompile Include="PanelConsole.cpp" />
     <ClCompile Include="PanelHierarchy.cpp" />
     <ClCompile Include="PanelInspector.cpp" />
+    <ClCompile Include="PanelSaveScene.cpp" />
     <ClCompile Include="PanelTimeManagement.cpp" />
     <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="QuadTree.cpp" />
