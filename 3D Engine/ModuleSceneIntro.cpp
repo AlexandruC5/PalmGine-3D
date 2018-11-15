@@ -20,8 +20,8 @@ ModuleSceneIntro::~ModuleSceneIntro()
 {
 	quadtree.~Quadtree();
 	//delete camera;
-	delete root_gameObjects;
-	delete last_scene_name;
+	RELEASE(root_gameObjects);
+	RELEASE_ARRAY(last_scene_name);
 }
 
 // Load assets
