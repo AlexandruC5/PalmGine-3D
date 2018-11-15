@@ -15,6 +15,11 @@ void CompTransform::Update(float dt)
 {
 }
 
+void CompTransform::UpdateTransformationMatrix()
+{
+	transform_matrix = float4x4::FromTRS(position, quaternion_rotation, scale);
+}
+
 void CompTransform::SetTransformation(math::float4x4 new_trans)
 {
 	transform_matrix = new_trans;

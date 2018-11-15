@@ -113,7 +113,7 @@ update_status ModuleUI::Update(float dt)
 			}
 			if (ImGui::MenuItem("Load scene")) 
 			{
-				App->scene_intro->LoadSceneData("Assets/Scenes/serialized_scene.binaryscene");
+				App->scene_intro->LoadSceneData("Assets/Scenes/scene_name.binaryscene");
 			}
 			ImGui::EndMenu();
 		}

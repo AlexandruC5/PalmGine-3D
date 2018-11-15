@@ -526,10 +526,17 @@ void ModuleSceneIntro::LoadSceneData(char * path)
 	}
 	
 	// Fill childs
+	delete root_gameObjects;
+	selected_gameObject = nullptr;
+
 	for (uint i = 0; i < go_list.size(); i++)
 	{
+		if (go_list[i]->GetParentUUID() == 0)
+		{
+			//root_gameObjects->AddChild(go_list[i]);
+			root_gameObjects = go_list[i];
+		}
 		uint current_uuid = go_list[i]->GetUUID();
-		GameObject* item2 = go_list[0];
 		for (uint j = 0; j < go_list.size(); j++)
 		{
 			if (go_list[j]->GetParentUUID() == current_uuid)
@@ -538,11 +545,6 @@ void ModuleSceneIntro::LoadSceneData(char * path)
 			}
 		}
 	}
-
-	// Delete current hierarchy and add the loaded scene
-	root_gameObjects->~GameObject();
-	selected_gameObject = nullptr;
-	root_gameObjects = go_list[0];
 }
 
 char * ModuleSceneIntro::ReadBinaryScene(char * path)

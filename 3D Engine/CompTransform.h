@@ -22,6 +22,7 @@ public:
 	~CompTransform();
 
 	void Update(float dt);
+	void UpdateTransformationMatrix();
 
 	// Set methods
 	void SetTransformation(math::float4x4 new_trans);
@@ -49,7 +50,7 @@ private:
 	// Propierties
 	math::float3 position = { 0, 0, 0 };
 	math::float3 rotation = { 0, 0, 0 };
-	math::float3 scale = { 0, 0, 0 };
+	math::float3 scale = { 1, 1, 1 };
 
 	// Transform and rotation
 	math::float4x4 transform_matrix = math::float4x4::identity;
