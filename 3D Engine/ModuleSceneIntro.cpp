@@ -173,11 +173,11 @@ GameObject* ModuleSceneIntro::TestRayWithAllGO(const LineSegment& picker) const 
 				for (uint iterator = 0; iterator < GOMesh->num_indices; ++iterator) {
 					//Set triangle
 					nearestTriangle.a = { GOMesh->vertices[GOMesh->indices[iterator] * 3], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 1], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 2] };
-					iterator++;
-					nearestTriangle.b = { GOMesh->vertices[GOMesh->indices[iterator] * 3], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 1], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 2] };
-					iterator++;
-					nearestTriangle.c = { GOMesh->vertices[GOMesh->indices[iterator] * 3], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 1], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 2] };
-					iterator++;
+				//	iterator++;
+					nearestTriangle.b = { GOMesh->vertices[GOMesh->indices[iterator] * 3 + 3], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 4], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 5] };
+					//iterator++;
+					nearestTriangle.c = { GOMesh->vertices[GOMesh->indices[iterator] * 3 + 6], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 7], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 8] };
+					//iterator++;
 
 					float3 hit_point = float3::zero;
 					float hit_distance = 0.0f;
