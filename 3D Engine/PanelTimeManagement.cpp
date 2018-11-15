@@ -13,7 +13,12 @@ PanelTimeManagement::~PanelTimeManagement()
 void PanelTimeManagement::Draw()
 {
 	//Creates the console interface
-	ImGui::Begin("Time Management", &active, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_HorizontalScrollbar);
+	ImGui::Begin("Time Management", &active, 
+		ImGuiWindowFlags_HorizontalScrollbar | 
+		ImGuiWindowFlags_NoMove |
+		ImGuiWindowFlags_NoTitleBar |
+		ImGuiWindowFlags_NoResize |
+		ImGuiWindowFlags_NoCollapse);
 
 	ImGui::SetWindowPos({(250.0f*App->window->width)/1280, 20.0f});
 	ImGui::SetWindowSize(ImVec2((500*App->window->width)/1280, (60*App->window->height)/1024), ImGuiCond_Always);
