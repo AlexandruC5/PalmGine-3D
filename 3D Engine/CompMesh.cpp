@@ -46,9 +46,7 @@ void CompMesh::Draw()
 	// Adapt blit to geometry
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
-	auto temp2 = trans->GetTransformationMatrix().Transposed().ptr();
-	auto temp3 = trans->GetTransformationMatrix();
-	glMultMatrixf(temp2);
+	glMultMatrixf(trans->GetTransformationMatrix().Transposed().ptr());
 
 	glBindBuffer(GL_ARRAY_BUFFER, mesh->id_vertices);
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
