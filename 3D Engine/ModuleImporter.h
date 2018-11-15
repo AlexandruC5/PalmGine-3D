@@ -23,6 +23,7 @@ public:
 	// ------ LOAD FILES ------
 	bool LoadFBX(const char* path);
 	void LoadMesh(const char* path);
+	void AddResource(const char* path);
 	// ------ WRITE BINARY ------
 
 	//     -- Mesh --

@@ -262,6 +262,7 @@ void GameObject::DebugDrawBox()
 {
 	for (int i = 0; i < 12; ++i) 
 	{
+		// TODO don't draw on direct mode
 		glVertex3f(GetAABB().Edge(i).a.x, GetAABB().Edge(i).a.y, GetAABB().Edge(i).a.z);
 		glVertex3f(GetAABB().Edge(i).b.x, GetAABB().Edge(i).b.y, GetAABB().Edge(i).b.z);
 	}

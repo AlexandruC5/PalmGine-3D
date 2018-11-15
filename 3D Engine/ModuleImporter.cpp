@@ -57,16 +57,12 @@ bool ModuleImporter::LoadFBX(const char* path)
 {
 	LOG("Loading FBX...");
 	
-	
 	const aiScene* scene = aiImportFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
 	std::string binary_path = ImportFBX(scene, path, GetFileNameFromPath(path).c_str());
-	//TODO Check this path doesn't exist
-	App->ui->assets_path.push_back(binary_path);
-	//char* data = LoadData(binary_path.c_str());
-	//char* cursor = data;
-	//LoadRecursiveHierarchy(&cursor, App->scene_intro->root_gameObjects);
+	//Add it to resources
+	AddResource(binary_path.c_str());
 
-	return false;
+	return true;
 }
 
 void ModuleImporter::LoadMesh(const char * path)
@@ -74,6 +70,28 @@ void ModuleImporter::LoadMesh(const char * path)
 	char* data = LoadData(path);
 	char* cursor = data;
 	LoadRecursiveHierarchy(&cursor, App->scene_intro->root_gameObjects);
+}
+
+void ModuleImporter::AddResource(const char * path)
+{
+	// Check if this resource already exists on the resources vector
+	if (App->ui->assets_path.size() == 0)
+		App->ui->assets_path.push_back(path);
+	else
+	{
+		bool file_exists = false;
+		for (uint i = 0; i < App->ui->assets_path.size(); i++)
+		{
+			if (!strcmp(App->ui->assets_path[i].c_str(), path))
+			{
+				file_exists = true;
+			}
+		}
+		if (file_exists == false)
+		{
+			App->ui->assets_path.push_back(path);
+		}
+	}
 }
 
 std::string ModuleImporter::ImportFBX(const aiScene * scene, const char * path, const char * name)
