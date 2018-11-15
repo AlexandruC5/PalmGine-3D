@@ -14,6 +14,7 @@
 #include "ModuleHardware.h"
 #include "ModuleUI.h"
 #include "ModuleImporter.h"
+#include "ModuleResourceManager.h"
 
 class Application
 {
@@ -26,7 +27,7 @@ public:
 	ModuleCamera3D* camera;
 	ModuleUI* ui;
 	ModuleImporter* importer;
-
+	ModuleResourceManager* resource_manager;
 	JSON_Value* JSONconfig = nullptr;
 	JSON_Object* JSONconfig_obj = nullptr;
 

@@ -96,7 +96,7 @@ update_status ModuleUI::Update(float dt)
 		goHierarchy->Draw();
 	}
 
-	if (save_scene->active == true)
+	if (save_scene != nullptr && save_scene->active == true)
 		save_scene->Draw();
 	// Main Bar
 	if (ImGui::BeginMainMenuBar())

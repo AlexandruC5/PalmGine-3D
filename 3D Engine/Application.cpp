@@ -10,6 +10,7 @@ Application::Application()
 	camera = new ModuleCamera3D();
 	importer = new ModuleImporter();
 	ui = new ModuleUI();
+	resource_manager = new ModuleResourceManager();
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -20,7 +21,8 @@ Application::Application()
 	AddModule(camera);
 	AddModule(input);
 	AddModule(hardware);
-	
+	AddModule(resource_manager);
+
 	// Scene
 	AddModule(scene_intro);
 	AddModule(importer);

@@ -14,15 +14,15 @@ CompMesh::CompMesh(GameObject * parent, COMP_TYPE type) : Component(parent, type
 
 CompMesh::~CompMesh()
 {
+	rmesh->already_loaded--;
+	if (rmesh->already_loaded <= 0)
+		RELEASE(rtexture);
 }
 
 void CompMesh::Update(float dt)
 {
 	if (this->IsActive())
 	{
-		//if (drawable == true) {
-		//	Draw();
-		//}
 		if (parent->IsStatic() == false) {
 			Draw();
 		}
@@ -48,13 +48,13 @@ void CompMesh::Draw()
 	glPushMatrix();
 	glMultMatrixf(trans->GetTransformationMatrix().Transposed().ptr());
 
-	glBindBuffer(GL_ARRAY_BUFFER, mesh->id_vertices);
+	glBindBuffer(GL_ARRAY_BUFFER, rmesh->mesh->id_vertices);
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 	
 	// --- Texture ---
-	if (mesh->num_uvs > 0)
+	if (rmesh->mesh->num_uvs > 0)
 	{
-		glBindBuffer(GL_ARRAY_BUFFER, mesh->id_uvs);
+		glBindBuffer(GL_ARRAY_BUFFER, rmesh->mesh->id_uvs);
 		glTexCoordPointer(2, GL_FLOAT, 0, NULL);
 	}
 	CompMaterial* temp = parent->GetCompMaterial();
@@ -69,8 +69,8 @@ void CompMesh::Draw()
 		LOG("Texture doesn't found. Add a component material to the GameObject and add the texture.");
 	// --- End texture ---
 	
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->id_indices);
-	glDrawElements(GL_TRIANGLES, mesh->num_indices, GL_UNSIGNED_INT, NULL);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, rmesh->mesh->id_indices);
+	glDrawElements(GL_TRIANGLES, rmesh->mesh->num_indices, GL_UNSIGNED_INT, NULL);
 	
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -86,9 +86,9 @@ void CompMesh::Draw()
 
 }
 
-void CompMesh::SetMesh(Mesh * mesh)
+void CompMesh::SetMesh(ResourceMesh * mesh)
 {
-	this->mesh = mesh;
+	this->rmesh = mesh;
 }
 
 void CompMesh::ApplyTexture(const char * path)
@@ -103,29 +103,29 @@ void CompMesh::ApplyTexture(const char * path)
 
 uint CompMesh::GetNumIndices()const
 {
-	return(mesh->num_indices);
+	return(rmesh->mesh->num_indices);
 }
 
 uint CompMesh::GetNumVertices()const
 {
-	return(mesh->num_vertices);
+	return(rmesh->mesh->num_vertices);
 }
 
 float CompMesh::GetNumNormals()const
 {
-	return(mesh->num_normals);
+	return(rmesh->mesh->num_normals);
 }
 
 float CompMesh::GetNumUvs()const
 {
-	return(mesh->num_uvs);
+	return(rmesh->mesh->num_uvs);
 }
 
 math::AABB CompMesh::GetAABB()const
 {
 	CompTransform* transformation = parent->GetCompTransform();
 	math::AABB box(float3(0, 0, 0), float3(0, 0, 0));
-	box.Enclose((float3*)mesh->vertices, mesh->num_vertices);
+	box.Enclose((float3*)rmesh->mesh->vertices, rmesh->mesh->num_vertices);
 
 	OBB boundingBox(box);
 	boundingBox.Transform(transformation->GetTransformationMatrix());
@@ -166,19 +166,19 @@ void CompMesh::WriteComponentData(char ** cursor)
 	// BINARY PATH
 	bytes = sizeof(char) * 128;
 	char* name = new char[128];
-	strcpy(name, binary_path);
+	strcpy(name, rmesh->exported_path.c_str());
 	memcpy(cursor[0], name, bytes);
 	cursor[0] += bytes;
 }
 
 float * CompMesh::GetVertices() const
 {
-	return (mesh->vertices);
+	return (rmesh->mesh->vertices);
 }
 
 Mesh * CompMesh::GetMesh() const
 {
-	return mesh;
+	return rmesh->mesh;
 }
 
 void CompMesh::BlitComponentInspector()
@@ -187,7 +187,7 @@ void CompMesh::BlitComponentInspector()
 
 	ImGui::TextColored(ImVec4(1.0f, 0.64f, 0.0f, 1.0f), "Mesh");
 
-	if (mesh == nullptr)
+	if (rmesh->mesh == nullptr)
 		ImGui::Text("NULL MESH RESOURCE");
 
 	else

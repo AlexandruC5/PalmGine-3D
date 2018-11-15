@@ -4,6 +4,7 @@
 #include "Globals.h"
 #include <vector>
 #include "MathGeoLib/MathGeoLib.h"
+#include "ResourceMesh.h"
 #include "Component.h"
 
 struct Mesh
@@ -35,7 +36,7 @@ public:
 
 	void Update(float dt);
 	void Draw();
-	void SetMesh(Mesh* mesh);
+	void SetMesh(ResourceMesh* mesh);
 	void ApplyTexture(const char* path);
 
 	// Read
@@ -52,13 +53,11 @@ public:
 	// UI 
 	void BlitComponentInspector();
 
-
-private:
-	Mesh* mesh = nullptr;
 public:
 	bool wireframe = false;
 	float tex_alpha = 0.0f;
 	char* binary_path = nullptr;
+	ResourceMesh* rmesh = nullptr;
 };
 
 #endif // !COMPMESH_H

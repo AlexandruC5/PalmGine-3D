@@ -1,41 +1,44 @@
 #include "CompMaterial.h"
 #include "GameObject.h"
+#include "ResourceTexture.h"
 
 CompMaterial::CompMaterial(GameObject * parent, COMP_TYPE type) : Component(parent, type)
 {
-	texture = new Texture();
+
 	parent->AddComponent(this);
 }
 
 CompMaterial::~CompMaterial()
 {
-	texture->texture_path.clear();
-	delete texture;
+	rtexture->texture->texture_path.clear();
+	rtexture->already_loaded--;
+	if (rtexture->already_loaded <= 0)
+		RELEASE(rtexture);
 }
 
 void CompMaterial::SetID(uint id, std::string path, int width, int height)
 {
-	texture->id = id;
-	texture->texture_path = path;
-	texture->textureWidth = width;
-	texture->textureHeight = height;
+	rtexture->texture->id = id;
+	rtexture->texture->texture_path = path;
+	rtexture->texture->textureWidth = width;
+	rtexture->texture->textureHeight = height;
 }
 
 uint CompMaterial::GetTextureId() const
 {
-	return texture->id;
+	return rtexture->texture->id;
 }
 
 std::string CompMaterial::GetTexturePath() const {
-	return texture->texture_path;
+	return rtexture->texture->texture_path;
 }
 
 int CompMaterial::GetTextureWidth()const {
-	return texture->textureWidth;
+	return rtexture->texture->textureWidth;
 }
 
 int CompMaterial::GetTextureHeight()const {
-	return texture->textureHeight;
+	return rtexture->texture->textureHeight;
 }
 
 uint CompMaterial::GetSize() 
@@ -69,7 +72,7 @@ void CompMaterial::WriteComponentData(char ** cursor)
 	// BINARY PATH
 	bytes = sizeof(char) * 128;
 	char* name = new char[128];
-	strcpy(name, binary_path);
+	strcpy(name, rtexture->exported_path.c_str());
 	memcpy(cursor[0], name, bytes);
 	cursor[0] += bytes;
 }

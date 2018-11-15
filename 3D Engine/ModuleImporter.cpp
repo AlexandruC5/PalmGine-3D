@@ -9,6 +9,9 @@
 #include "CompMesh.h"
 #include "CompTransform.h"
 #include "CompMaterial.h"
+#include "ModuleResourceManager.h"
+#include "ResourceMesh.h"
+#include "ResourceTexture.h"
 #include <string>
 
 #pragma comment (lib, "Assimp/libx86/assimp.lib")
@@ -436,9 +439,32 @@ GameObject* ModuleImporter::ReadBinaryHierarchy(char** cursor, uint* num_childs,
 		transform->SetPosition(float3(translation.x, translation.y, translation.z));
 		transform->SetScale(float3(scale.x,scale.y,scale.z));
 		transform->SetRotation(float3(rotation.x, rotation.y, rotation.z));
-		LoadDDS(texture_name, go);
-		if(range[0] != 0)
-			ReadBinaryMesh(path_name, go);
+		// Resource mesh
+		if (range[0] != 0)
+		{
+			uint mesh_uuid = App->resource_manager->SearchResource(path_name);
+			
+			if (mesh_uuid == 0)
+				ReadBinaryMesh(path_name, go);
+			else
+			{
+				CompMesh* mesh_comp = new CompMesh(go, COMP_TYPE::C_MESH);
+				mesh_comp->rmesh = (ResourceMesh*)App->resource_manager->resources[mesh_uuid];
+				mesh_comp->rmesh->already_loaded++;
+			}
+		}
+		// Resource texture
+		uint texture_uuid = App->resource_manager->SearchResource(texture_name);
+
+		if (texture_uuid == 0)
+			LoadDDS(texture_name, go);
+		else
+		{
+			CompMaterial* mat_comp = new CompMaterial(go, COMP_TYPE::C_MATERIAL);
+			mat_comp->rtexture = (ResourceTexture*)App->resource_manager->resources[texture_uuid];
+			mat_comp->SetID(mat_comp->rtexture->texture->id, mat_comp->rtexture->exported_path, ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT));
+			mat_comp->rtexture->already_loaded++;
+		}
 
 		iterator++;
 	} while (iterator < num_meshes);
@@ -458,6 +484,7 @@ void ModuleImporter::ReadBinaryMesh(const char * path, GameObject* go)
 	int has_tex_coords = 0;
 	int has_normals = 0;
 	Mesh* mesh = new Mesh();
+	ResourceMesh* rmesh = new ResourceMesh();
 	
 	mesh_comp->binary_path = (char*)path;
 	//Num indices
@@ -510,7 +537,11 @@ void ModuleImporter::ReadBinaryMesh(const char * path, GameObject* go)
 		memcpy(mesh->normals, cursor, bytes);
 		cursor += bytes;
 	}
-	mesh_comp->SetMesh(mesh);
+	rmesh->mesh = mesh;
+	mesh_comp->SetMesh(rmesh);	
+	rmesh->exported_path = path;
+	rmesh->already_loaded++;
+	App->resource_manager->resources[rmesh->uuid] = (Resource*)rmesh;
 	//Gen buffers for geometry
 	GenBuffers(mesh_comp);
 }
@@ -631,7 +662,10 @@ void ModuleImporter::LoadDDS(const char * path, GameObject* go)
 {
 	if (!strcmp(path, "empty_texture"))
 		return;
+	ResourceTexture* rtexture = new ResourceTexture();
 	CompMaterial* material = new CompMaterial(go, C_MATERIAL);
+	material->rtexture = rtexture;
+	rtexture->exported_path = path;
 	material->binary_path = (char*)path;
 	ILuint id;
 	uint texture_id;
@@ -640,4 +674,6 @@ void ModuleImporter::LoadDDS(const char * path, GameObject* go)
 	ilLoadImage(path);
 	texture_id = ilutGLBindTexImage();
 	material->SetID(texture_id, path, ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT));
+	App->resource_manager->resources[rtexture->uuid] = rtexture;
+	rtexture->already_loaded++;
 }

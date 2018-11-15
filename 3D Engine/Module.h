@@ -3,8 +3,6 @@
 
 class Application;
 
-class Application;
-
 class Module
 {
 private :

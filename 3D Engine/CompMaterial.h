@@ -3,6 +3,7 @@
 
 #include "Component.h"
 #include "Globals.h"
+#include "ResourceTexture.h"
 #include <vector>
 #include "MathGeoLib/MathGeoLib.h"
 
@@ -35,10 +36,9 @@ public:
 	
 	void WriteComponentData(char ** cursor);
 
-private:
-	Texture* texture;
 public:
 	char* binary_path = nullptr;
+	ResourceTexture* rtexture;
 };
 
 #endif // !COMMATERIAL_H

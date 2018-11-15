@@ -8,6 +8,8 @@
 #include "Component.h"
 #include "MathGeoLib/MathGeoLib.h"
 #include <list>
+#include "Devil/include/il.h"
+#include "Devil/include/ilut.h"
 
 #pragma comment( lib, "Glew/libx86/glew32.lib" )
 
@@ -485,7 +487,18 @@ void ModuleSceneIntro::LoadSceneData(char * path)
 				bytes = sizeof(char) * 128;
 				memcpy(path, cursor, bytes);
 				cursor += bytes;
-				App->importer->ReadBinaryMesh(path, go);
+			
+				uint mesh_uuid = App->resource_manager->SearchResource(path);
+
+				if (mesh_uuid == 0)
+					App->importer->ReadBinaryMesh(path, go);
+				else
+				{
+					CompMesh* mesh_comp = new CompMesh(go, COMP_TYPE::C_MESH);
+					mesh_comp->rmesh = (ResourceMesh*)App->resource_manager->resources[mesh_uuid];
+					mesh_comp->rmesh->already_loaded++;
+				}
+			
 				break;
 			}
 			case COMP_TYPE::C_MATERIAL:
@@ -495,7 +508,21 @@ void ModuleSceneIntro::LoadSceneData(char * path)
 				bytes = sizeof(char) * 128;
 				memcpy(path, cursor, bytes);
 				cursor += bytes;
-				App->importer->LoadDDS(path, go);
+
+				// Resource texture
+				uint texture_uuid = App->resource_manager->SearchResource(path);
+
+				if (texture_uuid == 0)
+					App->importer->LoadDDS(path, go);
+				else
+				{
+					CompMaterial* mat_comp = new CompMaterial(go, COMP_TYPE::C_MATERIAL);
+					mat_comp->rtexture = (ResourceTexture*)App->resource_manager->resources[texture_uuid];
+					mat_comp->SetID(mat_comp->rtexture->texture->id, mat_comp->rtexture->exported_path, ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT));
+					mat_comp->rtexture->already_loaded++;
+				}
+				
+			
 				break;
 			}
 			case COMP_TYPE::C_CAMERA:
