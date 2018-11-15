@@ -57,13 +57,23 @@ bool ModuleImporter::LoadFBX(const char* path)
 {
 	LOG("Loading FBX...");
 	
+	
 	const aiScene* scene = aiImportFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
 	std::string binary_path = ImportFBX(scene, path, GetFileNameFromPath(path).c_str());
-	char* data = LoadData(binary_path.c_str());
-	char* cursor = data;
-	LoadRecursiveHierarchy(&cursor, App->scene_intro->root_gameObjects);
+	//TODO Check this path doesn't exist
+	App->ui->assets_path.push_back(binary_path);
+	//char* data = LoadData(binary_path.c_str());
+	//char* cursor = data;
+	//LoadRecursiveHierarchy(&cursor, App->scene_intro->root_gameObjects);
 
 	return false;
+}
+
+void ModuleImporter::LoadMesh(const char * path)
+{
+	char* data = LoadData(path);
+	char* cursor = data;
+	LoadRecursiveHierarchy(&cursor, App->scene_intro->root_gameObjects);
 }
 
 std::string ModuleImporter::ImportFBX(const aiScene * scene, const char * path, const char * name)
@@ -619,7 +629,6 @@ void ModuleImporter::GenBuffers(CompMesh * comp_mesh)
 void ModuleImporter::ImportImage(const char * path)
 {
 	ILuint id;
-	uint texture_id;
 	ilGenImages(1, &id);
 	ilBindImage(id);
 
@@ -654,8 +663,7 @@ void ModuleImporter::ImportImage(const char * path)
 			}
 			RELEASE_ARRAY(data);
 		}
-	}
-	texture_id = ilutGLBindTexImage();
+	}	
 }
 
 void ModuleImporter::LoadDDS(const char * path, GameObject* go)

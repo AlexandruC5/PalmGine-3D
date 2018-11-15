@@ -39,6 +39,8 @@ public:
 	PanelHierarchy* goHierarchy = nullptr;
 	PanelTimeManagement* time_management = nullptr;
 	PanelSaveScene* save_scene = nullptr;
+public:
+	std::vector<std::string> assets_path;
 };
 
 #endif // !MODULEUI_H

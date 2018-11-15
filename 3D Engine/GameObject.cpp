@@ -258,7 +258,8 @@ bool GameObject::CompAlreadyExists(COMP_TYPE type) const
 	return false;
 }
 
-void GameObject::DebugDrawBox() {
+void GameObject::DebugDrawBox() 
+{
 	for (int i = 0; i < 12; ++i) 
 	{
 		glVertex3f(GetAABB().Edge(i).a.x, GetAABB().Edge(i).a.y, GetAABB().Edge(i).a.z);
@@ -266,7 +267,10 @@ void GameObject::DebugDrawBox() {
 	}
 	for (uint i = 0; i < childs.size(); i++)
 	{
-		childs[i]->DebugDrawBox();
+		if (childs[i]->GetCompMesh() != nullptr)
+		{
+			childs[i]->DebugDrawBox();
+		}
 	}
 }
 
