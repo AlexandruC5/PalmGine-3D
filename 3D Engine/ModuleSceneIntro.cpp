@@ -81,6 +81,9 @@ GameObject * ModuleSceneIntro::GetSelectedGO() const
 update_status ModuleSceneIntro::PreUpdate(float dt)
 {
 	// TODO Preupdate go
+
+	in_game_dt = (float)in_game_timer.Read() / 1000.0f;
+
 	return(UPDATE_CONTINUE);
 }
 
@@ -101,6 +104,8 @@ update_status ModuleSceneIntro::Update(float dt)
 	quadtree.DebugDraw();
 
 	SetGameObjectDrawability();
+
+	root_gameObjects->Update(in_game_dt);
 
 	return UPDATE_CONTINUE;
 }

@@ -57,6 +57,9 @@ public:
 	bool game_paused = false;
 	float in_game_time_scale = 1.0f;
 
+	float in_game_dt;
+
+
 };
 
 #endif // !MODULESCENEINTRO_H

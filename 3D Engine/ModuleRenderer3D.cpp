@@ -140,7 +140,7 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 // Update
 update_status ModuleRenderer3D::Update(float dt)
 {
-	App->scene_intro->root_gameObjects->Update(dt);
+	//App->scene_intro->root_gameObjects->Update(dt);
 	return UPDATE_CONTINUE;
 }
 
