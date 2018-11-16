@@ -31,16 +31,6 @@ void PanelConfig::Draw()
 	ImGui::Text("Configuration Menu");
 	ImGui::Separator();
 	ImGui::Separator();
-	if (ImGui::CollapsingHeader("Assets"))
-	{
-		for (uint i = 0; i < App->ui->assets_path.size(); i++)
-		{
-			if (ImGui::Button(App->ui->assets_path[i].c_str()))
-			{
-				App->importer->LoadMesh(App->ui->assets_path[i].c_str());
-			}
-		}
-	}
 	//Aplication
 	if (ImGui::CollapsingHeader("Application")) {
 		ImGui::TextWrapped("App Name: PalmGine");

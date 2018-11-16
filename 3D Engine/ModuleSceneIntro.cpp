@@ -388,9 +388,14 @@ void ModuleSceneIntro::CreateFileData(const char * name, char* data, uint size)
 	}
 }
 
-void ModuleSceneIntro::LoadSceneData(char * path)
+void ModuleSceneIntro::LoadSceneData(const char * path)
 {
-	char* data = ReadBinaryScene(path);
+	std::string bin_path;
+	FILE * pFile;
+	bin_path = BINARY_SCENE_PATH;
+	bin_path += path;
+	bin_path += ".binaryscene";
+	char* data = ReadBinaryScene(bin_path.c_str());
 	char* cursor = data;
 	uint bytes = 0;
 	uint num_go = 0;
@@ -574,7 +579,7 @@ void ModuleSceneIntro::LoadSceneData(char * path)
 	}
 }
 
-char * ModuleSceneIntro::ReadBinaryScene(char * path)
+char * ModuleSceneIntro::ReadBinaryScene(const char * path)
 {
 	FILE * pFile;
 	long lSize;

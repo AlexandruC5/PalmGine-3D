@@ -18,6 +18,9 @@ PanelInspector::~PanelInspector()
 //Function that draws all the console
 void PanelInspector::Draw()
 {
+	ImGui::Text("GameObject Information");
+	ImGui::Separator();
+	ImGui::Separator();
 	GameObject* selected_go = App->scene_intro->GetSelectedGO();
 	if (selected_go != nullptr)
 	{

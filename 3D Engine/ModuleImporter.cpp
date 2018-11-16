@@ -462,6 +462,7 @@ GameObject* ModuleImporter::ReadBinaryHierarchy(char** cursor, uint* num_childs,
 
 		// *-- CREATE GAME OBJECT --*
 		go = new GameObject(parent);
+		//TODO change name if already exists in hierarchy
 		go->SetName(name);
 		CompTransform* transform = go->GetCompTransform();
 		transform->SetPosition(float3(translation.x, translation.y, translation.z));

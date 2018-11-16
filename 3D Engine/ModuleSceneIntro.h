@@ -40,8 +40,8 @@ public:
 	void CreateData(char** cursor, GameObject* go);
 	void CreateFileData(const char* name, char* data, uint size);
 
-	void LoadSceneData(char* path);
-	char* ReadBinaryScene(char*path);
+	void LoadSceneData(const char* path);
+	char* ReadBinaryScene(const char*path);
 
 public:
 

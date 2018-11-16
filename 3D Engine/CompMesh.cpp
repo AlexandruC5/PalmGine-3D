@@ -101,6 +101,7 @@ void CompMesh::ApplyTexture(const char * path)
 	LOG("Loaded and applied new texture correctly from path %s.", path);
 }
 
+// TODO this methods must be on resource mesh 
 uint CompMesh::GetNumIndices()const
 {
 	return(rmesh->mesh->num_indices);

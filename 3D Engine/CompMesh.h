@@ -47,7 +47,6 @@ public:
 	math::AABB GetAABB()const;
 	uint GetSize();
 	void WriteComponentData(char ** cursor);
-	// TODO check const
 	float* GetVertices()const;
 	Mesh* GetMesh()const;
 	// UI 
