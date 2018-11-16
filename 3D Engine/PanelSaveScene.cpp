@@ -24,7 +24,13 @@ void PanelSaveScene::Draw()
 	{
 		App->scene_intro->SerializeScene(name);
 		active = false;
+		saved = true;
 	}
 
 	ImGui::End();
+}
+
+ const char* PanelSaveScene::GetLastSceneName()
+{
+	return name;
 }

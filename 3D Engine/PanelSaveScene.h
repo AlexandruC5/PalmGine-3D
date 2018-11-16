@@ -14,8 +14,9 @@ public:
 	~PanelSaveScene();
 
 	void Draw() override;
-
+	const char* GetLastSceneName();
 	bool active = false;
+	bool saved = false;
 private:
 	char* name = nullptr;
 };
