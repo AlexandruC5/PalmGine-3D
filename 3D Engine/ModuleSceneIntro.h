@@ -58,8 +58,7 @@ public:
 	float in_game_time_scale = 1.0f;
 
 	float in_game_dt;
-
-
+	std::vector<GameObject*> to_delete;
 };
 
 #endif // !MODULESCENEINTRO_H

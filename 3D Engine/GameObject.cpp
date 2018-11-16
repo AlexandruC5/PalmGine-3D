@@ -9,6 +9,7 @@
 #include "ModuleSceneIntro.h"
 #include "Glew/include/glew.h"
 #include "ModuleSceneIntro.h"
+#include <iostream>
 
 GameObject::GameObject(GameObject* parent) : parent(parent)
 {
@@ -56,6 +57,22 @@ void GameObject::Update(float dt)
 
 		glColor4f(1.f, 1.f, 1.f, 1.f);
 		glEnd();
+	}
+}
+
+void GameObject::PopGameObject()
+{
+	if (parent != nullptr)
+	{
+		for (uint i = 0; i < parent->childs.size(); i++)
+		{
+			if (parent->childs[i] == this)
+			{
+				parent->childs.erase(parent->childs.begin() + i);
+				App->scene_intro->to_delete.push_back(this);
+				break;
+			}
+		}
 	}
 }
 

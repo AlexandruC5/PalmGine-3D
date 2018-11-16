@@ -3,12 +3,10 @@
 #include "Globals.h"
 
 PanelAssets::PanelAssets() : Panel("Save Scene")
-{
-}
+{}
 
 PanelAssets::~PanelAssets()
-{
-}
+{}
 
 void PanelAssets::Draw()
 {

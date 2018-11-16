@@ -26,6 +26,11 @@ ModuleSceneIntro::~ModuleSceneIntro()
 	//delete camera;
 	RELEASE(root_gameObjects);
 	RELEASE_ARRAY(last_scene_name);
+	// Delete the non-used game objects
+	for (uint i = 0; i < to_delete.size(); i++)
+	{
+		delete to_delete[i];
+	}
 }
 
 // Load assets

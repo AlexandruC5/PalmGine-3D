@@ -19,7 +19,7 @@ public:
 	~GameObject();
 
 	void Update(float dt);
-
+	void PopGameObject();
 	// Name --------------------------
 	void SetName(const char* new_name);
 	std::string GetName();
@@ -54,7 +54,6 @@ public:
 
 	// UI
 	void BlitGameObjectHierarchy();
-	void BlitGameObjectInspector();
 
 	//DebugDrawBox
 	void DebugDrawBox();

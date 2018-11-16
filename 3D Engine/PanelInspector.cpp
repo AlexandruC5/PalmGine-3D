@@ -9,6 +9,7 @@
 #include "CompCamera.h"
 #include "ImGuizmo-master/ImGuizmo.h"
 #include "ModuleInput.h"
+#include "GameObject.h"
 
 PanelInspector::PanelInspector() : Panel("Inspector")
 {}
@@ -34,7 +35,12 @@ void PanelInspector::Draw()
 		if(ImGui::InputText("Name", name, 50, ImGuiInputTextFlags_AutoSelectAll |ImGuiInputTextFlags_EnterReturnsTrue)) {
 			selected_go->SetName(name);
 		}
-		
+		if (ImGui::Button("Delete GameObject"))
+		{
+			selected_go->PopGameObject();
+			selected_go = nullptr;
+		}
+			
 		//DeleteGameObject
 		//TODO Solve crash when delete is clicked in this commented code
 		//if (selected_go != App->scene_intro->camera) {
