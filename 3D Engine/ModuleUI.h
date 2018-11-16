@@ -4,9 +4,6 @@
 #include "Module.h"
 #include "Globals.h"
 
-#include "Module.h"
-#include "Globals.h"
-
 class Panel;
 class PanelAbout;
 class PanelConsole;
@@ -15,6 +12,8 @@ class PanelInspector;
 class PanelHierarchy;
 class PanelTimeManagement;
 class PanelSaveScene;
+class PanelLoadScene;
+class PanelAssets;
 
 class ModuleUI : public Module
 {
@@ -39,6 +38,8 @@ public:
 	PanelHierarchy* goHierarchy = nullptr;
 	PanelTimeManagement* time_management = nullptr;
 	PanelSaveScene* save_scene = nullptr;
+	PanelLoadScene* load_scene = nullptr;
+	PanelAssets* assets = nullptr;
 public:
 	std::vector<std::string> assets_path;
 };

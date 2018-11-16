@@ -502,6 +502,12 @@
     <ClInclude Include="ResourceTexture.h">
       <Filter>Sources\Modules\Scene\Resources</Filter>
     </ClInclude>
+    <ClInclude Include="PanelLoadScene.h">
+      <Filter>Sources\Modules\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PanelAssets.h">
+      <Filter>Sources\Modules\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -723,6 +729,12 @@
     </ClCompile>
     <ClCompile Include="ResourceTexture.cpp">
       <Filter>Sources\Modules\Scene\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="PanelLoadScene.cpp">
+      <Filter>Sources\Modules\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PanelAssets.cpp">
+      <Filter>Sources\Modules\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

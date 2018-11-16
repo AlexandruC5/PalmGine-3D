@@ -7,6 +7,8 @@
 #include "PanelHierarchy.h"
 #include "PanelTimeManagement.h"
 #include "PanelSaveScene.h"
+#include "PanelLoadScene.h"
+#include "PanelAssets.h"
 #include "imGUI/imgui.h"
 #include "imGUI/imgui_impl_sdl_gl3.h"
 #include "Glew/include/glew.h"
@@ -22,6 +24,8 @@ ModuleUI::ModuleUI(bool start_enabled)
 	panels.push_back(goHierarchy = new PanelHierarchy());
 	panels.push_back(time_management = new PanelTimeManagement());
 	panels.push_back(save_scene = new PanelSaveScene());
+	panels.push_back(load_scene = new PanelLoadScene());
+	panels.push_back(assets = new PanelAssets());
 }
 
 ModuleUI::~ModuleUI()
@@ -73,12 +77,20 @@ update_status ModuleUI::Update(float dt)
 		if (ImGui::SmallButton("Inspector")) {
 			config->active = false;
 			inspector->active = true;
+			assets->active = false;
+		}
+		ImGui::SameLine();
+		if (ImGui::SmallButton("Assets")) {
+			assets->active = true;
+			inspector->active = false;
+			config->active = false;
 		}
 		ImGui::SameLine();
 		
 		if (ImGui::SmallButton("Configuration")) {
 			config->active = true;
 			inspector->active = false;
+			assets->active = false;
 		}
 		ImGui::Separator();
 		//Inspector
@@ -88,6 +100,9 @@ update_status ModuleUI::Update(float dt)
 		if (config->active == true) {
 			config->Draw();
 		}
+		if (assets->active == true) {
+			assets->Draw();
+		}
 		ImGui::End();
 	}
 
@@ -95,9 +110,12 @@ update_status ModuleUI::Update(float dt)
 	if (goHierarchy->active == true) {
 		goHierarchy->Draw();
 	}
-
+	//Save scene
 	if (save_scene != nullptr && save_scene->active == true)
 		save_scene->Draw();
+	//Load scene
+	if (load_scene != nullptr && load_scene->active == true)
+		load_scene->Draw();
 	// Main Bar
 	if (ImGui::BeginMainMenuBar())
 	{
@@ -110,10 +128,12 @@ update_status ModuleUI::Update(float dt)
 			if (ImGui::MenuItem("Save scene")) 
 			{
 				save_scene->active = true;
+				load_scene->active = false;
 			}
 			if (ImGui::MenuItem("Load scene")) 
 			{
-				App->scene_intro->LoadSceneData("Assets/Scenes/scene_name.binaryscene");
+				load_scene->active = true;
+				save_scene->active = false;
 			}
 			ImGui::EndMenu();
 		}

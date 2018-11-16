@@ -208,10 +208,12 @@
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="Panel.h" />
     <ClInclude Include="PanelAbout.h" />
+    <ClInclude Include="PanelAssets.h" />
     <ClInclude Include="PanelConfig.h" />
     <ClInclude Include="PanelConsole.h" />
     <ClInclude Include="PanelHierarchy.h" />
     <ClInclude Include="PanelInspector.h" />
+    <ClInclude Include="PanelLoadScene.h" />
     <ClInclude Include="PanelSaveScene.h" />
     <ClInclude Include="PanelTimeManagement.h" />
     <ClInclude Include="Primitive.h" />
@@ -284,10 +286,12 @@
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Panel.cpp" />
     <ClCompile Include="PanelAbout.cpp" />
+    <ClCompile Include="PanelAssets.cpp" />
     <ClCompile Include="PanelConfig.cpp" />
     <ClCompile Include="PanelConsole.cpp" />
     <ClCompile Include="PanelHierarchy.cpp" />
     <ClCompile Include="PanelInspector.cpp" />
+    <ClCompile Include="PanelLoadScene.cpp" />
     <ClCompile Include="PanelSaveScene.cpp" />
     <ClCompile Include="PanelTimeManagement.cpp" />
     <ClCompile Include="Primitive.cpp" />
