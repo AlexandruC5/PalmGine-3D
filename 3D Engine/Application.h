@@ -45,6 +45,7 @@ public:
 	bool Init();
 	update_status Update();
 	bool CleanUp();
+	float GetDT() const;
 
 private:
 

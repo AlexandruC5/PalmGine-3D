@@ -29,8 +29,15 @@ void PanelTimeManagement::Draw()
 		App->scene_intro->game_running = true;
 	}
 	ImGui::SameLine();
-	if (ImGui::Button("Pause")) {
-
+	if (App->scene_intro->in_game_timer.IsPaused() == false) {
+		if (ImGui::Button("Pause")) {
+			App->scene_intro->in_game_timer.Pause();
+		}
+	}
+	else {
+		if (ImGui::Button("Continue")) {
+			App->scene_intro->in_game_timer.UnPause();
+		}
 	}
 	ImGui::SameLine();
 	if (ImGui::Button("Stop")) {
@@ -45,14 +52,13 @@ void PanelTimeManagement::Draw()
 	ImGui::SameLine();
 
 	//Timer
-	float timer = 1.0212;
 	ImGui::Text("%.3f", (float)App->scene_intro->in_game_timer.Read()/1000);
 	ImGui::SameLine();
 
 	//TimeScale Slider
 	ImGui::PushItemWidth(150);
 	if (ImGui::SliderFloat("Time Scale", &App->scene_intro->in_game_time_scale, 0.0f, 2.0f, "%.1f")) {
-
+		App->scene_intro->in_game_timer.SetTimerScale(App->scene_intro->in_game_time_scale);
 	}
 
 	ImGui::End();

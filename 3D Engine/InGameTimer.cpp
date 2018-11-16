@@ -4,6 +4,7 @@
 // ----------------------------------------------------
 
 #include "InGameTimer.h"
+#include "Application.h"
 
 // ---------------------------------------------
 InGameTimer::InGameTimer()
@@ -11,21 +12,38 @@ InGameTimer::InGameTimer()
 	Start();
 }
 
+void InGameTimer::UpdateTimer() {
+	if (paused == true || running == false) {
+		dt = 0.0f;
+	}
+	else {
+		dt = App->GetDT() * time_scale;
+	}
+}
+
 // ---------------------------------------------
 void InGameTimer::Start()
 {
+	paused = false;
 	running = true;
 	started_at = SDL_GetTicks();
 }
 
 // ---------------------------------------------
 void InGameTimer::Pause() {
-	running = !running;
+	paused = true;
+	paused_at = SDL_GetTicks();
+}
+
+// ---------------------------------------------
+void InGameTimer::UnPause() {
+	paused = false;
 }
 
 // ---------------------------------------------
 void InGameTimer::Stop()
 {
+	paused = false;
 	running = false;
 	stopped_at = SDL_GetTicks();
 }
@@ -42,7 +60,10 @@ float InGameTimer::GetTimerScale() const {
 // ---------------------------------------------
 Uint32 InGameTimer::Read()
 {
-	if(running == true)
+	if (paused == true) {
+		return paused_at - started_at;
+	}
+	else if(running == true)
 	{
 		return SDL_GetTicks() - started_at;
 	}
@@ -52,4 +73,12 @@ Uint32 InGameTimer::Read()
 	}
 }
 
+// ---------------------------------------------
+bool InGameTimer::IsPaused() const{
+	return paused;
+}
 
+// ---------------------------------------------
+float InGameTimer::GetDT()const {
+	return dt;
+}
