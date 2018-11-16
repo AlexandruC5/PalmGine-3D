@@ -6,6 +6,7 @@
 #include "Globals.h"
 #include "GameObject.h"
 #include "QuadTree.h"
+#include "InGameTimer.h"
 
 class ModuleSceneIntro : public Module
 {
@@ -50,6 +51,12 @@ public:
 	GameObject* camera = nullptr;
 	Quadtree quadtree;
 	char* last_scene_name = nullptr;
+
+	InGameTimer in_game_timer;
+	bool game_running = false;
+	bool game_paused = false;
+	float in_game_time_scale = 1.0f;
+
 };
 
 #endif // !MODULESCENEINTRO_H

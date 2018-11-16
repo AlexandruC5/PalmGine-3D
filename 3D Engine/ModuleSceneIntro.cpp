@@ -16,6 +16,8 @@
 ModuleSceneIntro::ModuleSceneIntro(bool start_enabled) : Module(start_enabled)
 {
 	last_scene_name = new char[64];
+	in_game_timer.Start();
+	in_game_timer.Stop();
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
