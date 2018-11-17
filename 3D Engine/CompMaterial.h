@@ -37,7 +37,6 @@ public:
 	void WriteComponentData(char ** cursor);
 
 public:
-	char* binary_path = nullptr;
 	ResourceTexture* rtexture;
 };
 

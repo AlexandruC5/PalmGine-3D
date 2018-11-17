@@ -52,7 +52,6 @@ bool ModuleSceneIntro::Start()
 	CompCamera* cameracomp = new CompCamera(camera, COMP_TYPE::C_CAMERA);
 	camera->AddComponent(cameracomp);
 
-
 	if (game_running == true) {
 		in_game_timer.Start();
 		SerializeScene("AutoSaveWhenPlay");
@@ -95,8 +94,6 @@ GameObject * ModuleSceneIntro::GetSelectedGO() const
 // PreUpdate
 update_status ModuleSceneIntro::PreUpdate(float dt)
 {
-	// TODO Preupdate go
-
 	in_game_timer.UpdateTimer();
 	in_game_dt = in_game_timer.GetDT();
 

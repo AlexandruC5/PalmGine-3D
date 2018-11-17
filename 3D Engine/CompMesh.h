@@ -54,7 +54,6 @@ public:
 public:
 	bool wireframe = false;
 	float tex_alpha = 0.0f;
-	char* binary_path = nullptr;
 	ResourceMesh* rmesh = nullptr;
 };
 
