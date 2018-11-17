@@ -53,6 +53,12 @@ void PanelTimeManagement::Draw()
 			App->scene_intro->in_game_timer.Stop();
 			App->scene_intro->game_running = false;
 			App->scene_intro->LoadSceneData("AutoSaveWhenPlay");
+			std::string bin_path;
+			bin_path = BINARY_SCENE_PATH;
+			bin_path += "AutoSaveWhenPlay";
+			bin_path += ".binaryscene";
+			remove(bin_path.c_str());
+			bin_path.clear();
 			App->scene_intro->in_game_timer.ResetExtraTicks();
 		}
 	}
