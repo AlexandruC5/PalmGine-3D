@@ -125,8 +125,6 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	else {
 		glLoadMatrixf((float*)&App->scene_intro->camera->GetCompCamera()->GetViewMatrix());
 	}
-	//glLoadMatrixf((float*)&App->camera->GetViewMatrix());
-	//glLoadMatrixf((float*)&App->scene_intro->camera->GetCompCamera()->GetViewMatrix());
 
 	// light 0 on cam pos
 	lights[0].SetPos(App->camera->GetCameraPos().x, App->camera->GetCameraPos().y, App->camera->GetCameraPos().z);
@@ -140,7 +138,6 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 // Update
 update_status ModuleRenderer3D::Update(float dt)
 {
-	//App->scene_intro->root_gameObjects->Update(dt);
 	return UPDATE_CONTINUE;
 }
 
@@ -170,7 +167,6 @@ void ModuleRenderer3D::OnResize(int width, int height)
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	//ProjectionMatrix = perspective(60.0f, (float)width / (float)height, 0.125f, 512.0f);
 	glLoadMatrixf((float*)&App->camera->GetProjectionMatrix());
 
 	glMatrixMode(GL_MODELVIEW);

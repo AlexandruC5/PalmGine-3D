@@ -82,7 +82,6 @@ private:
 	int mouse_y_motion;
 
 	const FILE_TYPE ModuleInput::GetFileType(const char * dir) const;
-	//int mouse_z_motion;
 };
 
 #endif // !MODULEINPUT_H

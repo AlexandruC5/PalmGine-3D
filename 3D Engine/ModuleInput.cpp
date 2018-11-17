@@ -15,7 +15,6 @@ ModuleInput::ModuleInput(bool start_enabled) : Module(start_enabled)
 // Destructor
 ModuleInput::~ModuleInput()
 {
-	//fbx_path.clear;
 	delete[] keyboard;
 }
 
@@ -156,7 +155,6 @@ const FILE_TYPE ModuleInput::GetFileType(const char * dir) const
 		std::string type;
 		//From const char* to std::string
 		std::string path(dir);
-		// TODO use tolower func to verify format
 		//Find extension
 		type = path.substr(path.find_last_of("."));
 		if (type == ".png" || type == ".jpg" || type == ".bmp" || type == ".dds" || type == ".tga" ||
