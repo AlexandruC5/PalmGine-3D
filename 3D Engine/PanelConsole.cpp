@@ -64,7 +64,7 @@ void PanelConsole::Draw()
 	//Write logs
 	for (int i = 0; i < items.Size; i++) {
 		const char* currentItem = items[i];
-		ImVec4 colour = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
+		ImVec4 colour = ImVec4(0.0f, 0.0f, 0.0f, 1.0f);
 		if (strstr(currentItem, "[error]")) {
 			colour = ImColor(1.0f, 0.4f, 0.4f, 1.0f);
 		}
