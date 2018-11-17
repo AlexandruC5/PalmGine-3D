@@ -1,6 +1,9 @@
 #include "PanelAssets.h"
 #include "Application.h"
 #include "Globals.h"
+#include "Devil/include/il.h"
+
+#define IL_IMAGE_WIDTH           0x0DE4
 
 PanelAssets::PanelAssets() : Panel("Save Scene")
 {}
@@ -25,10 +28,7 @@ void PanelAssets::Draw()
 	{
 		for (uint i = 0; i < textures.size(); i++)
 		{
-			if (ImGui::MenuItem(textures[i].c_str()))
-			{
-				if (App->scene_intro->selected_gameObject != nullptr);
-			}
+			ImGui::Text(textures[i].c_str());
 		}
 	}
 }
