@@ -20,15 +20,11 @@ void PanelLoadScene::Draw()
 	ImGui::Separator();
 	for (uint i = 0; i < scenes.size(); i++)
 	{
-		if (ImGui::MenuItem(scenes[i].c_str()))
+		if (ImGui::Button(scenes[i].c_str()))
 		{
-			if (ImGui::IsItemClicked())
-			{
 				LOG("LOADING SCENE WITH NAME: %s", scenes[i].c_str());
 				App->scene_intro->LoadSceneData(scenes[i].c_str());
-				active = false;
-			}
-				
+				active = false;		
 		}
 	}
 	ImGui::End();

@@ -37,7 +37,6 @@ public:
 	void Update(float dt);
 	void Draw();
 	void SetMesh(ResourceMesh* mesh);
-	void ApplyTexture(const char* path);
 
 	// Read
 	uint GetNumIndices()const;
