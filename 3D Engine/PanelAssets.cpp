@@ -30,19 +30,7 @@ void PanelAssets::Draw()
 			{
 				if (App->scene_intro->selected_gameObject != nullptr && App->scene_intro->selected_gameObject->GetCompMaterial() != nullptr)
 				{
-					std::string tmp = DDS_IMAGES_PATH;
-					tmp += textures[i];
-					tmp += ".dds";
-
-					uint texture_uuid = App->resource_manager->SearchResource(tmp.c_str());
-					if (texture_uuid == 0)
-					{
-						App->importer->LoadDDS(tmp.c_str(), App->scene_intro->selected_gameObject);
-						texture_uuid = App->resource_manager->SearchResource(tmp.c_str());
-					}
-					CompMaterial* mat_comp = App->scene_intro->selected_gameObject->GetCompMaterial();
-					mat_comp->rtexture = (ResourceTexture*)App->resource_manager->resources[texture_uuid];
-					mat_comp->SetID(mat_comp->rtexture->texture->id, mat_comp->rtexture->exported_path, ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT));
+					App->importer->ApplyAndImportImage(textures[i]);
 				}
 				else
 					LOG("GameObject doesn't have component mesh.");
