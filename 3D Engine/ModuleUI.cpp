@@ -30,7 +30,7 @@ ModuleUI::ModuleUI(bool start_enabled)
 	ImGuiStyle& style = ImGui::GetStyle();
 	style.Colors[ImGuiCol_Text] = ImVec4(0.00f, 0.00f, 0.00f, 1.00f);
 	style.Colors[ImGuiCol_TextDisabled] = ImVec4(0.60f, 0.60f, 0.60f, 1.00f);
-	style.Colors[ImGuiCol_WindowBg] = ImVec4(0.72f, 0.72f, 0.72f, 0.93f);
+	style.Colors[ImGuiCol_WindowBg] = ImVec4(0.57f, 0.57f, 0.57f, 0.93f);
 	style.Colors[ImGuiCol_ChildWindowBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
 	style.Colors[ImGuiCol_PopupBg] = ImVec4(0.88f, 0.88f, 0.88f, 0.90f);
 	style.Colors[ImGuiCol_Border] = ImVec4(0.59f, 0.59f, 0.59f, 0.40f);
