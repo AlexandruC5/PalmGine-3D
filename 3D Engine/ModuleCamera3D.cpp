@@ -9,15 +9,6 @@
 
 ModuleCamera3D::ModuleCamera3D(bool start_enabled) : Module(start_enabled)
 {
-	//CalculateViewMatrix();
-
-	//X = vec3(1.0f, 0.0f, 0.0f);
-	//Y = vec3(0.0f, 1.0f, 0.0f);
-	//Z = vec3(0.0f, 0.0f, 1.0f);
-
-	//Position = vec3(0.0f, 0.0f, 5.0f);
-	//Reference = vec3(0.0f, 0.0f, 0.0f);
-
 	engine_camera = new CompCamera(nullptr, C_CAMERA);
 	engine_camera->SetFarPlaneDistance(100.0f);
 
@@ -50,9 +41,6 @@ bool ModuleCamera3D::CleanUp()
 // -----------------------------------------------------------------
 update_status ModuleCamera3D::Update(float dt)
 {
-	// Implement a debug camera with keys and mouse
-	// Now we can make this movememnt frame rate independant!
-
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 		speed = 8.0f * dt;
 
@@ -212,7 +200,7 @@ void ModuleCamera3D::CentrateObjectView()
 }
 
 float4x4 ModuleCamera3D::GetViewMatrix() const {
-	return /*(float*)&*/engine_camera->GetViewMatrix();
+	return engine_camera->GetViewMatrix();
 }
 
 float4x4 ModuleCamera3D::GetProjectionMatrix() const {
