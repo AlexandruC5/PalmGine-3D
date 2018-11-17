@@ -10,8 +10,8 @@ Hope you like it.
 # QUICK START #
 
 1) To use our engine drop one FBX file from "Models" folder.
-2) Inside the engine, will be generated the proper resources.
-3) Go to "Assets" on the right panel of the engine.
+2) The proper resources will be generated in the engine.
+3) Go to "Assets" on the right panel (in-engine).
 4) Click on the Object you want to add to the hierarchy.
 
 # INNOVATION
@@ -20,12 +20,13 @@ Hope you like it.
 
 # CAMERA CONTROLS (Like Unity)
 
-- Mouse left + Alt-left: Move Camera arround model pivot
-- Mouse right click: Move Camera with static position
-- Mouse right click + WASD keys: Navigate arround the scene
-- Mouse wheel: Move Camera forward and backward
-- Mouse middle: Panning
-- F: Center the Camera on an object
+- Mouse left + Alt-left: Move Camera arround model pivot.
+- Mouse right click: Move Camera with static position.
+- Mouse right click + WASD keys: Navigate arround the scene.
+- Mouse wheel: Move Camera forward and backward.
+- Mouse middle: Panning.
+- F: Center the Camera on an object.
+- Shift to speed up the camera's velocity.
 
 # FEATURES
 
@@ -43,7 +44,7 @@ Hope you like it.
 - Binary scene serialization (Allow to save and load scenes).
 - Application/Scene window can be resized and the rendering window adapts to the new aspect ratio.
 - All meshes use a bounding volume (AABB). Can be discarded with frustum culling.
-- All resources use reference counting.
+- All resources use reference counting (One texture/mesh is only once in memory regardless of how many gameobject use it).
 - Resource management:
    - “Asset” window that shows all user assets.
    - Upon start, all resources not managed inside Assets are generated in Library.
