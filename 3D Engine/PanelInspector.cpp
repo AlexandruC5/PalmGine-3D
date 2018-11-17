@@ -35,6 +35,13 @@ void PanelInspector::Draw()
 		if(ImGui::InputText("Name", name, 50, ImGuiInputTextFlags_AutoSelectAll |ImGuiInputTextFlags_EnterReturnsTrue)) {
 			selected_go->SetName(name);
 		}
+		if (ImGui::Checkbox("Active", &go_active))
+		{
+			if (selected_go->IsActive())
+				selected_go->SetActive(false);
+			else
+				selected_go->SetActive(true);
+		}
 		if (ImGui::Button("Delete GameObject"))
 		{
 			selected_go->PopGameObject();

@@ -38,27 +38,30 @@ GameObject::~GameObject()
 
 void GameObject::Update(float dt)
 {
-	for (uint i = 0; i < components.size(); i++)
+	if (active)
 	{
-		components[i]->Update(dt);
-	}
-	for (uint i = 0; i < childs.size(); i++)
-	{
-		childs[i]->Update(dt);
-	}
+		for (uint i = 0; i < components.size(); i++)
+		{
+			components[i]->Update(dt);
+		}
+		for (uint i = 0; i < childs.size(); i++)
+		{
+			childs[i]->Update(dt);
+		}
 
-	if (App->scene_intro->selected_gameObject == this) 
-	{
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		glBegin(GL_QUADS);
-		glLineWidth(5.0f);
-		glColor4f(1.f, 1.f, 0.f, 1.f);
+		if (App->scene_intro->selected_gameObject == this)
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			glBegin(GL_QUADS);
+			glLineWidth(5.0f);
+			glColor4f(1.f, 1.f, 0.f, 1.f);
 
-		DebugDrawBox();
+			DebugDrawBox();
 
-		glColor4f(1.f, 1.f, 1.f, 1.f);
-		glEnd();
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			glColor4f(1.f, 1.f, 1.f, 1.f);
+			glEnd();
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		}
 	}
 }
 
