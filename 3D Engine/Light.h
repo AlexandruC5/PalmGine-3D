@@ -3,7 +3,7 @@
 #define LIGHT_H
 
 #include "Color.h"
-#include "MathGeoLib\MathGeoLib.h"
+#include "MathGeoLib/MathGeoLib.h"
 
 struct Light
 {

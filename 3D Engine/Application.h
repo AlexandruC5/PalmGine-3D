@@ -3,7 +3,7 @@
 
 #include <list>
 #include "Globals.h"
-#include "JSON\parson.h"
+#include "JSON/parson.h"
 #include "Timer.h"
 #include "Module.h"
 #include "ModuleWindow.h"

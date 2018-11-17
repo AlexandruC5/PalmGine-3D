@@ -1,7 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleInput.h"
-#include "imGUI\imgui_impl_sdl_gl3.h"
+#include "imGUI/imgui_impl_sdl_gl3.h"
 
 #define MAX_KEYS 300
 

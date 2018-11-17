@@ -3,7 +3,7 @@
 #define PRIMITIVE_H
 
 
-#include "MathGeoLib\MathGeoLib.h"
+#include "MathGeoLib/MathGeoLib.h"
 #include "Color.h"
 
 enum PrimitiveTypes
