@@ -33,7 +33,7 @@ void PanelAssets::Draw()
 					App->importer->ApplyAndImportImage(textures[i]);
 				}
 				else
-					LOG("GameObject doesn't have component mesh.");
+					LOG("Selected GameObject doesn't have component mesh.");
 			}
 		}
 	}

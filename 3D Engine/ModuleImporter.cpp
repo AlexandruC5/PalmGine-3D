@@ -561,7 +561,7 @@ void ModuleImporter::ReadBinaryMesh(const char * path, GameObject* go)
 		memcpy(mesh->uvs, cursor, bytes);
 		cursor += bytes;
 	}
-	//Normales
+	//Normals
 	if (has_normals)
 	{
 		bytes = sizeof(float)*mesh->num_normals * 3;
