@@ -1,4 +1,5 @@
 #include "Globals.h"
+
 #include <random>
 
 // ~~ FUNCTIONS ~~
@@ -44,4 +45,26 @@ uint GenRandomNumber()
 	number = distr(eng);
 	
 	return number;
+}
+
+std::vector<std::string> ReadAllFilesOnPath(const char * path, const char * extension)
+{
+	std::vector<std::string> paths;
+	std::string dir = path;
+	dir += "*";
+	dir += extension;
+
+	WIN32_FIND_DATA search_data;
+
+	memset(&search_data, 0, sizeof(WIN32_FIND_DATA));
+
+	HANDLE handle = FindFirstFile(dir.c_str(), &search_data);
+
+	while (handle != INVALID_HANDLE_VALUE)
+	{
+		paths.push_back(GetFileNameFromPath(search_data.cFileName));
+		if (FindNextFile(handle, &search_data) == FALSE)
+			break;
+	}
+	return paths;
 }
