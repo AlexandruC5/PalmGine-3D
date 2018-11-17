@@ -297,13 +297,6 @@ bool GameObject::CompAlreadyExists(COMP_TYPE type) const
 
 void GameObject::DebugDrawBox() 
 {
-	//for (int i = 0; i < 12; ++i) 
-	//{
-	//	// TODO don't draw on direct mode
-	//	glVertex3f(GetAABB().Edge(i).a.x, GetAABB().Edge(i).a.y, GetAABB().Edge(i).a.z);
-	//	glVertex3f(GetAABB().Edge(i).b.x, GetAABB().Edge(i).b.y, GetAABB().Edge(i).b.z);
-	//}
-
 	float3 vertices[8];
 	GetAABB().GetCornerPoints(vertices);
 
@@ -336,14 +329,6 @@ void GameObject::DebugDrawBox()
 	glVertex3fv((GLfloat*)&vertices[4]);
 	glVertex3fv((GLfloat*)&vertices[5]);
 	glVertex3fv((GLfloat*)&vertices[1]);
-
-	//for (uint i = 0; i < childs.size(); i++)
-	//{
-	//	if (childs[i]->GetCompMesh() != nullptr)
-	//	{
-	//		childs[i]->DebugDrawBox();
-	//	}
-	//}
 }
 
 math::AABB GameObject::GetAABB()
