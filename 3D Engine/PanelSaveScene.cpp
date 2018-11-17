@@ -5,7 +5,7 @@
 PanelSaveScene::PanelSaveScene() : Panel("Save Scene")
 {
 	name = new char[64];
-	strcpy(name, "scene_name");
+	strcpy(name, "SceneName");
 }
 
 PanelSaveScene::~PanelSaveScene()
@@ -23,10 +23,30 @@ void PanelSaveScene::Draw()
 	
 	if (ImGui::Button("save"))
 	{
-		LOG("SAVING SCENE WITH NAME: %s", name);
-		App->scene_intro->SerializeScene(name);
-		active = false;
+		std::string tmp = name;
+		if (OnlyLetters(tmp))
+		{
+			LOG("SAVING SCENE WITH NAME: %s", name);
+			App->scene_intro->SerializeScene(name);
+			active = false;
+		}
+		else
+			LOG("ERROR: INVALID NAME. Scene name only accepts uppercase or lowercase letters.");
 	}
 
+
 	ImGui::End();
+}
+
+bool PanelSaveScene::OnlyLetters(std::string name)
+{
+	for (uint i = 0; i < name.size(); i++)
+	{
+		uint filter = toupper(name[i]);
+		if (filter < 'A' || filter > 'Z')
+		{
+			return false;
+		}
+	}
+	return true; 
 }

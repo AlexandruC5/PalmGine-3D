@@ -14,7 +14,8 @@ public:
 	~PanelSaveScene();
 
 	void Draw() override;
-	
+	bool OnlyLetters(std::string input);
+
 public:
 	char* name;
 	bool active = false;
