@@ -63,6 +63,12 @@ bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading Intro scene");
 	JSONscene_obj = nullptr;
+	std::string bin_path;
+	bin_path = BINARY_SCENE_PATH;
+	bin_path += "AutoSaveWhenPlay";
+	bin_path += ".binaryscene";
+	remove(bin_path.c_str());
+	bin_path.clear();
 	return true;
 }
 
