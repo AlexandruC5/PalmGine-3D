@@ -19,7 +19,7 @@ void PanelSaveScene::Draw()
 	ImGui::SetWindowPos({ (float)App->window->height / 3, ((float)App->window->height - ((225 * App->window->height) / 1024)) / 2 });
 	ImGui::SetWindowSize(ImVec2(App->window->width / 4, (225 * App->window->height) / 1024 / 2), ImGuiCond_Always);
 	ImGui::Text("Introduce the name of the scene:");
-	ImGui::InputText(".binaryscene", name, 64, ImGuiInputTextFlags_AutoSelectAll | ImGuiInputTextFlags_EnterReturnsTrue);
+	ImGui::InputText(BINARY_SCENE_EXTENSION, name, 64, ImGuiInputTextFlags_AutoSelectAll | ImGuiInputTextFlags_EnterReturnsTrue);
 	
 	if (ImGui::Button("save"))
 	{

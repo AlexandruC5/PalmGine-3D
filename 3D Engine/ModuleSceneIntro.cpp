@@ -52,7 +52,7 @@ bool ModuleSceneIntro::Start()
 	if (game_running == true) 
 	{
 		in_game_timer.Start();
-		SerializeScene("AutoSaveWhenPlay");
+		SerializeScene("auto_save_when_play");
 	}
 
 	return ret;
@@ -65,8 +65,8 @@ bool ModuleSceneIntro::CleanUp()
 	JSONscene_obj = nullptr;
 	std::string bin_path;
 	bin_path = BINARY_SCENE_PATH;
-	bin_path += "AutoSaveWhenPlay";
-	bin_path += ".binaryscene";
+	bin_path += "auto_save_when_play";
+	bin_path += BINARY_SCENE_EXTENSION;
 	remove(bin_path.c_str());
 	bin_path.clear();
 	return true;
@@ -400,7 +400,7 @@ void ModuleSceneIntro::CreateFileData(const char * name, char* data, uint size)
 	FILE * pFile;
 	bin_path = BINARY_SCENE_PATH;
 	bin_path += name;
-	bin_path += ".binaryscene";
+	bin_path += BINARY_SCENE_EXTENSION;
 	if (!FileExist(bin_path.c_str()))
 	{
 		pFile = fopen(bin_path.c_str(), "wb");
@@ -422,7 +422,7 @@ void ModuleSceneIntro::LoadSceneData(const char * path)
 	FILE * pFile;
 	bin_path = BINARY_SCENE_PATH;
 	bin_path += path;
-	bin_path += ".binaryscene";
+	bin_path += BINARY_SCENE_EXTENSION;
 	char* data = ReadBinaryScene(bin_path.c_str());
 	char* cursor = data;
 	uint bytes = 0;

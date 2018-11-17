@@ -84,7 +84,7 @@ bool ModuleUI::Start()
 	glewInit();
 	ImGui_ImplSdlGL3_Init(App->window->window);
 	config->active = false;
-	App->ui->load_scene->scenes = ReadAllFilesOnPath(BINARY_SCENE_PATH, ".binaryscene");
+	App->ui->load_scene->scenes = ReadAllFilesOnPath(BINARY_SCENE_PATH, BINARY_SCENE_EXTENSION);
 	App->ui->assets->fbx_vector = ReadAllFilesOnPath(BINARY_MESH_PATH, ".hierarchy");
 	App->ui->assets->textures = ReadAllFilesOnPath(DDS_IMAGES_PATH, ".dds");
 	return true;
