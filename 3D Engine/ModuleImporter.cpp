@@ -12,6 +12,7 @@
 #include "ModuleResourceManager.h"
 #include "ResourceMesh.h"
 #include "ResourceTexture.h"
+#include "PanelAssets.h"
 #include <string>
 
 #pragma comment (lib, "Assimp/libx86/assimp.lib")
@@ -60,14 +61,17 @@ bool ModuleImporter::LoadFBX(const char* path)
 	const aiScene* scene = aiImportFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
 	std::string binary_path = ImportFBX(scene, path, GetFileNameFromPath(path).c_str());
 	//Add it to resources
-	AddResource(binary_path.c_str());
+	AddResource(GetFileNameFromPath(binary_path.c_str()).c_str());
 
 	return true;
 }
 
-void ModuleImporter::LoadMesh(const char * path)
+void ModuleImporter::LoadMesh(const char * name)
 {
-	char* data = LoadData(path);
+	std::string path = BINARY_MESH_PATH;
+	path += name;
+	path += ".hierarchy";
+	char* data = LoadData(path.c_str());
 	char* cursor = data;
 	LoadRecursiveHierarchy(&cursor, App->scene_intro->root_gameObjects);
 }
@@ -75,21 +79,21 @@ void ModuleImporter::LoadMesh(const char * path)
 void ModuleImporter::AddResource(const char * path)
 {
 	// Check if this resource already exists on the resources vector
-	if (App->ui->assets_path.size() == 0)
-		App->ui->assets_path.push_back(path);
+	if (App->ui->assets->fbx_vector.size() == 0)
+		App->ui->assets->fbx_vector.push_back(GetFileNameFromPath(path));
 	else
 	{
 		bool file_exists = false;
-		for (uint i = 0; i < App->ui->assets_path.size(); i++)
+		for (uint i = 0; i <App->ui->assets->fbx_vector.size(); i++)
 		{
-			if (!strcmp(App->ui->assets_path[i].c_str(), path))
+			if (!strcmp(App->ui->assets->fbx_vector[i].c_str(), path))
 			{
 				file_exists = true;
 			}
 		}
 		if (file_exists == false)
 		{
-			App->ui->assets_path.push_back(path);
+			App->ui->assets->fbx_vector.push_back(GetFileNameFromPath(path));
 		}
 	}
 }

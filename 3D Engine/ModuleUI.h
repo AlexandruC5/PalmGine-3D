@@ -40,8 +40,6 @@ public:
 	PanelSaveScene* save_scene = nullptr;
 	PanelLoadScene* load_scene = nullptr;
 	PanelAssets* assets = nullptr;
-public:
-	std::vector<std::string> assets_path;
 };
 
 #endif // !MODULEUI_H

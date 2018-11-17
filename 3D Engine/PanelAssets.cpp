@@ -13,18 +13,21 @@ void PanelAssets::Draw()
 	ImGui::Text("Assets List");
 	ImGui::Separator();
 	ImGui::Separator();
-	for (uint i = 0; i < App->ui->assets_path.size(); i++)
+	if (ImGui::CollapsingHeader("Objects"))
 	{
-		if (ImGui::MenuItem(GetFileNameFromPath(App->ui->assets_path[i].c_str()).c_str()))
+		for (uint i = 0; i < fbx_vector.size(); i++)
 		{
-			if (ImGui::IsItemClicked())
-				App->importer->LoadMesh(App->ui->assets_path[i].c_str());
-
-			if (ImGui::IsItemHovered())
+			if (ImGui::MenuItem(fbx_vector[i].c_str()))
+				App->importer->LoadMesh(fbx_vector[i].c_str());
+		}
+	}
+	if (ImGui::CollapsingHeader("Textures"))
+	{
+		for (uint i = 0; i < textures.size(); i++)
+		{
+			if (ImGui::MenuItem(textures[i].c_str()))
 			{
-				ImGui::BeginTooltip();
-				ImGui::Text("Source: %s", App->ui->assets_path[i].c_str());
-				ImGui::EndTooltip();
+				if (App->scene_intro->selected_gameObject != nullptr);
 			}
 		}
 	}

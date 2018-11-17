@@ -16,7 +16,9 @@ public:
 	void Draw() override;
 	bool active = false;
 
-private:
+public:
+	std::vector<std::string> fbx_vector;
+	std::vector<std::string> textures;
 };
 
 #endif 
