@@ -15,9 +15,17 @@ void PanelAssets::Draw()
 	ImGui::Separator();
 	for (uint i = 0; i < App->ui->assets_path.size(); i++)
 	{
-		if (ImGui::Button(App->ui->assets_path[i].c_str()))
+		if (ImGui::MenuItem(GetFileNameFromPath(App->ui->assets_path[i].c_str()).c_str()), ImGuiTreeNodeFlags_Leaf)
 		{
-			App->importer->LoadMesh(App->ui->assets_path[i].c_str());
+			if (ImGui::IsItemClicked())
+				App->importer->LoadMesh(App->ui->assets_path[i].c_str());
+
+			if (ImGui::IsItemHovered())
+			{
+				ImGui::BeginTooltip();
+				ImGui::Text("Source: %s", App->ui->assets_path[i].c_str());
+				ImGui::EndTooltip();
+			}
 		}
 	}
 }
