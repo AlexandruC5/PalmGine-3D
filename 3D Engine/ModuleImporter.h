@@ -34,7 +34,7 @@ public:
 	void CreateBinaryMesh(const aiScene* scene, const char* path);
 	//     -- Texture --
 	void ImportImage(const char* path /*PNG Path*/);
-
+	void ApplyAndImportImage(std::string name);
 	// ------ READ BINARY ------
 
 	//     -- Mesh --
