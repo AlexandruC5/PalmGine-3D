@@ -49,7 +49,8 @@ void GameObject::Update(float dt)
 
 	if (App->scene_intro->selected_gameObject == this) 
 	{
-		glBegin(GL_LINES);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glBegin(GL_QUADS);
 		glLineWidth(5.0f);
 		glColor4f(1.f, 1.f, 0.f, 1.f);
 
@@ -57,6 +58,7 @@ void GameObject::Update(float dt)
 
 		glColor4f(1.f, 1.f, 1.f, 1.f);
 		glEnd();
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 }
 
@@ -292,12 +294,46 @@ bool GameObject::CompAlreadyExists(COMP_TYPE type) const
 
 void GameObject::DebugDrawBox() 
 {
-	for (int i = 0; i < 12; ++i) 
-	{
-		// TODO don't draw on direct mode
-		glVertex3f(GetAABB().Edge(i).a.x, GetAABB().Edge(i).a.y, GetAABB().Edge(i).a.z);
-		glVertex3f(GetAABB().Edge(i).b.x, GetAABB().Edge(i).b.y, GetAABB().Edge(i).b.z);
-	}
+	//for (int i = 0; i < 12; ++i) 
+	//{
+	//	// TODO don't draw on direct mode
+	//	glVertex3f(GetAABB().Edge(i).a.x, GetAABB().Edge(i).a.y, GetAABB().Edge(i).a.z);
+	//	glVertex3f(GetAABB().Edge(i).b.x, GetAABB().Edge(i).b.y, GetAABB().Edge(i).b.z);
+	//}
+
+	float3 vertices[8];
+	GetAABB().GetCornerPoints(vertices);
+
+	glVertex3fv((GLfloat*)&vertices[1]);
+	glVertex3fv((GLfloat*)&vertices[5]);
+	glVertex3fv((GLfloat*)&vertices[7]);
+	glVertex3fv((GLfloat*)&vertices[3]);
+
+	glVertex3fv((GLfloat*)&vertices[4]);
+	glVertex3fv((GLfloat*)&vertices[0]);
+	glVertex3fv((GLfloat*)&vertices[2]);
+	glVertex3fv((GLfloat*)&vertices[6]);
+
+	glVertex3fv((GLfloat*)&vertices[5]);
+	glVertex3fv((GLfloat*)&vertices[4]);
+	glVertex3fv((GLfloat*)&vertices[6]);
+	glVertex3fv((GLfloat*)&vertices[7]);
+
+	glVertex3fv((GLfloat*)&vertices[0]);
+	glVertex3fv((GLfloat*)&vertices[1]);
+	glVertex3fv((GLfloat*)&vertices[3]);
+	glVertex3fv((GLfloat*)&vertices[2]);
+
+	glVertex3fv((GLfloat*)&vertices[3]);
+	glVertex3fv((GLfloat*)&vertices[7]);
+	glVertex3fv((GLfloat*)&vertices[6]);
+	glVertex3fv((GLfloat*)&vertices[2]);
+
+	glVertex3fv((GLfloat*)&vertices[0]);
+	glVertex3fv((GLfloat*)&vertices[4]);
+	glVertex3fv((GLfloat*)&vertices[5]);
+	glVertex3fv((GLfloat*)&vertices[1]);
+
 	for (uint i = 0; i < childs.size(); i++)
 	{
 		if (childs[i]->GetCompMesh() != nullptr)

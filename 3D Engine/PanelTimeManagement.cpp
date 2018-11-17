@@ -46,14 +46,14 @@ void PanelTimeManagement::Draw()
 		App->scene_intro->game_running = false;
 	}
 	ImGui::SameLine();
-	if (ImGui::Button("NextFrame")) {
-		
-	}
-	ImGui::SameLine();
+	//if (ImGui::Button("NextFrame")) {
+	//	
+	//}
+	//ImGui::SameLine();
 
-	//Timer
-	ImGui::Text("%.3f", (float)App->scene_intro->in_game_timer.Read()/1000);
-	ImGui::SameLine();
+	////Timer
+	//ImGui::Text("%.3f", (float)App->scene_intro->in_game_timer.Read()/1000);
+	//ImGui::SameLine();
 
 	//TimeScale Slider
 	ImGui::PushItemWidth(150);
