@@ -25,7 +25,7 @@ ModuleSceneIntro::~ModuleSceneIntro()
 	quadtree.~Quadtree();
 	//delete camera;
 	RELEASE(root_gameObjects);
-	// Delete the non-used game objects
+	
 	for (uint i = 0; i < to_delete.size(); i++)
 	{
 		delete to_delete[i];
@@ -208,10 +208,10 @@ GameObject* ModuleSceneIntro::TestRayWithAllGO(const LineSegment& picker) const 
 					float hit_distance = 0.0f;
 
 					if (picker_in_local.Intersects(nearestTriangle, &hit_distance, &hit_point)) {
-						if (hit_distance < lower_hit_distance) {
-							lower_hit_distance = hit_distance;
+						//if (hit_distance < lower_hit_distance) {
+						//	lower_hit_distance = hit_distance;
 							posibleGO = posible_GOs_picked[i];
-						}
+						//}
 					}
 				}
 			}
