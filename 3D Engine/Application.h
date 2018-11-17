@@ -34,8 +34,6 @@ public:
 	Timer	ms_timer;
 
 private:
-
-	//Timer	ms_timer;
 	float	dt;
 	std::list<Module*> list_modules;
 

@@ -129,44 +129,6 @@ void QuadtreeNode::DebugDraw(){
 
 	if (this != nullptr) {
 
-
-		//float3 vertices[8];
-		//box.GetCornerPoints(vertices);
-		//glBegin(GL_QUADS);
-
-		//glVertex3fv((GLfloat*)&vertices[1]);
-		//glVertex3fv((GLfloat*)&vertices[5]);
-		//glVertex3fv((GLfloat*)&vertices[7]);
-		//glVertex3fv((GLfloat*)&vertices[3]);
-
-		//glVertex3fv((GLfloat*)&vertices[4]);
-		//glVertex3fv((GLfloat*)&vertices[0]);
-		//glVertex3fv((GLfloat*)&vertices[2]);
-		//glVertex3fv((GLfloat*)&vertices[6]);
-
-		//glVertex3fv((GLfloat*)&vertices[5]);
-		//glVertex3fv((GLfloat*)&vertices[4]);
-		//glVertex3fv((GLfloat*)&vertices[6]);
-		//glVertex3fv((GLfloat*)&vertices[7]);
-
-		//glVertex3fv((GLfloat*)&vertices[0]);
-		//glVertex3fv((GLfloat*)&vertices[1]);
-		//glVertex3fv((GLfloat*)&vertices[3]);
-		//glVertex3fv((GLfloat*)&vertices[2]);
-
-		//glVertex3fv((GLfloat*)&vertices[3]);
-		//glVertex3fv((GLfloat*)&vertices[7]);
-		//glVertex3fv((GLfloat*)&vertices[6]);
-		//glVertex3fv((GLfloat*)&vertices[2]);
-
-		//glVertex3fv((GLfloat*)&vertices[0]);
-		//glVertex3fv((GLfloat*)&vertices[4]);
-		//glVertex3fv((GLfloat*)&vertices[5]);
-		//glVertex3fv((GLfloat*)&vertices[1]);
-
-		//
-		//glEnd();
-
 		for (int i = 0; i < 12; ++i) {
 			glVertex3f(box.Edge(i).a.x, box.Edge(i).a.y, box.Edge(i).a.z);
 			glVertex3f(box.Edge(i).b.x, box.Edge(i).b.y, box.Edge(i).b.z);
