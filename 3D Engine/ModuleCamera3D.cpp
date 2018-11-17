@@ -100,7 +100,7 @@ update_status ModuleCamera3D::Update(float dt)
 			RotateAroundReference(engine_camera->frustum.pos, dx * cameraRotationSpeed, dy * cameraRotationSpeed);
 		}
 	}
-	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT &&
+	if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT &&
 		App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT)
 	{
 		int dx = -App->input->GetMouseXMotion();
@@ -108,7 +108,7 @@ update_status ModuleCamera3D::Update(float dt)
 
 
 
-		float sensibility = 2.0f * dt;
+		float sensibility = 4.0f * dt;
 		if (dx != 0 || dy != 0)
 		{
 			float cameraRotationSpeed = speed * sensibility;
@@ -140,7 +140,7 @@ update_status ModuleCamera3D::Update(float dt)
 	}
 
 	if (ImGui::IsMouseHoveringAnyWindow() == false && ImGuizmo::IsOver() == false) {
-		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) {
+		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN && App->input->GetKey(SDL_SCANCODE_LALT) == KEY_IDLE) {
 			float window_width = (float)App->window->screen_surface->w;
 			float window_height = (float)App->window->screen_surface->h;
 			int mouseX = App->input->GetMouseX();
