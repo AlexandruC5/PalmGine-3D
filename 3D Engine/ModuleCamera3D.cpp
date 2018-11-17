@@ -154,7 +154,7 @@ update_status ModuleCamera3D::Update(float dt)
 			App->scene_intro->PickGO(picker);
 		}
 	}
-	DebugDrawPicker();
+	//DebugDrawPicker();
 
 	// Camera speed
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_DOWN)
