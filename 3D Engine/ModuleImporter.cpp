@@ -62,7 +62,7 @@ bool ModuleImporter::LoadFBX(const char* path)
 	std::string binary_path = ImportFBX(scene, path, GetFileNameFromPath(path).c_str());
 	//Add it to resources
 	AddResource(GetFileNameFromPath(binary_path.c_str()).c_str());
-
+	LOG("Load FBX completed.");
 	return true;
 }
 
