@@ -14,10 +14,10 @@ PanelAbout::~PanelAbout()
 //Function that draws all the console
 void PanelAbout::Draw()
 {
-	ImGui::TextColored(ImVec4(1, 1, 0, 100), "=== PalGine 3D ===");
+	ImGui::TextColored({ 125, 156, 212, 255 }, "=== PalGine 3D ===");
 	ImGui::Text("Palmgine 3D is a project consistent of creating a Game Engine.\nAt this moment, you can import your model (.fbx, .obj, etc),\nload geometry and change or apply one texture on the model (.jpg or .png).\nDrop the files on the window.\nHope you like it.");
 	ImGui::Separator();
-	ImGui::TextColored(ImVec4(0, 1, 1, 100), "Project links");
+	ImGui::TextColored({ 125, 156, 212, 255 }, "Project links");
 	if (ImGui::MenuItem("- Link to PalmGine 3D repository"))
 	{
 		ShellExecuteA(0, 0, "chrome.exe", "https://github.com/botttos/PalmGine", 0, SW_SHOWMAXIMIZED);

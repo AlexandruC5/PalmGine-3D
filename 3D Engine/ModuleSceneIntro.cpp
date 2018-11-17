@@ -161,7 +161,6 @@ void ModuleSceneIntro::SetGameObjectDrawability() {
 }
 
 void ModuleSceneIntro::PickGO(const LineSegment picker) {
-	//Test GO to see which one is the one that the mouse is picking
 	selected_gameObject = TestRayWithAllGO(picker);
 }
 
@@ -213,7 +212,6 @@ GameObject* ModuleSceneIntro::TestRayWithAllGO(const LineSegment& picker) const 
 	return posibleGO;
 }
 
-//Used to insert GO that aren't in quadtree but are in frustrum
 void ModuleSceneIntro::TestGOOutOfQuad(std::vector<GameObject*> &posible_GOs_picked, GameObject* posibleGO) const {
 	if (posibleGO->IsActive() == true && posibleGO->IsStatic() == false) {
 		if (App->camera->engine_camera->frustum.Contains(posibleGO->GetAABB()) == true) {
