@@ -160,18 +160,21 @@ void ModuleSceneIntro::SetGameObjectDrawability() {
 	}
 }
 
-void ModuleSceneIntro::PickGO(const LineSegment picker) {
+void ModuleSceneIntro::PickGO(const LineSegment picker) 
+{
 	selected_gameObject = TestRayWithAllGO(picker);
 }
 
-GameObject* ModuleSceneIntro::TestRayWithAllGO(const LineSegment& picker) const {
+GameObject* ModuleSceneIntro::TestRayWithAllGO(const LineSegment& picker) const 
+{
 	GameObject* posibleGO = nullptr;
 	std::vector<GameObject*> posible_GOs_picked;
 	quadtree.CollectIntersections(posible_GOs_picked, picker);
 
 	float lower_hit_distance = inf;
 
-	for (uint i = 0; i < root_gameObjects->GetNumChilds(); ++i) {
+	for (uint i = 0; i < root_gameObjects->GetNumChilds(); ++i) 
+	{
 		TestGOOutOfQuad(posible_GOs_picked, root_gameObjects->childs[i]);
 	}
 
@@ -212,12 +215,14 @@ GameObject* ModuleSceneIntro::TestRayWithAllGO(const LineSegment& picker) const 
 	return posibleGO;
 }
 
-void ModuleSceneIntro::TestGOOutOfQuad(std::vector<GameObject*> &posible_GOs_picked, GameObject* posibleGO) const {
-	if (posibleGO->IsActive() == true && posibleGO->IsStatic() == false) {
-		if (App->camera->engine_camera->frustum.Contains(posibleGO->GetAABB()) == true) {
+void ModuleSceneIntro::TestGOOutOfQuad(std::vector<GameObject*> &posible_GOs_picked, GameObject* posibleGO) const 
+{
+	if (posibleGO->IsActive() == true && posibleGO->IsStatic() == false) 
+	{
+		if (App->camera->engine_camera->frustum.Contains(posibleGO->GetAABB()) == true) 
+		{
 			posible_GOs_picked.push_back(posibleGO);
 		}
-
 		for (uint i = 0; i <posibleGO->GetNumChilds(); ++i) {
 			TestGOOutOfQuad(posible_GOs_picked, posibleGO->childs[i]);
 		}
@@ -541,8 +546,6 @@ void ModuleSceneIntro::LoadSceneData(const char * path)
 					mat_comp->SetID(mat_comp->rtexture->texture->id, mat_comp->rtexture->exported_path, ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT));
 					mat_comp->rtexture->already_loaded++;
 				}
-				
-			
 				break;
 			}
 			case COMP_TYPE::C_CAMERA:

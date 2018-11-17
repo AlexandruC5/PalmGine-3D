@@ -16,7 +16,6 @@ public:
 	~PanelLoadScene();
 
 	void Draw() override;
-
 	
 public:
 	std::vector<std::string> scenes;

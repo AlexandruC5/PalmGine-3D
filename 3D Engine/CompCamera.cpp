@@ -59,7 +59,7 @@ float CompCamera::GetApectRatio() const
 	return frustum.AspectRatio();
 }
 
-uint CompCamera::GetSize() 
+uint CompCamera::GetSize() const
 {
 	// GET SIZE FOR SERIALIZATION
 	uint size = 0;

@@ -43,7 +43,7 @@ int CompMaterial::GetTextureHeight()const
 	return rtexture->texture->texture_height;
 }
 
-uint CompMaterial::GetSize() 
+uint CompMaterial::GetSize() const
 {
 	// GET SIZE FOR SERIALIZATION
 	uint size = 0;

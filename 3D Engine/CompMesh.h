@@ -44,10 +44,11 @@ public:
 	float GetNumNormals()const;
 	float GetNumUvs()const;
 	math::AABB GetAABB()const;
-	uint GetSize();
-	void WriteComponentData(char ** cursor);
+	uint GetSize() const;
 	float* GetVertices()const;
 	Mesh* GetMesh()const;
+	void WriteComponentData(char ** cursor);
+	
 	// UI 
 	void BlitComponentInspector();
 

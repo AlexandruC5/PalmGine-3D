@@ -21,7 +21,7 @@ public:
 	float GetFarPlaneDistance() const;
 	float GetFOV() const;
 	float GetApectRatio() const;
-	uint GetSize();
+	uint GetSize() const;
 	float4x4 GetViewMatrix() const;
 	float4x4 GetProjectionMatrix() const;
 

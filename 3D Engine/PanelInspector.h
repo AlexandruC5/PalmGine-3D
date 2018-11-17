@@ -17,10 +17,9 @@ public:
 
 	void EnableGuizmos(GameObject* selected_go);
 
+public:
 	bool active = true;
 	bool go_active = true;
-private:
-
 };
 
 #endif 

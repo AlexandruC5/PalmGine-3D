@@ -15,7 +15,6 @@ public:
 	virtual ~PanelAbout();
 
 	void Draw() override;
-
 };
 
 #endif 

@@ -147,5 +147,4 @@ void ModuleHardware::Draw(const char* title)
 	ImGui::Text("VRAM Reserved: ");
 	ImGui::SameLine();
 	ImGui::TextColored({ 125, 156, 212, 255 }, "%.2f Mb", (dedicatedMemory * 0.001));
-
 }

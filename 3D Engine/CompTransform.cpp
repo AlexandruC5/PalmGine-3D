@@ -192,7 +192,7 @@ math::float4x4 CompTransform::GetTransformationMatrix() const
 	return transform_matrix;
 }
 
-uint CompTransform::GetSize() 
+uint CompTransform::GetSize() const
 {
 	// GET SIZE FOR SERIALIZATION
 	uint size = 0;

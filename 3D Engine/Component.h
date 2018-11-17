@@ -19,6 +19,7 @@ class Component
 public:
 	Component(GameObject* parent, COMP_TYPE type);
 	virtual ~Component();
+	
 	virtual void preUpdate(float dt);
 	virtual void Update(float dt);
 	virtual void Draw();
@@ -28,7 +29,7 @@ public:
 	COMP_TYPE GetType() const;
 	bool IsActive() const;
 	const char* GetName() const;
-	uint GetSize();
+	uint GetSize() const;
 
 	//Set methods
 	virtual bool Enable();

@@ -123,7 +123,7 @@ math::AABB CompMesh::GetAABB()const
 	return box;
 }
 
-uint CompMesh::GetSize() 
+uint CompMesh::GetSize() const 
 {
 	// GET SIZE FOR SERIALIZATION
 	uint size = 0;

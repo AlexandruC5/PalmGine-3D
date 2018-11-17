@@ -15,9 +15,8 @@ public:
 
 	void Draw() override;
 
+public:
 	bool active = true;
-private:
-
 };
 
 #endif 

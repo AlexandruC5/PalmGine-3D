@@ -44,7 +44,7 @@ const char * Component::GetName() const
 	return name;
 }
 
-uint Component::GetSize() 
+uint Component::GetSize() const
 {
 	return 0;
 }

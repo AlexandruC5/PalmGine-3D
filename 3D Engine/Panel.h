@@ -14,12 +14,10 @@ public:
 
 	void Activate();
 	bool IsActive() const;
-
 	virtual void Draw() = 0;
 
 public:
 	bool active = true;
-
 protected:
 	std::string name;
 };

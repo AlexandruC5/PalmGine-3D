@@ -18,9 +18,9 @@ public:
 
 	void Draw() override;
 
+public:
 	bool active = false;
 private:
-
 	int rand = 0;
 	int width = 1280;
 	int height = 1024;

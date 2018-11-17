@@ -17,8 +17,6 @@ public:
 	update_status PreUpdate(float dt);
 	bool CleanUp();
 
-	//GameObject* AddGameObject(GameObject* parent);
-
 	// Variables
 	bool grid_enabled = true;
 	bool axis_enabled = false;

@@ -48,7 +48,6 @@ private:
 	bool sse3 = false;
 	bool sse41 = false;
 	bool sse42 = false;
-
 };
 
 #endif 

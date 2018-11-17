@@ -29,7 +29,7 @@ public:
 	std::string GetTexturePath() const;
 	int GetTextureWidth() const;
 	int GetTextureHeight() const;
-	uint GetSize();
+	uint GetSize() const;
 
 	// Set methods
 	void SetID(uint id, std::string path, int width, int height);
