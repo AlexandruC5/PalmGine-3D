@@ -28,6 +28,7 @@ void PanelTimeManagement::Draw()
 		if (App->scene_intro->game_running == false) {
 			App->scene_intro->in_game_timer.Start();
 			App->scene_intro->game_running = true;
+			App->scene_intro->SerializeScene("AutoSaveWhenPlay");
 		}
 	}
 	ImGui::SameLine();
@@ -50,6 +51,7 @@ void PanelTimeManagement::Draw()
 		App->scene_intro->in_game_timer.Start();
 		App->scene_intro->in_game_timer.Stop();
 		App->scene_intro->game_running = false;
+		App->scene_intro->LoadSceneData("AutoSaveWhenPlay");
 	}
 	ImGui::SameLine();
 	//if (ImGui::Button("NextFrame")) {
