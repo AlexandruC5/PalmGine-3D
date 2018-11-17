@@ -157,6 +157,22 @@ void ModuleSceneIntro::SetGameObjectDrawability() {
 				(*iterator).second->GetCompMesh()->Draw();
 			}
 		}
+		else {
+			for (int i = 0; i < root_gameObjects->GetNumChilds(); ++i) {
+				for (int j = 0; j < root_gameObjects->childs[i]->GetNumChilds(); ++j) {
+					if (root_gameObjects->childs[i]->childs[j]->IsStatic() == true) {
+						if (root_gameObjects->childs[i]->childs[j]->GetCompMesh() != nullptr) {
+							root_gameObjects->childs[i]->childs[j]->GetCompMesh()->Draw();
+						}
+					}
+				}
+				if (root_gameObjects->childs[i]->IsStatic() == true) {
+					if (root_gameObjects->childs[i]->GetCompMesh() != nullptr) {
+						root_gameObjects->childs[i]->GetCompMesh()->Draw();
+					}
+				}
+			}
+		}
 	}
 }
 
