@@ -6,7 +6,6 @@
 #include "CompTransform.h"
 #include "CompMesh.h"
 #include "Component.h"
-#include "PanelLoadScene.h"
 #include "MathGeoLib/MathGeoLib.h"
 #include <list>
 #include "Devil/include/il.h"
@@ -50,7 +49,8 @@ bool ModuleSceneIntro::Start()
 	CompCamera* cameracomp = new CompCamera(camera, COMP_TYPE::C_CAMERA);
 	camera->AddComponent(cameracomp);
 
-	if (game_running == true) {
+	if (game_running == true) 
+	{
 		in_game_timer.Start();
 		SerializeScene("AutoSaveWhenPlay");
 	}
@@ -397,7 +397,6 @@ void ModuleSceneIntro::CreateFileData(const char * name, char* data, uint size)
 		pFile = fopen(bin_path.c_str(), "wb");
 		fwrite(data, sizeof(char), size, pFile);
 		fclose(pFile);
-		App->ui->load_scene->scenes.push_back(name);
 	}
 	else
 	{

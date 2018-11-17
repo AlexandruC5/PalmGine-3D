@@ -28,6 +28,7 @@ void PanelSaveScene::Draw()
 		{
 			LOG("SAVING SCENE WITH NAME: %s", name);
 			App->scene_intro->SerializeScene(name);
+			App->ui->load_scene->scenes.push_back(name);
 			active = false;
 		}
 		else
