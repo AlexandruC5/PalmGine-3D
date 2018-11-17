@@ -53,11 +53,14 @@ void PanelTimeManagement::Draw()
 			App->scene_intro->in_game_timer.Stop();
 			App->scene_intro->game_running = false;
 			App->scene_intro->LoadSceneData("AutoSaveWhenPlay");
+			App->scene_intro->in_game_timer.ResetExtraTicks();
 		}
 	}
 	ImGui::SameLine();
 	if (ImGui::Button("NextFrame")) {
-		
+		if (App->scene_intro->game_running == true){
+			App->scene_intro->in_game_timer.AddExtraTicks(App->scene_intro->in_game_timer.GetDT());
+		}
 	}
 	ImGui::SameLine();
 

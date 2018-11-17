@@ -19,6 +19,10 @@ void InGameTimer::UpdateTimer() {
 	else {
 		dt = App->GetDT() * time_scale;
 	}
+
+	time = App->ms_timer.Read() - started_at;
+	time += extra_ticks;
+
 }
 
 // ---------------------------------------------
@@ -65,7 +69,7 @@ Uint32 InGameTimer::Read()
 	}
 	else if(running == true)
 	{
-		return SDL_GetTicks() - started_at;
+		return SDL_GetTicks() - time;
 	}
 	else
 	{
@@ -81,4 +85,13 @@ bool InGameTimer::IsPaused() const{
 // ---------------------------------------------
 float InGameTimer::GetDT()const {
 	return dt;
+}
+
+// ---------------------------------------------
+void InGameTimer::AddExtraTicks(float ticks) {
+	extra_ticks += ticks;
+}
+
+void InGameTimer::ResetExtraTicks() {
+	extra_ticks = 0;
 }

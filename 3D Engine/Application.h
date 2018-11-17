@@ -31,9 +31,11 @@ public:
 	JSON_Value* JSONconfig = nullptr;
 	JSON_Object* JSONconfig_obj = nullptr;
 
+	Timer	ms_timer;
+
 private:
 
-	Timer	ms_timer;
+	//Timer	ms_timer;
 	float	dt;
 	std::list<Module*> list_modules;
 
