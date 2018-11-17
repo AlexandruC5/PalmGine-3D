@@ -56,10 +56,10 @@ void PanelTimeManagement::Draw()
 		}
 	}
 	ImGui::SameLine();
-	//if (ImGui::Button("NextFrame")) {
-	//	
-	//}
-	//ImGui::SameLine();
+	if (ImGui::Button("NextFrame")) {
+		
+	}
+	ImGui::SameLine();
 
 	////Timer
 	//ImGui::Text("%.3f", (float)App->scene_intro->in_game_timer.Read()/1000);

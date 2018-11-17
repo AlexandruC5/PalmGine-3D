@@ -59,6 +59,9 @@ public:
 
 	float in_game_dt;
 	std::vector<GameObject*> to_delete;
+
+	JSON_Object* JSONscene_obj;
+
 };
 
 #endif // !MODULESCENEINTRO_H

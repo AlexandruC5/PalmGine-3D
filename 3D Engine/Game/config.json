@@ -9,7 +9,10 @@
     "borderless": false,
     "fullscreen_window": false
   },
-    "renderer3D": {
+  "renderer3D": {
     "vsync": true
+  },
+  "scene": {
+    "inGame": false
   }
 }

@@ -37,6 +37,10 @@ ModuleSceneIntro::~ModuleSceneIntro()
 bool ModuleSceneIntro::Start()
 {
 	LOG("Loading Intro assets");
+
+	JSONscene_obj = json_object_get_object(App->JSONconfig_obj, "scene");
+	game_running = json_object_get_boolean(JSONscene_obj, "inGame");
+
 	bool ret = true;
 	//App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(float3::zero);
@@ -49,6 +53,12 @@ bool ModuleSceneIntro::Start()
 	CompCamera* cameracomp = new CompCamera(camera, COMP_TYPE::C_CAMERA);
 	camera->AddComponent(cameracomp);
 
+
+	if (game_running == true) {
+		in_game_timer.Start();
+		SerializeScene("AutoSaveWhenPlay");
+	}
+
 	return ret;
 }
 
@@ -56,6 +66,7 @@ bool ModuleSceneIntro::Start()
 bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading Intro scene");
+	JSONscene_obj = nullptr;
 	return true;
 }
 
