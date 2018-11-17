@@ -25,8 +25,8 @@ public:
 	void DebugDrawPicker();
 
 public:
-	float speed = 6.0f;
-	float wheelSpeed = 3.0f;
+	float speed = 7.0f;
+	float wheelSpeed = 25.0f;
 	CompCamera* engine_camera = nullptr;
 
 private:

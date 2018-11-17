@@ -148,7 +148,7 @@ void PanelConfig::Draw()
 	//Camera
 	if (ImGui::CollapsingHeader("Camera")) {
 		ImGui::SliderFloat("Camera Speed", &App->camera->speed, 0, 15, NULL);
-		ImGui::SliderFloat("Wheel Speed", &App->camera->wheelSpeed, 0, 15, NULL);
+		ImGui::SliderFloat("Wheel Speed", &App->camera->wheelSpeed, 0, 50, NULL);
 		float fov = App->camera->engine_camera->GetFOV();
 		if (ImGui::SliderFloat("Field of View", &fov, 1.0f, 179.0f)) {
 			App->camera->engine_camera->SetFOV(fov);
