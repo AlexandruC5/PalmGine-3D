@@ -7,10 +7,14 @@ Link: https://github.com/botttos/PalmGine-3D/tree/Assignment2
 
 Hope you like it.  
 
+# INNOVATION
+
+- Scene serialization in binary to make it faster.
+
 # CAMERA CONTROLS (Like Unity)
 
 - Mouse right click: Move Camera with static position
-- Mouse right click + arrow keys: Navigate arround the scene
+- Mouse right click + WASD keys: Navigate arround the scene
 - Mouse left + Alt-left: Move Camera arround model pivot
 - Mouse wheel: Move Camera forward and backward
 - Mouse middle: Panning
@@ -26,6 +30,10 @@ Hope you like it.
 - Quadtree.
 - Camera (frustum culling, near/far plane, FOV and aspect ratio).
 - Guizmos.
+- Assets folder.
+- GameMode with modifiable time scale.
+- MousePicking.
+- Binary scene serialization (Allow to save and load scenes).
 
 # VERSION CONTROL
 ## v.0.7
