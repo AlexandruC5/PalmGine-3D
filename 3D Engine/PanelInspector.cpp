@@ -72,7 +72,7 @@ void PanelInspector::Draw()
 				}
 			}
 
-			if (ImGui::CollapsingHeader("Transform"), ImGuiTreeNodeFlags_DefaultOpen)
+			if (ImGui::CollapsingHeader("Transform"))
 			{
 				if (transform != nullptr)
 				{
@@ -121,14 +121,14 @@ void PanelInspector::Draw()
 
 			if (mesh != nullptr)
 			{
-				if (ImGui::CollapsingHeader("Renderer Options"), ImGuiTreeNodeFlags_DefaultOpen)
+				if (ImGui::CollapsingHeader("Renderer Options"))
 				{
 					ImGui::Checkbox("Wireframe mode", &mesh->wireframe);
 					if (texture != nullptr) {
 						ImGui::SliderFloat("Alpha tolerance", &mesh->tex_alpha, 0, 1, NULL);
 					}
 				}
-				if (ImGui::CollapsingHeader("Mesh Information"), ImGuiTreeNodeFlags_DefaultOpen)
+				if (ImGui::CollapsingHeader("Mesh Information"))
 				{
 					ImGui::Text("Showing read only information about the mesh");
 					ImGui::Separator();
@@ -146,7 +146,7 @@ void PanelInspector::Draw()
 			}
 
 			if (camera != nullptr) {
-				if (ImGui::CollapsingHeader("Camera"), ImGuiTreeNodeFlags_DefaultOpen)
+				if (ImGui::CollapsingHeader("Camera"))
 				{
 					ImGui::Checkbox("Active", &camera->active);
 					ImGui::Checkbox("Frustum Culling", &camera->frustum_culling);
@@ -169,7 +169,7 @@ void PanelInspector::Draw()
 				}
 			}
 			if (texture != nullptr) {
-				if (ImGui::CollapsingHeader("Material"), ImGuiTreeNodeFlags_DefaultOpen) {
+				if (ImGui::CollapsingHeader("Material")) {
 					ImGui::Text("Showing read only information about the mesh material");
 					ImGui::Separator();
 					ImGui::Text("Texture path: %s", texture->GetTexturePath().c_str());
