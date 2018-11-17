@@ -15,7 +15,7 @@ void PanelAssets::Draw()
 	ImGui::Separator();
 	for (uint i = 0; i < App->ui->assets_path.size(); i++)
 	{
-		if (ImGui::MenuItem(GetFileNameFromPath(App->ui->assets_path[i].c_str()).c_str()), ImGuiTreeNodeFlags_Leaf)
+		if (ImGui::MenuItem(GetFileNameFromPath(App->ui->assets_path[i].c_str()).c_str()))
 		{
 			if (ImGui::IsItemClicked())
 				App->importer->LoadMesh(App->ui->assets_path[i].c_str());

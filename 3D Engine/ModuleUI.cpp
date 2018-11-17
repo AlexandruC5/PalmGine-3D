@@ -39,6 +39,7 @@ bool ModuleUI::Start()
 	glewInit();
 	ImGui_ImplSdlGL3_Init(App->window->window);
 	config->active = false;
+	App->ui->load_scene->scenes = ReadAllFilesOnPath(BINARY_SCENE_PATH, ".binaryscene");
 
 	return true;
 }

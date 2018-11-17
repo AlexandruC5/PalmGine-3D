@@ -18,11 +18,11 @@ public:
 	void Draw() override;
 	//void AddSceneName(std::string name);
 
-	bool active = false;
-private:
+	
+public:
 	//TODO delete if is not implemented
 	std::vector<std::string> scenes;
-	char* name = nullptr;
+	bool active = false;
 };
 
 #endif 
