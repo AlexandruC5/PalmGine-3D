@@ -1,7 +1,6 @@
 #ifndef MODULESCENEINTRO_H
 #define MODULESCENEINTRO_H
 
-
 #include "Module.h"
 #include "Globals.h"
 #include "GameObject.h"
@@ -13,12 +12,12 @@ class ModuleSceneIntro : public Module
 public:
 	ModuleSceneIntro(bool start_enabled = true);
 	~ModuleSceneIntro();
-
 	bool Start();
 	update_status Update(float dt);
 	update_status PreUpdate(float dt);
 	bool CleanUp();
-	GameObject* AddGameObject(GameObject* parent);
+
+	//GameObject* AddGameObject(GameObject* parent);
 
 	// Variables
 	bool grid_enabled = true;
@@ -45,7 +44,6 @@ public:
 	char* ReadBinaryScene(const char*path);
 
 public:
-
 	GameObject* root_gameObjects =  nullptr;
 	GameObject* selected_gameObject = nullptr;
 	GameObject* camera = nullptr;
@@ -60,7 +58,6 @@ public:
 	std::vector<GameObject*> to_delete;
 
 	JSON_Object* JSONscene_obj;
-
 };
 
 #endif // !MODULESCENEINTRO_H

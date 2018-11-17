@@ -83,7 +83,6 @@ void CompMesh::Draw()
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
-
 }
 
 void CompMesh::SetMesh(ResourceMesh * mesh)
@@ -128,7 +127,6 @@ uint CompMesh::GetSize()
 {
 	// GET SIZE FOR SERIALIZATION
 	uint size = 0;
-
 	// COMPONENT TYPE
 	size += sizeof(int);
 	// IS ACTIVE
@@ -173,9 +171,7 @@ Mesh * CompMesh::GetMesh() const
 void CompMesh::BlitComponentInspector()
 {
 	ImGui::Separator();
-
 	ImGui::TextColored(ImVec4(1.0f, 0.64f, 0.0f, 1.0f), "Mesh");
-
 	if (rmesh->mesh == nullptr)
 		ImGui::Text("NULL MESH RESOURCE");
 

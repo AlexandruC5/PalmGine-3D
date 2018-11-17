@@ -20,11 +20,11 @@ public:
 
 	void Update(float dt);
 	void PopGameObject();
-	// Name --------------------------
+	//Name
 	void SetName(const char* new_name);
 	std::string GetName();
 
-	// State --------------------------
+	//State
 	bool Enable();
 	bool Disable();
 	bool IsActive();
@@ -36,14 +36,14 @@ public:
 	void SetActive(bool set);
 	void SetUniqueName(const char* name);
 
-	// Parent -------------------------
+	//Parent
 	const GameObject* GetParent() const;
 
-	// Childs -------------------------
+	//Childs
 	void AddChild(GameObject* child);
 	uint GetNumChilds() const;
 
-	// Components ---------------------
+	//Components
 	Component* FindComponent(COMP_TYPE type) const;
 	bool CompAlreadyExists(COMP_TYPE type) const;
 	CompMesh* GetCompMesh() const;
@@ -53,27 +53,28 @@ public:
 	Component* AddEmptyComponent(COMP_TYPE type);
 	void AddComponent(Component* comp);
 
-	// UI
+	//UI
 	void BlitGameObjectHierarchy();
 
 	//DebugDrawBox
 	void DebugDrawBox();
 	math::AABB GetAABB();
 
+	//UUID
 	uint GetUUID()const;
 	uint GetParentUUID()const;
+
+public:
+	std::vector<GameObject*> childs;
+	std::vector<Component*> components;
+
 private:
 	uint uuid = 0;
 	uint parent_uuid = 0;
 	std::string name = "Unnamed";
 	bool active = true;
 	bool static_obj = false;
-
 	GameObject* parent = nullptr;
-
-public:
-	std::vector<GameObject*> childs;
-	std::vector<Component*> components;
 };
 
 #endif // !GAMEOBJECT_H

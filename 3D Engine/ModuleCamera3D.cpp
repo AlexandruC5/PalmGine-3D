@@ -105,7 +105,6 @@ update_status ModuleCamera3D::Update(float dt)
 			}
 		}
 	}
-
 	// FPS-like movement
 	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_DOWN)
 	{
@@ -126,7 +125,6 @@ update_status ModuleCamera3D::Update(float dt)
 
 		engine_camera->frustum.Translate(newPos);
 	}
-
 	if (ImGui::IsMouseHoveringAnyWindow() == false && ImGuizmo::IsOver() == false) {
 		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN && App->input->GetKey(SDL_SCANCODE_LALT) == KEY_IDLE) {
 			float window_width = (float)App->window->screen_surface->w;
@@ -154,7 +152,8 @@ update_status ModuleCamera3D::Update(float dt)
 }
 
 // -----------------------------------------------------------------
-void ModuleCamera3D::RotateAroundReference(const math::float3& reference, float arroundX, float arroundY) const {
+void ModuleCamera3D::RotateAroundReference(const math::float3& reference, float arroundX, float arroundY) const 
+{
 	math::Quat rotX = math::Quat::RotateAxisAngle({ 0.0f,1.0f,0.0f }, arroundX * DEGTORAD);
 	math::Quat rotY = math::Quat::RotateAxisAngle(engine_camera->frustum.WorldRight(), arroundY * DEGTORAD);
 	math::Quat rot = rotX * rotY;
@@ -177,7 +176,6 @@ void ModuleCamera3D::LookAt(const float3 &Spot)
 	engine_camera->frustum.up = Y;
 }
 
-
 void ModuleCamera3D::CentrateObjectView()
 {
 	if (App->scene_intro->selected_gameObject != nullptr)
@@ -199,15 +197,18 @@ void ModuleCamera3D::CentrateObjectView()
 	}
 }
 
-float4x4 ModuleCamera3D::GetViewMatrix() const {
+float4x4 ModuleCamera3D::GetViewMatrix() const 
+{
 	return engine_camera->GetViewMatrix();
 }
 
-float4x4 ModuleCamera3D::GetProjectionMatrix() const {
+float4x4 ModuleCamera3D::GetProjectionMatrix() const 
+{
 	return engine_camera->GetProjectionMatrix();
 }
 
-float3 ModuleCamera3D::GetCameraPos()const {
+float3 ModuleCamera3D::GetCameraPos()const 
+{
 	return engine_camera->frustum.pos;
 }
 

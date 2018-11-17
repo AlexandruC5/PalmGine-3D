@@ -1,7 +1,6 @@
 #ifndef COMPTRANSFORM_H
 #define COMPTRANSFORM_H
 
-
 #include "Component.h"
 #include <vector>
 #include "MathGeoLib/MathGeoLib.h"
@@ -31,9 +30,7 @@ public:
 	void SetRotationWithQuat(math::Quat rot);
 	void SetScale(math::float3 scale);
 
-	void RecalculateGlobalMatrix();
-
-	// Read
+	// Get methods
 	math::float3 GetPosition() const;
 	math::float3 GetRotation() const;
 	math::Quat GetRotationQuat() const;
@@ -42,16 +39,18 @@ public:
 	math::float4x4 GetTransformationMatrix() const;
 	uint GetSize();
 
+	//Utility
+	void RecalculateGlobalMatrix();
+
 	// Write
 	void WriteComponentData(char** cursor);
+
 private:
 	Axis axis;
-
 	// Propierties
 	math::float3 position = { 0, 0, 0 };
 	math::float3 rotation = { 0, 0, 0 };
 	math::float3 scale = { 1, 1, 1 };
-
 	// Transform and rotation
 	math::float4x4 transform_matrix = math::float4x4::identity;
 	math::float3 euler_rotation = { 0,0,0 };

@@ -4,7 +4,6 @@
 
 CompMaterial::CompMaterial(GameObject * parent, COMP_TYPE type) : Component(parent, type)
 {
-
 	parent->AddComponent(this);
 }
 
@@ -20,8 +19,8 @@ void CompMaterial::SetID(uint id, std::string path, int width, int height)
 {
 	rtexture->texture->id = id;
 	rtexture->texture->texture_path = path;
-	rtexture->texture->textureWidth = width;
-	rtexture->texture->textureHeight = height;
+	rtexture->texture->texture_width = width;
+	rtexture->texture->texture_height = height;
 }
 
 uint CompMaterial::GetTextureId() const
@@ -29,16 +28,19 @@ uint CompMaterial::GetTextureId() const
 	return rtexture->texture->id;
 }
 
-std::string CompMaterial::GetTexturePath() const {
+std::string CompMaterial::GetTexturePath() const 
+{
 	return rtexture->texture->texture_path;
 }
 
-int CompMaterial::GetTextureWidth()const {
-	return rtexture->texture->textureWidth;
+int CompMaterial::GetTextureWidth()const 
+{
+	return rtexture->texture->texture_width;
 }
 
-int CompMaterial::GetTextureHeight()const {
-	return rtexture->texture->textureHeight;
+int CompMaterial::GetTextureHeight()const 
+{
+	return rtexture->texture->texture_height;
 }
 
 uint CompMaterial::GetSize() 

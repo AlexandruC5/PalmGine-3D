@@ -100,17 +100,14 @@ update_status ModuleUI::Update(float dt)
 	if (time_management->active == true) {
 		time_management->Draw();
 	}
-
 	// Test window
 	if (show_test_window)
 	{
 		ImGui::ShowTestWindow();
 	}
-
 	if (show_style_editor) {
 		ImGui::ShowStyleEditor();
 	}
-
 	// Console
 	if (console->active == true) {
 		console->Draw();

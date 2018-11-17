@@ -59,7 +59,6 @@ void CompTransform::SetPosition(math::float3 pos)
 			parent->childs[i]->GetCompTransform()->RecalculateGlobalMatrix();
 		}
 	}
-
 }
 
 void CompTransform::SetRotation(math::float3 rot)
@@ -73,7 +72,6 @@ void CompTransform::SetRotation(math::float3 rot)
 		transform_matrix = math::float4x4::FromQuat(quaternion_rotation);
 		rotation = rot;
 	}
-
 
 	if (parent->GetParent() != nullptr)
 	{
@@ -91,10 +89,10 @@ void CompTransform::SetRotation(math::float3 rot)
 			parent->childs[i]->GetCompTransform()->RecalculateGlobalMatrix();
 		}
 	}
-
 }
 
-void CompTransform::SetRotationWithQuat(Quat rot) {
+void CompTransform::SetRotationWithQuat(Quat rot) 
+{
 	quaternion_rotation = rot;
 	if (parent->GetCompCamera() == nullptr) {
 		transform_matrix = float4x4::FromTRS(position, quaternion_rotation, scale);
@@ -121,7 +119,6 @@ void CompTransform::SetRotationWithQuat(Quat rot) {
 			parent->childs[i]->GetCompTransform()->RecalculateGlobalMatrix();
 		}
 	}
-
 }
 
 void CompTransform::SetScale(math::float3 sca)
@@ -158,7 +155,6 @@ void CompTransform::RecalculateGlobalMatrix() {
 			parent->childs[i]->GetCompTransform()->RecalculateGlobalMatrix();
 		}
 	}
-
 }
 
 math::float3 CompTransform::GetPosition()const
@@ -186,7 +182,8 @@ math::float4x4 CompTransform::GetLocalTransform() const
 	return transform_matrix;
 }
 
-math::float4x4 CompTransform::GetTransformationMatrix() const {
+math::float4x4 CompTransform::GetTransformationMatrix() const 
+{
 	if (parent->GetParent() != nullptr)
 	{
 		CompTransform* trans = parent->GetParent()->GetCompTransform();

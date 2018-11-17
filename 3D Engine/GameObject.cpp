@@ -111,11 +111,13 @@ bool GameObject::IsRootGo() const
 	return App->scene_intro->IsRootGO(this);
 }
 
-bool GameObject::IsStatic() const {
+bool GameObject::IsStatic() const 
+{
 	return static_obj;
 }
 
-void GameObject::SetStatic(bool isStatic) {
+void GameObject::SetStatic(bool isStatic) 
+{
 	static_obj = isStatic;
 	if (GetNumChilds() > 0) {
 		for (int i = 0; i < GetNumChilds(); ++i) {

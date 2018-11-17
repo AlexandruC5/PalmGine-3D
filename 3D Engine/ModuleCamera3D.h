@@ -12,7 +12,6 @@ class ModuleCamera3D : public Module
 public:
 	ModuleCamera3D(bool start_enabled = true);
 	~ModuleCamera3D();
-
 	bool Start();
 	update_status Update(float dt);
 	bool CleanUp();
@@ -22,22 +21,16 @@ public:
 	void CentrateObjectView();
 	float4x4 GetViewMatrix() const;
 	float4x4 GetProjectionMatrix() const;
-
 	float3 GetCameraPos()const;
-
 	void DebugDrawPicker();
 
 public:
-
 	float speed = 3.0f;
 	float wheelSpeed = 3.0f;
-
 	CompCamera* engine_camera = nullptr;
-
 
 private:
 	LineSegment picker;
-
 };
 
 #endif // !MODULECAMERA3D_H

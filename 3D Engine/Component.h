@@ -19,19 +19,18 @@ class Component
 public:
 	Component(GameObject* parent, COMP_TYPE type);
 	virtual ~Component();
-
 	virtual void preUpdate(float dt);
 	virtual void Update(float dt);
 	virtual void Draw();
 	virtual void Clear();
 
-	// Component info
+	//Get methods
 	COMP_TYPE GetType() const;
 	bool IsActive() const;
 	const char* GetName() const;
 	uint GetSize();
 
-	// Utility
+	//Set methods
 	virtual bool Enable();
 	virtual bool Disable();
 

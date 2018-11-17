@@ -18,8 +18,7 @@ CompCamera::CompCamera(GameObject * parent, COMP_TYPE type) : Component(parent, 
 }
 
 CompCamera::~CompCamera()
-{
-}
+{}
 
 void CompCamera::Update(float dt) {
 	DebugDraw();
@@ -38,22 +37,25 @@ void CompCamera::DebugDraw() {
 
 	glColor4f(1.f, 1.f, 1.f, 1.f);
 	glEnd();
-
 }
 
-float CompCamera::GetNearPlaneDistance() const{
+float CompCamera::GetNearPlaneDistance() const
+{
 	return frustum.nearPlaneDistance;
 }
 
-float CompCamera::GetFarPlaneDistance() const {
+float CompCamera::GetFarPlaneDistance() const 
+{
 	return frustum.farPlaneDistance;
 }
 
-float CompCamera::GetFOV() const {
+float CompCamera::GetFOV() const 
+{
 	return frustum.verticalFov * RADTODEG;
 }
 
-float CompCamera::GetApectRatio() const {
+float CompCamera::GetApectRatio() const 
+{
 	return frustum.AspectRatio();
 }
 
@@ -96,7 +98,6 @@ void CompCamera::WriteComponentData(char ** cursor)
 	int fc = (int)frustum_culling;
 	memcpy(cursor[0], &fc, bytes);
 	cursor[0] += bytes;
-
 }
 
 float4x4 CompCamera::GetViewMatrix() const
@@ -111,29 +112,36 @@ float4x4 CompCamera::GetProjectionMatrix() const
 	return matrix.Transposed();
 }
 
-void CompCamera::SetNearPlaneDistance(float distance) {
-	if (distance > 0.0f && distance < frustum.farPlaneDistance) {
+void CompCamera::SetNearPlaneDistance(float distance) 
+{
+	if (distance > 0.0f && distance < frustum.farPlaneDistance) 
+	{
 		frustum.nearPlaneDistance = distance;
 	}
 }
 
-void CompCamera::SetFarPlaneDistance(float distance) {
-	if (distance > 0.0f && distance > frustum.nearPlaneDistance) {
+void CompCamera::SetFarPlaneDistance(float distance) 
+{
+	if (distance > 0.0f && distance > frustum.nearPlaneDistance) 
+	{
 		frustum.farPlaneDistance = distance;
 	}
 }
 
-void CompCamera::SetFOV(float fov) {
+void CompCamera::SetFOV(float fov) 
+{
 	float aspect_ratio = frustum.AspectRatio();
 	frustum.verticalFov = fov * DEGTORAD;
 	SetAspectRatio(aspect_ratio);
 }
 
-void CompCamera::SetAspectRatio(float aspect_ratio) {
+void CompCamera::SetAspectRatio(float aspect_ratio) 
+{
 	frustum.horizontalFov = 2.f * atanf(tanf(frustum.verticalFov * 0.5f) * aspect_ratio);
 }
 
-void CompCamera::Look(const float3& position) {
+void CompCamera::Look(const float3& position) 
+{
 	float3 dir = position - frustum.pos;
 
 	float3x3 m = float3x3::LookAt(frustum.front, dir.Normalized(), frustum.up, float3::unitY);

@@ -1,5 +1,6 @@
 #include "ResourceTexture.h"
 #include "CompMaterial.h"
+
 ResourceTexture::ResourceTexture()
 {
 	uuid = GenRandomNumber();
@@ -7,8 +8,7 @@ ResourceTexture::ResourceTexture()
 }
 
 ResourceTexture::ResourceTexture(uint uuid)
-{
-}
+{}
 
 ResourceTexture::~ResourceTexture()
 {

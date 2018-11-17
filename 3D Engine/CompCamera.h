@@ -14,10 +14,9 @@ public:
 	CompCamera(GameObject* parent, COMP_TYPE type);
 	~CompCamera();
 	void Update(float dt);
-
 	void DebugDraw();
 
-	//Getters
+	//Get methods
 	float GetNearPlaneDistance() const;
 	float GetFarPlaneDistance() const;
 	float GetFOV() const;
@@ -26,15 +25,16 @@ public:
 	float4x4 GetViewMatrix() const;
 	float4x4 GetProjectionMatrix() const;
 
-	//Setters
+	//Set methods
 	void SetNearPlaneDistance(float distance);
 	void SetFarPlaneDistance(float distance);
 	void SetFOV(float fov);
 	void SetAspectRatio(float aspect_ratio);
 
+	//Utility
 	void Look(const float3& position);
-
 	void WriteComponentData(char** cursor);
+
 public:
 	Frustum frustum;
 	bool frustum_culling = false;

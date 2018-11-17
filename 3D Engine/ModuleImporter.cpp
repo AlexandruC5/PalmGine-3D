@@ -464,7 +464,7 @@ GameObject* ModuleImporter::ReadBinaryHierarchy(char** cursor, uint* num_childs,
 		memcpy(num_childs, cursor[0], bytes);
 		cursor[0] += bytes;
 
-		// *-- CREATE GAME OBJECT --*
+		// CREATE GAME OBJECT
 		go = new GameObject(parent);
 		go->SetUniqueName(name);
 		CompTransform* transform = go->GetCompTransform();
@@ -627,7 +627,6 @@ void ModuleImporter::GenBuffers(CompMesh * comp_mesh)
 	glGenBuffers(1, (GLuint*)&(mesh->id_indices));
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->id_indices);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * mesh->num_indices, mesh->indices, GL_STATIC_DRAW);
-
 	if (mesh->num_uvs > 0)
 	{
 		glGenBuffers(1, (GLuint*)&(mesh->id_uvs));
