@@ -16,11 +16,9 @@ public:
 	~PanelLoadScene();
 
 	void Draw() override;
-	//void AddSceneName(std::string name);
 
 	
 public:
-	//TODO delete if is not implemented
 	std::vector<std::string> scenes;
 	bool active = false;
 };

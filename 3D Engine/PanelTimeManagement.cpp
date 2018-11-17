@@ -70,10 +70,6 @@ void PanelTimeManagement::Draw()
 	}
 	ImGui::SameLine();
 
-	////Timer
-	//ImGui::Text("%.3f", (float)App->scene_intro->in_game_timer.Read()/1000);
-	//ImGui::SameLine();
-
 	//TimeScale Slider
 	ImGui::PushItemWidth(150);
 	if (ImGui::SliderFloat("Time Scale", &App->scene_intro->in_game_time_scale, 0.0f, 2.0f, "%.1f")) {

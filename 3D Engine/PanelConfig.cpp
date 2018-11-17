@@ -67,7 +67,6 @@ void PanelConfig::Draw()
 		}
 		mem_array[GRAPH_ARRAY_SIZE - 1] = smstats.totalActualMemory;
 		char mem_title[25] = "Memory Consumption";
-		//sprintf_s(ms_title, 25, "Memory Consumption %.1f", mem_title[GRAPH_ARRAY_SIZE - 1]);
 		ImGui::PlotHistogram("", mem_array, IM_ARRAYSIZE(mem_title), 30, mem_title, 0.0f, 1000000.0f, ImVec2(0, 80));
 
 		//TotalReported memory
