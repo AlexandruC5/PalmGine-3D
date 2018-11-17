@@ -23,7 +23,6 @@ ModuleSceneIntro::ModuleSceneIntro(bool start_enabled) : Module(start_enabled)
 ModuleSceneIntro::~ModuleSceneIntro()
 {
 	quadtree.~Quadtree();
-	//delete camera;
 	RELEASE(root_gameObjects);
 	
 	for (uint i = 0; i < to_delete.size(); i++)
@@ -41,7 +40,6 @@ bool ModuleSceneIntro::Start()
 	game_running = json_object_get_boolean(JSONscene_obj, "inGame");
 
 	bool ret = true;
-	//App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(float3::zero);
 	
 	root_gameObjects = new GameObject(nullptr);
@@ -66,14 +64,6 @@ bool ModuleSceneIntro::CleanUp()
 	LOG("Unloading Intro scene");
 	JSONscene_obj = nullptr;
 	return true;
-}
-
-GameObject * ModuleSceneIntro::AddGameObject(GameObject* parent)
-{
-	GameObject* go = new GameObject(parent);
-	root_gameObjects->AddChild(go);
-	
-	return go;
 }
 
 bool ModuleSceneIntro::IsRootGO(const GameObject* go) const
@@ -134,9 +124,6 @@ void ModuleSceneIntro::SetGameObjectDrawability() {
 						if (camera->GetCompCamera()->frustum.Intersects(root_gameObjects->childs[i]->GetAABB())) {
 							root_gameObjects->childs[i]->GetCompMesh()->Draw();
 						}
-						//else {
-						//	root_gameObjects->childs[i]->GetCompMesh()->drawable = false;
-						//}
 					}
 				}
 				else if (root_gameObjects->childs[i]->GetCompMesh() != nullptr) {
@@ -209,22 +196,15 @@ GameObject* ModuleSceneIntro::TestRayWithAllGO(const LineSegment& picker) const 
 				GOMesh = GOCompMesh->GetMesh();
 
 				for (uint iterator = 0; iterator < GOMesh->num_indices; ++iterator) {
-					//Set triangle
 					nearestTriangle.a = { GOMesh->vertices[GOMesh->indices[iterator] * 3], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 1], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 2] };
-				//	iterator++;
 					nearestTriangle.b = { GOMesh->vertices[GOMesh->indices[iterator] * 3 + 3], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 4], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 5] };
-					//iterator++;
 					nearestTriangle.c = { GOMesh->vertices[GOMesh->indices[iterator] * 3 + 6], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 7], GOMesh->vertices[GOMesh->indices[iterator] * 3 + 8] };
-					//iterator++;
 
 					float3 hit_point = float3::zero;
 					float hit_distance = 0.0f;
 
 					if (picker_in_local.Intersects(nearestTriangle, &hit_distance, &hit_point)) {
-						//if (hit_distance < lower_hit_distance) {
-						//	lower_hit_distance = hit_distance;
-							posibleGO = posible_GOs_picked[i];
-						//}
+						posibleGO = posible_GOs_picked[i];
 					}
 				}
 			}

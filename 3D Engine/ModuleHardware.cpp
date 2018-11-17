@@ -68,84 +68,84 @@ void ModuleHardware::Draw(const char* title)
 	char SDLVer[256];
 	sprintf_s(SDLVer, sizeof(SDLVer), "%d.%d.%d", currentSDLVersion.major, currentSDLVersion.minor, currentSDLVersion.patch);
 	ImGui::SameLine();
-	ImGui::TextColored(ImVec4(0, 1, 0, 100), SDLVer);
+	ImGui::TextColored({ 125, 156, 212, 255 }, SDLVer);
 	ImGui::Separator();
 
 	//Platform
 	ImGui::Text("Platform: ");
 	const char* platform = SDL_GetPlatform();
 	ImGui::SameLine();
-	ImGui::TextColored(ImVec4(0, 1, 0, 100), platform);
+	ImGui::TextColored({ 125, 156, 212, 255 }, platform);
 
 	//CPU
 	ImGui::Text("CPUs: ");
 	ImGui::SameLine();
-	ImGui::TextColored(ImVec4(0, 1, 0, 100), "%i (Cache: %ikb)", cpus, cache);
+	ImGui::TextColored({ 125, 156, 212, 255 }, "%i (Cache: %ikb)", cpus, cache);
 
 	//RAM
 	ImGui::Text("System RAM: ");
 	ImGui::SameLine();
-	ImGui::TextColored(ImVec4(0, 1, 0, 100), "%iGb", systemRam);
+	ImGui::TextColored({ 125, 156, 212, 255 }, "%iGb", systemRam);
 
 	//Caps
 	ImGui::Text("Caps: ");
 	ImGui::SameLine();
 	if (rdtsc == true) {
-		ImGui::TextColored(ImVec4(0, 1, 0, 100), "RDTSC");
+		ImGui::TextColored({ 125, 156, 212, 255 }, "RDTSC");
 		ImGui::SameLine();
 	}
 	if (mmx == true) {
-		ImGui::TextColored(ImVec4(0, 1, 0, 100), "MMX");
+		ImGui::TextColored({ 125, 156, 212, 255 }, "MMX");
 		ImGui::SameLine();
 	}
 	if (sse == true) {
-		ImGui::TextColored(ImVec4(0, 1, 0, 100), "SSE");
+		ImGui::TextColored({ 125, 156, 212, 255 }, "SSE");
 		ImGui::SameLine();
 	}
 	if (sse2 == true) {
-		ImGui::TextColored(ImVec4(0, 1, 0, 100), "SSE2");
+		ImGui::TextColored({ 125, 156, 212, 255 }, "SSE2");
 		ImGui::SameLine();
 	}
 	if (sse3 == true) {
-		ImGui::TextColored(ImVec4(0, 1, 0, 100), "SSE3");
+		ImGui::TextColored({ 125, 156, 212, 255 }, "SSE3");
 		ImGui::SameLine();
 	}
 	if (sse41 == true) {
-		ImGui::TextColored(ImVec4(0, 1, 0, 100), "SSE41");
+		ImGui::TextColored({ 125, 156, 212, 255 }, "SSE41");
 		ImGui::SameLine();
 	}
 	if (sse42 == true) {
-		ImGui::TextColored(ImVec4(0, 1, 0, 100), "SSE42");
+		ImGui::TextColored({ 125, 156, 212, 255 }, "SSE42");
 		ImGui::SameLine();
 	}
 	if (avx == true) {
-		ImGui::TextColored(ImVec4(0, 1, 0, 100), "AVX");
+		ImGui::TextColored({ 125, 156, 212, 255 }, "AVX");
 	}
 	ImGui::Separator();
 
 	//GPU
 	ImGui::Text("GPU: ");
 	ImGui::SameLine();
-	ImGui::TextColored(ImVec4(0, 1, 0, 100), "%s", vendor);
+	ImGui::TextColored({ 125, 156, 212, 255 }, "%s", vendor);
 	//Brand
 	ImGui::Text("Brand: ");
 	ImGui::SameLine();
-	ImGui::TextColored(ImVec4(0, 1, 0, 100), "%s", gpuName);
+	ImGui::TextColored({ 125, 156, 212, 255 }, "%s", gpuName);
 	//VRAM Budget
 	ImGui::Text("VRAM Budget: ");
 	ImGui::SameLine();
-	ImGui::TextColored(ImVec4(0, 1, 0, 100), "%.2f Mb", (totalMemory * 0.001));
+	ImGui::TextColored({ 125, 156, 212, 255 }, "%.2f Mb", (totalMemory * 0.001));
 	//VRAM Usage
 	ImGui::Text("VRAM Usage: ");
 	ImGui::SameLine();
-	ImGui::TextColored(ImVec4(0, 1, 0, 100), "%.2f Mb", (memoryUsage * 0.001));
+	ImGui::TextColored({ 125, 156, 212, 255 }, "%.2f Mb", (memoryUsage * 0.001));
 	//VRAM Available
 	ImGui::Text("VRAM Available: ");
 	ImGui::SameLine();
-	ImGui::TextColored(ImVec4(0, 1, 0, 100), "%.2f Mb", (availableMemory * 0.001));
+	ImGui::TextColored({ 125, 156, 212, 255 }, "%.2f Mb", (availableMemory * 0.001));
 	//VRAM Reserved
 	ImGui::Text("VRAM Reserved: ");
 	ImGui::SameLine();
-	ImGui::TextColored(ImVec4(0, 1, 0, 100), "%.2f Mb", (dedicatedMemory * 0.001));
+	ImGui::TextColored({ 125, 156, 212, 255 }, "%.2f Mb", (dedicatedMemory * 0.001));
 
 }

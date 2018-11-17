@@ -191,18 +191,18 @@ void PanelConfig::Draw()
 	if (ImGui::CollapsingHeader("Input")) {
 		ImGui::Text("Mouse Positiom: ");
 		ImGui::SameLine();
-		ImGui::TextColored({ 255, 255, 0, 255 }, "X: %i ", App->input->GetMouseX());
+		ImGui::TextColored({ 125, 156, 212, 255 }, "X: %i ", App->input->GetMouseX());
 		ImGui::SameLine();
-		ImGui::TextColored({ 255, 255, 0, 255 }, "Y: %i", App->input->GetMouseY());
+		ImGui::TextColored({ 125, 156, 212, 255 }, "Y: %i", App->input->GetMouseY());
 
 		ImGui::Text("Mouse Motion: ");
 		ImGui::SameLine();
-		ImGui::TextColored({ 255, 255, 0, 255 }, "X: %i ", App->input->GetMouseXMotion());
+		ImGui::TextColored({ 125, 156, 212, 255 }, "X: %i ", App->input->GetMouseXMotion());
 		ImGui::SameLine();
-		ImGui::TextColored({ 255, 255, 0, 255 }, "Y: %i", App->input->GetMouseYMotion());
+		ImGui::TextColored({ 125, 156, 212, 255 }, "Y: %i", App->input->GetMouseYMotion());
 
 		ImGui::Text("Mouse Wheel: ");
 		ImGui::SameLine();
-		ImGui::TextColored({ 255, 255, 0, 255 }, "%i ", App->input->GetMouseZ());
+		ImGui::TextColored({ 125, 156, 212, 255 }, "%i ", App->input->GetMouseZ());
 	}
 }
