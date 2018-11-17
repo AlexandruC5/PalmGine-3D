@@ -42,23 +42,14 @@ void PanelInspector::Draw()
 			else
 				selected_go->SetActive(true);
 		}
-		if (ImGui::Button("Delete GameObject"))
-		{
-			selected_go->PopGameObject();
-			selected_go = nullptr;
+		if (selected_go != App->scene_intro->camera) {
+			if (ImGui::Button("Delete GameObject"))
+			{
+				App->scene_intro->quadtree.Remove(selected_go);
+				selected_go->PopGameObject();
+				selected_go = nullptr;
+			}
 		}
-			
-		//DeleteGameObject
-		//TODO Solve crash when delete is clicked in this commented code
-		//if (selected_go != App->scene_intro->camera) {
-		//	ImGui::SameLine();
-		//	if (ImGui::Button("Delete")) {
-		//		App->scene_intro->quadtree.Remove(selected_go);
-		//		delete selected_go;
-		//		App->scene_intro->selected_gameObject = nullptr;
-		//		selected_go = nullptr;
-		//	}
-		//}
 
 		// Components
 		if (selected_go != nullptr) {
@@ -177,24 +168,6 @@ void PanelInspector::Draw()
 					}
 				}
 			}
-
-
-			// TODO Add mesh info
-			/*{
-			ImGui::Text("Showing read only information about the mesh");
-			ImGui::Separator();
-			//Mesh Triangles
-			ImGui::Text("Mesh triangles: %i", App->fbx->GetVerticesQuantity()/3);
-			//Mesh Vertices
-			ImGui::Text("Mesh vertices: %i", App->fbx->GetVerticesQuantity());
-			//Mesh Indices
-			ImGui::Text("Mesh indices: %i", App->fbx->GetIndicesQuantity());
-			//Mesh Normals
-			ImGui::Text("Mesh normals: %f", App->fbx->GetNormalsQuantity());
-			//Mesh UVS
-			ImGui::Text("Mesh uvs: %f", App->fbx->GetUvsQuanity());
-		}*/
-
 			if (texture != nullptr) {
 				if (ImGui::CollapsingHeader("Material"), ImGuiTreeNodeFlags_DefaultOpen) {
 					ImGui::Text("Showing read only information about the mesh material");
@@ -207,7 +180,6 @@ void PanelInspector::Draw()
 			}
 		}
 	}
-	//ImGui::End();
 }
 
 void PanelInspector::EnableGuizmos(GameObject* selected_go) {
