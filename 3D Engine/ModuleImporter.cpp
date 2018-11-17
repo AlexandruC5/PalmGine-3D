@@ -681,6 +681,8 @@ void ModuleImporter::ImportImage(const char * path)
 					pFile = fopen(name.c_str(), "wb");
 					fwrite(data, sizeof(char), size, pFile);
 					fclose(pFile);
+					// Add the resource on textures
+					App->ui->assets->textures.push_back(GetFileNameFromPath(path));
 				}
 			}
 			RELEASE_ARRAY(data);
