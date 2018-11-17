@@ -15,12 +15,10 @@ public:
 	virtual ~QuadtreeNode();
 
 	bool IsLeaf() const;
-
 	void Insert(GameObject* go);
 	void Remove(GameObject* go);
 	void CreateChilds();
 	void RedistributeChilds();
-
 	void DebugDraw();
 
 	//Intersections
@@ -34,8 +32,6 @@ public:
 	std::list<GameObject*> objectsInNode;
 	QuadtreeNode* parent;
 	QuadtreeNode* childs[4];
-
-
 };
 
 class Quadtree {
@@ -65,7 +61,8 @@ public:
 
 //Quadtree CollectIntersections using map
 template<typename TYPE>
-void Quadtree::CollectIntersections(std::map<float, GameObject*>& objects, const TYPE & primitive)const {
+void Quadtree::CollectIntersections(std::map<float, GameObject*>& objects, const TYPE & primitive)const 
+{
 	if (root != nullptr) {
 		root->CollectIntersections(objects, primitive);
 	}
@@ -73,7 +70,8 @@ void Quadtree::CollectIntersections(std::map<float, GameObject*>& objects, const
 
 //Quadtree CollectIntersections using vector
 template<typename TYPE>
-void Quadtree::CollectIntersections(std::vector<GameObject*>& objects, const TYPE & primitive)const {
+void Quadtree::CollectIntersections(std::vector<GameObject*>& objects, const TYPE & primitive)const 
+{
 	if (root != nullptr) {
 		root->CollectIntersections(objects, primitive);
 	}
@@ -81,7 +79,8 @@ void Quadtree::CollectIntersections(std::vector<GameObject*>& objects, const TYP
 
 //QuadtreeNode CollectIntersections using map
 template<typename TYPE>
-void QuadtreeNode::CollectIntersections(std::map<float, GameObject*>& objects, const TYPE& primitive) const {
+void QuadtreeNode::CollectIntersections(std::map<float, GameObject*>& objects, const TYPE& primitive) const 
+{
 	if (primitive.Intersects(box) == true) {
 		float hitNear;
 		float hitFar;
@@ -100,7 +99,8 @@ void QuadtreeNode::CollectIntersections(std::map<float, GameObject*>& objects, c
 
 //QuadtreeNode CollectIntersections using vector
 template<typename TYPE>
-void QuadtreeNode::CollectIntersections(std::vector<GameObject*>& objects, const TYPE& primitive) const {
+void QuadtreeNode::CollectIntersections(std::vector<GameObject*>& objects, const TYPE& primitive) const 
+{
 	if (primitive.Intersects(box) == true) {
 		for (std::list<GameObject*>::const_iterator iterator = this->objectsInNode.begin(); iterator != this->objectsInNode.end(); ++iterator) {
 			if (primitive.Intersects((*iterator)->GetAABB())) {

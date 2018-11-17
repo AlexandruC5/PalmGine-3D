@@ -10,8 +10,7 @@
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 
 ModuleRenderer3D::ModuleRenderer3D(bool start_enabled) : Module(start_enabled)
-{
-}
+{}
 
 // Destructor
 ModuleRenderer3D::~ModuleRenderer3D()
@@ -83,7 +82,6 @@ bool ModuleRenderer3D::Init()
 				LOG("Error initializing OpenGL! %s\n", gluErrorString(error));
 				ret = false;
 			}
-
 			GLfloat LightModelAmbient[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 			glLightModelfv(GL_LIGHT_MODEL_AMBIENT, LightModelAmbient);
 			//Lights on scene
@@ -105,7 +103,6 @@ bool ModuleRenderer3D::Init()
 			glEnable(GL_LIGHTING);
 			glEnable(GL_COLOR_MATERIAL);
 		}
-
 		// Projection matrix for
 		OnResize(App->window->width, App->window->height);
 	}

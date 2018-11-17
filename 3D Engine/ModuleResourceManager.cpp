@@ -3,12 +3,10 @@
 #include "ModuleResourceManager.h"
 
 ModuleResourceManager::ModuleResourceManager(bool start_enabled)
-{
-}
+{}
 
 ModuleResourceManager::~ModuleResourceManager()
-{
-}
+{}
 
 bool ModuleResourceManager::Init()
 {

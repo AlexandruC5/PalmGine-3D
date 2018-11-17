@@ -58,7 +58,6 @@ bool Application::Init()
 		ret = item._Ptr->_Myval->Init();
 		item++;
 	}
-
 	// After all Init calls we call Start() in all modules
 	LOG("Application Start --------------");
 	item = list_modules.begin();
@@ -68,7 +67,6 @@ bool Application::Init()
 		ret = item._Ptr->_Myval->Start();
 		item++;
 	}
-	
 	ms_timer.Start();
 	return ret;
 }
@@ -82,8 +80,7 @@ void Application::PrepareUpdate()
 
 // ---------------------------------------------
 void Application::FinishUpdate()
-{
-}
+{}
 
 // Call PreUpdate, Update and PostUpdate on all modules
 update_status Application::Update()

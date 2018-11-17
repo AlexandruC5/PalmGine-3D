@@ -21,7 +21,8 @@
 
 //QuadtreeNode
 
-QuadtreeNode::QuadtreeNode(const AABB& box) {
+QuadtreeNode::QuadtreeNode(const AABB& box) 
+{
 	this->box = box;
 	parent = nullptr;
 	childs[NE] = nullptr;
@@ -30,28 +31,37 @@ QuadtreeNode::QuadtreeNode(const AABB& box) {
 	childs[NW] = nullptr;
 }
 
-QuadtreeNode::~QuadtreeNode() {
-	for (int i = 0; i < 4; ++i) {
-		if (childs[i] != nullptr) {
+QuadtreeNode::~QuadtreeNode() 
+{
+	for (int i = 0; i < 4; ++i) 
+	{
+		if (childs[i] != nullptr) 
+		{
 			RELEASE(childs[i]);
 		}
 	}
 }
 
-bool QuadtreeNode::IsLeaf() const{
+bool QuadtreeNode::IsLeaf() const
+{
 	bool ret = false;
-	if (childs[NE] == nullptr) {
+	if (childs[NE] == nullptr) 
+	{
 		ret = true;
 	}
 	return ret;
 }
 
-void QuadtreeNode::Insert(GameObject* go) {
-	if (IsLeaf()==true && (objectsInNode.size() < QUADTREE_MAX_ITEMS || (box.HalfSize().LengthSq() <= QUADTREE_MIN_SIZE * QUADTREE_MIN_SIZE))) {
+void QuadtreeNode::Insert(GameObject* go) 
+{
+	if (IsLeaf()==true && (objectsInNode.size() < QUADTREE_MAX_ITEMS || (box.HalfSize().LengthSq() <= QUADTREE_MIN_SIZE * QUADTREE_MIN_SIZE))) 
+	{
 		objectsInNode.push_back(go);
 	}
-	else {
-		if (IsLeaf() == true) {
+	else 
+	{
+		if (IsLeaf() == true) 
+		{
 			CreateChilds();
 		}
 		objectsInNode.push_back(go);
@@ -59,21 +69,24 @@ void QuadtreeNode::Insert(GameObject* go) {
 	}
 }
 
-void QuadtreeNode::Remove(GameObject* go) {
+void QuadtreeNode::Remove(GameObject* go) 
+{
 	std::list<GameObject*>::iterator it = std::find(objectsInNode.begin(), objectsInNode.end(), go);
 	if (it != objectsInNode.end())
 		objectsInNode.erase(it);
 
-	if (IsLeaf() == false) {
-		for (int i = 0; i < 4; ++i) {
+	if (IsLeaf() == false) 
+	{
+		for (int i = 0; i < 4; ++i) 
+		{
 			childs[i]->Remove(go);
 		}
 	}
-
 }
 
 //Subdivides actual node
-void QuadtreeNode::CreateChilds() {
+void QuadtreeNode::CreateChilds() 
+{
 	float3 newSize(box.Size().x/2, box.Size().y, box.Size().z/2);
 	AABB newBox;
 
@@ -100,7 +113,8 @@ void QuadtreeNode::CreateChilds() {
 }
 
 //Distribute objects in actual node to new childs
-void QuadtreeNode::RedistributeChilds() {
+void QuadtreeNode::RedistributeChilds() 
+{
 	// Now redistribute ALL objects
 	for (std::list<GameObject*>::iterator it = objectsInNode.begin(); it != objectsInNode.end();)
 	{
@@ -127,63 +141,67 @@ void QuadtreeNode::RedistributeChilds() {
 
 void QuadtreeNode::DebugDraw(){
 
-	if (this != nullptr) {
+	if (this != nullptr) 
+	{
 
-		for (int i = 0; i < 12; ++i) {
+		for (int i = 0; i < 12; ++i) 
+		{
 			glVertex3f(box.Edge(i).a.x, box.Edge(i).a.y, box.Edge(i).a.z);
 			glVertex3f(box.Edge(i).b.x, box.Edge(i).b.y, box.Edge(i).b.z);
 		}
 
 	}
-
-	for (int i = 0; i < 4;++i) {
-		if (childs[i] != nullptr) {
+	for (int i = 0; i < 4;++i) 
+	{
+		if (childs[i] != nullptr) 
+		{
 			childs[i]->DebugDraw();
 		}
 	}
-
 }
-
-
-
-//---------------------------
-
 //Quadtree
 
+Quadtree::Quadtree() 
+{}
 
-Quadtree::Quadtree() {
-
-}
-
-Quadtree::~Quadtree() {
+Quadtree::~Quadtree() 
+{
 	Clear();
 }
 
-void Quadtree::SetBoundries(const AABB& box) {
+void Quadtree::SetBoundries(const AABB& box) 
+{
 	Clear();
 	root = new QuadtreeNode(box);
 }
 
-void Quadtree::Insert(GameObject* go) {
+void Quadtree::Insert(GameObject* go) 
+{
 	if (root != nullptr) {
-		if (go->GetAABB().Intersects(root->box)) {
+		if (go->GetAABB().Intersects(root->box)) 
+		{
 			root->Insert(go);
 		}
 	}
 }
 
-void Quadtree::Remove(GameObject* go) {
-	if (root!=nullptr) {
+void Quadtree::Remove(GameObject* go) 
+{
+	if (root!=nullptr) 
+	{
 		root->Remove(go);
 	}
 }
 
-void Quadtree::Clear() {
+void Quadtree::Clear() 
+{
 	RELEASE(root);
 }
 
-void Quadtree::DebugDraw() {
-	if (root!=nullptr) {
+void Quadtree::DebugDraw() 
+{
+	if (root!=nullptr) 
+	{
 		glBegin(GL_LINES);
 		glLineWidth(5.0f);
 		root->DebugDraw();

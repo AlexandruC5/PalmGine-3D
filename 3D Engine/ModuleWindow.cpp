@@ -10,8 +10,7 @@ ModuleWindow::ModuleWindow(bool start_enabled) : Module(start_enabled)
 
 // Destructor
 ModuleWindow::~ModuleWindow()
-{
-}
+{}
 
 // Called before render is available
 bool ModuleWindow::Init()
@@ -121,7 +120,6 @@ void ModuleWindow::SetFullScreen(bool fullscreen)
 	{
 		SDL_SetWindowFullscreen(window, 0);
 	}
-
 }
 
 void ModuleWindow::SetWindowed(bool borderless)

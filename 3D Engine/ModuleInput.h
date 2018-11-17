@@ -30,7 +30,6 @@ public:
 	
 	ModuleInput(bool start_enabled = true);
 	~ModuleInput();
-
 	bool Init();
 	update_status PreUpdate(float dt);
 	bool CleanUp();
@@ -70,8 +69,6 @@ public:
 		return mouse_y_motion;
 	}
 
-	std::string fbx_path;
-
 private:
 	KEY_STATE* keyboard;
 	KEY_STATE mouse_buttons[MAX_MOUSE_BUTTONS];
@@ -80,7 +77,7 @@ private:
 	int mouse_z;
 	int mouse_x_motion;
 	int mouse_y_motion;
-
+	std::string fbx_path;
 	const FILE_TYPE ModuleInput::GetFileType(const char * dir) const;
 };
 
