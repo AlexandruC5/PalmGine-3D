@@ -32,8 +32,34 @@ Hope you like it.
 - Guizmos.
 - Assets folder.
 - GameMode with modifiable time scale.
-- MousePicking.
+- MousePicking (Mouse left click).
 - Binary scene serialization (Allow to save and load scenes).
+
+# VERSION CONTROL
+## v.1.0
+- Load and draw one .fbx or .obj file with one channel diffuse.
+- Configuration options (Application, window, scene, render, hardware, volume, camera, light and input).
+- Inspector shows transform propierties, mesh information and texture information.
+- Console with LOG control.
+- Drag and drop.
+- Unity-like camera.
+- Wireframe mode
+- Texture alpha tolerance
+- Light control
+- Window settings are saved in parson
+- Game Object hierarchy implemented with components.
+- Transformations can be applied to game objects
+- When a new item is dropped, the system will generate a binary file (engine own format) and read the item from here.
+- Textures are written and readed in DDS format.
+- Quadtree optimization.
+- Camera uses frustrum culling, far/near plane, FOV and aspect ratio.
+- Guizmos implemented.
+### // * NEW * //
+- GameMode with own timer scale that can modify time speed.
+- Assets folder shown in the engine.
+- Mouse Picking to pick objects in the scene.
+- Scene serialization using binary format.
+- Load scenes.
 
 # VERSION CONTROL
 ## v.0.7
@@ -47,7 +73,6 @@ Hope you like it.
 - Texture alpha tolerance
 - Light control
 - Window settings are saved in parson
-### // * NEW * //
 - Game Object hierarchy implemented with components.
 - Transformations can be applied to game objects
 - When a new item is dropped, the system will generate a binary file (engine own format) and read the item from here.
