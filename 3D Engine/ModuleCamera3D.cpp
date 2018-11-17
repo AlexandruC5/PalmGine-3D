@@ -100,6 +100,23 @@ update_status ModuleCamera3D::Update(float dt)
 			RotateAroundReference(engine_camera->frustum.pos, dx * cameraRotationSpeed, dy * cameraRotationSpeed);
 		}
 	}
+	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT &&
+		App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT)
+	{
+		int dx = -App->input->GetMouseXMotion();
+		int dy = -App->input->GetMouseYMotion();
+
+
+
+		float sensibility = 2.0f * dt;
+		if (dx != 0 || dy != 0)
+		{
+			float cameraRotationSpeed = speed * sensibility;
+			if (App->scene_intro->selected_gameObject !=nullptr) {
+				RotateAroundReference(App->scene_intro->selected_gameObject->GetCompTransform()->GetPosition(), dx * cameraRotationSpeed, dy * cameraRotationSpeed);
+			}
+		}
+	}
 
 	// FPS-like movement
 	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_DOWN)
