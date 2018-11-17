@@ -25,18 +25,24 @@ void PanelTimeManagement::Draw()
 
 	//Buttons
 	if (ImGui::Button("Play")) {
-		App->scene_intro->in_game_timer.Start();
-		App->scene_intro->game_running = true;
+		if (App->scene_intro->game_running == false) {
+			App->scene_intro->in_game_timer.Start();
+			App->scene_intro->game_running = true;
+		}
 	}
 	ImGui::SameLine();
 	if (App->scene_intro->in_game_timer.IsPaused() == false) {
 		if (ImGui::Button("Pause")) {
-			App->scene_intro->in_game_timer.Pause();
+			if (App->scene_intro->game_running == true) {
+				App->scene_intro->in_game_timer.Pause();
+			}
 		}
 	}
 	else {
 		if (ImGui::Button("Continue")) {
-			App->scene_intro->in_game_timer.UnPause();
+			if (App->scene_intro->game_running == true) {
+				App->scene_intro->in_game_timer.UnPause();
+			}
 		}
 	}
 	ImGui::SameLine();
