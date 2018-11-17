@@ -23,16 +23,24 @@ void PanelSaveScene::Draw()
 	
 	if (ImGui::Button("save"))
 	{
-		std::string tmp = name;
-		if (OnlyLetters(tmp))
+		if (App->scene_intro->game_paused || App->scene_intro->game_running)
 		{
-			LOG("SAVING SCENE WITH NAME: %s", name);
-			App->scene_intro->SerializeScene(name);
-			App->ui->load_scene->scenes.push_back(name);
-			active = false;
+			LOG("ERROR SAVING SCENE. Can't save scene on play mode.");
 		}
 		else
-			LOG("ERROR: INVALID NAME. Scene name only accepts uppercase or lowercase letters.");
+		{
+			std::string tmp = name;
+			if (OnlyLetters(tmp))
+			{
+				LOG("SAVING SCENE WITH NAME: %s", name);
+				App->scene_intro->SerializeScene(name);
+				App->ui->load_scene->scenes.push_back(name);
+				active = false;
+			}
+			else
+				LOG("ERROR: INVALID NAME. Scene name only accepts uppercase or lowercase letters.");
+		}
+		
 	}
 
 
