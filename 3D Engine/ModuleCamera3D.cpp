@@ -11,7 +11,7 @@ ModuleCamera3D::ModuleCamera3D(bool start_enabled) : Module(start_enabled)
 {
 	engine_camera = new CompCamera(nullptr, C_CAMERA);
 	engine_camera->SetFarPlaneDistance(100.0f);
-
+	speed = 6.0f;
 }
 
 ModuleCamera3D::~ModuleCamera3D()
