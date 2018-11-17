@@ -6,6 +6,7 @@
 #include "CompTransform.h"
 #include "CompMesh.h"
 #include "Component.h"
+#include "PanelLoadScene.h"
 #include "MathGeoLib/MathGeoLib.h"
 #include <list>
 #include "Devil/include/il.h"
@@ -15,7 +16,6 @@
 
 ModuleSceneIntro::ModuleSceneIntro(bool start_enabled) : Module(start_enabled)
 {
-	last_scene_name = new char[64];
 	in_game_timer.Start();
 	in_game_timer.Stop();
 }
@@ -25,7 +25,6 @@ ModuleSceneIntro::~ModuleSceneIntro()
 	quadtree.~Quadtree();
 	//delete camera;
 	RELEASE(root_gameObjects);
-	RELEASE_ARRAY(last_scene_name);
 	// Delete the non-used game objects
 	for (uint i = 0; i < to_delete.size(); i++)
 	{
@@ -255,7 +254,7 @@ void ModuleSceneIntro::SerializeScene(const char * name)
 
 	CreateFileData(name, data, size);
 
-	strcpy(last_scene_name, name);
+	LOG("SUCCESS SAVING SCENE");
 }
 
 uint ModuleSceneIntro::GetSceneSize(GameObject* go, uint* go_num)
@@ -402,6 +401,7 @@ void ModuleSceneIntro::CreateFileData(const char * name, char* data, uint size)
 		pFile = fopen(bin_path.c_str(), "wb");
 		fwrite(data, sizeof(char), size, pFile);
 		fclose(pFile);
+		App->ui->load_scene->scenes.push_back(name);
 	}
 	else
 	{
@@ -601,6 +601,7 @@ void ModuleSceneIntro::LoadSceneData(const char * path)
 			}
 		}
 	}
+	LOG("LOADED SCENE WITH NAME: %s", path);
 }
 
 char * ModuleSceneIntro::ReadBinaryScene(const char * path)

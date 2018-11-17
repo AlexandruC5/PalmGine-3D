@@ -50,7 +50,6 @@ public:
 	GameObject* selected_gameObject = nullptr;
 	GameObject* camera = nullptr;
 	Quadtree quadtree;
-	char* last_scene_name = nullptr;
 
 	InGameTimer in_game_timer;
 	bool game_running = false;
