@@ -76,7 +76,8 @@ std::vector<std::string> ReadAllFilesOnPath(const char * path, const char * exte
 
 	while (handle != INVALID_HANDLE_VALUE)
 	{
-		paths.push_back(GetFileNameFromPath(search_data.cFileName));
+		if(GetFileNameFromPath(search_data.cFileName) != "auto_save_when_play")
+			paths.push_back(GetFileNameFromPath(search_data.cFileName));
 		if (FindNextFile(handle, &search_data) == FALSE)
 			break;
 	}
