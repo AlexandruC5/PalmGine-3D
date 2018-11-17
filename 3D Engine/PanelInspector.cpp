@@ -72,12 +72,16 @@ void PanelInspector::Draw()
 				}
 			}
 
+			if (transform != nullptr)
+			{
+				//Enable guizmos
+				EnableGuizmos(selected_go);
+			}
+
 			if (ImGui::CollapsingHeader("Transform"))
 			{
 				if (transform != nullptr)
 				{
-					//Enable guizmos
-					EnableGuizmos(selected_go);
 
 					ImGui::Text("Showing read only information about the mesh transform");
 					ImGui::Separator();
@@ -213,7 +217,7 @@ void PanelInspector::EnableGuizmos(GameObject* selected_go) {
 	ImGuiIO& io = ImGui::GetIO();
 	ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
 
-	float4x4 matrix = selected_go->GetCompTransform()->GetTransformationMatrix().Transposed();
+	float4x4 matrix = selected_go->GetCompTransform()->GetLocalTransform().Transposed();
 	CompTransform* transform = selected_go->GetCompTransform();
 
 	ImGuizmo::Manipulate((float*)&App->camera->GetViewMatrix(), (float*)&App->camera->GetProjectionMatrix(), mCurrentGizmoOperation, ImGuizmo::WORLD, (float*)&matrix);
