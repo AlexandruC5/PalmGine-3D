@@ -134,6 +134,21 @@ void GameObject::SetActive(bool set)
 	active = set;
 }
 
+void GameObject::SetUniqueName(const char * name)
+{
+	SetName(name);
+	for (uint i = 0; i < App->scene_intro->root_gameObjects->GetNumChilds(); i++)
+	{
+		if (strcmp(App->scene_intro->root_gameObjects->childs[i]->GetName().c_str(), name) == 0 && App->scene_intro->root_gameObjects->childs[i] != this)
+		{
+			std::string tmp_name = name;
+			tmp_name += "(0)";
+			this->SetName(tmp_name.c_str());
+			SetUniqueName(GetName().c_str());
+		}
+	}
+}
+
 const GameObject * GameObject::GetParent() const
 {
 	return parent;

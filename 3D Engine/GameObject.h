@@ -34,6 +34,7 @@ public:
 	void SetUUID(uint uuid);
 	void SetParentUUID(uint uuid);
 	void SetActive(bool set);
+	void SetUniqueName(const char* name);
 
 	// Parent -------------------------
 	const GameObject* GetParent() const;
