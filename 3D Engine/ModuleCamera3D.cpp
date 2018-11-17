@@ -101,7 +101,7 @@ update_status ModuleCamera3D::Update(float dt)
 		{
 			float cameraRotationSpeed = speed * sensibility;
 			if (App->scene_intro->selected_gameObject !=nullptr) {
-				RotateAroundReference(App->scene_intro->selected_gameObject->GetCompTransform()->GetPosition(), dx * cameraRotationSpeed, dy * cameraRotationSpeed);
+				RotateAroundReference(App->scene_intro->selected_gameObject->GetAABB().CenterPoint(), dx * cameraRotationSpeed, dy * cameraRotationSpeed);
 			}
 			else {
 				RotateAroundReference(float3::zero, dx * cameraRotationSpeed, dy * cameraRotationSpeed);
