@@ -121,7 +121,10 @@ update_status ModuleInput::PreUpdate(float dt)
 			}
 			else if (file_type == TEXTURE)
 			{
-				App->importer->ImportImage(fbx_path.c_str());
+				// Set windows path to import images
+				std::string path = "..//Textures//";
+				path += GetFileNameWithExtension(fbx_path.c_str());
+				App->importer->ImportImage(path.c_str());
 			}
 
 		case SDL_WINDOWEVENT:

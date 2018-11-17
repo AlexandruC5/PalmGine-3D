@@ -36,6 +36,20 @@ std::string GetFileNameFromPath(const char * path)
 	return filename;
 }
 
+std::string GetFileNameWithExtension(const char * path)
+{
+	std::string filename = path;
+
+	// Remove directory
+	const size_t last_slash = filename.find_last_of("\\/");
+	if (std::string::npos != last_slash)
+	{
+		filename.erase(0, last_slash + 1);
+	}
+
+	return filename;
+}
+
 uint GenRandomNumber()
 {
 	uint number = 0;
