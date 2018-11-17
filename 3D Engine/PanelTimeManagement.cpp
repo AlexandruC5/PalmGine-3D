@@ -48,10 +48,12 @@ void PanelTimeManagement::Draw()
 	}
 	ImGui::SameLine();
 	if (ImGui::Button("Stop")) {
-		App->scene_intro->in_game_timer.Start();
-		App->scene_intro->in_game_timer.Stop();
-		App->scene_intro->game_running = false;
-		App->scene_intro->LoadSceneData("AutoSaveWhenPlay");
+		if (App->scene_intro->game_running == true) {
+			App->scene_intro->in_game_timer.Start();
+			App->scene_intro->in_game_timer.Stop();
+			App->scene_intro->game_running = false;
+			App->scene_intro->LoadSceneData("AutoSaveWhenPlay");
+		}
 	}
 	ImGui::SameLine();
 	//if (ImGui::Button("NextFrame")) {
