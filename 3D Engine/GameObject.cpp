@@ -334,13 +334,13 @@ void GameObject::DebugDrawBox()
 	glVertex3fv((GLfloat*)&vertices[5]);
 	glVertex3fv((GLfloat*)&vertices[1]);
 
-	for (uint i = 0; i < childs.size(); i++)
-	{
-		if (childs[i]->GetCompMesh() != nullptr)
-		{
-			childs[i]->DebugDrawBox();
-		}
-	}
+	//for (uint i = 0; i < childs.size(); i++)
+	//{
+	//	if (childs[i]->GetCompMesh() != nullptr)
+	//	{
+	//		childs[i]->DebugDrawBox();
+	//	}
+	//}
 }
 
 math::AABB GameObject::GetAABB()

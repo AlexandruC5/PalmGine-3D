@@ -166,6 +166,7 @@ void ModuleRenderer3D::OnResize(int width, int height)
 	glViewport(0, 0, width, height);
 	App->window->width = width;
 	App->window->height = height;
+	App->camera->engine_camera->SetAspectRatio((float)width / (float)height);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
