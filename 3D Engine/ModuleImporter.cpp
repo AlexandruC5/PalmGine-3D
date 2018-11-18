@@ -74,6 +74,7 @@ void ModuleImporter::LoadMesh(const char * name)
 	char* data = LoadData(path.c_str());
 	char* cursor = data;
 	LoadRecursiveHierarchy(&cursor, App->scene_intro->root_gameObjects);
+	RELEASE(data);
 }
 
 void ModuleImporter::AddResource(const char * path)
@@ -181,6 +182,7 @@ void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const c
 			itoa(node->mMeshes[num_mesh], num_path, 10);
 			path_name += num_path;
 			path_name += ".geometry";
+			RELEASE(num_path);
 		}
 
 		bytes = sizeof(range);
@@ -222,6 +224,7 @@ void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const c
 		memcpy(cursor[0], &node->mNumChildren, bytes);
 		cursor[0] += bytes;
 
+		
 		num_mesh++;
 	} while (num_mesh < node->mNumMeshes);
 
@@ -351,6 +354,7 @@ void ModuleImporter::CreateBinaryMesh(const aiScene * scene, const char * path)
 			bytes = sizeof(float)*mesh->mNumVertices * 2;
 			memcpy(cursor, new_uvs, bytes);
 			cursor += bytes;
+			RELEASE_ARRAY(new_uvs);
 		}
 		//Normals
 		if (mesh->HasNormals())
@@ -367,6 +371,9 @@ void ModuleImporter::CreateBinaryMesh(const aiScene * scene, const char * path)
 		path_name += num_path;
 
 		WriteFile(data, path_name.c_str(), path, size, ".geometry");
+		RELEASE_ARRAY(data);
+		RELEASE_ARRAY(indices);
+		RELEASE_ARRAY(num_path);
 	}
 }
 
@@ -497,9 +504,12 @@ GameObject* ModuleImporter::ReadBinaryHierarchy(char** cursor, uint* num_childs,
 			mat_comp->SetID(mat_comp->rtexture->texture->id, mat_comp->rtexture->exported_path, ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT));
 			mat_comp->rtexture->already_loaded++;
 		}
-
+		RELEASE_ARRAY(name);
+		RELEASE_ARRAY(path_name);
+		RELEASE_ARRAY(texture_name);
 		iterator++;
 	} while (iterator < num_meshes);
+	
 	return go;
 }
 
@@ -575,6 +585,7 @@ void ModuleImporter::ReadBinaryMesh(const char * path, GameObject* go)
 	App->resource_manager->resources[rmesh->uuid] = (Resource*)rmesh;
 	//Gen buffers for geometry
 	GenBuffers(mesh_comp);
+	RELEASE(data);
 }
 
 char * ModuleImporter::LoadData(const char * path)
