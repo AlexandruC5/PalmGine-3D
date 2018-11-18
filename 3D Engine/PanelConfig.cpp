@@ -98,10 +98,6 @@ void PanelConfig::Draw()
 		ImGui::DragFloat("Global Alpha", &style.Alpha, 0.005f, 0.20f, 1.0f, "%.2f");
 		//Brightness
 		ImGui::SliderFloat("Brightness", &brightness, 0, 2, NULL);
-		//Width
-		ImGui::SliderInt("Width", &App->window->width, 0, 1920, NULL);
-		//Height
-		ImGui::SliderInt("Height", &App->window->height, 0, 1080, NULL);
 		
 		//Screen
 		if (ImGui::Checkbox("Fullscreen", &App->window->fullscreen))
