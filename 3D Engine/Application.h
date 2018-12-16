@@ -15,6 +15,7 @@
 #include "ModuleUI.h"
 #include "ModuleImporter.h"
 #include "ModuleResourceManager.h"
+#include "ModuleAudio.h"
 
 class Application
 {
@@ -28,6 +29,7 @@ public:
 	ModuleUI* ui;
 	ModuleImporter* importer;
 	ModuleResourceManager* resource_manager;
+	ModuleAudio* audio;
 	JSON_Value* JSONconfig = nullptr;
 	JSON_Object* JSONconfig_obj = nullptr;
 

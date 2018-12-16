@@ -11,6 +11,7 @@ Application::Application()
 	importer = new ModuleImporter();
 	ui = new ModuleUI();
 	resource_manager = new ModuleResourceManager();
+	audio = new ModuleAudio();
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -22,6 +23,7 @@ Application::Application()
 	AddModule(input);
 	AddModule(hardware);
 	AddModule(resource_manager);
+	AddModule(audio);
 
 	// Scene
 	AddModule(scene_intro);
