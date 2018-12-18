@@ -64,6 +64,12 @@
     <Filter Include="Sources\Modules\Scene\Resources">
       <UniqueIdentifier>{abbaa406-d6b8-4c1b-978a-a7f4d5ea7e02}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Tools\wwise">
+      <UniqueIdentifier>{44aea21e-8ef7-42c7-ba93-fa2f6a8ea300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Tools\wwise\wwise_libs">
+      <UniqueIdentifier>{fe882328-aed5-46a4-9be0-732af52900f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -514,6 +520,45 @@
     <ClInclude Include="ModuleAudio.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="AK\Win32\AkDefaultIOHookBlocking.h">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
+    </ClInclude>
+    <ClInclude Include="AK\Win32\AkDefaultIOHookDeferred.h">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
+    </ClInclude>
+    <ClInclude Include="AK\Win32\AkFileHelpers.h">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
+    </ClInclude>
+    <ClInclude Include="AK\Win32\AkFilePackageLowLevelIOBlocking.h">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
+    </ClInclude>
+    <ClInclude Include="AK\Win32\AkFilePackageLowLevelIODeferred.h">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
+    </ClInclude>
+    <ClInclude Include="AK\Win32\stdafx.h">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
+    </ClInclude>
+    <ClInclude Include="AK\Common\AkDefaultLowLevelIODispatcher.h">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
+    </ClInclude>
+    <ClInclude Include="AK\Common\AkFileLocationBase.h">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
+    </ClInclude>
+    <ClInclude Include="AK\Common\AkFilePackage.h">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
+    </ClInclude>
+    <ClInclude Include="AK\Common\AkFilePackageLowLevelIO.h">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
+    </ClInclude>
+    <ClInclude Include="AK\Common\AkFilePackageLUT.h">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
+    </ClInclude>
+    <ClInclude Include="AK\Common\AkMultipleFileLocation.h">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
+    </ClInclude>
+    <ClInclude Include="WwiseT.h">
+      <Filter>Sources\Tools\wwise</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -748,6 +793,33 @@
     <ClCompile Include="ModuleAudio.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="AK\Win32\AkDefaultIOHookBlocking.cpp">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
+    </ClCompile>
+    <ClCompile Include="AK\Win32\AkDefaultIOHookDeferred.cpp">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
+    </ClCompile>
+    <ClCompile Include="AK\Win32\stdafx.cpp">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
+    </ClCompile>
+    <ClCompile Include="AK\Common\AkDefaultLowLevelIODispatcher.cpp">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
+    </ClCompile>
+    <ClCompile Include="AK\Common\AkFileLocationBase.cpp">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
+    </ClCompile>
+    <ClCompile Include="AK\Common\AkFilePackage.cpp">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
+    </ClCompile>
+    <ClCompile Include="AK\Common\AkFilePackageLUT.cpp">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
+    </ClCompile>
+    <ClCompile Include="AK\Common\AkMultipleFileLocation.cpp">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
+    </ClCompile>
+    <ClCompile Include="WwiseT.cpp">
+      <Filter>Sources\Tools\wwise</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assimp\include\color4.inl">
@@ -791,6 +863,9 @@
     </None>
     <None Include="MathGeoLib\Math\Matrix.inl">
       <Filter>Sources\Tools\MathGeoLib\Math</Filter>
+    </None>
+    <None Include="AK\Common\AkFilePackageLowLevelIO.inl">
+      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
     </None>
   </ItemGroup>
 </Project>

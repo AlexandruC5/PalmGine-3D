@@ -50,6 +50,7 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>D:\Proyectos GitHub\PalmGine-3D\3D Engine\AK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -76,6 +77,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AK\Common\AkDefaultLowLevelIODispatcher.h" />
+    <ClInclude Include="AK\Common\AkFileLocationBase.h" />
+    <ClInclude Include="AK\Common\AkFilePackage.h" />
+    <ClInclude Include="AK\Common\AkFilePackageLowLevelIO.h" />
+    <ClInclude Include="AK\Common\AkFilePackageLUT.h" />
+    <ClInclude Include="AK\Common\AkMultipleFileLocation.h" />
+    <ClInclude Include="AK\Win32\AkDefaultIOHookBlocking.h" />
+    <ClInclude Include="AK\Win32\AkDefaultIOHookDeferred.h" />
+    <ClInclude Include="AK\Win32\AkFileHelpers.h" />
+    <ClInclude Include="AK\Win32\AkFilePackageLowLevelIOBlocking.h" />
+    <ClInclude Include="AK\Win32\AkFilePackageLowLevelIODeferred.h" />
+    <ClInclude Include="AK\Win32\stdafx.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Assimp\include\ai_assert.h" />
     <ClInclude Include="Assimp\include\anim.h" />
@@ -226,8 +239,17 @@
     <ClInclude Include="ResourceMesh.h" />
     <ClInclude Include="ResourceTexture.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="WwiseT.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AK\Common\AkDefaultLowLevelIODispatcher.cpp" />
+    <ClCompile Include="AK\Common\AkFileLocationBase.cpp" />
+    <ClCompile Include="AK\Common\AkFilePackage.cpp" />
+    <ClCompile Include="AK\Common\AkFilePackageLUT.cpp" />
+    <ClCompile Include="AK\Common\AkMultipleFileLocation.cpp" />
+    <ClCompile Include="AK\Win32\AkDefaultIOHookBlocking.cpp" />
+    <ClCompile Include="AK\Win32\AkDefaultIOHookDeferred.cpp" />
+    <ClCompile Include="AK\Win32\stdafx.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="CompCamera.cpp" />
@@ -306,8 +328,10 @@
     <ClCompile Include="ResourceMesh.cpp" />
     <ClCompile Include="ResourceTexture.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="WwiseT.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="AK\Common\AkFilePackageLowLevelIO.inl" />
     <None Include="Assimp\include\color4.inl" />
     <None Include="Assimp\include\material.inl" />
     <None Include="Assimp\include\matrix3x3.inl" />
