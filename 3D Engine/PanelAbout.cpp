@@ -74,11 +74,6 @@ void PanelAbout::Draw()
 		ShellExecuteA(0, 0, "chrome.exe", "http://www.stratos-ad.com/forums/index.php?topic=9897.0", 0, SW_SHOWMAXIMIZED);
 	}
 
-	if (ImGui::MenuItem("- Bullet (v2.84)"))
-	{
-		ShellExecuteA(0, 0, "chrome.exe", "http://bulletphysics.org/wordpress/", 0, SW_SHOWMAXIMIZED);
-	}
-
 	if (ImGui::MenuItem("- Assimp (v3.3.1)"))
 	{
 		ShellExecuteA(0, 0, "chrome.exe", "http://assimp.sourceforge.net/", 0, SW_SHOWMAXIMIZED);
