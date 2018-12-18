@@ -101,7 +101,7 @@ void CompTransform::SetRotationWithQuat(Quat rot)
 		transform_matrix = math::float4x4::FromQuat(quaternion_rotation);
 		transform_matrix.SetTranslatePart(position);
 	}
-	rotation = rot.ToEulerXYX();
+	rotation = rot.ToEulerXYX()*RADTODEG;
 
 	if (parent->GetParent() != nullptr)
 	{
