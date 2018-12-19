@@ -2,7 +2,7 @@
 #define WWISET_H_
 
 #include "Globals.h"
-// Wwise libraries
+// Wwise libs
 #ifndef _DEBUG  // Profile build configuration must be loaded instead of Debug
 #define AK_OPTIMIZED
 #pragma comment( lib, "AK/Release(StaticCRT)/lib/AkSoundEngine.lib")

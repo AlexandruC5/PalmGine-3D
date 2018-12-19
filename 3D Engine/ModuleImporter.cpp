@@ -74,7 +74,8 @@ void ModuleImporter::LoadMesh(const char * name)
 	char* data = LoadData(path.c_str());
 	char* cursor = data;
 	LoadRecursiveHierarchy(&cursor, App->scene_intro->root_gameObjects);
-	RELEASE(data);
+	//TODO
+	//RELEASE(data);
 }
 
 void ModuleImporter::AddResource(const char * path)
@@ -182,7 +183,8 @@ void ModuleImporter::WriteBinaryRecursive(aiNode * node, char ** cursor, const c
 			itoa(node->mMeshes[num_mesh], num_path, 10);
 			path_name += num_path;
 			path_name += ".geometry";
-			RELEASE(num_path);
+			//TODO
+			//RELEASE_ARRAY(num_path);
 		}
 
 		bytes = sizeof(range);
@@ -585,7 +587,8 @@ void ModuleImporter::ReadBinaryMesh(const char * path, GameObject* go)
 	App->resource_manager->resources[rmesh->uuid] = (Resource*)rmesh;
 	//Gen buffers for geometry
 	GenBuffers(mesh_comp);
-	RELEASE(data);
+	//TODO
+	//RELEASE(data);
 }
 
 char * ModuleImporter::LoadData(const char * path)
