@@ -106,6 +106,9 @@ bool WwiseT::InitSoundEngine()
 	}
 #endif // AK_OPTIMIZED
 
+	// Load the init soundbank
+	LoadBank("Init.bnk");
+
 	return true;
 }
 
@@ -134,6 +137,16 @@ void WwiseT::TermSoundEngine()
 
 	// Terminate memory manager
 	AK::MemoryMgr::Term();
+}
+
+void WwiseT::LoadBank(const char * path)
+{
+	AkBankID bankID; // Not used. These banks can be unloaded with their file name.
+	AKRESULT eResult = AK::SoundEngine::LoadBank(path, AK_DEFAULT_POOL_ID, bankID);
+	if (eResult == AK_Success)
+	{
+		assert(!"Could not initialize soundbank.");
+	}
 }
 
 WwiseT::AudioSource::AudioSource()

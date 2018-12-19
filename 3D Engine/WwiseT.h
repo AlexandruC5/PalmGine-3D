@@ -43,6 +43,7 @@ namespace WwiseT
 	bool InitSoundEngine();
 	void ProcessAudio();
 	void TermSoundEngine(); // Close wwise
+	void LoadBank(const char* path);
 
 	class AudioSource
 	{
