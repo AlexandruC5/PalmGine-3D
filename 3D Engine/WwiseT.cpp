@@ -135,3 +135,15 @@ void WwiseT::TermSoundEngine()
 	// Terminate memory manager
 	AK::MemoryMgr::Term();
 }
+
+WwiseT::AudioSource::AudioSource()
+{
+}
+
+WwiseT::AudioSource::~AudioSource()
+{
+}
+
+void WwiseT::AudioSource::Play()
+{
+}

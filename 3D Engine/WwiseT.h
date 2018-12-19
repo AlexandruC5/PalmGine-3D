@@ -44,6 +44,14 @@ namespace WwiseT
 	void ProcessAudio();
 	void TermSoundEngine(); // Close wwise
 
+	class AudioSource
+	{
+	public:
+		AudioSource();
+		~AudioSource();
+
+		void Play();
+	};
 }
 // Make wwise methods here :)
 // We will access all the functions in the engine from here
