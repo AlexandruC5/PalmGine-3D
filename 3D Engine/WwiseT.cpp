@@ -148,28 +148,6 @@ void WwiseT::ProcessAudio()
 	AK::SoundEngine::RenderAudio();
 }
 
-void WwiseT::TermSoundEngine()
-{
-	// Terminate Communication Services
-#ifndef AK_OPTIMIZED
-	AK::Comm::Term();
-#endif
-
-	// Terminate music engine
-	AK::MusicEngine::Term();
-
-	// Terminate sound engine
-	AK::SoundEngine::Term();
-
-	// Terminate streaming manager
-	g_lowLevelIO.Term();
-	if (AK::IAkStreamMgr::Get())
-		AK::IAkStreamMgr::Get()->Destroy();
-
-	// Terminate memory manager
-	AK::MemoryMgr::Term();
-}
-
 void WwiseT::LoadBank(const char * path)
 {
 	AkBankID bankID; // Not used. These banks can be unloaded with their file name.
@@ -177,15 +155,6 @@ void WwiseT::LoadBank(const char * path)
 	if (eResult != AK_Success)
 	{
 		assert(!"Could not initialize soundbank.");
-	}
-}
-
-void WwiseT::SetLanguage(const char * lang)
-{
-	AKRESULT res = AK::StreamMgr::SetCurrentLanguage((AkOSChar*)lang);
-	if (res == AK_Fail)
-	{
-		assert(!"Invalid language.");
 	}
 }
 
@@ -218,7 +187,7 @@ WwiseT::AudioSource::~AudioSource()
 	}
 }
 
-void WwiseT::AudioSource::PlayByName(const char * name)
+void WwiseT::AudioSource::PlayEventByName(const char * name)
 {
 	AK::SoundEngine::PostEvent(name, id);
 }

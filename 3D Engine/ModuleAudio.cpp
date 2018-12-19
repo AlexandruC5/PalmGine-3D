@@ -29,7 +29,7 @@ update_status ModuleAudio::Update(float dt)
 	//TODO delete test sound
 	if ((App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN))
 	{
-		test2->PlayByName("fireball");
+		test2->PlayEventByName("fireball");
 	}
 	
 	WwiseT::ProcessAudio();

@@ -46,7 +46,7 @@ namespace WwiseT
 		AudioSource(const char* name);
 		~AudioSource();
 
-		void PlayByName(const char* name);
+		void PlayEventByName(const char* name);
 		void SetListener();
 
 	private:
@@ -55,12 +55,11 @@ namespace WwiseT
 	};
 
 	bool InitSoundEngine();
-	bool CloseSoundEngine();
+	bool CloseSoundEngine(); // Close wwise
 	void ProcessAudio();
-	void TermSoundEngine(); // Close wwise
 	void LoadBank(const char* path);
-	void SetLanguage(const char* lang);
 	
+	// Utils
 	AudioSource* CreateAudSource(const char* name);
 }
 // Make wwise methods here :)
