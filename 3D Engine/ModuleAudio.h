@@ -17,6 +17,7 @@ public:
 	// Delete emmiter
 
 private:
+	
 	// list of emmiters
 	// listener (?
 };

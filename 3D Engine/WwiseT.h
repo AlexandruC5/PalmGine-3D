@@ -13,6 +13,7 @@
 #else
 #include <AK/Comm/AkCommunication.h>
 #pragma comment( lib, "AK/Debug(StaticCRT)/lib/CommunicationCentral.lib" )
+#pragma comment( lib, "AK/ws2_32.lib") 
 #pragma comment( lib, "AK/Debug(StaticCRT)/lib/AkSoundEngine.lib" )
 #pragma comment( lib, "AK/Debug(StaticCRT)/lib/AkMusicEngine.lib" )
 #pragma comment( lib, "AK/Debug(StaticCRT)/lib/AkMemoryMgr.lib" )
@@ -24,7 +25,8 @@
 #pragma comment( lib, "AK/DirectSound/dsound.lib" ) 
 #pragma comment( lib, "AK/DirectSound/dxguid.lib" )
 
-// Wwise stuff
+// Wwise memory hooks
+// From wwise tutorial: https://www.audiokinetic.com/library/edge/?source=SDK&id=workingwithsdks__initialization.html
 namespace AK
 {
 #ifdef WIN32
@@ -36,6 +38,10 @@ namespace AK
 #endif
 }
 
+namespace WwiseT
+{
+	bool InitSoundEngine(const wchar_t* base_path, const char* language);
+}
 // Make wwise methods here :)
 // We will access all the functions in the engine from here
 
