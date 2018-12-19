@@ -1,0 +1,8 @@
+Event	ID	Name			Wwise Object Path	Notes
+	3841200954	fireball			\Default Work Unit\fireball	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	270557088	Fireball_Impact	D:\Documentos\WwiseProjects\Assignment3\.cache\Windows\SFX\Fireball_Impact_56D34C19.wem		\Actor-Mixer Hierarchy\Default Work Unit\Fireball_Impact		303836
+	498058724	Combat_theme	D:\Documentos\WwiseProjects\Assignment3\.cache\Windows\SFX\Combat_theme_56D34C19.wem		\Actor-Mixer Hierarchy\Default Work Unit\Combat_theme		6401064
+	992504696	Boss_theme	D:\Documentos\WwiseProjects\Assignment3\.cache\Windows\SFX\Boss_theme_56D34C19.wem		\Actor-Mixer Hierarchy\Default Work Unit\Boss_theme		8810852
+

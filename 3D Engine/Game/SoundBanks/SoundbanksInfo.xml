@@ -16,5 +16,27 @@
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 		</SoundBank>
+		<SoundBank Id="1860126629" Language="SFX">
+			<ObjectPath>\SoundBanks\Default Work Unit\Assignment3</ObjectPath>
+			<ShortName>Assignment3</ShortName>
+			<Path>Assignment3.bnk</Path>
+			<IncludedEvents>
+				<Event Id="3841200954" Name="fireball" ObjectPath="\Events\Default Work Unit\fireball"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="270557088" Language="SFX">
+					<ShortName>Fireball_Impact.wav</ShortName>
+					<Path>SFX\Fireball_Impact_56D34C19.wem</Path>
+				</File>
+				<File Id="498058724" Language="SFX">
+					<ShortName>Combat_theme.wav</ShortName>
+					<Path>SFX\Combat_theme_56D34C19.wem</Path>
+				</File>
+				<File Id="992504696" Language="SFX">
+					<ShortName>Boss_theme.wav</ShortName>
+					<Path>SFX\Boss_theme_56D34C19.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
 	</SoundBanks>
 </SoundBanksInfo>
