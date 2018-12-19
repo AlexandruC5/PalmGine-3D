@@ -158,9 +158,9 @@ void WwiseT::SetLanguage(const char * lang)
 	}
 }
 
-WwiseT::AudioSource::AudioSource(AkGameObjectID event_id, const char* event_name)
+WwiseT::AudioSource::AudioSource(const char* event_name)
 {
-	id = event_id;
+	id = GenRandomNumber();
 	name = event_name;
 	AKRESULT eResult = AK::SoundEngine::RegisterGameObj(id, name);
 	if (eResult != AK_Success)
