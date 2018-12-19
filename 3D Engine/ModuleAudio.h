@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "Globals.h"
+#include "WwiseT.h"
 
 class ModuleAudio : public Module
 {
@@ -17,7 +18,7 @@ public:
 	// Delete emmiter
 
 private:
-	
+	std::list<WwiseT::AudioSource*> event_list;
 	// list of emmiters
 	// listener (?
 };

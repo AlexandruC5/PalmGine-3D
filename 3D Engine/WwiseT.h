@@ -40,23 +40,25 @@ namespace AK
 
 namespace WwiseT
 {
-	bool InitSoundEngine();
-	void ProcessAudio();
-	void TermSoundEngine(); // Close wwise
-	void LoadBank(const char* path);
-	void SetLanguage(const char* lang);
-
 	class AudioSource
 	{
 	public:
 		AudioSource(const char* name);
 		~AudioSource();
 
-		void Play(AkGameObjectID id);
+
+		void PlayByName(const char* name);
 	private:
 		AkGameObjectID id;
 		const char* name = nullptr;
 	};
+
+	bool InitSoundEngine();
+	void ProcessAudio();
+	void TermSoundEngine(); // Close wwise
+	void LoadBank(const char* path);
+	void SetLanguage(const char* lang);
+	AudioSource* CreateAudSource(const char* name);
 }
 // Make wwise methods here :)
 // We will access all the functions in the engine from here

@@ -106,6 +106,13 @@ bool WwiseT::InitSoundEngine()
 	}
 #endif // AK_OPTIMIZED
 
+	AKRESULT base_path_res = g_lowLevelIO.SetBasePath(AKTEXT("../Game/SoundBanks/"));
+	if (base_path_res != AK_Success)
+	{
+		assert(!"Invalid base path!");
+		return false;
+	}
+
 	// Load the init soundbank
 	LoadBank("Init.bnk");
 
@@ -143,7 +150,7 @@ void WwiseT::LoadBank(const char * path)
 {
 	AkBankID bankID; // Not used. These banks can be unloaded with their file name.
 	AKRESULT eResult = AK::SoundEngine::LoadBank(path, AK_DEFAULT_POOL_ID, bankID);
-	if (eResult == AK_Success)
+	if (eResult != AK_Success)
 	{
 		assert(!"Could not initialize soundbank.");
 	}
@@ -156,6 +163,15 @@ void WwiseT::SetLanguage(const char * lang)
 	{
 		assert(!"Invalid language.");
 	}
+}
+
+WwiseT::AudioSource* WwiseT::CreateAudSource(const char * name)
+{
+	AudioSource* src = nullptr;
+
+	src = new AudioSource(name);
+
+	return src;
 }
 
 WwiseT::AudioSource::AudioSource(const char* event_name)
@@ -178,7 +194,7 @@ WwiseT::AudioSource::~AudioSource()
 	}
 }
 
-void WwiseT::AudioSource::Play(AkGameObjectID event_id)
+void WwiseT::AudioSource::PlayByName(const char * name)
 {
-	AK::SoundEngine::PostEvent(event_id, id);
+	AK::SoundEngine::PostEvent(name, id);
 }
