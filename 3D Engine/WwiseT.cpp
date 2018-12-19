@@ -113,3 +113,25 @@ void WwiseT::ProcessAudio()
 {
 	AK::SoundEngine::RenderAudio();
 }
+
+void WwiseT::TermSoundEngine()
+{
+	// Terminate Communication Services
+#ifndef AK_OPTIMIZED
+	AK::Comm::Term();
+#endif
+
+	// Terminate music engine
+	AK::MusicEngine::Term();
+
+	// Terminate sound engine
+	AK::SoundEngine::Term();
+
+	// Terminate streaming manager
+	g_lowLevelIO.Term();
+	if (AK::IAkStreamMgr::Get())
+		AK::IAkStreamMgr::Get()->Destroy();
+
+	// Terminate memory manager
+	AK::MemoryMgr::Term();
+}

@@ -42,6 +42,8 @@ namespace WwiseT
 {
 	bool InitSoundEngine();
 	void ProcessAudio();
+	void TermSoundEngine(); // Close wwise
+
 }
 // Make wwise methods here :)
 // We will access all the functions in the engine from here
