@@ -44,6 +44,7 @@ namespace WwiseT
 	void ProcessAudio();
 	void TermSoundEngine(); // Close wwise
 	void LoadBank(const char* path);
+	void SetLanguage(const char* lang);
 
 	class AudioSource
 	{

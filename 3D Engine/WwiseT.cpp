@@ -149,6 +149,15 @@ void WwiseT::LoadBank(const char * path)
 	}
 }
 
+void WwiseT::SetLanguage(const char * lang)
+{
+	AKRESULT res = AK::StreamMgr::SetCurrentLanguage((AkOSChar*)lang);
+	if (res == AK_Fail)
+	{
+		assert(!"Invalid language.");
+	}
+}
+
 WwiseT::AudioSource::AudioSource()
 {
 }
