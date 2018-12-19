@@ -41,7 +41,7 @@ namespace AK
 }
 
 // Wwise stuff
-bool WwiseT::InitSoundEngine(const wchar_t * base_path, const char * language)
+bool WwiseT::InitSoundEngine()
 {
 	// Init mem manager
 	AkMemSettings memSettings;
@@ -107,4 +107,9 @@ bool WwiseT::InitSoundEngine(const wchar_t * base_path, const char * language)
 #endif // AK_OPTIMIZED
 
 	return true;
+}
+
+void WwiseT::ProcessAudio()
+{
+	AK::SoundEngine::RenderAudio();
 }

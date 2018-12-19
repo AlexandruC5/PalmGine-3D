@@ -40,7 +40,8 @@ namespace AK
 
 namespace WwiseT
 {
-	bool InitSoundEngine(const wchar_t* base_path, const char* language);
+	bool InitSoundEngine();
+	void ProcessAudio();
 }
 // Make wwise methods here :)
 // We will access all the functions in the engine from here
