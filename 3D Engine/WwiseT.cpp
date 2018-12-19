@@ -119,6 +119,30 @@ bool WwiseT::InitSoundEngine()
 	return true;
 }
 
+bool WwiseT::CloseSoundEngine()
+{
+	//Terminate comunication module (IMPORTANT: this must be the first module in being terminated)
+#ifndef AK_OPTIMIZED
+	AK::Comm::Term();
+#endif 
+
+	// Terminate the music engine
+	AK::MusicEngine::Term();
+
+	// Terminate the sound engine
+	AK::SoundEngine::Term();
+
+	// Terminate IO device
+	g_lowLevelIO.Term();
+	if (AK::IAkStreamMgr::Get())
+		AK::IAkStreamMgr::Get()->Destroy();
+
+	// Terminate the Memory Manager
+	AK::MemoryMgr::Term();
+
+	return true;
+}
+
 void WwiseT::ProcessAudio()
 {
 	AK::SoundEngine::RenderAudio();
@@ -197,4 +221,13 @@ WwiseT::AudioSource::~AudioSource()
 void WwiseT::AudioSource::PlayByName(const char * name)
 {
 	AK::SoundEngine::PostEvent(name, id);
+}
+
+void WwiseT::AudioSource::SetListener()
+{
+	AKRESULT eResult = AK::SoundEngine::SetDefaultListeners(&id, 1);
+	if (eResult != AK_Success)
+	{
+		assert(!"Could not set GameObject as listerner.");
+	}
 }

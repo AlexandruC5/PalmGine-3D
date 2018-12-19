@@ -8,6 +8,8 @@ ModuleAudio::ModuleAudio(bool start_enabled) : Module(start_enabled)
 ModuleAudio::~ModuleAudio()
 {
 	// clean up all emmiters
+	delete test2;
+	WwiseT::CloseSoundEngine();
 }
 
 bool ModuleAudio::Start()
@@ -17,13 +19,19 @@ bool ModuleAudio::Start()
 	WwiseT::LoadBank("Assignment3.bnk");
 	
 	//TODO delete test sound
-	WwiseT::AudioSource* test = WwiseT::CreateAudSource("test");
-	event_list.push_back(test);
-
+	test2 = WwiseT::CreateAudSource("test");
+	test2->SetListener();
 	return true;
 }
 
 update_status ModuleAudio::Update(float dt)
 {
+	//TODO delete test sound
+	if ((App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN))
+	{
+		test2->PlayByName("fireball");
+	}
+	
+	WwiseT::ProcessAudio();
 	return UPDATE_CONTINUE;
 }

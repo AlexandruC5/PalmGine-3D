@@ -46,18 +46,21 @@ namespace WwiseT
 		AudioSource(const char* name);
 		~AudioSource();
 
-
 		void PlayByName(const char* name);
+		void SetListener();
+
 	private:
 		AkGameObjectID id;
 		const char* name = nullptr;
 	};
 
 	bool InitSoundEngine();
+	bool CloseSoundEngine();
 	void ProcessAudio();
 	void TermSoundEngine(); // Close wwise
 	void LoadBank(const char* path);
 	void SetLanguage(const char* lang);
+	
 	AudioSource* CreateAudSource(const char* name);
 }
 // Make wwise methods here :)

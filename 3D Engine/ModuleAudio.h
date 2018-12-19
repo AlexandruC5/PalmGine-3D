@@ -16,11 +16,10 @@ public:
 	// Set listener
 	// Create emmiter
 	// Delete emmiter
-
+	
+	WwiseT::AudioSource* test2 = nullptr;
 private:
 	std::list<WwiseT::AudioSource*> event_list;
-	// list of emmiters
-	// listener (?
 };
 
 #endif // !MODULEAUDIO_H
