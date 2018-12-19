@@ -158,14 +158,27 @@ void WwiseT::SetLanguage(const char * lang)
 	}
 }
 
-WwiseT::AudioSource::AudioSource()
+WwiseT::AudioSource::AudioSource(AkGameObjectID event_id, const char* event_name)
 {
+	id = event_id;
+	name = event_name;
+	AKRESULT eResult = AK::SoundEngine::RegisterGameObj(id, name);
+	if (eResult != AK_Success)
+	{
+		assert(!"Could not register GameObject. See eResult variable to more info");
+	}
 }
 
 WwiseT::AudioSource::~AudioSource()
 {
+	AKRESULT eResult = AK::SoundEngine::UnregisterGameObj(id);
+	if (eResult != AK_Success)
+	{
+		assert(!"Could not unregister GameObject. See eResult variable to more info");
+	}
 }
 
-void WwiseT::AudioSource::Play()
+void WwiseT::AudioSource::Play(AkGameObjectID event_id)
 {
+	AK::SoundEngine::PostEvent(event_id, id);
 }

@@ -53,6 +53,9 @@ namespace WwiseT
 		~AudioSource();
 
 		void Play();
+	private:
+		AkGameObjectID id;
+		const char* name = nullptr;
 	};
 }
 // Make wwise methods here :)
