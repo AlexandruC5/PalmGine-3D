@@ -49,10 +49,10 @@ namespace WwiseT
 	class AudioSource
 	{
 	public:
-		AudioSource();
+		AudioSource(AkGameObjectID id, const char* name);
 		~AudioSource();
 
-		void Play();
+		void Play(AkGameObjectID id);
 	private:
 		AkGameObjectID id;
 		const char* name = nullptr;
