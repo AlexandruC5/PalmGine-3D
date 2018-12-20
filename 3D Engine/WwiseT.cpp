@@ -215,6 +215,21 @@ void WwiseT::AudioSource::PlayEventByName(const char * name)
 	AK::SoundEngine::PostEvent(name, id);
 }
 
+void WwiseT::AudioSource::StopEventByName(const char * name)
+{
+	AK::SoundEngine::ExecuteActionOnEvent(name, AK::SoundEngine::AkActionOnEventType_Stop);
+}
+
+void WwiseT::AudioSource::PauseEventByName(const char * name)
+{
+	AK::SoundEngine::ExecuteActionOnEvent(name, AK::SoundEngine::AkActionOnEventType_Pause);
+}
+
+void WwiseT::AudioSource::ResumeEventByName(const char * name)
+{
+	AK::SoundEngine::ExecuteActionOnEvent(name, AK::SoundEngine::AkActionOnEventType_Resume);
+}
+
 void WwiseT::AudioSource::SetListener()
 {
 	AkGameObjectID tmp = id;

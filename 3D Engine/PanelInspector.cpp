@@ -204,12 +204,8 @@ void PanelInspector::Draw()
 						audio_source->PlayAudio();
 					}
 					ImGui::SameLine();
-					if (ImGui::Button("Pause")) {
-						audio_source->PlayAudio();
-					}
-					ImGui::SameLine();
 					if (ImGui::Button("Stop")) {
-						audio_source->PlayAudio();
+						audio_source->StopAudio();
 					}
 
 					bool muted = audio_source->isMuted();

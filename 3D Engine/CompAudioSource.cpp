@@ -142,10 +142,15 @@ void CompAudioSource::PlayAudio()
 
 void CompAudioSource::PauseAudio()
 {
-	//TODO do this
+	source->PauseEventByName(audio_to_play);
+}
+
+void CompAudioSource::ResumeAudio()
+{
+	source->ResumeEventByName(audio_to_play);
 }
 
 void CompAudioSource::StopAudio()
 {
-	//TODO do this
+	source->StopEventByName(audio_to_play);
 }
