@@ -47,7 +47,7 @@ public:
 	uint audio_source_id;
 
 private:
-	const char* audio_to_play;
+	const char* audio_to_play = "";
 	bool mute = false;
 	bool bypass_effects = true;
 	bool play_on_awake = true;

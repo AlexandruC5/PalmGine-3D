@@ -8,6 +8,7 @@
 #include "CompMaterial.h"
 #include "CompCamera.h"
 #include "CompAudioListener.h"
+#include "CompAudioSource.h"
 #include "ImGuizmo-master/ImGuizmo.h"
 #include "ModuleInput.h"
 #include "GameObject.h"
@@ -59,6 +60,7 @@ void PanelInspector::Draw()
 			CompMaterial* texture = selected_go->GetCompMaterial();
 			CompCamera* camera = selected_go->GetCompCamera();
 			CompAudioListener* audio_listener = selected_go->GetCompAudioListener();
+			CompAudioSource* audio_source = selected_go->GetCompAudioSource();
 
 			if (mesh != nullptr) {
 				//SetStatic
@@ -189,6 +191,68 @@ void PanelInspector::Draw()
 					ImGui::Image((ImTextureID)texture->GetTextureId(), ImVec2(200, 200));
 				}
 			}
+
+			if (audio_source != nullptr) {
+				if (ImGui::CollapsingHeader("Audio Source")) {
+					char text[100];
+					strcpy_s(text, 100, audio_source->GetAudioToPlay());
+					if (ImGui::InputText("AudioClip", text, 100, ImGuiInputTextFlags_AutoSelectAll | ImGuiInputTextFlags_EnterReturnsTrue)) {
+						audio_source->SetAudio(text);
+					}
+
+					bool muted = audio_source->isMuted();
+					if (ImGui::Checkbox("Mute", &muted)) {
+						audio_source->SetMuted(muted);
+					}
+
+					bool bypass_effects = audio_source->GetBypassEffects();
+					if (ImGui::Checkbox("ByPass Effects", &bypass_effects)) {
+						audio_source->SetBypassEffects(bypass_effects);
+					}
+
+					bool play_on_awake = audio_source->GetPlayOnAwake();
+					if (ImGui::Checkbox("Play On Awake", &play_on_awake)) {
+						audio_source->SetPlayOnAwake(play_on_awake);
+					}
+
+					bool loop = audio_source->isInLoop();
+					if (ImGui::Checkbox("Loop", &loop)) {
+						audio_source->SetLoop(loop);
+					}
+
+					int volume = audio_source->GetVolume();
+					if (ImGui::SliderInt("Volume", &volume, 0,1)) {
+						audio_source->SetVolume(volume);
+					}
+
+					bool mono = audio_source->isMono();
+					if (ImGui::Checkbox("Mono", &mono)) {
+						audio_source->SetMono(mono);
+					}
+
+					int pitch = audio_source->GetPitch();
+					if (ImGui::SliderInt("Pitch", &pitch, -3, 3)) {
+						audio_source->SetPitch(pitch);
+					}
+
+					int stereo_pan = audio_source->GetStereoPan();
+					if (ImGui::SliderInt("Stereo Pan", &stereo_pan, -1, 1)) {
+						audio_source->SetStereoPan(stereo_pan);
+					}
+
+					float min_distance = audio_source->GetMinDistance();
+					if (ImGui::InputFloat("Min. Distance", &min_distance)) {
+						audio_source->SetMinDistance(min_distance);
+					}
+
+					float max_distance = audio_source->GetMaxDistance();
+					if (ImGui::InputFloat("Max. Distance", &max_distance)) {
+						audio_source->SetMaxDistance(max_distance);
+					}
+					
+				}
+			}
+
 		}
 	}
 }

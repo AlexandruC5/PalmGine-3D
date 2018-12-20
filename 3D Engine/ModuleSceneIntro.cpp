@@ -7,6 +7,7 @@
 #include "CompMesh.h"
 #include "Component.h"
 #include "CompAudioListener.h"
+#include "CompAudioSource.h"
 #include "MathGeoLib/MathGeoLib.h"
 #include <list>
 #include "Devil/include/il.h"
@@ -51,6 +52,9 @@ bool ModuleSceneIntro::Start()
 	camera->AddComponent(cameracomp);
 	CompAudioListener* a_listener =  new CompAudioListener(camera, COMP_TYPE::C_AUDIOLISTENER);
 	camera->AddComponent(a_listener);
+	//TODO DeleteAudioSourceFromHere
+	CompAudioSource* a_source = new CompAudioSource(camera, COMP_TYPE::C_AUDIO_SOURCE, "Source1");
+	camera->AddComponent(a_source);
 
 	if (game_running == true) 
 	{
