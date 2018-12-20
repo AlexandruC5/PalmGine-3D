@@ -97,6 +97,12 @@ void CompAudioSource::SetAudio(const char* audio)
 void CompAudioSource::SetMuted(bool must_mute)
 {
 	mute = must_mute;
+	if (mute == true) {
+		source->SetVolume(0);
+	}
+	else {
+		source->SetVolume(volume);
+	}
 }
 void CompAudioSource::SetBypassEffects(bool must_bypass_effects)
 {
@@ -113,7 +119,9 @@ void CompAudioSource::SetLoop(bool must_loop)
 void CompAudioSource::SetVolume(float desired_volume)
 {
 	volume = desired_volume;
-	source->SetVolume(desired_volume);
+	if (mute == false) {
+		source->SetVolume(desired_volume);
+	}
 }
 void CompAudioSource::SetMono(bool must_mono)
 {
