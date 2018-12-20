@@ -1,5 +1,6 @@
 Event	ID	Name			Wwise Object Path	Notes
 	2607198564	music_TheDillards_Dooley			\Default Work Unit\music_TheDillards_Dooley	
+	3412057565	train			\Default Work Unit\train	
 	3585407402	music_TheGrowlers_GoingGetsTuff			\Default Work Unit\music_TheGrowlers_GoingGetsTuff	
 	3841200954	fireball			\Default Work Unit\fireball	
 
@@ -7,4 +8,5 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	248768372	The Growlers-Going Gets Tuff MONO	D:\Documentos\WwiseProjects\Assignment3\.cache\Windows\SFX\The Growlers-Going Gets Tuff MONO_56D34C19.wem		\Actor-Mixer Hierarchy\Default Work Unit\The Growlers-Going Gets Tuff MONO		18422942
 	270557088	Fireball_Impact	D:\Documentos\WwiseProjects\Assignment3\.cache\Windows\SFX\Fireball_Impact_56D34C19.wem		\Actor-Mixer Hierarchy\Default Work Unit\Fireball_Impact		303836
 	422655339	The Dillards - Dooley	D:\Documentos\WwiseProjects\Assignment3\.cache\Windows\SFX\The Dillards - Dooley_56D34C19.wem		\Actor-Mixer Hierarchy\Default Work Unit\The Dillards - Dooley		10850368
+	554279214	train	D:\Documentos\WwiseProjects\Assignment3\.cache\Windows\SFX\train_56D34C19.wem		\Actor-Mixer Hierarchy\Default Work Unit\train		2029888
 
