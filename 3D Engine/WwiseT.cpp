@@ -321,3 +321,8 @@ void WwiseT::AudioSource::ApplyEnvReverb(AkReal32 desired_level, const char * ta
 	// the values must be computed and set for each listener independently.
 	//AKRESULT eResult = AK::SoundEngine::SetObjectObstructionAndOcclusion(id, 0 /*listener*/, fObstruction, fOcclusion);
 }
+
+void WwiseT::AudioSource::ChangeState(const char * group_name, const char * new_state)
+{
+	AKRESULT res = AK::SoundEngine::SetState(group_name, new_state);
+}
