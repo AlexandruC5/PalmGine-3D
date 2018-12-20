@@ -32,7 +32,11 @@ update_status ModuleAudio::Update(float dt)
 	{
 		test2->PlayEventByName("fireball");
 	}
-	
+	return UPDATE_CONTINUE;
+}
+
+update_status ModuleAudio::PostUpdate(float dt)
+{
 	WwiseT::ProcessAudio();
 	return UPDATE_CONTINUE;
 }
