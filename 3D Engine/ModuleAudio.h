@@ -18,6 +18,7 @@ public:
 	// Create emmiter
 	// Delete emmiter
 	
+	WwiseT::AudioSource* test1 = nullptr;
 	WwiseT::AudioSource* test2 = nullptr;
 private:
 	std::list<WwiseT::AudioSource*> event_list;

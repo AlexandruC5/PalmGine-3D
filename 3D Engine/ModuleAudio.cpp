@@ -8,6 +8,7 @@ ModuleAudio::ModuleAudio(bool start_enabled) : Module(start_enabled)
 ModuleAudio::~ModuleAudio()
 {
 	// clean up all emmiters
+	delete test1;
 	delete test2;
 	WwiseT::CloseSoundEngine();
 }
@@ -21,7 +22,7 @@ bool ModuleAudio::Start()
 	//TODO delete test sound
 	test2 = WwiseT::CreateAudSource("test");
 	WwiseT::SetDefaultListener(test2->GetID());
-	//test2->SetListener();
+	test1 = WwiseT::CreateAudSource("test1");
 	return true;
 }
 
@@ -30,9 +31,10 @@ update_status ModuleAudio::Update(float dt)
 	//TODO delete test sound
 	if ((App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN))
 	{
-		test2->PlayEventByName("train");
+		test1->PlayEventByName("train");
+		test2->PlayEventByName("music_TheGrowlers_GoingGetsTuff");
 		float vel = 5;
-		test2->ApplyEnvReverb(vel, "tunnel");
+		test1->ApplyEnvReverb(vel, "tunnel");
 	}
 	return UPDATE_CONTINUE;
 }
