@@ -30,7 +30,9 @@ update_status ModuleAudio::Update(float dt)
 	//TODO delete test sound
 	if ((App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN))
 	{
-		test2->PlayEventByName("music_TheGrowlers_GoingGetsTuff");
+		test2->PlayEventByName("train");
+		float vel = 12;
+		test2->ApplyEnvReverb(vel, "tunnel");
 	}
 	return UPDATE_CONTINUE;
 }

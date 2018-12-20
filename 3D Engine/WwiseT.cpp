@@ -286,5 +286,11 @@ void WwiseT::AudioSource::ApplyEnvReverb(AkReal32 desired_level, const char * ta
 	environment.fControlValue = desired_level;
 	environment.auxBusID = AK::SoundEngine::GetIDFromString(target);
 
-	AKRESULT res = AK::SoundEngine::SetGameObjectAuxSendValues(id, &environment, 1);
+	AKRESULT res = AK::SoundEngine::SetGameObjectAuxSendValues(id, &environment, 2);
+
+	//AkReal32 fObstruction = 10.5f;
+	//AkReal32 fOcclusion = 0.0f;
+	// In this case we compute and set the values for Listener 0 only. If you have multiple listeners,
+	// the values must be computed and set for each listener independently.
+	//AKRESULT eResult = AK::SoundEngine::SetObjectObstructionAndOcclusion(id, 0 /*listener*/, fObstruction, fOcclusion);
 }
