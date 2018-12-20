@@ -22,19 +22,21 @@
 			<Path>Assignment3.bnk</Path>
 			<IncludedEvents>
 				<Event Id="3841200954" Name="fireball" ObjectPath="\Events\Default Work Unit\fireball"/>
+				<Event Id="2607198564" Name="music_TheDillards_Dooley" ObjectPath="\Events\Default Work Unit\music_TheDillards_Dooley"/>
+				<Event Id="3585407402" Name="music_TheGrowlers_GoingGetsTuff" ObjectPath="\Events\Default Work Unit\music_TheGrowlers_GoingGetsTuff"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
+				<File Id="248768372" Language="SFX">
+					<ShortName>The Growlers-Going Gets Tuff MONO.wav</ShortName>
+					<Path>SFX\The Growlers-Going Gets Tuff MONO_56D34C19.wem</Path>
+				</File>
 				<File Id="270557088" Language="SFX">
 					<ShortName>Fireball_Impact.wav</ShortName>
 					<Path>SFX\Fireball_Impact_56D34C19.wem</Path>
 				</File>
-				<File Id="498058724" Language="SFX">
-					<ShortName>Combat_theme.wav</ShortName>
-					<Path>SFX\Combat_theme_56D34C19.wem</Path>
-				</File>
-				<File Id="992504696" Language="SFX">
-					<ShortName>Boss_theme.wav</ShortName>
-					<Path>SFX\Boss_theme_56D34C19.wem</Path>
+				<File Id="422655339" Language="SFX">
+					<ShortName>The Dillards - Dooley.wav</ShortName>
+					<Path>SFX\The Dillards - Dooley_56D34C19.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
