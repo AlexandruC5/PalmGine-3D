@@ -230,6 +230,11 @@ void WwiseT::AudioSource::ResumeEventByName(const char * name)
 	AK::SoundEngine::ExecuteActionOnEvent(name, AK::SoundEngine::AkActionOnEventType_Resume);
 }
 
+void WwiseT::AudioSource::SetVolume(float new_volume)
+{
+	AK::SoundEngine::SetGameObjectOutputBusVolume(id, AK_INVALID_GAME_OBJECT, new_volume);
+}
+
 void WwiseT::AudioSource::SetListener()
 {
 	AkGameObjectID tmp = id;

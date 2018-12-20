@@ -22,7 +22,7 @@ public:
 	bool GetBypassEffects()const;
 	bool GetPlayOnAwake()const;
 	bool isInLoop()const;
-	uint GetVolume()const;
+	float GetVolume()const;
 	bool isMono()const;
 	int GetPitch()const;
 	int GetStereoPan()const;
@@ -35,7 +35,7 @@ public:
 	void SetBypassEffects(bool must_bypass_effects);
 	void SetPlayOnAwake(bool must_play_on_awake);
 	void SetLoop(bool must_loop);
-	void SetVolume(uint desired_volume);
+	void SetVolume(float desired_volume);
 	void SetMono(bool must_mono);
 	void SetPitch(int desired_pitch);
 	void SetStereoPan(int desired_stereo_pan);
@@ -57,9 +57,9 @@ private:
 	bool bypass_effects = true;
 	bool play_on_awake = true;
 	bool loop = false;
-	uint volume = 1;
+	float volume = 1;
 	bool mono = false;
-	int pitch = 1;
+	int pitch = 0;
 	int stereo_pan = 0;
 	float min_distance = 1.0f;
 	float max_distance = 500.0f;

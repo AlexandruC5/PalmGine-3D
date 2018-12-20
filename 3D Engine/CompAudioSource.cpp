@@ -64,7 +64,7 @@ bool CompAudioSource::isInLoop()const
 {
 	return loop;
 }
-uint CompAudioSource::GetVolume()const
+float CompAudioSource::GetVolume()const
 {
 	return volume;
 }
@@ -110,9 +110,10 @@ void CompAudioSource::SetLoop(bool must_loop)
 {
 	loop = must_loop;
 }
-void CompAudioSource::SetVolume(uint desired_volume)
+void CompAudioSource::SetVolume(float desired_volume)
 {
 	volume = desired_volume;
+	source->SetVolume(desired_volume);
 }
 void CompAudioSource::SetMono(bool must_mono)
 {

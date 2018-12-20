@@ -56,6 +56,11 @@ bool ModuleSceneIntro::Start()
 	CompAudioSource* a_source = new CompAudioSource(camera, COMP_TYPE::C_AUDIO_SOURCE, "Source1");
 	camera->AddComponent(a_source);
 
+	GameObject* go = new GameObject(root_gameObjects);
+	go->GetCompTransform()->SetPosition(math::float3(10,10,10));
+	CompAudioSource* a_source2 = new CompAudioSource(camera, COMP_TYPE::C_AUDIO_SOURCE, "Source1");
+	go->AddComponent(a_source2);
+
 	if (game_running == true) 
 	{
 		in_game_timer.Start();
