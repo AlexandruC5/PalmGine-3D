@@ -31,7 +31,7 @@ update_status ModuleAudio::Update(float dt)
 	if ((App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN))
 	{
 		test2->PlayEventByName("train");
-		float vel = 12;
+		float vel = 5;
 		test2->ApplyEnvReverb(vel, "tunnel");
 	}
 	return UPDATE_CONTINUE;

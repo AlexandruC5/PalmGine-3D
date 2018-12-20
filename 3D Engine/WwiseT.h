@@ -12,6 +12,7 @@
 #pragma comment( lib, "AK/Release(StaticCRT)/lib/AkMusicEngine.lib")
 #pragma comment( lib, "AK/Release(StaticCRT)/lib/AkMemoryMgr.lib")
 #pragma comment( lib, "AK/Release(StaticCRT)/lib/AkStreamMgr.lib")
+#pragma comment( lib, "AK/Debug(StaticCRT)/lib/AkRoomVerbFX.lib")
 
 #else
 #include <AK/Comm/AkCommunication.h>
@@ -21,6 +22,7 @@
 #pragma comment( lib, "AK/Debug(StaticCRT)/lib/AkMusicEngine.lib" )
 #pragma comment( lib, "AK/Debug(StaticCRT)/lib/AkMemoryMgr.lib" )
 #pragma comment( lib, "AK/Debug(StaticCRT)/lib/AkStreamMgr.lib" )
+#pragma comment( lib, "AK/Debug(StaticCRT)/lib/AkRoomVerbFX.lib")
 
 #endif
 

@@ -4,9 +4,11 @@
 #include <AK/SoundEngine/Common/AkModule.h>						// Default memory and stream managers
 #include "AK/Win32/AkFilePackageLowLevelIOBlocking.h"			
 #include <AK/MusicEngine/Common/AkMusicEngine.h>                // Music Engine
+#include "MathGeoLib/MathGeoLib.h"
 #include <assert.h>
 #include <vector>
-#include "MathGeoLib/MathGeoLib.h"
+
+#include <AK/Plugin/AkRoomVerbFXFactory.h>
 
 CAkFilePackageLowLevelIOBlocking g_lowLevelIO;
 
@@ -124,6 +126,10 @@ bool WwiseT::InitSoundEngine()
 
 	// Load the init soundbank
 	LoadBank("Init.bnk");
+
+	AKRESULT res = AK::StreamMgr::SetCurrentLanguage((AkOSChar*)"English");
+	if (res == AK_Fail)
+		assert(!"Invalid language!");
 
 	return true;
 }
@@ -301,6 +307,7 @@ void WwiseT::AudioSource::SetPos(float pos_x, float pos_y, float pos_z, float fr
 
 void WwiseT::AudioSource::ApplyEnvReverb(AkReal32 desired_level, const char * target)
 {
+	AK::SoundEngine::GetGlobalPluginContext();
 	AkAuxSendValue environment;
 	environment.listenerID = id;
 	environment.fControlValue = desired_level;
