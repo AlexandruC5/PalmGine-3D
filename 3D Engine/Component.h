@@ -9,7 +9,8 @@ enum COMP_TYPE
 	C_TRANSFORM,
 	C_MATERIAL,
 	C_MESH,
-	C_CAMERA
+	C_CAMERA,
+	C_AUDIOLISTENER
 };
 
 class GameObject;

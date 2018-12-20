@@ -133,6 +133,7 @@
     <ClInclude Include="Assimp\include\vector3.h" />
     <ClInclude Include="Assimp\include\version.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="CompAudioListener.h" />
     <ClInclude Include="CompCamera.h" />
     <ClInclude Include="CompMaterial.h" />
     <ClInclude Include="CompMesh.h" />
@@ -257,6 +258,7 @@
     <ClCompile Include="AK\Win32\stdafx.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="CompAudioListener.cpp" />
     <ClCompile Include="CompCamera.cpp" />
     <ClCompile Include="CompMaterial.cpp" />
     <ClCompile Include="CompMesh.cpp" />

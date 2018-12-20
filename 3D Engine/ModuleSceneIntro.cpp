@@ -6,6 +6,7 @@
 #include "CompTransform.h"
 #include "CompMesh.h"
 #include "Component.h"
+#include "CompAudioListener.h"
 #include "MathGeoLib/MathGeoLib.h"
 #include <list>
 #include "Devil/include/il.h"
@@ -48,6 +49,7 @@ bool ModuleSceneIntro::Start()
 	camera->SetName("MainCamera");
 	CompCamera* cameracomp = new CompCamera(camera, COMP_TYPE::C_CAMERA);
 	camera->AddComponent(cameracomp);
+	camera->AddComponent(new CompAudioListener(camera, COMP_TYPE::C_AUDIOLISTENER));
 
 	if (game_running == true) 
 	{
