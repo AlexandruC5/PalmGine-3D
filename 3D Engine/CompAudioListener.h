@@ -3,8 +3,7 @@
 
 #include "Component.h"
 #include "Globals.h"
-#include <vector>
-#include "MathGeoLib/MathGeoLib.h"
+#include "WwiseT.h"
 
 class GameObject;
 

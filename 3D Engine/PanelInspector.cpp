@@ -7,6 +7,7 @@
 #include "CompMesh.h"
 #include "CompMaterial.h"
 #include "CompCamera.h"
+#include "CompAudioListener.h"
 #include "ImGuizmo-master/ImGuizmo.h"
 #include "ModuleInput.h"
 #include "GameObject.h"
@@ -57,6 +58,7 @@ void PanelInspector::Draw()
 			CompMesh* mesh = selected_go->GetCompMesh();
 			CompMaterial* texture = selected_go->GetCompMaterial();
 			CompCamera* camera = selected_go->GetCompCamera();
+			CompAudioListener* audio_listener = selected_go->GetCompAudioListener();
 
 			if (mesh != nullptr) {
 				//SetStatic
@@ -121,6 +123,11 @@ void PanelInspector::Draw()
 				}
 				else
 					LOG("ERROR: COMPONENT TRANSFORM IS NULLPTR on GameObject with name %s", selected_go->GetName().c_str());
+			}
+
+			if (audio_listener != nullptr)
+			{
+				ImGui::CollapsingHeader("Audio Listener");
 			}
 
 			if (mesh != nullptr)

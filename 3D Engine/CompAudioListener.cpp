@@ -1,6 +1,5 @@
 #include "CompAudioListener.h"
 #include "Application.h"
-#include "WwiseT.h"
 #include "ModuleAudio.h"
 
 CompAudioListener::CompAudioListener(GameObject * parent, COMP_TYPE type) : Component(parent, type)

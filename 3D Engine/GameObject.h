@@ -11,6 +11,7 @@ class CompMesh;
 class CompMaterial;
 class CompTransform;
 class CompCamera;
+class CompAudioListener;
 
 class GameObject
 {
@@ -50,6 +51,7 @@ public:
 	CompTransform* GetCompTransform() const;
 	CompMaterial* GetCompMaterial() const;
 	CompCamera* GetCompCamera() const;
+	CompAudioListener* GetCompAudioListener() const;
 	Component* AddEmptyComponent(COMP_TYPE type);
 	void AddComponent(Component* comp);
 

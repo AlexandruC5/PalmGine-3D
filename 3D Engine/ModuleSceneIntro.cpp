@@ -49,7 +49,8 @@ bool ModuleSceneIntro::Start()
 	camera->SetName("MainCamera");
 	CompCamera* cameracomp = new CompCamera(camera, COMP_TYPE::C_CAMERA);
 	camera->AddComponent(cameracomp);
-	camera->AddComponent(new CompAudioListener(camera, COMP_TYPE::C_AUDIOLISTENER));
+	CompAudioListener* a_listener =  new CompAudioListener(camera, COMP_TYPE::C_AUDIOLISTENER);
+	camera->AddComponent(a_listener);
 
 	if (game_running == true) 
 	{
