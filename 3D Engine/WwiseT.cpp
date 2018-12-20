@@ -158,6 +158,16 @@ void WwiseT::LoadBank(const char * path)
 	}
 }
 
+void WwiseT::SetDefaultListener(uint id)
+{
+	AkGameObjectID tmp = id;
+	AKRESULT eResult = AK::SoundEngine::SetDefaultListeners(&tmp, 1);
+	if (eResult != AK_Success)
+	{
+		assert(!"Could not set GameObject as default listerner.");
+	}
+}
+
 WwiseT::AudioSource* WwiseT::CreateAudSource(const char * name)
 {
 	AudioSource* src = nullptr;
@@ -194,9 +204,15 @@ void WwiseT::AudioSource::PlayEventByName(const char * name)
 
 void WwiseT::AudioSource::SetListener()
 {
-	AKRESULT eResult = AK::SoundEngine::SetDefaultListeners(&id, 1);
+	AkGameObjectID tmp = id;
+	AKRESULT eResult = AK::SoundEngine::SetListeners(id, &tmp, 1);
 	if (eResult != AK_Success)
 	{
 		assert(!"Could not set GameObject as listerner.");
 	}
+}
+
+uint WwiseT::AudioSource::GetID()
+{
+	return id;
 }

@@ -2,6 +2,8 @@
 #define WWISET_H_
 
 #include "Globals.h"
+#include <AK\SoundEngine\Platforms\Windows\AkTypes.h>
+
 // Wwise libs
 #ifndef _DEBUG  // Profile build configuration must be loaded instead of Debug
 #define AK_OPTIMIZED
@@ -48,9 +50,10 @@ namespace WwiseT
 
 		void PlayEventByName(const char* name);
 		void SetListener();
+		uint GetID();
 
 	private:
-		AkGameObjectID id;
+		uint id;
 		const char* name = nullptr;
 	};
 
@@ -58,7 +61,7 @@ namespace WwiseT
 	bool CloseSoundEngine(); // Close wwise
 	void ProcessAudio();
 	void LoadBank(const char* path);
-	
+	void SetDefaultListener(uint id);
 	// Utils
 	AudioSource* CreateAudSource(const char* name);
 }
