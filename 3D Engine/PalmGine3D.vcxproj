@@ -134,6 +134,7 @@
     <ClInclude Include="Assimp\include\version.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="CompAudioListener.h" />
+    <ClInclude Include="CompAudioSource.h" />
     <ClInclude Include="CompCamera.h" />
     <ClInclude Include="CompMaterial.h" />
     <ClInclude Include="CompMesh.h" />
@@ -259,6 +260,7 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="CompAudioListener.cpp" />
+    <ClCompile Include="CompAudioSource.cpp" />
     <ClCompile Include="CompCamera.cpp" />
     <ClCompile Include="CompMaterial.cpp" />
     <ClCompile Include="CompMesh.cpp" />

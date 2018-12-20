@@ -5,6 +5,7 @@
 #include "CompMaterial.h"
 #include "CompCamera.h"
 #include "CompAudioListener.h"
+#include "CompAudioSource.h"
 #include "imGUI/imgui.h"
 #include "Application.h"
 #include "ModuleSceneIntro.h"
@@ -198,6 +199,11 @@ CompCamera* GameObject::GetCompCamera() const
 CompAudioListener* GameObject::GetCompAudioListener() const 
 {
 	return (CompAudioListener*)FindComponent(COMP_TYPE::C_AUDIOLISTENER);
+}
+
+CompAudioSource* GameObject::GetCompAudioSource() const
+{
+	return (CompAudioSource*)FindComponent(COMP_TYPE::C_AUDIO_SOURCE);
 }
 
 Component * GameObject::AddEmptyComponent(COMP_TYPE type)

@@ -562,6 +562,9 @@
     <ClInclude Include="CompAudioListener.h">
       <Filter>Sources\Modules\Scene\Components</Filter>
     </ClInclude>
+    <ClInclude Include="CompAudioSource.h">
+      <Filter>Sources\Modules\Scene\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -824,6 +827,9 @@
       <Filter>Sources\Tools\wwise</Filter>
     </ClCompile>
     <ClCompile Include="CompAudioListener.cpp">
+      <Filter>Sources\Modules\Scene\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CompAudioSource.cpp">
       <Filter>Sources\Modules\Scene\Components</Filter>
     </ClCompile>
   </ItemGroup>
