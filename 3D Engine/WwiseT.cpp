@@ -278,3 +278,13 @@ void WwiseT::AudioSource::SetPos(float pos_x, float pos_y, float pos_z, float fr
 	position.Set(ak_pos, ak_rot_front, ak_rot_top);
 	AK::SoundEngine::SetPosition(id, position);
 }
+
+void WwiseT::AudioSource::ApplyEnvReverb(AkReal32 desired_level, const char * target)
+{
+	AkAuxSendValue environment;
+	environment.listenerID = id;
+	environment.fControlValue = desired_level;
+	environment.auxBusID = AK::SoundEngine::GetIDFromString(target);
+
+	AKRESULT res = AK::SoundEngine::SetGameObjectAuxSendValues(id, &environment, 1);
+}
