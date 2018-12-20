@@ -20,7 +20,8 @@ bool ModuleAudio::Start()
 	
 	//TODO delete test sound
 	test2 = WwiseT::CreateAudSource("test");
-	test2->SetListener();
+	WwiseT::SetDefaultListener(test2->GetID());
+	//test2->SetListener();
 	return true;
 }
 
