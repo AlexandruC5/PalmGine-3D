@@ -4,6 +4,7 @@
 #include "Globals.h"
 #include <AK\SoundEngine\Platforms\Windows\AkTypes.h>
 
+
 // Wwise libs
 #ifndef _DEBUG  // Profile build configuration must be loaded instead of Debug
 #define AK_OPTIMIZED
@@ -51,10 +52,12 @@ namespace WwiseT
 		void PlayEventByName(const char* name);
 		void SetListener();
 		uint GetID();
+		void SetPos(float pos_x, float pos_y, float pos_z, float front_rot_x, float front_rot_y, float front_rot_z, float top_rot_x, float top_rot_y, float top_rot_z);
 
 	private:
 		uint id;
-		const char* name = nullptr;
+		const char* name = nullptr; // Event name
+		AkSoundPosition position;
 	};
 
 	bool InitSoundEngine();
