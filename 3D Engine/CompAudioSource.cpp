@@ -64,6 +64,10 @@ bool CompAudioSource::isInLoop()const
 {
 	return loop;
 }
+int CompAudioSource::GetPriority()const
+{
+	return priority;
+}
 float CompAudioSource::GetVolume()const
 {
 	return volume;
@@ -115,6 +119,10 @@ void CompAudioSource::SetPlayOnAwake(bool must_play_on_awake)
 void CompAudioSource::SetLoop(bool must_loop)
 {
 	loop = must_loop;
+}
+void CompAudioSource::SetPriority(int desired_priority) 
+{
+	priority = desired_priority;
 }
 void CompAudioSource::SetVolume(float desired_volume)
 {

@@ -228,6 +228,11 @@ void PanelInspector::Draw()
 						audio_source->SetLoop(loop);
 					}
 
+					int priority = audio_source->GetPriority();
+					if (ImGui::SliderInt("Priority", &priority, 1, 100)) {
+						audio_source->SetPriority(priority);
+					}
+
 					float volume = audio_source->GetVolume();
 					if (ImGui::SliderFloat("Volume", &volume, 0,1)) {
 						audio_source->SetVolume(volume);
@@ -244,7 +249,7 @@ void PanelInspector::Draw()
 					}
 
 					int stereo_pan = audio_source->GetStereoPan();
-					if (ImGui::SliderInt("Stereo Pan", &stereo_pan, -1, 1)) {
+					if (ImGui::SliderInt("Stereo Pan", &stereo_pan, 0, 1)) {
 						audio_source->SetStereoPan(stereo_pan);
 					}
 

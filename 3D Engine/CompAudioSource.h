@@ -22,6 +22,7 @@ public:
 	bool GetBypassEffects()const;
 	bool GetPlayOnAwake()const;
 	bool isInLoop()const;
+	int GetPriority()const;
 	float GetVolume()const;
 	bool isMono()const;
 	int GetPitch()const;
@@ -35,6 +36,7 @@ public:
 	void SetBypassEffects(bool must_bypass_effects);
 	void SetPlayOnAwake(bool must_play_on_awake);
 	void SetLoop(bool must_loop);
+	void SetPriority(int desired_priority);
 	void SetVolume(float desired_volume);
 	void SetMono(bool must_mono);
 	void SetPitch(int desired_pitch);
@@ -57,6 +59,7 @@ private:
 	bool bypass_effects = true;
 	bool play_on_awake = true;
 	bool loop = false;
+	int priority = 50;
 	float volume = 1;
 	bool mono = false;
 	int pitch = 0;
