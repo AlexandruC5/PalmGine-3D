@@ -19,7 +19,7 @@ void CompAudioSource::Update(float dt)
 {
 	UpdateSourcePos();
 
-	if (audio_to_play != "") {
+	if (audio_to_play != "" && loop == true) {
 		source->PlayEventByName(audio_to_play);
 	}
 
@@ -133,4 +133,19 @@ void CompAudioSource::SetMinDistance(float desired_min_distance)
 void CompAudioSource::SetMaxDistance(float desired_max_distance)
 {
 	max_distance = desired_max_distance;
+}
+
+void CompAudioSource::PlayAudio()
+{
+	source->PlayEventByName(audio_to_play);
+}
+
+void CompAudioSource::PauseAudio()
+{
+	//TODO do this
+}
+
+void CompAudioSource::StopAudio()
+{
+	//TODO do this
 }

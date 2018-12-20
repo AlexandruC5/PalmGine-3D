@@ -200,6 +200,18 @@ void PanelInspector::Draw()
 						audio_source->SetAudio(text);
 					}
 
+					if (ImGui::Button("Play")) {
+						audio_source->PlayAudio();
+					}
+					ImGui::SameLine();
+					if (ImGui::Button("Pause")) {
+						audio_source->PlayAudio();
+					}
+					ImGui::SameLine();
+					if (ImGui::Button("Stop")) {
+						audio_source->PlayAudio();
+					}
+
 					bool muted = audio_source->isMuted();
 					if (ImGui::Checkbox("Mute", &muted)) {
 						audio_source->SetMuted(muted);

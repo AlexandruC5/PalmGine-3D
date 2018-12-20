@@ -42,12 +42,16 @@ public:
 	void SetMinDistance(float desired_min_distance);
 	void SetMaxDistance(float desired_max_distance);
 
+	void PlayAudio();
+	void PauseAudio();
+	void StopAudio();
+
 public:
 	WwiseT::AudioSource* source;
 	uint audio_source_id;
 
 private:
-	const char* audio_to_play = "";
+	const char* audio_to_play = "fireball";
 	bool mute = false;
 	bool bypass_effects = true;
 	bool play_on_awake = true;
