@@ -12,6 +12,9 @@ class CompAudioListener : public Component
 public:
 	CompAudioListener(GameObject* parent, COMP_TYPE type);
 	~CompAudioListener();
+	void Update(float dt);
+
+	void UpdateListenerPos();
 
 public:
 	WwiseT::AudioSource* listener;
