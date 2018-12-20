@@ -16,12 +16,49 @@ public:
 
 	void UpdateSourcePos();
 
+	//Getters
+	const char* GetAudioToPlay() const;
+	bool isMuted()const;
+	bool GetBypassEffects()const;
+	bool GetPlayOnAwake()const;
+	bool isInLoop()const;
+	uint GetVolume()const;
+	bool isMono()const;
+	int GetPitch()const;
+	int GetStereoPan()const;
+	float GetMinDistance()const;
+	float GetMaxDistance()const;
+
+	//Seters
 	void SetAudio(const char* audio);
+	void SetMuted(bool must_mute);
+	void SetBypassEffects(bool must_bypass_effects);
+	void SetPlayOnAwake(bool must_play_on_awake);
+	void SetLoop(bool must_loop);
+	void SetVolume(uint desired_volume);
+	void SetMono(bool must_mono);
+	void SetPitch(int desired_pitch);
+	void SetStereoPan(int desired_stereo_pan);
+	void SetMinDistance(float desired_min_distance);
+	void SetMaxDistance(float desired_max_distance);
 
 public:
 	WwiseT::AudioSource* source;
 	uint audio_source_id;
+
+private:
 	const char* audio_to_play;
+	bool mute = false;
+	bool bypass_effects = true;
+	bool play_on_awake = true;
+	bool loop = false;
+	uint volume = 1;
+	bool mono = false;
+	int pitch = 1;
+	int stereo_pan = 0;
+	float min_distance = 1.0f;
+	float max_distance = 500.0f;
+
 };
 
 #endif // !COMAUDIOSOURCE_H
