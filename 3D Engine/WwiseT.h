@@ -2,8 +2,8 @@
 #define WWISET_H_
 
 #include "Globals.h"
-#include <AK\SoundEngine\Platforms\Windows\AkTypes.h>
-
+#include "AK\Common\AkTypes.h"
+//#include <AK\SoundEngine\Platforms\Windows\AkTypes.h>
 
 // Wwise libs
 #ifndef _DEBUG  // Profile build configuration must be loaded instead of Debug
