@@ -25,7 +25,7 @@ public:
 	int GetPriority()const;
 	float GetVolume()const;
 	bool isMono()const;
-	int GetPitch()const;
+	float GetPitch()const;
 	int GetStereoPan()const;
 	float GetMinDistance()const;
 	float GetMaxDistance()const;
@@ -39,7 +39,7 @@ public:
 	void SetPriority(int desired_priority);
 	void SetVolume(float desired_volume);
 	void SetMono(bool must_mono);
-	void SetPitch(int desired_pitch);
+	void SetPitch(float desired_pitch);
 	void SetStereoPan(int desired_stereo_pan);
 	void SetMinDistance(float desired_min_distance);
 	void SetMaxDistance(float desired_max_distance);
@@ -63,7 +63,7 @@ private:
 	int priority = 50;
 	float volume = 1;
 	bool mono = false;
-	int pitch = 0;
+	float pitch = 0.0f;
 	int stereo_pan = 0;
 	float min_distance = 1.0f;
 	float max_distance = 500.0f;

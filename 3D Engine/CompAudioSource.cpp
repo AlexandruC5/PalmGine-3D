@@ -77,7 +77,7 @@ bool CompAudioSource::isMono()const
 {
 	return mono;
 }
-int CompAudioSource::GetPitch()const
+float CompAudioSource::GetPitch()const
 {
 	return pitch;
 }
@@ -142,9 +142,10 @@ void CompAudioSource::SetMono(bool must_mono)
 		source->SetStereo();
 	}
 }
-void CompAudioSource::SetPitch(int desired_pitch)
+void CompAudioSource::SetPitch(float desired_pitch)
 {
 	pitch = desired_pitch;
+	source->SetPitch(pitch);
 }
 void CompAudioSource::SetStereoPan(int desired_stereo_pan)
 {

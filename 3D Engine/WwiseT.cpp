@@ -251,7 +251,7 @@ void WwiseT::AudioSource::SetMono()
 	AkChannelConfig cfg;
 	cfg.SetStandard(AK_SPEAKER_SETUP_MONO);
 	AK::SoundEngine::SetBusConfig(id, cfg);
-	//cfg.Clear();
+	cfg.Clear();
 }
 
 void WwiseT::AudioSource::SetStereo()
@@ -260,6 +260,11 @@ void WwiseT::AudioSource::SetStereo()
 	cfg.SetStandard(AK_SPEAKER_SETUP_STEREO);
 	AK::SoundEngine::SetBusConfig(id, cfg);
 	cfg.Clear();
+}
+
+void WwiseT::AudioSource::SetPitch(float value) {
+	//TODO Correct this
+	AK::SoundEngine::SetRTPCValue("Pitch", value, id);
 }
 
 void WwiseT::AudioSource::SetListener()

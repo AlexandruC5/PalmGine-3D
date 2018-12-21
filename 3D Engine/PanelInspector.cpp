@@ -243,8 +243,8 @@ void PanelInspector::Draw()
 						audio_source->SetMono(mono);
 					}
 
-					int pitch = audio_source->GetPitch();
-					if (ImGui::SliderInt("Pitch", &pitch, -3, 3)) {
+					float pitch = audio_source->GetPitch();
+					if (ImGui::SliderFloat("Pitch", &pitch, -3, 3)) {
 						audio_source->SetPitch(pitch);
 					}
 
