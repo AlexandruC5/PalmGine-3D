@@ -17,7 +17,7 @@ public:
 	void UpdateSourcePos();
 
 	//Getters
-	const char* GetAudioToPlay() const;
+	std::string GetAudioToPlay() const;
 	bool isMuted()const;
 	bool GetBypassEffects()const;
 	bool GetPlayOnAwake()const;
@@ -54,7 +54,8 @@ public:
 	uint audio_source_id;
 
 private:
-	const char* audio_to_play = "music_TheGrowlers_GoingGetsTuff";
+	//const char* audio_to_play = "music_TheGrowlers_GoingGetsTuff";
+	std::string audio_to_play = "music_TheGrowlers_GoingGetsTuff";
 	bool mute = false;
 	bool bypass_effects = true;
 	bool play_on_awake = true;

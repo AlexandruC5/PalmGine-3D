@@ -13,6 +13,7 @@ CompAudioSource::CompAudioSource(GameObject * parent, COMP_TYPE type, const char
 CompAudioSource::~CompAudioSource()
 {
 	delete source;
+	audio_to_play.clear();
 }
 
 void CompAudioSource::Update(float dt)
@@ -20,7 +21,7 @@ void CompAudioSource::Update(float dt)
 	UpdateSourcePos();
 
 	if (audio_to_play != "" && loop == true) {
-		source->PlayEventByName(audio_to_play);
+		source->PlayEventByName(audio_to_play.c_str());
 	}
 
 }
@@ -44,7 +45,7 @@ void CompAudioSource::UpdateSourcePos()
 }
 
 //Getters
-const char* CompAudioSource::GetAudioToPlay() const
+std::string CompAudioSource::GetAudioToPlay() const
 {
 	return audio_to_play;
 }
@@ -134,6 +135,12 @@ void CompAudioSource::SetVolume(float desired_volume)
 void CompAudioSource::SetMono(bool must_mono)
 {
 	mono = must_mono;
+	if (mono == true) {
+		source->SetMono();
+	}
+	else {
+		source->SetStereo();
+	}
 }
 void CompAudioSource::SetPitch(int desired_pitch)
 {
@@ -154,20 +161,20 @@ void CompAudioSource::SetMaxDistance(float desired_max_distance)
 
 void CompAudioSource::PlayAudio()
 {
-	source->PlayEventByName(audio_to_play);
+	source->PlayEventByName(audio_to_play.c_str());
 }
 
 void CompAudioSource::PauseAudio()
 {
-	source->PauseEventByName(audio_to_play);
+	source->PauseEventByName(audio_to_play.c_str());
 }
 
 void CompAudioSource::ResumeAudio()
 {
-	source->ResumeEventByName(audio_to_play);
+	source->ResumeEventByName(audio_to_play.c_str());
 }
 
 void CompAudioSource::StopAudio()
 {
-	source->StopEventByName(audio_to_play);
+	source->StopEventByName(audio_to_play.c_str());
 }

@@ -195,7 +195,7 @@ void PanelInspector::Draw()
 			if (audio_source != nullptr) {
 				if (ImGui::CollapsingHeader("Audio Source")) {
 					char text[100];
-					strcpy_s(text, 100, audio_source->GetAudioToPlay());
+					strcpy_s(text, 100, audio_source->GetAudioToPlay().c_str());
 					if (ImGui::InputText("AudioClip", text, 100, ImGuiInputTextFlags_AutoSelectAll | ImGuiInputTextFlags_EnterReturnsTrue)) {
 						audio_source->SetAudio(text);
 					}

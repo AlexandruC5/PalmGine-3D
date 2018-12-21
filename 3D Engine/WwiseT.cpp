@@ -246,6 +246,22 @@ void WwiseT::AudioSource::SetVolume(float new_volume)
 	AK::SoundEngine::SetGameObjectOutputBusVolume(id, AK_INVALID_GAME_OBJECT, new_volume);
 }
 
+void WwiseT::AudioSource::SetMono()
+{
+	AkChannelConfig cfg;
+	cfg.SetStandard(AK_SPEAKER_SETUP_MONO);
+	AK::SoundEngine::SetBusConfig(id, cfg);
+	//cfg.Clear();
+}
+
+void WwiseT::AudioSource::SetStereo()
+{
+	AkChannelConfig cfg;
+	cfg.SetStandard(AK_SPEAKER_SETUP_STEREO);
+	AK::SoundEngine::SetBusConfig(id, cfg);
+	cfg.Clear();
+}
+
 void WwiseT::AudioSource::SetListener()
 {
 	AkGameObjectID tmp = id;
