@@ -21,7 +21,7 @@ under the Apache License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
 OR CONDITIONS OF ANY KIND, either express or implied. See the Apache License for
 the specific language governing permissions and limitations under the License.
 
-  Version: v2018.1.4  Build: 6807
+  Version: v2017.2.6  Build: 6636
   Copyright (c) 2006-2018 Audiokinetic Inc.
 *******************************************************************************/
 
@@ -57,9 +57,9 @@ struct AkArrayAllocatorNoAlign
 		AK::MemoryMgr::Free( U_POOL::Get(), in_pAddress );
 	}
 
-	AkForceInline void TransferMem(void ** io_pDest, AkArrayAllocatorNoAlign<U_POOL> in_srcAlloc, void * in_pSrc ) 
+	AkForceInline void TransferMem(void *& io_pDest, AkArrayAllocatorNoAlign<U_POOL> in_srcAlloc, void * in_pSrc ) 
 	{
-		(*io_pDest) = in_pSrc;
+		io_pDest = in_pSrc;
 	}
 };
 
@@ -76,9 +76,9 @@ struct AkArrayAllocatorAlignedSimd
 		AK::MemoryMgr::Falign( U_POOL::Get(), in_pAddress );
 	}
 
-	AkForceInline void TransferMem(void ** io_pDest, AkArrayAllocatorAlignedSimd<U_POOL> in_srcAlloc, void * in_pSrc ) 
+	AkForceInline void TransferMem(void *& io_pDest, AkArrayAllocatorAlignedSimd<U_POOL> in_srcAlloc, void * in_pSrc ) 
 	{
-		(*io_pDest) = in_pSrc;
+		io_pDest = in_pSrc;
 	}
 
 };
@@ -106,16 +106,16 @@ struct AkHybridAllocator
 			AK::MemoryMgr::Falign(g_DefaultPoolId, in_pAddress);
 	}
 
-	AkForceInline void TransferMem(void ** io_pDest, AkHybridAllocator<uBufferSizeBytes, uAlignmentSize>& in_srcAlloc, void * in_pSrc)
+	AkForceInline void TransferMem(void *& io_pDest, AkHybridAllocator<uBufferSizeBytes, uAlignmentSize>& in_srcAlloc, void * in_pSrc)
 	{
 		if (&in_srcAlloc.m_buffer == in_pSrc)
 		{
 			AKPLATFORM::AkMemCpy(m_buffer, in_srcAlloc.m_buffer, uBufferSizeBytes);
-			(*io_pDest) = m_buffer;
+			io_pDest = m_buffer;
 		}
 		else
 		{
-			(*io_pDest) = in_pSrc;
+			io_pDest = in_pSrc;
 		}
 	}
 	
@@ -175,22 +175,6 @@ public:
 	struct Iterator
 	{
 		T* pItem;	///< Pointer to the item in the array.
-
-		/// + operator
-		Iterator operator+(AkUInt32 inc) const
-		{
-			AKASSERT( pItem );
-			Iterator returnedIt;
-			returnedIt.pItem = pItem + inc;
-			return returnedIt;
-		}
-
-        /// - operator
-        AkUInt32 operator-(Iterator const& rhs) const
-        {
-			AKASSERT((pItem && rhs.pItem)||(!pItem && !rhs.pItem));
-			return (AkUInt32)(pItem - rhs.pItem);
-        }
 
 		/// ++ operator
 		Iterator& operator++()
@@ -383,12 +367,6 @@ public:
 	AkForceInline AkUInt32 Length() const
 	{
 		return m_uLength;
-	}
-
-	/// Returns a pointer to the first item in the array.
-	AkForceInline T * Data() const
-	{
-		return m_pItems;
 	}
 
 	/// Returns true if the number items in the array is 0, false otherwise.
@@ -614,7 +592,7 @@ public:
 	{
 		Term();
 
-		TAlloc::TransferMem( (void **)&m_pItems, in_rSource, (void*)in_rSource.m_pItems );
+		TAlloc::TransferMem( (void*&)m_pItems, in_rSource, (void*)in_rSource.m_pItems );
 		m_uLength = in_rSource.m_uLength;
 		m_ulReserved = in_rSource.m_ulReserved;
 

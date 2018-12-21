@@ -21,7 +21,7 @@ under the Apache License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
 OR CONDITIONS OF ANY KIND, either express or implied. See the Apache License for
 the specific language governing permissions and limitations under the License.
 
-  Version: v2018.1.4  Build: 6807
+  Version: v2017.2.6  Build: 6636
   Copyright (c) 2006-2018 Audiokinetic Inc.
 *******************************************************************************/
 
@@ -130,11 +130,11 @@ namespace AK
 			ErrorCode_SeekAfterEof,
 
 			ErrorCode_UnknownGameObject,
-			ErrorCode_UnknownEmitter,			//Deprecated
+			ErrorCode_UnknownEmitter, 
 			ErrorCode_UnknownListener, 
 			ErrorCode_GameObjectIsNotListener,
 			ErrorCode_GameObjectIsNotEmitter,
-			ErrorCode_UnknownGameObjectEvent,	//Deprecated
+			ErrorCode_UnknownGameObjectEvent,
 			ErrorCode_GameObjectIsNotEmitterEvent,
 
 			ErrorCode_ExternalSourceNotResolved,
@@ -162,9 +162,6 @@ namespace AK
 			ErrorCode_AudioDeviceShareSetNotFound,
 
 			ErrorCode_NotEnoughMemoryToStart,
-			ErrorCode_UnkownOpusError,
-
-			ErrorCode_AudioDeviceInitFailure,
 
 			Num_ErrorCodes // THIS STAYS AT END OF ENUM
 		};
@@ -259,9 +256,9 @@ namespace AK
 			AKTEXT("No error"), // ErrorCode_NoError
 			AKTEXT("File not found"), // ErrorCode_FileNotFound,
 			AKTEXT("Cannot open file"), // ErrorCode_CannotOpenFile,
-			AKTEXT("Not enough memory in I/O pool to start stream"), // ErrorCode_CannotStartStreamNoMemory,
-			AKTEXT("Unknown I/O device error"), // ErrorCode_IODevice,
-			AKTEXT("I/O settings incompatible."), // ErrorCode_IncompatibleIOSettings
+			AKTEXT("Not enough memory to start stream"), // ErrorCode_CannotStartStreamNoMemory,
+			AKTEXT("IO device error"), // ErrorCode_IODevice,
+			AKTEXT("IO settings incompatible with user requirements"), // ErrorCode_IncompatibleIOSettings
 
 			AKTEXT("Plug-in unsupported channel configuration"), // ErrorCode_PluginUnsupportedChannelConfiguration,
 			AKTEXT("Plug-in media unavailable"), // ErrorCode_PluginMediaUnavailable,
@@ -289,7 +286,7 @@ AKTEXT("File or loop region is too small to be played properly"), // ErrorCode_F
 
 AKTEXT("Transition not sample-accurate due to mixed channel configurations"), // ErrorCode_TransitionNotAccurateChannel,
 AKTEXT("Transition not sample-accurate due to source starvation"), // ErrorCode_TransitionNotAccurateStarvation,
-AKTEXT("Nothing to play in Dynamic Sequence"), // ErrorCode_NothingToPlay, 
+AKTEXT("Nothing to play"), // ErrorCode_NothingToPlay, 
 AKTEXT("Play Failed"), // ErrorCode_PlayFailed,	// Notification meaning the play asked was not done for an out of control reason
 // For example, if The Element has a missing source file.
 
@@ -311,7 +308,7 @@ AKTEXT("XMA decoder starvation"), // ErrorCode_XMADecoderSourceStarving,
 AKTEXT("XMA decoding error"), // ErrorCode_XMADecodingError
 AKTEXT("Invalid XMA data - Make sure data is allocated from APU memory and is aligned to 2K."), // ErrorCode_InvalidXMAData
 
-AKTEXT("Plug-in not found"), // ErrorCode_PluginNotRegistered,
+AKTEXT("Plug-in not registered"), // ErrorCode_PluginNotRegistered,
 AKTEXT("Codec plug-in not registered"), // ErrorCode_CodecNotRegistered,
 AKTEXT("Plug-in version doesn't match sound engine version.  Please ensure the plug-in is compatible with this version of Wwise"), //ErrorCode_PluginVersionMismatch
 
@@ -372,8 +369,6 @@ AKTEXT("Number of Resume and/or Play-From-Beginning virtual voices has reached w
 AKTEXT("AK::SoundEngine::AddOutput() - Device ShareSet not found in Init bank."),	//ErrorCode_AudioDeviceShareSetNotFound
 
 AKTEXT("Not enough memory to start sound."),	//ErrorCode_NotEnoughMemoryToStart
-AKTEXT("Error while decoding Opus header."),	//ErrorCode_UnkownOpusError
-AKTEXT("The Output Device specified by AddOutput() or Init() could not be initialized."), //ErrorCode_AudioDeviceInitFailure
 
 		};
 	}

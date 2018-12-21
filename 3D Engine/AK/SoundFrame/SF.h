@@ -21,7 +21,7 @@ under the Apache License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
 OR CONDITIONS OF ANY KIND, either express or implied. See the Apache License for
 the specific language governing permissions and limitations under the License.
 
-  Version: v2018.1.4  Build: 6807
+  Version: v2017.2.6  Build: 6636
   Copyright (c) 2006-2018 Audiokinetic Inc.
 *******************************************************************************/
 
@@ -407,7 +407,7 @@ namespace AK
 			/// This function is thread-safe. 			
 			/// \return	True if the operation was successful, False otherwise
 			/// \sa
-			/// - AK::SoundEngine::SetScalingFactor()
+			/// - AK::SoundEngine::SetAttenuationScalingFactor()
 			virtual bool SetAttenuationScalingFactor(
 				AkGameObjectID in_GameObjectID,				///< Game object identifier
 				AkReal32 in_fAttenuationScalingFactor		///< Scaling Factor, 1 means 100%, 0.5 means 50%, 2 means 200%, and so on.

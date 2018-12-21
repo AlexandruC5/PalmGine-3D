@@ -21,7 +21,7 @@ under the Apache License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
 OR CONDITIONS OF ANY KIND, either express or implied. See the Apache License for
 the specific language governing permissions and limitations under the License.
 
-  Version: v2018.1.4  Build: 6807
+  Version: v2017.2.6  Build: 6636
   Copyright (c) 2006-2018 Audiokinetic Inc.
 *******************************************************************************/
 
@@ -63,7 +63,6 @@ the specific language governing permissions and limitations under the License.
 #include <AK/Plugin/AkAudioInputSourceFactory.h>				// Audio input
 #include <AK/Plugin/AkSynthOneSourceFactory.h>					// SynthOne
 #include <AK/Plugin/AkMotionGeneratorSourceFactory.h>
-#include <AK/Plugin/AkMotionSourceSourceFactory.h>
 
 // Required by codecs plug-ins
 #include <AK/Plugin/AkVorbisDecoderFactory.h>
@@ -71,7 +70,7 @@ the specific language governing permissions and limitations under the License.
 #include <AK/Plugin/AkAACFactory.h>			// Note: Useable only on Apple devices. Ok to include it on other platforms as long as it is not referenced.
 #endif
 #ifdef AK_NX
-#include <AK/Plugin/AkOpusNXFactory.h>		// Note: Useable only on NX. Ok to include it on other platforms as long as it is not referenced.
+#include <AK/Plugin/AkOpusFactory.h>		// Note: Useable only on NX. Ok to include it on other platforms as long as it is not referenced.
 #endif
 
 #if (defined AK_WIN || defined AK_PS4 || defined AK_XBOXONE || defined AK_NX || (defined AK_ANDROID && !defined AK_LUMIN)) 

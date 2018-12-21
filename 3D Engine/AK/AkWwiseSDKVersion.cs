@@ -21,7 +21,7 @@ under the Apache License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
 OR CONDITIONS OF ANY KIND, either express or implied. See the Apache License for
 the specific language governing permissions and limitations under the License.
 
-  Version: v2018.1.4  Build: 6807
+  Version: v2017.2.6  Build: 6636
   Copyright (c) 2006-2018 Audiokinetic Inc.
 *******************************************************************************/
 
@@ -39,22 +39,22 @@ namespace AK
 			/// <summary>
 			/// Wwise SDK major version
 			/// </summary>
-            public const int Major = 2018;
+            public const int Major = 2017;
 
 			/// <summary>
 			/// Wwise SDK minor version
 			/// </summary>
-            public const int Minor = 1;
+            public const int Minor = 2;
 
 			/// <summary>
 			/// Wwise SDK sub-minor version
 			/// </summary>
-            public const int SubMinor = 4;
+            public const int SubMinor = 6;
 
 			/// <summary>
 			/// Wwise SDK build number
 			/// </summary>
-            public const int Build = 6807;
+            public const int Build = 6636;
 			
 			/// <summary>
 			/// Wwise SDK build nickname
@@ -79,12 +79,12 @@ namespace AK
             /// <summary>
             /// String representing the Wwise SDK version
             /// </summary>
-            public const string AssemblyVersion = "2018.1.4.6807";
+            public const string AssemblyVersion = "2017.2.6.6636";
 
 			/// <summary>
 			/// String representing the Wwise SDK copyright notice
 			/// </summary>
-            public const string CopyrightNotice = "\xA9 2006-2018. Audiokinetic Inc. All rights reserved.";
+            public const string CopyrightNotice = "\xA9 2006-2017. Audiokinetic Inc. All rights reserved.";
 
             #endregion Wwise SDK Version - String values
         }

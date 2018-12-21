@@ -21,7 +21,7 @@ under the Apache License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
 OR CONDITIONS OF ANY KIND, either express or implied. See the Apache License for
 the specific language governing permissions and limitations under the License.
 
-  Version: v2018.1.4  Build: 6807
+  Version: v2017.2.6  Build: 6636
   Copyright (c) 2006-2018 Audiokinetic Inc.
 *******************************************************************************/
 
@@ -642,8 +642,6 @@ namespace AK
 			virtual IPluginMediaConverter* GetPluginMediaConverterInterface() { return NULL; }
 			virtual AK::Wwise::LicenseStatus GetLicenseStatus(const GUID &, AK::Wwise::Severity&, LPWSTR, unsigned int in_uiBufferSize){ return AK::Wwise::LicenseStatus_Valid; }
 			virtual bool GetSourceDuration( double& out_dblMinDuration, double& out_dblMaxDuration ) const { out_dblMinDuration = 0.f; out_dblMaxDuration = FLT_MAX; return false; }
-			virtual HINSTANCE GetResourceHandle() const { return NULL; }
-			virtual bool GetDialog(eDialog in_eDialog, UINT& out_uiDialogID, PopulateTableItem*& out_pTable) const { return false; }
 		};
 
 		typedef AKRESULT(CALLBACK* RegisterWwisePluginFn)(AK::PluginRegistration *in_pList);

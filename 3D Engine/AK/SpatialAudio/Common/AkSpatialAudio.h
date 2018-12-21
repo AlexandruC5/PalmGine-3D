@@ -21,7 +21,7 @@ under the Apache License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
 OR CONDITIONS OF ANY KIND, either express or implied. See the Apache License for
 the specific language governing permissions and limitations under the License.
 
-Version: v2018.1.4  Build: 6807
+Version: v2017.2.6  Build: 6636
 Copyright (c) 2006-2018 Audiokinetic Inc.
 *******************************************************************************/
 
@@ -123,18 +123,29 @@ struct AkEmitterSettings
 						, reflectionsOrder(1)
 						, reflectorFilterMask(0xFFFFFFFF)
 						, roomReverbAuxBusGain(1.0f)
-						, diffractionMaxEdges(0)
-						, diffractionMaxPaths(8)
-						, diffractionMaxPathLength(kDefaultMaxPathLength)
 	{
 		useImageSources = true;
+	}
+
+	/// Operator =
+	AkEmitterSettings& operator =(const AkEmitterSettings & src)
+	{
+		name = src.name;
+		reflectAuxBusID = src.reflectAuxBusID;
+		reflectionMaxPathLength = src.reflectionMaxPathLength;
+		reflectionsAuxBusGain = src.reflectionsAuxBusGain;
+		reflectionsOrder = src.reflectionsOrder;
+		reflectorFilterMask = src.reflectorFilterMask;
+		roomReverbAuxBusGain = src.roomReverbAuxBusGain;
+		useImageSources = src.useImageSources;
+		return *this;
 	}
 
 	/// Name given to this sound emitter.
 	AK::SpatialAudio::OsString name;
 
 	/// Aux bus with the AkReflect plug-in that is used by the geometric reflections API. Set to AK_INVALID_UNIQUE_ID to disable geometric reflections.
-	/// \aknote For proper operation with AkReflect and the SpatialAudio API, any aux bus using AkReflect should have 'Listener Relative Routing' checked and the 3D Spatialization set to None in the Wwise authoring tool. See \ref spatial_audio_wwiseprojectsetup_businstances for more details. \endaknote
+	/// \aknote For proper operation with AkReflect and the SpatialAudio API, any aux bus using AkReflect should have 'Enable Positioning' checked and the positioning type should be set to 2D in the Wwise authoring tool. See the Wwise Reflect documentation for more details. \endaknote
 	AkUniqueID reflectAuxBusID;
 
 	/// A heuristic to stop the computation of reflections. Should be no longer (and possibly shorter for less CPU usage) than the maximum attenuation of
@@ -161,152 +172,56 @@ struct AkEmitterSettings
 	/// - \ref AK::SpatialAudio::SetEmitterAuxSendValues
 	AkReal32 roomReverbAuxBusGain;
 
-	/// The maximum number of edges that the sound can diffract around between the emitter and the listener. Applies only to geometric diffraction, and not to sound propagation. 
-	/// Setting \c diffractionMaxEdges to 0 effectively disables geometric diffraction for this sound emitter.
-	AkUInt32 diffractionMaxEdges;
-
-	/// The maximum number of paths to the listener that the sound can take around obstacles.  Applies only to geometric diffraction, and not sound propagation. 
-	/// Diffraction paths map directly to virtual sound positions. Setting \c diffractionMaxPaths limits the number sound positions that are rendered for the game object. 
-	/// Setting \c diffractionMaxPaths to 0 effectively disables geometric diffraction for this sound emitter.
-	AkUInt32 diffractionMaxPaths;
-
-	/// The maximum length that a diffracted sound can travel.  Should be no longer (and possibly shorter for less CPU usage) than the maximum attenuation of
-	/// the sound emitter. Applies only to geometric diffraction, and not to sound propagation. 
-	AkReal32 diffractionMaxPathLength;
-
 	/// Enable reflections from image sources that have been added via the \c AK::SpatialAudio::SetImageSource() API. (Does not apply to geometric reflections.)
 	AkUInt8 useImageSources : 1;
 };
 
-/// Vertex for a spatial audio mesh.
-struct AkVertex
-{
-	/// Constructor
-	AkVertex() : X(0.f), Y(0.f), Z(0.f) {}
-	
-	/// Constructor
-	AkVertex(AkReal32 in_X, AkReal32 in_Y, AkReal32 in_Z) : X(in_X), Y(in_Y), Z(in_Z) {}
-
-	AkReal32 X; ///< X coordinate
-	AkReal32 Y; ///< Y coordinate
-	AkReal32 Z; ///< Z coordinate
-};
-
-/// Triangle for a spatial audio mesh. 
+/// Structure for describing information about individual triangles 
 struct AkTriangle
 {
 	/// Constructor
-	AkTriangle()	: point0(AK_INVALID_VERTEX)
-					, point1(AK_INVALID_VERTEX)
-					, point2(AK_INVALID_VERTEX)
-					, surface(AK_INVALID_SURFACE)
-	{}
-
-	/// Constructor
-	AkTriangle(AkVertIdx in_pt0, AkVertIdx in_pt1, AkVertIdx in_pt2, AkSurfIdx in_surfaceInfo) 
-		: point0(in_pt0)
-		, point1(in_pt1)
-		, point2(in_pt2)
-		, surface(in_surfaceInfo)
-	{}
-
-	/// Index into the vertex table passed into \c AkGeometryParams that describes the first vertex of the triangle. Triangles are double-sided, so vertex order in not important.
-	AkVertIdx point0; 
-
-	/// Index into the vertex table passed into \c AkGeometryParams that describes the second vertex of the triangle. Triangles are double-sided, so vertex order in not important.
-	AkVertIdx point1;
-
-	/// Index into the vertex table passed into \c AkGeometryParams that describes the third vertex of the triangle. Triangles are double-sided, so vertex order in not important.
-	AkVertIdx point2;
-
-	/// Index into the surface table passed into \c AkGeometryParams that describes the surface properties of the triangle.  
-	/// If this field is left as \c AK_INVALID_SURFACE, then a default-constructed \c AkAcousticSurface is used.
-	AkSurfIdx surface;
-};
-
-/// Describes the acoustic surface properties of one or more triangles.
-/// An single acoustic surface may describe any number of triangles, depending on the granularity desired.  For example, if desired for debugging, one could create a unique 
-/// \c AkAcousticSurface struct for each triangle, and define a unique name for each.  Alternatively, a single \c AkAcousticSurface could be used to describe all triangles.
-/// In fact it is not necessary to define any acoustic surfaces at all.  If the \c AkTriangle::surface field is left as \c AK_INVALID_SURFACE, then a default-constructed \c AkAcousticSurface is used.
-struct AkAcousticSurface
-{
-	/// Constructor
-	AkAcousticSurface(): textureID(AK_INVALID_UNIQUE_ID)
+	AkTriangle(): textureID(AK_INVALID_UNIQUE_ID)
 				, reflectorChannelMask((AkUInt32)-1)
-				, strName(NULL)
+				, strName(NULL) 
 	{}
 
-	/// Acoustic texture ShareSet ID for the surface.  The acoustic texture is authored in Wwise, and the shareset ID may be obtained by calling \c AK::SoundEngine::GetIDFromString
-	/// \sa <tt>\ref AK::SoundEngine::GetIDFromString()</tt>
+	/// Vertices 
+	AkVector point0;
+	AkVector point1;
+	AkVector point2;
+
+	/// Acoustic texture ShareSet ID
 	AkUInt32 textureID;
 
-	/// Bitfield of channels that this surface belongs to. When processing the reflections, this bit mask is ANDed with each of the emitter's <tt>reflectorFilterMask</tt>s to determine if the reflector/emitter pair can produce a valid hit.  
+	/// Bitfield of channels that this triangle belongs to. When processing the reflections, this bit mask is ANDed with each of the emitter's <tt>reflectorFilterMask</tt>s to determine if the reflector/emitter pair can produce a valid hit.  
 	AkUInt32 reflectorChannelMask;
 
-	/// Name to describe this surface
+	/// Name to describe this triangle. When passing into \c SetGeometry, this string is copied internally and may be freed as soon as the function returns.
 	const char* strName;
 };
 
 /// Structure for retrieving information about the indirect paths of a sound that have been calculated via the geometric reflections API. Useful for debug draw applications.
-struct AkReflectionPathInfo
+struct AkSoundPathInfo
 {
 	/// Apparent source of the reflected sound that follows this path.
 	AkVector imageSource;
 	
 	/// Vertices of the indirect path.
-	/// pathPoint[0] is closest to the emitter, pathPoint[numPathPoints-1] is closest to the listener.
-	AkVector pathPoint[AK_MAX_REFLECTION_PATH_LENGTH];
+	/// reflectionPoint[0] is closest to the emitter, reflectionPoint[numReflections-1] is closest to the listener.
+	AkVector reflectionPoint[AK_MAX_REFLECT_ORDER];
 
-	/// The surfaces that were hit in the path.
-	/// surfaces[0] is closest to the emitter, surfaces[numPathPoints-1] is closest to the listener.
-	AkAcousticSurface surfaces[AK_MAX_REFLECTION_PATH_LENGTH];
+	/// The triangles that were hit in the path. The vertices in \c reflectionPoint[] correspond to points on these triangles.
+	/// triangles[0] is closest to the emitter, triangles[numReflections-1] is closest to the listener.
+	AkTriangle triangles[AK_MAX_REFLECT_ORDER];
 
-	/// Number of valid elements in the \c pathPoint[], \c surfaces[], and \c diffraction[] arrays.
-	AkUInt32 numPathPoints;
-
-	/// Number of reflections in the \c pathPoint[] array. Shadow zone diffraction does not count as a reflection. If there is no shadow zone diffraction, \c numReflections is equal to \c numPathPoints.
+	/// Number of reflections and valid elements in the \c reflectionPoint[] and \c triangles[] arrays.
 	AkUInt32 numReflections;
 
-	/// Diffraction amount, normalized to the range [0,1]
-	AkReal32 diffraction[AK_MAX_REFLECTION_PATH_LENGTH];
-	
-	/// The point that was hit to cause the path to be occluded. Note that the spatial audio library must be recompiled with \c \#define AK_DEBUG_OCCLUSION to enable generation of occluded paths.
+	/// The point that was hit to cause the path to be occluded. Note that the spatial audio library must be recompiled with \c #define AK_DEBUG_OCCLUSION to enable generation of occluded paths.
 	AkVector occlusionPoint;
 
-	/// Linear gain applied to image source.
-	AkReal32 level;
-
-	/// True if the sound path was occluded. Note that the spatial audio library must be recompiled with \c \#define AK_DEBUG_OCCLUSION to enable generation of occluded paths.
+	/// True if the sound path was occluded. Note that the spatial audio library must be recompiled with \c #define AK_DEBUG_OCCLUSION to enable generation of occluded paths.
 	bool isOccluded;
-};
-
-/// Structure for retrieving information about diffraction paths for a given emitter. 
-/// Both the sound propagation (rooms and portals) system or the geometric diffraction system return infomation in this structure.
-struct AkDiffractionPathInfo
-{
-	/// Defines the maximum number of nodes that a user can retrieve information about.  Longer paths will be truncated. 
-	static const AkUInt32 kMaxNodes = AK_MAX_SOUND_PROPAGATION_DEPTH;
-
-	/// Diffraction points
-	AkVector nodes[kMaxNodes];
-
-	/// Raw diffraction angles at each point, in radians.
-	AkReal32 angles[kMaxNodes];
-
-	/// Virtual emitter position.
-	AkTransform virtualPos;
-
-	/// Total number of nodes in the path.  Defines the number of valid entries in the \c nodes and \c angles arrays.
-	AkUInt32 nodeCount;
-
-	/// Calculated total diffraction from this path, normalize to the range [0,1]
-	AkReal32 diffraction;
-
-	/// Total path length
-	AkReal32 totLength;
-
-	/// Obstruction value for this path.
-	AkReal32 obstructionValue;
 };
 
 /// Structure for retrieving information about the sound propagation paths that have been calculated via the rooms and portals API.  Useful for debug draw applications.
@@ -333,23 +248,23 @@ struct AkPropagationPathInfo
 	/// The cumulative gain (linear) of all portals traversed.  
 	AkReal32 gain;
 
-	/// The dry diffraction amount is normalized in the range [0,1], and calculated from the maximum deviation angle from a straight line, of all angles at each nodePoint.  Can be thought of as how
-	//	far into the 'shadow region' the sound has to 'bend' to reach the listener.
+	/// The dry diffraction angle is measured in radians, and calculated from the maximum deviation from a straight line, of all angles at each nodePoint.  Can be thought of as how
+	//	far into the 'shadow region' the sound has to 'bend' to reach the listener.  Valid range: 0 - PI radians.
 	/// Depending on the spatial audio initialization settings, this value that is applied internally, by spatial audio, to the obstruction or built-in parameter of the emitter game object.
 	/// \sa
 	/// - \ref AkDiffractionFlags
 	/// - \ref AkSpatialAudioInitSettings
-	AkReal32 dryDiffraction;
+	AkReal32 dryDiffractionAngle;
 
-	/// The wet diffraction amount for the portal closest to the listener, normalized in the range [0,1].  
-	/// The wet diffraction is calculated from how far into the 'shadow region' the listener is from the closest portal.  Unlike dry diffraction, the 
-	/// wet diffraction does not depend on the incident angle, but only the normal of the portal.
+	/// The wet diffraction for the portal closest to the listener.  
+	/// The wet diffraction angle is measured in radians and calculated from how far into the 'shadow region' the listener is from the closest portal.  Unlike dry diffraction, the 
+	/// wet diffraction does not depend on the incident angle, but only the normal of the portal.  Valid range: 0 - PI radians.
 	/// Depending on the spatial audio initialization settings, this value that is applied internally, by spatial audio, to the obstruction/built-in parameter of the room game object that is
 	/// on the other side of the portal closest to the listener.
 	/// \sa
 	/// - \ref AkDiffractionFlags
 	/// - \ref AkSpatialAudioInitSettings
-	AkReal32 wetDiffraction;
+	AkReal32 wetDiffractionAngle;
 };
 
 /// Parameters passed to \c SetPortal
@@ -414,7 +329,7 @@ struct AkRoomParams
 	}
 
 	/// Room Orientation. Up and Front must be orthonormal.
-	/// Room orientation has an effect when the associated aux bus (see ReverbAuxBus) is set with 3D Spatialization in Wwise, as 3D Spatialization implements relative rotation of the emitter (room) and listener.
+	/// Room orientation has an effect when the associated aux bus (see ReverbAuxBus) is set with 3D positioning in Wwise, as 3D positioning implements relative rotation of the emitter (room) and listener.
 	AkVector						Up;
 	AkVector						Front;
 
@@ -432,10 +347,13 @@ struct AkRoomParams
 	/// Can be used to implement multiple rooms that share the same aux bus, but have different reverb levels.
 	AkReal32						ReverbLevel;
 
-	/// Occlusion level to set when modeling transmission through walls.  Transmission is modeled only when no sound propagation paths to the listener are found, meaning that there are no active portals between the listener's
+	/// Occlusion level to set when modeling transmission through walls.  Transmission is modeled only when no paths to the listener are found, meaning that there are no active portals between the listener's
 	/// room and the emitter's room. Valid range: (0.f-1.f)
 	AkReal32						WallOcclusion;
-	
+
+	/// Unused
+	AkInt32							Priority;
+
 	/// Name used to identify room (optional)
 	AK::SpatialAudio::OsString		strName;
 
@@ -462,49 +380,6 @@ struct AkRoomParams
 	bool							RoomGameObj_KeepRegistered;
 
 
-};
-
-/// Parameters passed to \c SetGeometry
-struct AkGeometryParams
-{
-	/// Constructor
-	AkGeometryParams() : Triangles(NULL), NumTriangles(0), Vertices(NULL), NumVertices(0), Surfaces(NULL), NumSurfaces(0), EnableDiffraction(false), EnableDiffractionOnBoundaryEdges(false) {}
-
-	/// Pointer to an array of AkTriangle structures. 
-	/// This array will be copied into the spatial audio memory pool and will not be accessed after \c SetGeometry returns.
-	///	- \ref AkTriangle
-	///	- \ref AK::SpatialAudio::SetGeometry
-	///	- \ref AK::SpatialAudio::RemoveGeometry
-	AkTriangle* Triangles;
-
-	/// Number of triangles in Triangles.
-	AkTriIdx NumTriangles;			
-
-	/// Pointer to an array of AkVertex structures. 
-	/// This array will be copied into the spatial audio memory pool and will not be accessed after \c SetGeometry returns.
-	///	- \ref AkVertex
-	///	- \ref AK::SpatialAudio::SetGeometry
-	///	- \ref AK::SpatialAudio::RemoveGeometry
-	AkVertex* Vertices;
-
-	///< Number of vertices in Vertices.
-	AkVertIdx NumVertices;			
-	
-	///< Pointer to an array of AkAcousticSurface structures.
-	/// This array will be copied into the spatial audio memory pool and will not be accessed after \c SetGeometry returns.
-	///	- \ref AkVertex
-	///	- \ref AK::SpatialAudio::SetGeometry
-	///	- \ref AK::SpatialAudio::RemoveGeometry
-	AkAcousticSurface* Surfaces;
-
-	/// Number of of AkTriangleInfo structures in in_pTriangleInfo and number of AkTriIdx's in in_infoMap.
-	AkSurfIdx NumSurfaces;
-
-	/// Switch to enable or disable geometric diffraction for this Geometry.
-	bool EnableDiffraction;
-	
-	/// Switch to enable or disable geometric diffraction on boundary edges for this Geometry.  Boundary edges are edges that are connected to only one triangle.
-	bool EnableDiffractionOnBoundaryEdges;
 };
 
 /// Audiokinetic namespace
@@ -607,7 +482,7 @@ namespace AK
 		/// Each instance of AkReflect has its own set of data, so you may reuse ID, if desired, as long as \c in_gameObjectID and \c in_AuxBusID are different.
 		/// If you are using the geometric reflections API on the same aux bus (as set in \c AkEmitterSettings) and game object(s), there is a small chance of ID conflict, because IDs for 
 		///	geometric reflections' image sources are generated internally using a hash function. If a conflict does occur, you will only hear one of the two reflections. \endaknote
-		/// \aknote For proper operation with AkReflect and the SpatialAudio API, any aux bus using AkReflect should have 'Listener Relative Routing' checked and the 3D Spatialization set to None in the Wwise authoring tool. See \ref spatial_audio_wwiseprojectsetup_businstances for more details. \endaknote
+		/// \aknote For proper operation with AkReflect and the SpatialAudio API, any aux bus using AkReflect should have 'Enable Positioning' checked and the positioning type should be set to 2D in the Wwise authoring tool. See the Wwise Reflect documentation for more details. \endaknote
 		/// \sa 
 		/// - \ref AK::SpatialAudio::RegisterEmitter
 		/// - \ref AK::SpatialAudio::RemoveImageSource
@@ -636,14 +511,16 @@ namespace AK
 		/// Geometry API for early reflection processing using Wwise Reflect.
 		//@{
 
-		/// Add or update a set of geometry from the \c SpatialAudio module for geometric reflection and diffaction processing. A geometry set is a logical set of vertices, triangles, and acoustic surfaces,
-		/// which are referenced by the same \c AkGeometrySetID. The ID (\c in_GeomSetID) must be unique and is also chosen by the client in a manner similar to \c AkGameObjectID's.
+		/// Add or update a set of geometry from the \c SpatialAudio module for geometric reflection processing. A geometry set is a logical set of triangles, formed by any criteria that suits the client,
+		/// which will be referenced by the same ID. The ID (\c in_GeomSetID) must be unique and is also chosen by the client in a manner similar to \c AkGameObjectID's. 
+		/// The data pointed to by \c in_pTriangles will be copied internally and may be released after this function returns.
 		/// \sa 
-		///	- \ref AkGeometryParams
+		///	- \ref AkTriangle
 		///	- \ref AK::SpatialAudio::RemoveGeometry
 		AK_EXTERNAPIFUNC(AKRESULT, SetGeometry)(
-			AkGeometrySetID in_GeomSetID,		///< Unique geometry set ID, chosen by client.
-			const AkGeometryParams& in_params	///< Geometry parameters to set.
+			AkGeometrySetID in_GeomSetID,	///< Unique geometry set ID, chosen by client.
+			AkTriangle* in_pTriangles,		///< Pointer to an array of AkTriangle structures.
+			AkUInt32 in_uNumTriangles		///< Number of triangles in in_pTriangles.
 		);
 		
 		/// Remove a set of geometry to the SpatialAudio API.
@@ -653,15 +530,15 @@ namespace AK
 			AkGeometrySetID in_SetID		///< ID of geometry set to be removed.
 		);
 
-		/// Query information about the reflection paths that have been calculated via geometric reflection processing in the SpatialAudio API. This function can be used for debugging purposes.
+		/// Query information about the indirect paths that have been calculated via geometric reflection processing in the SpatialAudio API. This function can be used for debugging purposes.
 		/// This function must acquire the global sound engine lock and therefore, may block waiting for the lock.
 		/// \sa
-		/// - \ref AkReflectionPathInfo
-		AK_EXTERNAPIFUNC(AKRESULT, QueryReflectionPaths)(
+		/// - \ref AkSoundPathInfo
+		AK_EXTERNAPIFUNC(AKRESULT, QueryIndirectPaths)(
 			AkGameObjectID in_gameObjectID, ///< The ID of the game object that the client wishes to query.
 			AkVector& out_listenerPos,		///< Returns the position of the listener game object that is associated with the game object \c in_gameObjectID.
 			AkVector& out_emitterPos,		///< Returns the position of the emitter game object \c in_gameObjectID.
-			AkReflectionPathInfo* out_aPaths,	///< Pointer to an array of \c AkReflectionPathInfo's which will be filled after returning.
+			AkSoundPathInfo* out_aPaths,	///< Pointer to an array of \c AkSoundPathInfo's which will be filled after returning.
 			AkUInt32& io_uArraySize			///< The number of slots in \c out_aPaths, after returning the number of valid elements written.
 			);
 
@@ -724,39 +601,31 @@ namespace AK
 			AkRoomID in_CurrentRoomID		///< RoomID that was passed to \c AK::SpatialAudio::SetRoom
 			);
 
-		/// Set the obstruction and occlusion values of an emitter game object that has been registered with the SpatialAudio API.  
-		/// This function should be called instead of \c AK::SoundEngine::SetObjectObstructionAndOcclusion(), and can be used for setting the obstruction and occlusion values on a Spatial Audio emitter.
-		/// The obstruction value passed to SetEmitterObstructionAndOcclusion() should be used to simulate obstructing objects between the emitter and the listener, if they are in the same room, or between the emitter and a portal, if the emitter
-		///	and listener are in different room.
-		/// The occlusion value that is passed to SetEmitterObstructionAndOcclusion() is send to the sound engine directly, unless the emitter is unreachable via sound propagation. In this case, the occlusion value is maxed with the \c AkRoomParams::WallOcclusion value
-		/// to simulate sound transmission through walls.
-		/// If the listener and the emitter are in different rooms, the maximum of the obstruction value passed into SetEmitterObstructionAndOcclusion() and the the obstruction value calculated from the diffraction angle is passed to the sound engine.
+		/// Set the obstruction value of an emitter game object that has been registered with the SpatialAudio API.  
+		/// This function should be called instead of \c AK::SoundEngine::SetObjectObstructionAndOcclusion(), and can be used for setting the obstruction value on a Spatial Audio emitter.
+		/// SetEmitterObstruction() should be used to simulate obstructing objects between the emitter and the listener, if they are in the same room, or between the emitter and a portal, if the emitter
+		///	and listener are in different room.  
+		/// If the listener and the emitter are in different rooms, the maximum of the value passed into SetEmitterObstruction() and the the obstruction value calculated from the diffraction angle is passed to the sound engine.
 		/// If the game object is not registered as an emitter with Spatial Audio, then an error will be reported, and the call will have no effect.
-		/// \aknote The game is responsible to differentiate between obstruction between the emitter and the portal (where \c AK::SoundEngine::SetEmitterObstructionAndOcclusion() should be used), and occlusion from room boundaries, 
+		/// \aknote The game is responsible to differentiate between obstruction between the emitter and the portal (where \c AK::SoundEngine::SetEmitterObstruction() should be used), and occlusion from room boundaries, 
 		/// which is better handled by the spatial audio diffraction system.  For example, games that use ray-testing for obstruction may report 100 % obstruction when an object is very close to the the opening of a portal, 
 		/// because the ray between the emitter and the listener hits a nearby wall. If the game then sends 100 %, this will erroneously override the diffraction angle calculation which is probably much less than 180 degrees, 
-		/// and better matches the expected audibility of the sound. To prevent this scenario, games can ray-test for obstruction objects between the emitter and the portal, passing the results with \c AK::SoundEngine::SetEmitterObstructionAndOcclusion(), 
-		/// and then test for obstructing objects between the portal and the listener, passing the results with \c AK::SoundEngine::SetPortalObstructionAndOcclusion().
+		/// and better matches the expected audibility of the sound. To prevent this scenario, games can ray-test for obstruction objects between the emitter and the portal, passing the results with \c AK::SoundEngine::SetEmitterObstruction(), 
+		/// and then test for obstructing objects between the portal and the listener, passing the results with \c AK::SoundEngine::SetPortalObstruction().
 		/// \sa 
-		///	- \ref AK::SpatialAudio::SetPortalObstructionAndOcclusion
-		AK_EXTERNAPIFUNC(AKRESULT, SetEmitterObstructionAndOcclusion)(
+		///	- \ref AK::SpatialAudio::SetPortalObstruction
+		AK_EXTERNAPIFUNC(AKRESULT, SetEmitterObstruction)(
 			AkGameObjectID in_gameObjectID,			///< Game object ID of the sound emitter.
-			AkReal32 in_fObstruction,				///< Obstruction value.  Valid range 0.f-1.f
-			AkReal32 in_fOcclusion					///< Occlusion value.  Valid range 0.f-1.f
+			AkReal32 in_fObstruction				///< Obstruction value.  Valid range 0.f-1.f
 			);
 
-		/// Set the obstruction and occlusion value for a portal that has been registered with Spatial Audio.
-		/// Portal obstruction is used to simulate objects between the portal and the listener that are obstructing the sound coming from the portal.  
-		/// The obstruction value affects only the portals dry path, and should relate to how much of the opening
-		/// is obstructed, and must be calculated by the client.  It is applied to the room's game object, as well as to all the emitters virtual positions 
-		/// which propagate from that room through this portal.
-		/// Portal occlusion is applied only on the room game object, and affects both the wet and dry path of the signal emitted from the room's bus.
-		/// \sa 
-		///	- \ref AK::SpatialAudio::SetEmitterObstructionAndOcclusion
-		AK_EXTERNAPIFUNC(AKRESULT, SetPortalObstructionAndOcclusion)(
-			AkPortalID in_PortalID,				///< Portal ID.
-			AkReal32 in_fObstruction,			///< Obstruction value.  Valid range 0.f-1.f
-			AkReal32 in_fOcclusion				///< Occlusion value.  Valid range 0.f-1.f
+		/// Set the obstruction value for a portal that has been registered with Spatial Audio.
+		/// Portal obstruction is used to simulate objects between the portal and the listener that are obstructing the sound coming from the portal.  The obstruction value should relate to how much of the opening
+		/// is obstructed, and must be calculated by the client.  Only portals connecting directly to the listeners current room need to have their obstruction value updated. If the listener moves to a new room, 
+		/// the new set of portals must be updated.
+		AK_EXTERNAPIFUNC(AKRESULT, SetPortalObstruction)(
+			AkPortalID in_PortalID,					///< Portal ID.
+			AkReal32 in_fObstruction				///< Obstruction value.  Valid range 0.f-1.f
 			);
 
 		/// Query information about the sound propagation state for a particular listener and emitter, which has been calculated using the data provided via the rooms and portals API. This function can be used for debugging purposes.
@@ -769,19 +638,7 @@ namespace AK
 			AkVector& out_emitterPos,			///< Returns the position of the emitter game object \c in_gameObjectID.
 			AkPropagationPathInfo* out_aPaths,	///< Pointer to an array of \c AkPropagationPathInfo's which will be filled after returning.
 			AkUInt32& io_uArraySize				///< The number of slots in \c out_aPaths, after returning the number of valid elements written.
-			);
-
-		/// Query information about the diffraction state for a particular listener and emitter, which has been calculated using the data provided via the spatial audio emitter API. This function can be used for debugging purposes.
-		/// This function must acquire the global sound engine lock and therefore, may block waiting for the lock.
-		/// \sa
-		/// - \ref AkDiffractionPathInfo
-		AK_EXTERNAPIFUNC(AKRESULT, QueryDiffractionPaths)(
-			AkGameObjectID in_gameObjectID,		///< The ID of the game object that the client wishes to query.
-			AkVector& out_listenerPos,			///< Returns the position of the listener game object that is associated with the game object \c in_gameObjectID.
-			AkVector& out_emitterPos,			///< Returns the position of the emitter game object \c in_gameObjectID.
-			AkDiffractionPathInfo* out_aPaths,	///< Pointer to an array of \c AkPropagationPathInfo's which will be filled after returning.
-			AkUInt32& io_uArraySize				///< The number of slots in \c out_aPaths, after returning the number of valid elements written.
-			);
+		);
 
 		//@}
 	}

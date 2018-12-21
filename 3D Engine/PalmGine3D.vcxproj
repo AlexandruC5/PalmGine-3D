@@ -54,7 +54,7 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>D:\Proyectos GitHub\PalmGine-3D\3D Engine\AK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Proyectos GitHub\PalmGine-3D\3D Engine\AK\Common;D:\Proyectos GitHub\PalmGine-3D\3D Engine\AK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -253,7 +253,6 @@
     <ClCompile Include="AK\Common\AkFileLocationBase.cpp" />
     <ClCompile Include="AK\Common\AkFilePackage.cpp" />
     <ClCompile Include="AK\Common\AkFilePackageLUT.cpp" />
-    <ClCompile Include="AK\Common\AkMultipleFileLocation.cpp" />
     <ClCompile Include="AK\Win32\AkDefaultIOHookBlocking.cpp" />
     <ClCompile Include="AK\Win32\AkDefaultIOHookDeferred.cpp" />
     <ClCompile Include="AK\Win32\stdafx.cpp" />

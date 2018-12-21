@@ -21,7 +21,7 @@ under the Apache License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
 OR CONDITIONS OF ANY KIND, either express or implied. See the Apache License for
 the specific language governing permissions and limitations under the License.
 
-  Version: v2018.1.4  Build: 6807
+  Version: v2017.2.6  Build: 6636
   Copyright (c) 2006-2018 Audiokinetic Inc.
 *******************************************************************************/
 
@@ -84,7 +84,6 @@ struct AkPoolNewKey
 
 #define AkFree(_pool,_pvmem)				(AK::MemoryMgr::Free((_pool),(_pvmem)))
 #define AkFalign(_pool,_pvmem)				(AK::MemoryMgr::Falign((_pool),(_pvmem)))
-#define AkRealloc(_pool, _pvmem, _size)		(AK::MemoryMgr::Realloc((_pool), _pvmem, _size))
 
 #if defined (AK_MEMDEBUG)
 

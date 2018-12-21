@@ -51,7 +51,7 @@ class WAAPI_URI:
     ak_wwise_waapi_getfunctions = u"ak.wwise.waapi.getFunctions"
     # Retrieve the JSON schema of a Waapi URI.
     ak_wwise_waapi_getschema = u"ak.wwise.waapi.getSchema"
-    # Opens a project, specified by path. Please refer to \ref ak_wwise_core_project_loaded for further explanations on how to be notified when the operation has completed.
+    # Opens a project, specified by path.
     ak_wwise_ui_project_open = u"ak.wwise.ui.project.open"
     # Closes the current project.
     ak_wwise_ui_project_close = u"ak.wwise.ui.project.close"
@@ -81,7 +81,7 @@ class WAAPI_URI:
     ak_wwise_core_switchcontainer_removeassignment = u"ak.wwise.core.switchContainer.removeAssignment"
     # Returns the list of assignments between a Switch Container's children and states.
     ak_wwise_core_switchcontainer_getassignments = u"ak.wwise.core.switchContainer.getAssignments"
-    # Creates an object of type 'type', as a child of 'parent'. Refer to \ref waapi_import for more information about creating objects. Also refer to \ref ak_wwise_core_audio_import to import audio files to Wwise.
+    # Creates an object of type 'type', as a child of 'parent'.
     ak_wwise_core_object_create = u"ak.wwise.core.object.create"
     # Moves an object to the given parent.
     ak_wwise_core_object_move = u"ak.wwise.core.object.move"
@@ -91,7 +91,7 @@ class WAAPI_URI:
     ak_wwise_core_object_delete = u"ak.wwise.core.object.delete"
     # Performs a query, returns specified data for each object in query result. Refer to \ref waapi_query for more information.
     ak_wwise_core_object_get = u"ak.wwise.core.object.get"
-    # Create Wwise objects and import audio files. This function is using the same importation processor available through the Tab Delimited import in the Audio File Importer. See \ref ak_wwise_core_audio_importtabdelimited. The function returns an array of all objects created, replaced or re-used. Use the options to specify how the objects are returned.
+    # Scripted object creation and audio file import. The contents of this command very closely mirror that of a tab-delimited import file. See \ref ak_wwise_core_audio_importtabdelimited.
     ak_wwise_core_audio_import = u"ak.wwise.core.audio.import"
     # Scripted object creation and audio file import from a tab-delimited file.
     ak_wwise_core_audio_importtabdelimited = u"ak.wwise.core.audio.importTabDelimited"
@@ -119,28 +119,21 @@ class WAAPI_URI:
     ak_wwise_core_plugin_getproperty = u"ak.wwise.core.plugin.getProperty"
     # Retrieves information about an object property.
     ak_wwise_core_object_getpropertyinfo = u"ak.wwise.core.object.getPropertyInfo"
-    # Retrieves the list of property and reference names for an object.
-    # \deprecated in favor of ak.wwise.core.object.getPropertyAndReferenceNames
+    # Retrieves the list of property names for an object.
+    # \deprecated in favor of ak.wwise.core.object.getPropertyNames
     ak_wwise_core_plugin_getproperties = u"ak.wwise.core.plugin.getProperties"
-    # Retrieves the list of property and reference names for an object.
-    # \deprecated in favor of ak.wwise.core.object.getPropertyAndReferenceNames
+    # Retrieves the list of property names for an object.
     ak_wwise_core_object_getpropertynames = u"ak.wwise.core.object.getPropertyNames"
-    # Retrieves the list of property and reference names for an object.
-    ak_wwise_core_object_getpropertyandreferencenames = u"ak.wwise.core.object.getPropertyAndReferenceNames"
     # Retrieves the status of a property.
     ak_wwise_core_object_ispropertyenabled = u"ak.wwise.core.object.isPropertyEnabled"
     # Enables debug assertions. Every call to enableAsserts with false increments the ref count. Calling with true will decrement the ref count. This is only available with Debug builds.
     ak_wwise_debug_enableasserts = u"ak.wwise.debug.enableAsserts"
     # Private use only.
     ak_wwise_debug_testassert = u"ak.wwise.debug.testAssert"
-    # Enable or disable the automation mode for Wwise. This reduces the potential interruptions caused by message boxes and dialogs. For instance, enabling the automation mode silently accepts: project migration, project load log, EULA acceptance, project licence display and generic message boxes.
-    ak_wwise_debug_enableautomationmode = u"ak.wwise.debug.enableAutomationMode"
     # Retrieves a SoundBank's inclusion list.
     ak_wwise_core_soundbank_getinclusions = u"ak.wwise.core.soundbank.getInclusions"
     # Modifies a SoundBank's inclusion list.  The 'operation' argument determines how the 'inclusions' argument modifies the SoundBank's inclusion list; 'inclusions' may be added to / removed from / replace the SoundBank's inclusion list.
     ak_wwise_core_soundbank_setinclusions = u"ak.wwise.core.soundbank.setInclusions"
-    # Retrieve the latest log for a specific channel. Refer to \ref ak_wwise_core_log_itemadded to be notified when a item is added to the log.
-    ak_wwise_core_log_get = u"ak.wwise.core.log.get"
     # Creates a transport object for the given Wwise object.  The return transport object can be used to play, stop, pause and resume the Wwise object via the other transport functions.
     ak_wwise_core_transport_create = u"ak.wwise.core.transport.create"
     # Destroys the given transport object.
@@ -151,14 +144,10 @@ class WAAPI_URI:
     ak_wwise_core_transport_getlist = u"ak.wwise.core.transport.getList"
     # Executes an action on the given transport object, or all transports if no transport is specified.
     ak_wwise_core_transport_executeaction = u"ak.wwise.core.transport.executeAction"
-    # Get the min/max peak pairs, in a given region of an audio source, as a collection of binary strings (one per channel). The strings are base-64 encoded 16-bit signed int arrays, with min and max values being interleaved. If getCrossChannelPeaks is true, there will be only one binary string representing peaks across all channels globally.
+    # Get the min/max peak pairs, in a given region of an audio source, as a collection of binary strings (one per channel). If getCrossChannelPeaks is true, there will be only one binary string representing peaks across all channels globally.
     ak_wwise_core_audiosourcepeaks_getminmaxpeaksinregion = u"ak.wwise.core.audioSourcePeaks.getMinMaxPeaksInRegion"
-    # Get the min/max peak pairs in the entire trimmed region of an audio source, for each channel, as an array of binary strings (one per channel). The strings are base-64 encoded 16-bit signed int arrays, with min and max values being interleaved. If getCrossChannelPeaks is true, there will be only one binary string representing peaks across all channels globally.
+    # Get the min/max peak pairs in the entire trimmed region of an audio source, for each channel, as an array of binary strings (one per channel). If getCrossChannelPeaks is true, there will be only one binary string representing peaks across all channels globally.
     ak_wwise_core_audiosourcepeaks_getminmaxpeaksintrimmedregion = u"ak.wwise.core.audioSourcePeaks.getMinMaxPeaksInTrimmedRegion"
-    # Register an array of add-on UI commands.
-    ak_wwise_ui_commands_register = u"ak.wwise.ui.commands.register"
-    # Unregister an array of add-on UI commands.
-    ak_wwise_ui_commands_unregister = u"ak.wwise.ui.commands.unregister"
     # Sent when an object reference is changed.
     ak_wwise_core_object_referencechanged = u"ak.wwise.core.object.referenceChanged"
     # Sent when an assignment is added to a Switch Container.
@@ -187,23 +176,15 @@ class WAAPI_URI:
     ak_wwise_core_object_attenuationcurvelinkchanged = u"ak.wwise.core.object.attenuationCurveLinkChanged"
     # Sent when the watched property of an object changes.
     ak_wwise_core_object_propertychanged = u"ak.wwise.core.object.propertyChanged"
-    # Sent when a single SoundBank is generated. This could be sent multiple times during soundbank generation, for every soundbank generated, for every platform. To generate SoundBanks, refer to \ref ak_wwise_ui_commands_execute with one of the Soundbank generation commands. Refer to \ref globalcommandsids for the list of commands.
-    ak_wwise_core_soundbank_generated = u"ak.wwise.core.soundbank.generated"
-    # Sent when an item is added to the log. This could be used to retrieve items added to the SoundBank generation log. To retrieve the complete log, refer to \ref ak_wwise_core_log_get.
-    ak_wwise_core_log_itemadded = u"ak.wwise.core.log.itemAdded"
     # Sent when the selection changes in the project.
     ak_wwise_ui_selectionchanged = u"ak.wwise.ui.selectionChanged"
-    # Sent when the project has been successfully loaded.
+    # Sent when the project has been loaded.
     ak_wwise_core_project_loaded = u"ak.wwise.core.project.loaded"
     # Sent when the project begins closing.
     ak_wwise_core_project_preclosed = u"ak.wwise.core.project.preClosed"
     # Sent when the after the project is completely closed.
     ak_wwise_core_project_postclosed = u"ak.wwise.core.project.postClosed"
-    # Sent when the project has been saved.
-    ak_wwise_core_project_saved = u"ak.wwise.core.project.saved"
     # Sent when the transport's state has changed.
     ak_wwise_core_transport_statechanged = u"ak.wwise.core.transport.stateChanged"
     # Sent when an assert has failed.
     ak_wwise_debug_assertfailed = u"ak.wwise.debug.assertFailed"
-    # Sent when a command is executed. The objects for which the command is executed are sent in the publication.
-    ak_wwise_ui_commands_executed = u"ak.wwise.ui.commands.executed"

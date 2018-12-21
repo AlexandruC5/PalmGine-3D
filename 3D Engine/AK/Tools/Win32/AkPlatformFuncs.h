@@ -21,7 +21,7 @@ under the Apache License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
 OR CONDITIONS OF ANY KIND, either express or implied. See the Apache License for
 the specific language governing permissions and limitations under the License.
 
-  Version: v2018.1.4  Build: 6807
+  Version: v2017.2.6  Build: 6636
   Copyright (c) 2006-2018 Audiokinetic Inc.
 *******************************************************************************/
 
@@ -77,7 +77,11 @@ namespace AK
 #define AK_GET_THREAD_ROUTINE_PARAMETER_PTR(type) reinterpret_cast<type*>( AK_THREAD_ROUTINE_PARAMETER )
 #define AK_RETURN_THREAD_OK                     0x00000000
 #define AK_RETURN_THREAD_ERROR                  0x00000001
-#define AK_DEFAULT_STACK_SIZE					(64*1024)
+#if defined AK_CPU_X86_64
+#define AK_DEFAULT_STACK_SIZE					(65536)
+#else
+#define AK_DEFAULT_STACK_SIZE                   (32768)
+#endif
 #define AK_THREAD_PRIORITY_NORMAL				THREAD_PRIORITY_NORMAL
 #define AK_THREAD_PRIORITY_ABOVE_NORMAL			THREAD_PRIORITY_ABOVE_NORMAL
 #define AK_THREAD_PRIORITY_TIME_CRITICAL		THREAD_PRIORITY_TIME_CRITICAL

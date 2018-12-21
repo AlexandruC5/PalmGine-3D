@@ -21,7 +21,7 @@ under the Apache License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
 OR CONDITIONS OF ANY KIND, either express or implied. See the Apache License for
 the specific language governing permissions and limitations under the License.
 
-Version: v2018.1.4  Build: 6807
+Version: v2017.2.6  Build: 6636
 Copyright (c) 2006-2018 Audiokinetic Inc.
 *******************************************************************************/
 
@@ -33,7 +33,6 @@ Copyright (c) 2006-2018 Audiokinetic Inc.
 #include <AK/Tools/Common/AkKeyArray.h>
 #include <AK/Tools/Common/AkSet.h>
 #include <AK/Tools/Common/AkString.h>
-#include <AK/Tools/Common/AkLock.h>
 
 class AkAcousticRoom;
 class AkAcousticPortal;
@@ -41,16 +40,11 @@ class AkImageSourceTriangle;
 class AkImageSourcePlane;
 
 #define AK_MAX_REFLECT_ORDER 4
-#define AK_MAX_REFLECTION_PATH_LENGTH (AK_MAX_REFLECT_ORDER + 2)
 #define AK_MAX_SOUND_PROPAGATION_DEPTH 8
 #define AK_DEFAULT_DIFFR_SHADOW_DEGREES (30.0f)
 #define AK_DEFAULT_DIFFR_SHADOW_ATTEN (2.0f)
-#define AK_SA_EPSILON (0.001f)
-#define AK_SA_PLANE_THICKNESS_RATIO (0.005f)
 
 const AkReal32 kDefaultMaxPathLength = 100.f;
-
-const AkReal32 kMaxDiffraction = 1.0f;
 
 extern AkMemPoolId g_SpatialAudioPoolId;
 
@@ -65,21 +59,8 @@ namespace AK
 		typedef AkString<ArrayPoolSpatialAudio, wchar_t> WString;		///< Wide string type for use in Wwise Spatial Audio
 		typedef AkString<ArrayPoolSpatialAudio, AkOSChar> OsString;		///< OS string type for use in Wwise Spatial Audio
 		typedef AkString<ArrayPoolSpatialAudio, char> String;			///< String type for use in Wwise Spatial Audio
-		typedef AkDbString<ArrayPoolSpatialAudio, char, CAkLock> DbString; ///< Instanced string type.
-
-		typedef AkUInt16 Idx;
 	}
 }
-
-typedef AkUInt16 AkVertIdx;
-typedef AkUInt16 AkTriIdx;
-typedef AkUInt16 AkSurfIdx;
-typedef AkUInt16 AkEdgeIdx;
-
-#define AK_INVALID_VERTEX ((AkVertIdx)(-1))
-#define AK_INVALID_TRIANGLE ((AkTriIdx)(-1))
-#define AK_INVALID_SURFACE ((AkSurfIdx)(-1))
-#define AK_INVALID_EDGE ((AkEdgeIdx)(-1))
 
 /// Base type for ID's used by Wwise spatial audio.  
 struct AkSpatialAudioID
@@ -148,5 +129,3 @@ typedef AkSpatialAudioID AkPortalID;
 ///	- \ref AK::SpatialAudio::SetGeometry
 ///	- \ref AK::SpatialAudio::RemoveGeometry
 typedef AkSpatialAudioID AkGeometrySetID;
-
-

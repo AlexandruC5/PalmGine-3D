@@ -9,7 +9,7 @@ may use this file in accordance with the end user license agreement provided
 with the software or, alternatively, in accordance with the terms contained in a
 written agreement between you and Audiokinetic Inc.
 
-Version: v2018.1.4  Build: 6807
+Version: v2017.2.6  Build: 6636
 Copyright (c) 2006-2018 Audiokinetic Inc.
 *******************************************************************************/
 
@@ -48,7 +48,7 @@ namespace AK
 			Client();
 			virtual ~Client();
 			
-			bool Connect(const char* in_uri, unsigned int in_port, disconnectHandler_t disconnectHandler = nullptr);
+			bool Connect(const char* in_uri, unsigned int in_port);
 			bool IsConnected() const;
 			void Disconnect();
 
@@ -66,11 +66,9 @@ namespace AK
 			void Log(const char* log);
 
 		private:
-
-			void LogErrorMessageFromJson(const AkJson& in_json);
 			
-			bool SubscribeImpl(const char* in_uri, const AkJson& in_options, handler_t in_callback, int in_timeoutMs, uint64_t& out_subscriptionId, AkJson& out_result);
-			bool UnsubscribeImpl(const uint64_t& in_subscriptionId, int in_timeoutMs, AkJson& out_result);
+			bool SubscribeImpl(const char* in_uri, const AkJson& in_options, handler_t in_callback, int in_timeoutMs, uint64_t& out_subscriptionId);
+			bool UnsubscribeImpl(const uint64_t& in_subscriptionId, int in_timeoutMs);
 			
 			template<typename T> bool GetFuture(std::future<T>& in_value, int in_timeoutMs, T& out_result)
 			{
@@ -88,6 +86,8 @@ namespace AK
 					return GetFutureBlocking(in_value, out_result);
 				}
 			}
+			
+			void ErrorToAkJson(const std::exception& in_exception, AkJson& out_result);
 
 		private:
 			

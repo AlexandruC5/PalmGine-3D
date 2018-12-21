@@ -21,7 +21,7 @@ under the Apache License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
 OR CONDITIONS OF ANY KIND, either express or implied. See the Apache License for
 the specific language governing permissions and limitations under the License.
 
-  Version: v2018.1.4  Build: 6807
+  Version: v2017.2.6  Build: 6636
   Copyright (c) 2006-2018 Audiokinetic Inc.
 *******************************************************************************/
 
@@ -203,37 +203,6 @@ static bool AkIntersection(AkSet<T, U_POOL, uGrowBy>& in_A, const AkSet<T, U_POO
 		}
 	}
 	in_A.Resize((AkUInt32)(itAw.pItem - in_A.Begin().pItem));
-	return true;
-}
-
-// AkIntersection
-//	- Out-of-place set intersection ( res = A n B )
-//
-template< typename T, class U_POOL, AkUInt32 uGrowBy >
-static bool AkIntersection(AkSet<T, U_POOL, uGrowBy>& out_res, const AkSet<T, U_POOL, uGrowBy>& in_A, const AkSet<T, U_POOL, uGrowBy>& in_B)
-{
-	out_res.RemoveAll();
-
-	typename AkSet<T, U_POOL, uGrowBy>::Iterator itA = in_A.Begin();
-	typename AkSet<T, U_POOL, uGrowBy>::Iterator itB = in_B.Begin();
-	while (itA != in_A.End() && itB != in_B.End())
-	{
-		if (*itA == *itB)
-		{
-			out_res.AddLast(*itA);
-
-			++itA;
-			++itB;
-		}
-		else if (*itA < *itB)
-		{
-			++itA;
-		}
-		else
-		{
-			++itB;
-		}
-	}
 	return true;
 }
 

@@ -1,11 +1,3 @@
-State Group	ID	Name			Wwise Object Path	Notes
-	1021618141	MusicState			\Default Work Unit\MusicState	
-
-State	ID	Name	State Group			Notes
-	0	None	MusicState			
-	930712164	Off	MusicState			
-	1651971902	On	MusicState			
-
 Game Parameter	ID	Name			Wwise Object Path	Notes
 	504532776	Brick			\Factory Reflect Acoustic Textures\Textures\Brick	
 	513139656	Mountain			\Factory Reflect Acoustic Textures\Textures\Mountain	
@@ -23,7 +15,6 @@ Game Parameter	ID	Name			Wwise Object Path	Notes
 	4262522749	Wood_Bright			\Factory Reflect Acoustic Textures\Textures\Wood_Bright	
 
 Audio Bus	ID	Name			Wwise Object Path	Notes
-	985987111	Motion Factory Bus			\Default Work Unit\Motion Factory Bus	
 	3803692087	Master Audio Bus			\Default Work Unit\Master Audio Bus	
 
 Auxiliary Bus	ID	Name			Wwise Object Path	Notes
@@ -35,5 +26,4 @@ Effect plug-ins	ID	Name	Type				Notes
 Audio Devices	ID	Name	Type				Notes
 	2317455096	No_Output	No Output			
 	3859886410	System	System			
-	4230635974	Default_Motion_Device	Wwise Motion			
 

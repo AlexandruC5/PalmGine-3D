@@ -9,7 +9,7 @@ may use this file in accordance with the end user license agreement provided
 with the software or, alternatively, in accordance with the terms contained in a
 written agreement between you and Audiokinetic Inc.
 
-  Version: v2018.1.4  Build: 6807
+  Version: v2017.2.6  Build: 6636
   Copyright (c) 2006-2018 Audiokinetic Inc.
 *******************************************************************************/
 //////////////////////////////////////////////////////////////////////
@@ -35,6 +35,7 @@ struct AkFileSystemFlags;
 
 // This file location class supports multiple base paths for Wwise file access.
 // Each path will be searched the reverse order of the addition order until the file is found.
+template<class OPEN_POLICY>
 class CAkMultipleFileLocation
 {
 protected:
@@ -46,6 +47,7 @@ protected:
 		AkOSChar szPath[1];	//Variable length
 	};
 public:
+	CAkMultipleFileLocation();
 	void Term();
 
 	//
@@ -92,12 +94,14 @@ public:
 		AkFileSystemFlags * in_pFlags,			// Special flags. Can be NULL.
 		AkOpenMode			in_eOpenMode,		// File open mode (read, write, ...).
 		AkOSChar *			out_pszFullFilePath, // Full file path.
-		AkOSChar*			in_pszBasePath = NULL	// Base path to use.  If null, the first suitable location will be given.		
+		FilePath*			in_pBasePath = NULL	// Base path to use.  If null, the first suitable location will be given.		
 		);  
 
 protected:
 
 	AkListBareLight<FilePath> m_Locations;
 };
+
+#include "AkMultipleFileLocation.inl"
 
 #endif //_AK_MULTI_FILE_LOCATION_H_

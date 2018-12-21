@@ -17,7 +17,7 @@ bool ModuleAudio::Start()
 {
 	// Init wwise and audio banks
 	WwiseT::InitSoundEngine();
-	WwiseT::LoadBank("Assignment3.bnk");
+	WwiseT::LoadBank("New_SoundBank.bnk");
 	
 	//TODO delete test sound
 	test2 = WwiseT::CreateAudSource("test");
@@ -32,7 +32,7 @@ update_status ModuleAudio::Update(float dt)
 	if ((App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN))
 	{
 		test1->PlayEventByName("train");
-		test2->PlayEventByName("music_TheGrowlers_GoingGetsTuff_stereo");
+		test2->PlayEventByName("music_TheGrowlers_GoingGetsTuff");
 		float vel = 12;
 		test1->ApplyEnvReverb(vel, "tunnel");
 	}

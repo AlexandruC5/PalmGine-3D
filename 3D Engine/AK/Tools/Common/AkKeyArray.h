@@ -21,7 +21,7 @@ under the Apache License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
 OR CONDITIONS OF ANY KIND, either express or implied. See the Apache License for
 the specific language governing permissions and limitations under the License.
 
-Version: v2018.1.4  Build: 6807
+Version: v2017.2.6  Build: 6636
 Copyright (c) 2006-2018 Audiokinetic Inc.
 *******************************************************************************/
 
@@ -238,14 +238,8 @@ public:
 	T_ITEM * Set(T_KEY in_key)
 	{
 		bool bFound;
-		return Set(in_key, bFound);
-	}
-
-	T_ITEM * Set(T_KEY in_key, bool & out_bExists)
-	{
-		
-		T_ITEM * pItem = BinarySearch(in_key, out_bExists);
-		if (!out_bExists)
+		T_ITEM * pItem = BinarySearch(in_key, bFound);
+		if (!bFound)
 		{
 			if (pItem)
 			{

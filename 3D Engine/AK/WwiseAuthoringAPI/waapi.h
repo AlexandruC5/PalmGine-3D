@@ -49,16 +49,14 @@ namespace ak {
             static const char* testAssert =  "ak.wwise.debug.testAssert"; 
             // Sent when an assert has failed.
             static const char* assertFailed =  "ak.wwise.debug.assertFailed"; 
-            // Enable or disable the automation mode for Wwise. This reduces the potential interruptions caused by message boxes and dialogs. For instance, enabling the automation mode silently accepts: project migration, project load log, EULA acceptance, project licence display and generic message boxes.
-            static const char* enableAutomationMode =  "ak.wwise.debug.enableAutomationMode"; 
             // Enables debug assertions. Every call to enableAsserts with false increments the ref count. Calling with true will decrement the ref count. This is only available with Debug builds.
             static const char* enableAsserts =  "ak.wwise.debug.enableAsserts";
         } 
         namespace core {
             namespace audioSourcePeaks {
-                // Get the min/max peak pairs, in a given region of an audio source, as a collection of binary strings (one per channel). The strings are base-64 encoded 16-bit signed int arrays, with min and max values being interleaved. If getCrossChannelPeaks is true, there will be only one binary string representing peaks across all channels globally.
+                // Get the min/max peak pairs, in a given region of an audio source, as a collection of binary strings (one per channel). If getCrossChannelPeaks is true, there will be only one binary string representing peaks across all channels globally.
                 static const char* getMinMaxPeaksInRegion =  "ak.wwise.core.audioSourcePeaks.getMinMaxPeaksInRegion"; 
-                // Get the min/max peak pairs in the entire trimmed region of an audio source, for each channel, as an array of binary strings (one per channel). The strings are base-64 encoded 16-bit signed int arrays, with min and max values being interleaved. If getCrossChannelPeaks is true, there will be only one binary string representing peaks across all channels globally.
+                // Get the min/max peak pairs in the entire trimmed region of an audio source, for each channel, as an array of binary strings (one per channel). If getCrossChannelPeaks is true, there will be only one binary string representing peaks across all channels globally.
                 static const char* getMinMaxPeaksInTrimmedRegion =  "ak.wwise.core.audioSourcePeaks.getMinMaxPeaksInTrimmedRegion";
             } 
             namespace remote {
@@ -70,12 +68,6 @@ namespace ak {
                 static const char* disconnect =  "ak.wwise.core.remote.disconnect"; 
                 // Connects the Wwise Authoring application to a Wwise Sound Engine running executable. The host must be running code with communication enabled.
                 static const char* connect =  "ak.wwise.core.remote.connect";
-            } 
-            namespace log {
-                // Sent when an item is added to the log. This could be used to retrieve items added to the SoundBank generation log. To retrieve the complete log, refer to \ref ak_wwise_core_log_get.
-                static const char* itemAdded =  "ak.wwise.core.log.itemAdded"; 
-                // Retrieve the latest log for a specific channel. Refer to \ref ak_wwise_core_log_itemadded to be notified when a item is added to the log.
-                static const char* get =  "ak.wwise.core.log.get";
             } 
             // Retrieve global Wwise information.
             static const char* getInfo =  "ak.wwise.core.getInfo"; 
@@ -92,7 +84,7 @@ namespace ak {
                 static const char* getTypes =  "ak.wwise.core.object.getTypes"; 
                 // Sent when the watched property of an object changes.
                 static const char* propertyChanged =  "ak.wwise.core.object.propertyChanged"; 
-                // Creates an object of type 'type', as a child of 'parent'. Refer to \ref waapi_import for more information about creating objects. Also refer to \ref ak_wwise_core_audio_import to import audio files to Wwise.
+                // Creates an object of type 'type', as a child of 'parent'.
                 static const char* create =  "ak.wwise.core.object.create"; 
                 // Performs a query, returns specified data for each object in query result. Refer to \ref waapi_query for more information.
                 static const char* get =  "ak.wwise.core.object.get"; 
@@ -126,17 +118,14 @@ namespace ak {
                 static const char* created =  "ak.wwise.core.object.created"; 
                 // Sent when an object is removed from the children of another object.
                 static const char* childRemoved =  "ak.wwise.core.object.childRemoved"; 
-                // Retrieves the list of property and reference names for an object.
-                // \deprecated in favor of ak.wwise.core.object.getPropertyAndReferenceNames
+                // Retrieves the list of property names for an object.
                 static const char* getPropertyNames =  "ak.wwise.core.object.getPropertyNames"; 
                 // Gets the specified attenuation curve for a given attenuation object.
                 static const char* getAttenuationCurve =  "ak.wwise.core.object.getAttenuationCurve"; 
                 // Sent when one or many curves are changed.
                 static const char* curveChanged =  "ak.wwise.core.object.curveChanged"; 
                 // Deletes the specified object.
-                static const char* delete_ =  "ak.wwise.core.object.delete"; 
-                // Retrieves the list of property and reference names for an object.
-                static const char* getPropertyAndReferenceNames =  "ak.wwise.core.object.getPropertyAndReferenceNames";
+                static const char* delete_ =  "ak.wwise.core.object.delete";
             } 
             namespace undo {
                 // Ends the last undo group.
@@ -149,14 +138,12 @@ namespace ak {
             namespace project {
                 // Sent when the after the project is completely closed.
                 static const char* postClosed =  "ak.wwise.core.project.postClosed"; 
-                // Sent when the project has been successfully loaded.
+                // Sent when the project has been loaded.
                 static const char* loaded =  "ak.wwise.core.project.loaded"; 
                 // Sent when the project begins closing.
                 static const char* preClosed =  "ak.wwise.core.project.preClosed"; 
                 // Saves the current project.
-                static const char* save =  "ak.wwise.core.project.save"; 
-                // Sent when the project has been saved.
-                static const char* saved =  "ak.wwise.core.project.saved";
+                static const char* save =  "ak.wwise.core.project.save";
             } 
             namespace transport {
                 // Gets the state of the given transport object.
@@ -175,13 +162,11 @@ namespace ak {
             namespace soundbank {
                 // Retrieves a SoundBank's inclusion list.
                 static const char* getInclusions =  "ak.wwise.core.soundbank.getInclusions"; 
-                // Sent when a single SoundBank is generated. This could be sent multiple times during soundbank generation, for every soundbank generated, for every platform. To generate SoundBanks, refer to \ref ak_wwise_ui_commands_execute with one of the Soundbank generation commands. Refer to \ref globalcommandsids for the list of commands.
-                static const char* generated =  "ak.wwise.core.soundbank.generated"; 
                 // Modifies a SoundBank's inclusion list.  The 'operation' argument determines how the 'inclusions' argument modifies the SoundBank's inclusion list; 'inclusions' may be added to / removed from / replace the SoundBank's inclusion list.
                 static const char* setInclusions =  "ak.wwise.core.soundbank.setInclusions";
             } 
             namespace audio {
-                // Create Wwise objects and import audio files. This function is using the same importation processor available through the Tab Delimited import in the Audio File Importer. See \ref ak_wwise_core_audio_importtabdelimited. The function returns an array of all objects created, replaced or re-used. Use the options to specify how the objects are returned.
+                // Scripted object creation and audio file import. The contents of this command very closely mirror that of a tab-delimited import file. See \ref ak_wwise_core_audio_importtabdelimited.
                 static const char* import =  "ak.wwise.core.audio.import"; 
                 // Scripted object creation and audio file import from a tab-delimited file.
                 static const char* importTabDelimited =  "ak.wwise.core.audio.importTabDelimited";
@@ -205,8 +190,8 @@ namespace ak {
                 // Retrieves information about an object property.
                 // \deprecated in favor of ak.wwise.core.object.getPropertyInfo
                 static const char* getProperty =  "ak.wwise.core.plugin.getProperty"; 
-                // Retrieves the list of property and reference names for an object.
-                // \deprecated in favor of ak.wwise.core.object.getPropertyAndReferenceNames
+                // Retrieves the list of property names for an object.
+                // \deprecated in favor of ak.wwise.core.object.getPropertyNames
                 static const char* getProperties =  "ak.wwise.core.plugin.getProperties";
             }
         } 
@@ -214,20 +199,14 @@ namespace ak {
             namespace project {
                 // Closes the current project.
                 static const char* close =  "ak.wwise.ui.project.close"; 
-                // Opens a project, specified by path. Please refer to \ref ak_wwise_core_project_loaded for further explanations on how to be notified when the operation has completed.
+                // Opens a project, specified by path.
                 static const char* open =  "ak.wwise.ui.project.open";
             } 
             // Bring Wwise main window to foreground. Refer to SetForegroundWindow and AllowSetForegroundWindow on MSDN for more information on the restrictions. Refer to ak.wwise.core.getInfo to obtain the Wwise process ID for AllowSetForegroundWindow.
             static const char* bringToForeground =  "ak.wwise.ui.bringToForeground"; 
             namespace commands {
-                // Unregister an array of add-on UI commands.
-                static const char* unregister =  "ak.wwise.ui.commands.unregister"; 
-                // Sent when a command is executed. The objects for which the command is executed are sent in the publication.
-                static const char* executed =  "ak.wwise.ui.commands.executed"; 
                 // Executes a command. Some commands can take a list of objects as parameter. Refer to \ref globalcommandsids for the available commands.
                 static const char* execute =  "ak.wwise.ui.commands.execute"; 
-                // Register an array of add-on UI commands.
-                static const char* register_ =  "ak.wwise.ui.commands.register"; 
                 // Get the list of commands.
                 static const char* getCommands =  "ak.wwise.ui.commands.getCommands";
             } 

@@ -21,7 +21,7 @@ under the Apache License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
 OR CONDITIONS OF ANY KIND, either express or implied. See the Apache License for
 the specific language governing permissions and limitations under the License.
 
-Version: v2018.1.4  Build: 6807
+Version: v2017.2.6  Build: 6636
 Copyright (c) 2006-2018 Audiokinetic Inc.
 *******************************************************************************/
 
@@ -75,7 +75,6 @@ struct AkImageSourceParams
 	AkImageSourceParams()
 		: fDistanceScalingFactor(1.f)
 		, fLevel(1.f)
-		, fDiffraction(0.f)
 	{
 		sourcePosition.X = 0.f;
 		sourcePosition.Y = 0.f;
@@ -86,16 +85,12 @@ struct AkImageSourceParams
 		: sourcePosition(in_sourcePosition)
 		, fDistanceScalingFactor(in_fDistanceScalingFactor)
 		, fLevel(in_fLevel)
-		, fDiffraction(0.f)
 	{
 	}
 
 	AkVector sourcePosition;					///< Image source position, relative to the world.
 	AkReal32 fDistanceScalingFactor;			///< Image source distance scaling. This number effectively scales the sourcePosition vector with respect to the listener and, consequently, scales distance and preserves orientation.
 	AkReal32 fLevel;							///< Game-controlled level for this source, linear.
-	AkReal32 fDiffraction;						///< Diffraction amount, normalized to the range [0,1].
-	bool bDiffractedEmitterSide;				///< Indicates if there is a shadow zone diffraction just after the emitter in the reflection path.
-	bool bDiffractedListenerSide;				///< Indicates if there is a shadow zone diffraction before reaching the listener in the reflection path.
 };
 
 struct AkReflectImageSource

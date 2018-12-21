@@ -26,9 +26,9 @@
 
 #endif
 
-#pragma comment( lib, "AK/DirectSound/dinput8.lib" )
-#pragma comment( lib, "AK/DirectSound/dsound.lib" ) 
-#pragma comment( lib, "AK/DirectSound/dxguid.lib" )
+#pragma comment( lib, "AK/dinput8.lib" )
+#pragma comment( lib, "AK/dsound.lib" ) 
+#pragma comment( lib, "AK/dxguid.lib" )
 
 // Wwise memory hooks
 // From wwise tutorial: https://www.audiokinetic.com/library/edge/?source=SDK&id=workingwithsdks__initialization.html

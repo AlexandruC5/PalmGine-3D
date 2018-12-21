@@ -9,7 +9,7 @@ may use this file in accordance with the end user license agreement provided
 with the software or, alternatively, in accordance with the terms contained in a
 written agreement between you and Audiokinetic Inc.
 
-  Version: v2018.1.4  Build: 6807
+  Version: v2017.2.6  Build: 6636
   Copyright (c) 2006-2018 Audiokinetic Inc.
 *******************************************************************************/
 //////////////////////////////////////////////////////////////////////
@@ -21,8 +21,8 @@ written agreement between you and Audiokinetic Inc.
 // on Windows.
 // 
 // AK::StreamMgr::IAkFileLocationResolver: 
-// Resolves file location using simple path concatenation logic.
-// It can be used as a 
+// Resolves file location using simple path concatenation logic 
+// (implemented in ../Common/CAkFileLocationBase). It can be used as a 
 // standalone Low-Level IO system, or as part of a multi device system. 
 // In the latter case, you should manage multiple devices by implementing 
 // AK::StreamMgr::IAkFileLocationResolver elsewhere (you may take a look 
@@ -113,8 +113,6 @@ AKRESULT CAkDefaultIOHookDeferred::Init(
 
 void CAkDefaultIOHookDeferred::Term()
 {
-	CAkMultipleFileLocation::Term();
-
 	if ( AK::StreamMgr::GetFileLocationResolver() == this )
 		AK::StreamMgr::SetFileLocationResolver( NULL );
 
@@ -146,16 +144,39 @@ AKRESULT CAkDefaultIOHookDeferred::Open(
 	if ( io_bSyncOpen || !m_bAsyncOpen )
 	{
 		io_bSyncOpen = true;
-		AKRESULT eResult = CAkMultipleFileLocation::Open(in_pszFileName, in_eOpenMode, in_pFlags, true, out_fileDesc);
-
-		if ( eResult == AK_Success )
+	
+	    // Get the full file path, using path concatenation logic.
+	    AkOSChar szFullFilePath[AK_MAX_PATH];
+	    if ( GetFullFilePath( in_pszFileName, in_pFlags, in_eOpenMode, szFullFilePath ) == AK_Success )
 		{
-			out_fileDesc.uSector			= 0;
-			out_fileDesc.deviceID			= m_deviceID;
-			out_fileDesc.pCustomParam		= ( in_eOpenMode == AK_OpenModeRead ) ? NULL : (void*)1;
-			out_fileDesc.uCustomParamSize	= 0;
+			// Open the file with FILE_FLAG_OVERLAPPED and FILE_FLAG_NO_BUFFERING flags.
+			AKRESULT eResult = CAkFileHelpers::OpenFile( 
+				szFullFilePath,
+				in_eOpenMode,
+				true,
+				true,
+				out_fileDesc.hFile );
+			if ( eResult == AK_Success )
+			{
+#ifdef AK_USE_UWP_API
+				FILE_STANDARD_INFO info;
+				::GetFileInformationByHandleEx( out_fileDesc.hFile, FileStandardInfo, &info, sizeof(info) );
+				out_fileDesc.iFileSize = info.EndOfFile.QuadPart;
+#else
+				ULARGE_INTEGER Temp;
+				Temp.LowPart = ::GetFileSize( out_fileDesc.hFile,(LPDWORD)&Temp.HighPart );
+
+				out_fileDesc.iFileSize			= Temp.QuadPart;
+#endif
+				out_fileDesc.uSector			= 0;
+				out_fileDesc.deviceID			= m_deviceID;
+				out_fileDesc.pCustomParam		= ( in_eOpenMode == AK_OpenModeRead ) ? NULL : (void*)1;
+				out_fileDesc.uCustomParamSize	= 0;
+			}
+			return eResult;
 		}
-		return eResult;
+	
+		return AK_Fail;
 	}
 	else
 	{
@@ -179,21 +200,45 @@ AKRESULT CAkDefaultIOHookDeferred::Open(
     AkFileDesc &    out_fileDesc        // Returned file descriptor.
     )
 {
-	AKRESULT eResult = AK_Success;
 	// We normally consider that calls to ::CreateFile() on a hard drive are fast enough to execute in the
 	// client thread. If you want files to be opened asynchronously when it is possible, this device should 
 	// be initialized with the flag in_bAsyncOpen set to true.
 	if ( io_bSyncOpen || !m_bAsyncOpen )
 	{
 		io_bSyncOpen = true;
-		eResult = CAkMultipleFileLocation::Open(in_fileID, in_eOpenMode, in_pFlags, true, out_fileDesc);
-		if ( eResult == AK_Success )
+	
+	    // Get the full file path, using path concatenation logic.
+	    AkOSChar szFullFilePath[AK_MAX_PATH];
+	    if ( GetFullFilePath( in_fileID, in_pFlags, in_eOpenMode, szFullFilePath ) == AK_Success )
 		{
-			out_fileDesc.uSector			= 0;
-			out_fileDesc.deviceID			= m_deviceID;
-			out_fileDesc.pCustomParam		= NULL;
-			out_fileDesc.uCustomParamSize	= 0;
+			// Open the file with FILE_FLAG_OVERLAPPED and FILE_FLAG_NO_BUFFERING flags.
+			AKRESULT eResult = CAkFileHelpers::OpenFile( 
+				szFullFilePath,
+				in_eOpenMode,
+				true,
+				true,
+				out_fileDesc.hFile );
+			if ( eResult == AK_Success )
+			{
+#ifdef AK_USE_UWP_API
+				FILE_STANDARD_INFO info;
+				::GetFileInformationByHandleEx( out_fileDesc.hFile, FileStandardInfo, &info, sizeof(info) );
+				out_fileDesc.iFileSize = info.EndOfFile.QuadPart;
+#else
+				ULARGE_INTEGER Temp;
+				Temp.LowPart = ::GetFileSize( out_fileDesc.hFile,(LPDWORD)&Temp.HighPart );
+
+				out_fileDesc.iFileSize			= Temp.QuadPart;
+#endif
+				out_fileDesc.uSector			= 0;
+				out_fileDesc.deviceID			= m_deviceID;
+				out_fileDesc.pCustomParam		= NULL;
+				out_fileDesc.uCustomParamSize	= 0;
+			}
+			return eResult;
 		}
+	
+		return AK_Fail;
 	}
 	else
 	{
@@ -204,9 +249,8 @@ AKRESULT CAkDefaultIOHookDeferred::Open(
 		out_fileDesc.deviceID			= m_deviceID;
 		out_fileDesc.pCustomParam		= NULL;
 		out_fileDesc.uCustomParamSize	= 0;
+		return AK_Success;
 	}
-
-	return eResult;
 }
 
 //

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="11" SoundbankVersion="132">
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="11" SoundbankVersion="128">
 	<RootPaths>
-		<ProjectRoot>D:\Documentos\WwiseProjects\Assignment3\</ProjectRoot>
-		<SourceFilesRoot>D:\Documentos\WwiseProjects\Assignment3\.cache\Windows\</SourceFilesRoot>
+		<ProjectRoot>D:\Documentos\WwiseProjects\Assignment3_2017v\</ProjectRoot>
+		<SourceFilesRoot>D:\Documentos\WwiseProjects\Assignment3_2017v\.cache\Windows\</SourceFilesRoot>
 		<SoundBanksRoot>D:\Proyectos GitHub\PalmGine-3D\3D Engine\Game\SoundBanks\</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>D:\Documentos\WwiseProjects\Assignment3\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>D:\Documentos\WwiseProjects\Assignment3_2017v\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<StreamedFiles/>
@@ -16,37 +16,27 @@
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 		</SoundBank>
-		<SoundBank Id="1860126629" Language="SFX">
-			<ObjectPath>\SoundBanks\Default Work Unit\Assignment3</ObjectPath>
-			<ShortName>Assignment3</ShortName>
-			<Path>Assignment3.bnk</Path>
+		<SoundBank Id="4072029455" Language="SFX">
+			<ObjectPath>\SoundBanks\Default Work Unit\New_SoundBank</ObjectPath>
+			<ShortName>New_SoundBank</ShortName>
+			<Path>New_SoundBank.bnk</Path>
 			<IncludedEvents>
-				<Event Id="3841200954" Name="fireball" ObjectPath="\Events\Default Work Unit\fireball"/>
 				<Event Id="2607198564" Name="music_TheDillards_Dooley" ObjectPath="\Events\Default Work Unit\music_TheDillards_Dooley"/>
 				<Event Id="3585407402" Name="music_TheGrowlers_GoingGetsTuff" ObjectPath="\Events\Default Work Unit\music_TheGrowlers_GoingGetsTuff"/>
-				<Event Id="1110712645" Name="music_TheGrowlers_GoingGetsTuff_stereo" ObjectPath="\Events\Default Work Unit\music_TheGrowlers_GoingGetsTuff_stereo"/>
 				<Event Id="3412057565" Name="train" ObjectPath="\Events\Default Work Unit\train"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
-				<File Id="248768372" Language="SFX">
-					<ShortName>The Growlers-Going Gets Tuff MONO.wav</ShortName>
-					<Path>SFX\The Growlers-Going Gets Tuff MONO_56D34C19.wem</Path>
-				</File>
-				<File Id="270557088" Language="SFX">
-					<ShortName>Fireball_Impact.wav</ShortName>
-					<Path>SFX\Fireball_Impact_56D34C19.wem</Path>
-				</File>
-				<File Id="422655339" Language="SFX">
-					<ShortName>The Dillards - Dooley.wav</ShortName>
-					<Path>SFX\The Dillards - Dooley_56D34C19.wem</Path>
-				</File>
-				<File Id="554279214" Language="SFX">
-					<ShortName>train.wav</ShortName>
-					<Path>SFX\train_56D34C19.wem</Path>
-				</File>
-				<File Id="838024055" Language="SFX">
+				<File Id="5030772" Language="SFX">
 					<ShortName>The Growlers-Going Gets Tuff.wav</ShortName>
-					<Path>SFX\The Growlers-Going Gets Tuff_56D34C19.wem</Path>
+					<Path>SFX\The Growlers-Going Gets Tuff_1C9C67B2.wem</Path>
+				</File>
+				<File Id="352902853" Language="SFX">
+					<ShortName>The Dillards - Dooley.wav</ShortName>
+					<Path>SFX\The Dillards - Dooley_1C9C67B2.wem</Path>
+				</File>
+				<File Id="496129679" Language="SFX">
+					<ShortName>train.wav</ShortName>
+					<Path>SFX\train_1C9C67B2.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
