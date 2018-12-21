@@ -234,7 +234,7 @@ void PanelInspector::Draw()
 					}
 
 					float volume = audio_source->GetVolume();
-					if (ImGui::SliderFloat("Volume", &volume, 0,1)) {
+					if (ImGui::SliderFloat("Volume", &volume, 0, 10)) {
 						audio_source->SetVolume(volume);
 					}
 
