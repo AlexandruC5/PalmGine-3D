@@ -24,6 +24,7 @@
 				<Event Id="3841200954" Name="fireball" ObjectPath="\Events\Default Work Unit\fireball"/>
 				<Event Id="2607198564" Name="music_TheDillards_Dooley" ObjectPath="\Events\Default Work Unit\music_TheDillards_Dooley"/>
 				<Event Id="3585407402" Name="music_TheGrowlers_GoingGetsTuff" ObjectPath="\Events\Default Work Unit\music_TheGrowlers_GoingGetsTuff"/>
+				<Event Id="1110712645" Name="music_TheGrowlers_GoingGetsTuff_stereo" ObjectPath="\Events\Default Work Unit\music_TheGrowlers_GoingGetsTuff_stereo"/>
 				<Event Id="3412057565" Name="train" ObjectPath="\Events\Default Work Unit\train"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
@@ -42,6 +43,10 @@
 				<File Id="554279214" Language="SFX">
 					<ShortName>train.wav</ShortName>
 					<Path>SFX\train_56D34C19.wem</Path>
+				</File>
+				<File Id="838024055" Language="SFX">
+					<ShortName>The Growlers-Going Gets Tuff.wav</ShortName>
+					<Path>SFX\The Growlers-Going Gets Tuff_56D34C19.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
