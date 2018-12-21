@@ -303,6 +303,17 @@ uint ModuleSceneIntro::GetSceneSize(GameObject* go, uint* go_num)
 			size += ((CompCamera*)go->components[i])->GetSize();
 			break;
 		}
+		case COMP_TYPE::C_AUDIOLISTENER:
+		{
+			size += ((CompAudioListener*)go->components[i])->GetSize();
+			break;
+		}
+		case COMP_TYPE::C_AUDIO_SOURCE:
+		{
+			size += ((CompAudioListener*)go->components[i])->GetSize();
+			break;
+		}
+		// serialization
 		}
 	}
 	for (uint i = 0; i < go->GetNumChilds(); i++)
@@ -398,7 +409,18 @@ void ModuleSceneIntro::CreateData(char ** cursor, GameObject * go)
 			((CompCamera*)go->components[i])->WriteComponentData(cursor);
 			break;
 		}
+		case COMP_TYPE::C_AUDIOLISTENER:
+		{
+			((CompAudioListener*)go->components[i])->WriteComponentData(cursor);
+			break;
 		}
+		case COMP_TYPE::C_AUDIO_SOURCE:
+		{
+			((CompAudioSource*)go->components[i])->WriteComponentData(cursor);
+			break;
+		}
+		}
+		// serialization
 	}
 	for (uint i = 0; i < go->childs.size(); i++)
 	{
@@ -543,7 +565,6 @@ void ModuleSceneIntro::LoadSceneData(const char * path)
 					mesh_comp->rmesh = (ResourceMesh*)App->resource_manager->resources[mesh_uuid];
 					mesh_comp->rmesh->already_loaded++;
 				}
-			
 				break;
 			}
 			case COMP_TYPE::C_MATERIAL:
@@ -590,7 +611,18 @@ void ModuleSceneIntro::LoadSceneData(const char * path)
 					camera = go;
 				break;
 			}
-			}	
+			case COMP_TYPE::C_AUDIOLISTENER:
+			{
+				//Add C_AUDIOLISTENER parameters
+				break;
+			}
+			case COMP_TYPE::C_AUDIO_SOURCE:
+			{
+				//Add C_AUDIO_SOURCE parameters
+				break;
+			}
+			}
+			// serialization
 		}
 		go_list.push_back(go);
 	}
@@ -603,7 +635,6 @@ void ModuleSceneIntro::LoadSceneData(const char * path)
 	{
 		if (go_list[i]->GetParentUUID() == 0)
 		{
-			//root_gameObjects->AddChild(go_list[i]);
 			root_gameObjects = go_list[i];
 		}
 		uint current_uuid = go_list[i]->GetUUID();
