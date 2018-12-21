@@ -138,6 +138,7 @@
     <ClInclude Include="CompCamera.h" />
     <ClInclude Include="CompMaterial.h" />
     <ClInclude Include="CompMesh.h" />
+    <ClInclude Include="CompMovement.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CompTransform.h" />
     <ClInclude Include="Devil\include\config.h" />
@@ -263,6 +264,7 @@
     <ClCompile Include="CompCamera.cpp" />
     <ClCompile Include="CompMaterial.cpp" />
     <ClCompile Include="CompMesh.cpp" />
+    <ClCompile Include="CompMovement.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CompTransform.cpp" />
     <ClCompile Include="GameObject.cpp" />

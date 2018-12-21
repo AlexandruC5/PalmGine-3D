@@ -9,6 +9,7 @@
 #include "CompCamera.h"
 #include "CompAudioListener.h"
 #include "CompAudioSource.h"
+#include "CompMovement.h"
 #include "ImGuizmo-master/ImGuizmo.h"
 #include "ModuleInput.h"
 #include "GameObject.h"
@@ -61,6 +62,7 @@ void PanelInspector::Draw()
 			CompCamera* camera = selected_go->GetCompCamera();
 			CompAudioListener* audio_listener = selected_go->GetCompAudioListener();
 			CompAudioSource* audio_source = selected_go->GetCompAudioSource();
+			CompMovement* comp_movement = selected_go->GetCompMovement();
 
 			if (mesh != nullptr) {
 				//SetStatic
@@ -267,6 +269,11 @@ void PanelInspector::Draw()
 						audio_source->SetMaxDistance(max_distance);
 					}
 					
+				}
+			}
+
+			if (comp_movement != nullptr) {
+				if (ImGui::CollapsingHeader("Movement")) {
 				}
 			}
 

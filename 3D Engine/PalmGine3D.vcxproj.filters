@@ -565,6 +565,9 @@
     <ClInclude Include="CompAudioSource.h">
       <Filter>Sources\Modules\Scene\Components</Filter>
     </ClInclude>
+    <ClInclude Include="CompMovement.h">
+      <Filter>Sources\Modules\Scene\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -820,9 +823,6 @@
     <ClCompile Include="AK\Common\AkFilePackageLUT.cpp">
       <Filter>Sources\Tools\wwise\wwise_libs</Filter>
     </ClCompile>
-    <ClCompile Include="AK\Common\AkMultipleFileLocation.cpp">
-      <Filter>Sources\Tools\wwise\wwise_libs</Filter>
-    </ClCompile>
     <ClCompile Include="WwiseT.cpp">
       <Filter>Sources\Tools\wwise</Filter>
     </ClCompile>
@@ -830,6 +830,9 @@
       <Filter>Sources\Modules\Scene\Components</Filter>
     </ClCompile>
     <ClCompile Include="CompAudioSource.cpp">
+      <Filter>Sources\Modules\Scene\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CompMovement.cpp">
       <Filter>Sources\Modules\Scene\Components</Filter>
     </ClCompile>
   </ItemGroup>

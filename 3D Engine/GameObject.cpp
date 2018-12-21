@@ -206,6 +206,11 @@ CompAudioSource* GameObject::GetCompAudioSource() const
 	return (CompAudioSource*)FindComponent(COMP_TYPE::C_AUDIO_SOURCE);
 }
 
+CompMovement* GameObject::GetCompMovement() const
+{
+	return  (CompMovement*)FindComponent(COMP_TYPE::C_MOVEMENT);
+}
+
 Component * GameObject::AddEmptyComponent(COMP_TYPE type)
 {
 	if (CompAlreadyExists(type))
