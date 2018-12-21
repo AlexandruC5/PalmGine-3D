@@ -17,7 +17,7 @@ bool ModuleAudio::Start()
 {
 	// Init wwise and audio banks
 	WwiseT::InitSoundEngine();
-	WwiseT::LoadBank("New_SoundBank.bnk");
+	WwiseT::LoadBank("Assignment3.bnk");
 	
 	//TODO delete test sound
 	test2 = WwiseT::CreateAudSource("test");
