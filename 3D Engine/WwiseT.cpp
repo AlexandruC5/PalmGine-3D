@@ -131,7 +131,7 @@ bool WwiseT::InitSoundEngine()
 	if (res == AK_Fail)
 		assert(!"Invalid language!");
 
-	// Init RTPCs to 0
+	// Init RTPCs
 	AK::SoundEngine::SetRTPCValue("Pitch", 0, AK_INVALID_GAME_OBJECT);
 	AK::SoundEngine::SetRTPCValue("PanLeft", 0, AK_INVALID_GAME_OBJECT);
 	AK::SoundEngine::SetRTPCValue("PanRight", 0, AK_INVALID_GAME_OBJECT);

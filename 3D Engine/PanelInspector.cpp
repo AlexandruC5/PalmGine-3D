@@ -248,13 +248,13 @@ void PanelInspector::Draw()
 						audio_source->SetPitch(pitch);
 					}
 
-					int stereo_pan_r = audio_source->GetStereoPanRight();
-					if (ImGui::SliderInt("Pan Left cancellation", &stereo_pan_r, 0, 100)) {
-						audio_source->SetStereoPanRight(stereo_pan_r);
-					}
 					int stereo_pan_l = audio_source->GetStereoPanLeft();
-					if (ImGui::SliderInt("Pan Right cancellation", &stereo_pan_l, 0, 100)) {
+					if (ImGui::SliderInt("Pan Left difference", &stereo_pan_l, 0, 100)) {
 						audio_source->SetStereoPanLeft(stereo_pan_l);
+					}
+					int stereo_pan_r = audio_source->GetStereoPanRight();
+					if (ImGui::SliderInt("Pan Right difference", &stereo_pan_r, 0, 100)) {
+						audio_source->SetStereoPanRight(stereo_pan_r);
 					}
 					
 					float min_distance = audio_source->GetMinDistance();
