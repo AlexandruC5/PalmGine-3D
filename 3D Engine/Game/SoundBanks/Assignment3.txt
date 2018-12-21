@@ -3,6 +3,19 @@ Event	ID	Name			Wwise Object Path	Notes
 	3412057565	train			\Default Work Unit\train	
 	3585407402	music_TheGrowlers_GoingGetsTuff			\Default Work Unit\music_TheGrowlers_GoingGetsTuff	
 
+State Group	ID	Name			Wwise Object Path	Notes
+	128914588	swap_music			\Default Work Unit\swap_music	
+
+State	ID	Name	State Group			Notes
+	0	None	swap_music			
+	930712164	Off	swap_music			
+	1651971902	On	swap_music			
+
+Custom State	ID	Name	State Group	Owner		Notes
+	454330767	Off	swap_music	\Actor-Mixer Hierarchy\Default Work Unit\The Dillards - Dooley		
+	702550394	Off	swap_music	\Actor-Mixer Hierarchy\Default Work Unit\The Growlers-Going Gets Tuff		
+	833841005	Off	swap_music	\Actor-Mixer Hierarchy\Default Work Unit\tunnel\train		
+
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	5030772	The Growlers-Going Gets Tuff	D:\Documentos\WwiseProjects\Assignment3_2017v\.cache\Windows\SFX\The Growlers-Going Gets Tuff_1C9C67B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\The Growlers-Going Gets Tuff		36845820
 	352902853	The Dillards - Dooley	D:\Documentos\WwiseProjects\Assignment3_2017v\.cache\Windows\SFX\The Dillards - Dooley_1C9C67B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\The Dillards - Dooley		10850368

@@ -194,6 +194,11 @@ WwiseT::AudioSource* WwiseT::CreateAudSource(const char * name)
 	return src;
 }
 
+void WwiseT::StopAllEvents()
+{
+	AK::SoundEngine::StopAll();
+}
+
 WwiseT::AudioSource::AudioSource(const char* event_name)
 {
 	id = GenRandomNumber();

@@ -75,6 +75,7 @@ namespace WwiseT
 	void SetDefaultListener(uint id);
 	// Utils
 	AudioSource* CreateAudSource(const char* name);
+	void StopAllEvents();
 }
 // Make wwise methods here :)
 // We will access all the functions in the engine from here

@@ -38,7 +38,11 @@ update_status ModuleAudio::Update(float dt)
 	}
 	if ((App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN))
 	{
-		test2->ChangeState("MusicState", "Off");
+		test2->ChangeState("swap_music", "Off");
+	}
+	if ((App->input->GetKey(SDL_SCANCODE_B) == KEY_DOWN))
+	{
+		WwiseT::StopAllEvents();
 	}
 	return UPDATE_CONTINUE;
 }
