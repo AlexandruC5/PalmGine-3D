@@ -133,6 +133,8 @@ bool WwiseT::InitSoundEngine()
 
 	// Init pitch to 0
 	AK::SoundEngine::SetRTPCValue("Pitch", 0, AK_INVALID_GAME_OBJECT);
+	AK::SoundEngine::SetRTPCValue("PanLeft", 0, AK_INVALID_GAME_OBJECT);
+	AK::SoundEngine::SetRTPCValue("PanRight", 0, AK_INVALID_GAME_OBJECT);
 	return true;
 }
 
@@ -246,6 +248,16 @@ void WwiseT::AudioSource::ResumeEventByName(const char * name)
 void WwiseT::AudioSource::SetVolume(float new_volume)
 {
 	AK::SoundEngine::SetGameObjectOutputBusVolume(id, AK_INVALID_GAME_OBJECT, new_volume);
+}
+
+void WwiseT::AudioSource::SetPanLeft(float value)
+{
+	AK::SoundEngine::SetRTPCValue("PanLeft", value, id);
+}
+
+void WwiseT::AudioSource::SetPanRight(float value)
+{
+	AK::SoundEngine::SetRTPCValue("PanRight", value, id);
 }
 
 void WwiseT::AudioSource::SetMono()

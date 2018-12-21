@@ -81,9 +81,13 @@ float CompAudioSource::GetPitch()const
 {
 	return pitch;
 }
-int CompAudioSource::GetStereoPan()const
+int CompAudioSource::GetStereoPanLeft()const
 {
-	return stereo_pan;
+	return stereo_pan_l;
+}
+int CompAudioSource::GetStereoPanRight()const
+{
+	return stereo_pan_r;
 }
 float CompAudioSource::GetMinDistance()const
 {
@@ -147,9 +151,16 @@ void CompAudioSource::SetPitch(float desired_pitch)
 	pitch = desired_pitch;
 	source->SetPitch(pitch);
 }
-void CompAudioSource::SetStereoPan(int desired_stereo_pan)
+void CompAudioSource::SetStereoPanLeft(float desired_stereo_pan)
 {
-	stereo_pan = desired_stereo_pan;
+	stereo_pan_l = desired_stereo_pan;
+	source->SetPanLeft(desired_stereo_pan);
+}
+
+void CompAudioSource::SetStereoPanRight(float desired_stereo_pan)
+{
+	stereo_pan_r = desired_stereo_pan;
+	source->SetPanRight(desired_stereo_pan);
 }
 void CompAudioSource::SetMinDistance(float desired_min_distance)
 {

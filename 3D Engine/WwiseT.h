@@ -56,6 +56,8 @@ namespace WwiseT
 		void PauseEventByName(const char* name);
 		void ResumeEventByName(const char* name);
 		void SetVolume(float new_volume);
+		void SetPanLeft(float value);
+		void SetPanRight(float value);
 		void SetMono();
 		void SetStereo();
 		void SetPitch(float value);

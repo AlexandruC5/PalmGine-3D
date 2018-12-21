@@ -28,15 +28,15 @@
 			<IncludedMemoryFiles>
 				<File Id="5030772" Language="SFX">
 					<ShortName>The Growlers-Going Gets Tuff.wav</ShortName>
-					<Path>SFX\The Growlers-Going Gets Tuff_1C9C67B2.wem</Path>
+					<Path>SFX\The Growlers-Going Gets Tuff_F17FB28C.wem</Path>
 				</File>
 				<File Id="352902853" Language="SFX">
 					<ShortName>The Dillards - Dooley.wav</ShortName>
-					<Path>SFX\The Dillards - Dooley_1C9C67B2.wem</Path>
+					<Path>SFX\The Dillards - Dooley_F17FB28C.wem</Path>
 				</File>
 				<File Id="496129679" Language="SFX">
 					<ShortName>train.wav</ShortName>
-					<Path>SFX\train_1C9C67B2.wem</Path>
+					<Path>SFX\train_F17FB28C.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>

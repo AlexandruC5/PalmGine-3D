@@ -26,7 +26,8 @@ public:
 	float GetVolume()const;
 	bool isMono()const;
 	float GetPitch()const;
-	int GetStereoPan()const;
+	int GetStereoPanLeft()const;
+	int GetStereoPanRight()const;
 	float GetMinDistance()const;
 	float GetMaxDistance()const;
 
@@ -40,7 +41,8 @@ public:
 	void SetVolume(float desired_volume);
 	void SetMono(bool must_mono);
 	void SetPitch(float desired_pitch);
-	void SetStereoPan(int desired_stereo_pan);
+	void SetStereoPanLeft(float desired_stereo_pan);
+	void SetStereoPanRight(float desired_stereo_pan);
 	void SetMinDistance(float desired_min_distance);
 	void SetMaxDistance(float desired_max_distance);
 
@@ -64,10 +66,10 @@ private:
 	float volume = 1;
 	bool mono = false;
 	float pitch = 0.0f;
-	int stereo_pan = 0;
+	float stereo_pan_l = 0.0f;
+	float stereo_pan_r = 0.0f;
 	float min_distance = 1.0f;
 	float max_distance = 500.0f;
-
 };
 
 #endif // !COMAUDIOSOURCE_H
