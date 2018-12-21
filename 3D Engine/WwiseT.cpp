@@ -131,6 +131,8 @@ bool WwiseT::InitSoundEngine()
 	if (res == AK_Fail)
 		assert(!"Invalid language!");
 
+	// Init pitch to 0
+	AK::SoundEngine::SetRTPCValue("Pitch", 0, AK_INVALID_GAME_OBJECT);
 	return true;
 }
 

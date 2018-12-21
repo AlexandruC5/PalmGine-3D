@@ -244,7 +244,7 @@ void PanelInspector::Draw()
 					}
 
 					float pitch = audio_source->GetPitch();
-					if (ImGui::SliderFloat("Pitch", &pitch, -3, 3)) {
+					if (ImGui::SliderFloat("Pitch", &pitch, 0, 100)) {
 						audio_source->SetPitch(pitch);
 					}
 
