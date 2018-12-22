@@ -16,10 +16,16 @@ public:
 
 	// Set listener
 	WwiseT::AudioSource* CreateSoundEmitter(const char * name);
-	WwiseT::AudioSource* listener;
+	uint GetListenerID()const;
+	
+	//
+	void Stop()const;
+	void Pause()const;
+	void Resume()const;
 	
 private:
 	std::list<WwiseT::AudioSource*> event_list;
+	WwiseT::AudioSource* listener;
 };
 
 #endif // !MODULEAUDIO_H

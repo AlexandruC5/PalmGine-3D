@@ -35,3 +35,21 @@ WwiseT::AudioSource * ModuleAudio::CreateSoundEmitter(const char * name)
 	event_list.push_back(ret);
 	return ret;
 }
+
+uint ModuleAudio::GetListenerID() const
+{
+	return listener->GetID();
+}
+
+void ModuleAudio::Stop() const
+{
+
+}
+
+void ModuleAudio::Pause() const
+{
+}
+
+void ModuleAudio::Resume() const
+{
+}
