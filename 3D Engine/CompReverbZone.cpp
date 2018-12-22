@@ -16,7 +16,10 @@ CompReverbZone::~CompReverbZone()
 void CompReverbZone::Update(float dt)
 {
 	sphere.pos = parent->GetCompTransform()->GetPosition();
-	cube.pos = parent->GetCompTransform()->GetPosition();
+	AABB box = sphere.MinimalEnclosingAABB();
+	OBB boundingBox(box);
+	box.Transform(parent->GetCompTransform()->GetTransformationMatrix());
+	cube = boundingBox;
 
 	if (use_sphere == true) {
 		DebugDrawSphere();
@@ -76,7 +79,6 @@ void CompReverbZone::SetRadius(float rad)
 {
 	radius = rad;
 	sphere.r = rad;
-	cube.r = math::float3(rad,rad,rad);
 }
 void CompReverbZone::ShouldUseSphere(bool should_use)
 {
@@ -130,7 +132,7 @@ void CompReverbZone::DebugDrawCube()
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glBegin(GL_QUADS);
 	glLineWidth(5.0f);
-	glColor4f(1.f, 1.f, 0.f, 1.f);
+	glColor3f(2.0f, 2.0f, 2.0f);
 
 	float3 vertices[8];
 	cube.GetCornerPoints(vertices);
