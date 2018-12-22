@@ -4,6 +4,7 @@
 #include "Component.h"
 #include "Globals.h"
 #include "WwiseT.h"
+#include "Timer.h"
 
 class GameObject;
 
@@ -31,6 +32,7 @@ public:
 	int GetStereoPanRight()const;
 	float GetMinDistance()const;
 	float GetMaxDistance()const;
+	float GetMusicSwapTime()const;
 
 	//Seters
 	void SetAudio(const char* audio);
@@ -46,6 +48,7 @@ public:
 	void SetStereoPanRight(float desired_stereo_pan);
 	void SetMinDistance(float desired_min_distance);
 	void SetMaxDistance(float desired_max_distance);
+	void SetMusicSwapTimer(float new_time);
 
 	void PlayAudio();
 	void PauseAudio();
@@ -76,6 +79,9 @@ private:
 	float min_distance = 1.0f;
 	float max_distance = 500.0f;
 	std::string audio_to_play;
+	Timer timer;
+	float time_to_swap = 30.0f;
+	int current_state = 1;
 };
 
 #endif // !COMAUDIOSOURCE_H

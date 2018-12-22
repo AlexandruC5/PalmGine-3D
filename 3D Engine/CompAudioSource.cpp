@@ -8,6 +8,7 @@ CompAudioSource::CompAudioSource(GameObject * parent, COMP_TYPE type, const char
 {
 	source = App->audio->CreateSoundEmitter(name);
 	App->audio->audio_sources.push_back(this);
+	timer.Start();
 }
 
 CompAudioSource::CompAudioSource(GameObject * parent, COMP_TYPE type) : Component(parent, type)
@@ -26,6 +27,19 @@ void CompAudioSource::Update(float dt)
 	UpdateSourcePos();
 
 	DebugDraw();
+
+	if (timer.Read()/1000 >= time_to_swap) {
+		if (current_state == 1) {
+			source->ChangeState("swap_music", "state2");
+			current_state = 2;
+			timer.Start();
+		}
+		else {
+			source->ChangeState("swap_music", "state1");
+			current_state = 1;
+			timer.Start();
+		}
+	}
 }
 
 void CompAudioSource::UpdateSourcePos()
@@ -98,10 +112,20 @@ float CompAudioSource::GetMaxDistance()const
 	return max_distance;
 }
 
+float CompAudioSource::GetMusicSwapTime()const
+{
+	return time_to_swap;
+}
+
 //Setters
 void CompAudioSource::SetAudio(const char* audio)
 {
 	audio_to_play = audio;
+	if (audio == "background_tracks") {
+		source->ChangeState("swap_music", "state2");
+		current_state = 2;
+		timer.Start();
+	}
 }
 void CompAudioSource::SetMuted(bool must_mute)
 {
@@ -170,6 +194,11 @@ void CompAudioSource::SetMinDistance(float desired_min_distance)
 void CompAudioSource::SetMaxDistance(float desired_max_distance)
 {
 	max_distance = desired_max_distance;
+}
+
+void CompAudioSource::SetMusicSwapTimer(float new_time)
+{
+	time_to_swap = new_time;
 }
 
 void CompAudioSource::PlayAudio()

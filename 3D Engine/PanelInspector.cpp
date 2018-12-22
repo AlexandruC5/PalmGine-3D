@@ -203,7 +203,10 @@ void PanelInspector::Draw()
 					if (ImGui::InputText("AudioClip", text, 100, ImGuiInputTextFlags_AutoSelectAll | ImGuiInputTextFlags_EnterReturnsTrue)) {
 						audio_source->SetAudio(text);
 					}
-
+					float time_to_swap = audio_source->GetMusicSwapTime();
+					if (ImGui::SliderFloat("Time to swap music", &time_to_swap, 1.0f, 30.0f)) {
+						audio_source->SetMusicSwapTimer(time_to_swap);
+					}
 					if (ImGui::Button("Play")) {
 						audio_source->PlayAudio();
 					}

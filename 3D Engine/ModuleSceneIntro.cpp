@@ -63,7 +63,7 @@ bool ModuleSceneIntro::Start()
 	CompAudioSource* a_source = new CompAudioSource(camera, COMP_TYPE::C_AUDIO_SOURCE, "Source1");
 	a_source->SetAudio("background_tracks");
 	// Swap state
-	a_source->source->ChangeState("swap_music", "state2");
+	//a_source->source->ChangeState("swap_music", "state2");
 	
 	camera->AddComponent(a_source);
 
