@@ -15,13 +15,9 @@ public:
 	update_status PostUpdate(float dt);
 
 	// Set listener
-	// Create emmiter
-	// Delete emmiter
-	
-	WwiseT::AudioSource* test1 = nullptr;
-	WwiseT::AudioSource* test2 = nullptr;
+	WwiseT::AudioSource* CreateSoundEmitter(const char * name);
 	WwiseT::AudioSource* listener;
-
+	
 private:
 	std::list<WwiseT::AudioSource*> event_list;
 };

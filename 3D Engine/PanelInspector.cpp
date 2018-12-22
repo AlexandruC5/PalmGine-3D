@@ -217,19 +217,9 @@ void PanelInspector::Draw()
 						audio_source->SetMuted(muted);
 					}
 
-					bool bypass_effects = audio_source->GetBypassEffects();
-					if (ImGui::Checkbox("ByPass Effects", &bypass_effects)) {
-						audio_source->SetBypassEffects(bypass_effects);
-					}
-
 					bool play_on_awake = audio_source->GetPlayOnAwake();
 					if (ImGui::Checkbox("Play On Awake", &play_on_awake)) {
 						audio_source->SetPlayOnAwake(play_on_awake);
-					}
-
-					bool loop = audio_source->isInLoop();
-					if (ImGui::Checkbox("Loop", &loop)) {
-						audio_source->SetLoop(loop);
 					}
 
 					int priority = audio_source->GetPriority();

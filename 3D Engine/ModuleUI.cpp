@@ -74,8 +74,7 @@ ModuleUI::ModuleUI(bool start_enabled)
 }
 
 ModuleUI::~ModuleUI()
-{
-}
+{}
 
 bool ModuleUI::Start()
 {

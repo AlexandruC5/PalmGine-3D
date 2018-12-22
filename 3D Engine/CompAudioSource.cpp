@@ -6,15 +6,17 @@
 
 CompAudioSource::CompAudioSource(GameObject * parent, COMP_TYPE type, const char* name) : Component(parent, type)
 {
-	source = WwiseT::CreateAudSource(name);
+	source = App->audio->CreateSoundEmitter(name);
 }
 
 CompAudioSource::CompAudioSource(GameObject * parent, COMP_TYPE type) : Component(parent, type)
 {
+	source = App->audio->CreateSoundEmitter("");
 }
 
 CompAudioSource::~CompAudioSource()
 {
+	delete source;
 	audio_to_play.clear();
 }
 
@@ -27,7 +29,6 @@ void CompAudioSource::Update(float dt)
 
 void CompAudioSource::UpdateSourcePos()
 {
-	
 	CompTransform* transformation = parent->GetCompTransform();
 
 	if (transformation != nullptr) 
@@ -40,7 +41,6 @@ void CompAudioSource::UpdateSourcePos()
 
 		source->SetPos(vector_pos.x, vector_pos.y, vector_pos.z, vector_front.x, vector_front.y, vector_front.z, vector_up.x, vector_up.y, vector_up.z);
 	}
-
 }
 
 //Getters
@@ -105,7 +105,8 @@ void CompAudioSource::SetAudio(const char* audio)
 void CompAudioSource::SetMuted(bool must_mute)
 {
 	mute = must_mute;
-	if (mute == true) {
+	if (mute == true) 
+	{
 		source->SetVolume(0);
 	}
 	else {

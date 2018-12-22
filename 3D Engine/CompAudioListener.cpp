@@ -6,14 +6,13 @@
 
 CompAudioListener::CompAudioListener(GameObject * parent, COMP_TYPE type) : Component(parent, type)
 {
-	listener = WwiseT::CreateAudSource("listener");
+	listener = App->audio->CreateSoundEmitter("listener");
 	WwiseT::SetDefaultListener(listener->GetID());
 }
 
 CompAudioListener::~CompAudioListener()
 {
 	delete listener;
-	WwiseT::SetDefaultListener(App->audio->test2->GetID());
 }
 
 void CompAudioListener::Update(float dt)
@@ -81,8 +80,8 @@ void CompAudioListener::WriteComponentData(char ** cursor)
 	cursor[0] += bytes;
 }
 
-void CompAudioListener::DebugDraw() {
-
+void CompAudioListener::DebugDraw() 
+{
 	math::Sphere sphere;
 
 	sphere.pos = parent->GetCompTransform()->GetPosition();
