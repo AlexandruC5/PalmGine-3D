@@ -37,7 +37,7 @@ private:
 	bool going_a = true;
 	bool going_b = false;
 
-	int velocity = 1;
+	int velocity = 5;
 };
 
 #endif // !COMPMOVEMENT_H

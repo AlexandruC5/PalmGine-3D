@@ -4,8 +4,8 @@
 
 CompMovement::CompMovement(GameObject * parent, COMP_TYPE type) : Component(parent, type)
 {
-	pos_a = math::float3(5, parent->GetCompTransform()->GetPosition().y, parent->GetCompTransform()->GetPosition().z);
-	pos_b = math::float3(-5, parent->GetCompTransform()->GetPosition().y, parent->GetCompTransform()->GetPosition().z);
+	pos_a = math::float3(10, parent->GetCompTransform()->GetPosition().y, parent->GetCompTransform()->GetPosition().z);
+	pos_b = math::float3(-10, parent->GetCompTransform()->GetPosition().y, parent->GetCompTransform()->GetPosition().z);
 }
 
 CompMovement::~CompMovement()
