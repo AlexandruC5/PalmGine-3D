@@ -55,39 +55,6 @@ bool ModuleSceneIntro::Start()
 	camera->SetName("MainCamera");
 	CompCamera* cameracomp = new CompCamera(camera, COMP_TYPE::C_CAMERA);
 	camera->AddComponent(cameracomp);
-	
-	//Listener
-	CompAudioListener* a_listener =  new CompAudioListener(camera, COMP_TYPE::C_AUDIOLISTENER);
-	
-	GameObject* listener = new GameObject(root_gameObjects);
-	listener->SetName("Listener");
-	listener->GetCompTransform()->SetPosition(math::float3(0, 1, 0));
-	listener->AddComponent(a_listener);
-	//TODO DeleteAudioSourceFromHere
-
-	CompAudioSource* a_source = new CompAudioSource(camera, COMP_TYPE::C_AUDIO_SOURCE, "Source1");
-	a_source->SetAudio("background_tracks");
-	// Swap state
-	//a_source->source->ChangeState("swap_music", "state2");
-	
-	listener->AddComponent(a_source);
-
-	GameObject* go = new GameObject(root_gameObjects);
-	go->SetName("Train");
-	go->GetCompTransform()->SetPosition(math::float3(10,0,0));
-	CompAudioSource* a_source2 = new CompAudioSource(go, COMP_TYPE::C_AUDIO_SOURCE, "Source1");
-	go->AddComponent(a_source2);
-	a_source2->SetAudio("train");
-	CompMovement* movement = new CompMovement(go, COMP_TYPE::C_MOVEMENT);
-	movement->SetGoingA(15);
-	go->AddComponent(movement);
-
-	GameObject* tunnel = new GameObject(root_gameObjects);
-	tunnel->SetName("Tunnel");
-	tunnel->GetCompTransform()->SetPosition(math::float3(10, 0, 0));
-	CompReverbZone* rev_zone = new CompReverbZone(tunnel, COMP_TYPE::C_REVERBZONE);
-	rev_zone->SetRadius(4);
-	tunnel->AddComponent(rev_zone);
 
 	if (game_running == true) 
 	{
