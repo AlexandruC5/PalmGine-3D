@@ -275,7 +275,25 @@ void PanelInspector::Draw()
 			}
 
 			if (comp_movement != nullptr) {
-				if (ImGui::CollapsingHeader("Movement")) {
+				if (ImGui::CollapsingHeader("Movement")) 
+				{
+					float pos_a = comp_movement->GetPosA().x;
+					if (ImGui::SliderFloat("Position A", &pos_a, -100, 100))
+					{
+						float3 final_pos = { pos_a, 0, 0 };
+						comp_movement->SetPosA(final_pos);
+					}
+					float pos_b = comp_movement->GetPosB().x;
+					if (ImGui::SliderFloat("Position B", &pos_b, -100, 100))
+					{
+						float3 final_pos = { pos_b, 0, 0 };
+						comp_movement->SetPosB(final_pos);
+					}
+					int vel = comp_movement->GetVel();
+					if (ImGui::SliderInt("Velocity", &vel, 1, 50))
+					{
+						comp_movement->SetVel(vel);
+					}
 				}
 			}
 

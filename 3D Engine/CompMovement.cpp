@@ -23,7 +23,7 @@ void CompMovement::Update(float dt)
 
 	if (going_a == true) {
 		if (curr_pos.x < pos_a.x) {
-			x += 1 * dt;
+			x += velocity * dt;
 		}
 		else {
 			going_a = false;
@@ -32,7 +32,7 @@ void CompMovement::Update(float dt)
 	}
 	else {
 		if (curr_pos.x > pos_b.x) {
-			x -= 1 * dt;
+			x -= velocity * dt;
 		}
 		else {
 			going_a = true;
@@ -56,6 +56,11 @@ math::float3 CompMovement::GetPosB()const
 	return pos_b;
 }
 
+int CompMovement::GetVel() const
+{
+	return velocity;
+}
+
 //Setters
 void CompMovement::SetPosA(math::float3 posA)
 {
@@ -74,6 +79,11 @@ void CompMovement::SetGoingA(bool going)
 void CompMovement::SetGoingB(bool going)
 {
 	going_b = going;
+}
+
+void CompMovement::SetVel(int vel)
+{
+	velocity = vel;
 }
 
 uint CompMovement::GetSize() const

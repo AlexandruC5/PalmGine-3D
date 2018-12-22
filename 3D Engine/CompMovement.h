@@ -17,12 +17,14 @@ public:
 	//Getters
 	math::float3 GetPosA()const;
 	math::float3 GetPosB()const;
+	int GetVel()const;
 
 	//Setters
 	void SetPosA(math::float3 posA);
 	void SetPosB(math::float3 posB);
 	void SetGoingA(bool going);
 	void SetGoingB(bool going);
+	void SetVel(int vel);
 
 	//Serialization
 	uint GetSize() const;
@@ -35,6 +37,7 @@ private:
 	bool going_a = true;
 	bool going_b = false;
 
+	int velocity = 1;
 };
 
 #endif // !COMPMOVEMENT_H
