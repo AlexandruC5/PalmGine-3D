@@ -31,7 +31,6 @@
 #pragma comment( lib, "AK/dxguid.lib" )
 
 // Wwise memory hooks
-// From wwise tutorial: https://www.audiokinetic.com/library/edge/?source=SDK&id=workingwithsdks__initialization.html
 namespace AK
 {
 #ifdef WIN32
@@ -43,6 +42,7 @@ namespace AK
 #endif
 }
 
+// Wwise functions
 namespace WwiseT
 {
 	class AudioSource
@@ -52,10 +52,14 @@ namespace WwiseT
 		AudioSource(uint id, const char* name);
 		~AudioSource();
 
+		// Events
 		void PlayEventByName(const char* name);
 		void StopEventByName(const char* name);
 		void PauseEventByName(const char* name);
 		void ResumeEventByName(const char* name);
+		void ApplyEnvReverb(AkReal32 desired_level, const char * target);
+		void ChangeState(const char* group_name, const char* new_state);
+		// Seters
 		void SetVolume(float new_volume);
 		void SetPanLeft(float value);
 		void SetPanRight(float value);
@@ -63,12 +67,11 @@ namespace WwiseT
 		void SetStereo();
 		void SetPitch(float value);
 		void SetListener();
+		void SetPos(float pos_x, float pos_y, float pos_z, float front_rot_x, float front_rot_y, float front_rot_z, float top_rot_x, float top_rot_y, float top_rot_z);
+		// Geters
 		uint GetID()const;
 		const char* GetName()const;
-		void SetPos(float pos_x, float pos_y, float pos_z, float front_rot_x, float front_rot_y, float front_rot_z, float top_rot_x, float top_rot_y, float top_rot_z);
-		void ApplyEnvReverb(AkReal32 desired_level, const char * target);
-		void ChangeState(const char* group_name, const char* new_state);
-
+		
 	private:
 		uint id;
 		const char* name = nullptr; // Event name
