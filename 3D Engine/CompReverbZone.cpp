@@ -21,7 +21,7 @@ void CompReverbZone::Update(float dt)
 {
 
 	sphere.pos = parent->GetCompTransform()->GetPosition();
-	cube.Translate(parent->GetCompTransform()->GetPosition());
+	cube.pos = parent->GetCompTransform()->GetPosition();
 
 	if (use_sphere == true) {
 		DebugDrawSphere();
