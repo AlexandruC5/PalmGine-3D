@@ -11,6 +11,7 @@ class CompAudioSource : public Component
 {
 public:
 	CompAudioSource(GameObject* parent, COMP_TYPE type, const char* name);
+	CompAudioSource(GameObject* parent, COMP_TYPE type);
 	~CompAudioSource();
 	void Update(float dt);
 
@@ -51,13 +52,15 @@ public:
 	void ResumeAudio();
 	void StopAudio();
 
+	//Serialization
+	uint GetSize() const;
+	void WriteComponentData(char ** cursor);
+
 public:
 	WwiseT::AudioSource* source;
-	uint audio_source_id;
 
 private:
 	//const char* audio_to_play = "music_TheGrowlers_GoingGetsTuff";
-	std::string audio_to_play = "music_TheGrowlers_GoingGetsTuff";
 	bool mute = false;
 	bool bypass_effects = true;
 	bool play_on_awake = true;
@@ -70,6 +73,7 @@ private:
 	float stereo_pan_r = 0.0f;
 	float min_distance = 1.0f;
 	float max_distance = 500.0f;
+	std::string audio_to_play = "train";
 };
 
 #endif // !COMAUDIOSOURCE_H

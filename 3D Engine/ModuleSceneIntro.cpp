@@ -8,6 +8,7 @@
 #include "Component.h"
 #include "CompAudioListener.h"
 #include "CompAudioSource.h"
+#include "WwiseT.h"
 #include "MathGeoLib/MathGeoLib.h"
 #include <list>
 #include "Devil/include/il.h"
@@ -50,6 +51,7 @@ bool ModuleSceneIntro::Start()
 	camera->SetName("MainCamera");
 	CompCamera* cameracomp = new CompCamera(camera, COMP_TYPE::C_CAMERA);
 	camera->AddComponent(cameracomp);
+	//
 	CompAudioListener* a_listener =  new CompAudioListener(camera, COMP_TYPE::C_AUDIOLISTENER);
 	camera->AddComponent(a_listener);
 	//TODO DeleteAudioSourceFromHere
@@ -58,7 +60,7 @@ bool ModuleSceneIntro::Start()
 
 	GameObject* go = new GameObject(root_gameObjects);
 	go->GetCompTransform()->SetPosition(math::float3(10,10,10));
-	CompAudioSource* a_source2 = new CompAudioSource(camera, COMP_TYPE::C_AUDIO_SOURCE, "Source1");
+	CompAudioSource* a_source2 = new CompAudioSource(go, COMP_TYPE::C_AUDIO_SOURCE, "Source1");
 	go->AddComponent(a_source2);
 
 	if (game_running == true) 
@@ -310,7 +312,7 @@ uint ModuleSceneIntro::GetSceneSize(GameObject* go, uint* go_num)
 		}
 		case COMP_TYPE::C_AUDIO_SOURCE:
 		{
-			size += ((CompAudioListener*)go->components[i])->GetSize();
+			size += ((CompAudioSource*)go->components[i])->GetSize();
 			break;
 		}
 		// serialization
@@ -492,7 +494,7 @@ void ModuleSceneIntro::LoadSceneData(const char * path)
 		memcpy(name, cursor, bytes);
 		go->SetName(name);
 		cursor += bytes;
-		// IS ACTIVE
+		// IS GAME OBJECT ACTIVE
 		bytes = sizeof(int);
 		memcpy(&is_active, cursor, bytes);
 		go->SetActive((bool)is_active);
@@ -614,11 +616,101 @@ void ModuleSceneIntro::LoadSceneData(const char * path)
 			case COMP_TYPE::C_AUDIOLISTENER:
 			{
 				//Add C_AUDIOLISTENER parameters
+				CompAudioListener* comp_aud_listener = new CompAudioListener(go, COMP_TYPE::C_AUDIOLISTENER);
+				WwiseT::AudioSource* listener = nullptr;
+				uint listener_id;
+				char* name = new char[128];
+				
+				//LISTENER ID
+				bytes = sizeof(uint);
+				memcpy(&listener_id, cursor, bytes);
+				cursor += bytes;
+				// NAME
+				bytes = sizeof(char) * 128;
+				memcpy(name, cursor, bytes);
+				cursor += bytes;
+
+				// Create listener
+				listener = WwiseT::CreateAudSource(listener_id, name);
+				comp_aud_listener->listener = listener;
+
+				go->AddComponent(comp_aud_listener);
 				break;
 			}
 			case COMP_TYPE::C_AUDIO_SOURCE:
 			{
 				//Add C_AUDIO_SOURCE parameters
+				CompAudioSource* comp_aud_source = new CompAudioSource(go, COMP_TYPE::C_AUDIO_SOURCE);
+				WwiseT::AudioSource* source = nullptr;
+				char* name = new char[128];
+				int id = 0;
+				int mute = 0;
+				int play_on_awake = 0;
+				int priority = 0;
+				float volume = 0.0f;
+				float pitch = 0.0f;
+				float stereo_pan_l = 0.0f;
+				float stereo_pan_r = 0.0f;
+				float min_distance = 0.0f;
+				float max_distance = 0.0f;
+				// AUDIO TO PLAY
+				bytes = sizeof(char) * 128;
+				memcpy(name, cursor, bytes);
+				cursor += bytes;
+				comp_aud_source->SetAudio(name);
+				// SOURCE ID
+				bytes = sizeof(uint);
+				memcpy(&id, cursor, bytes);
+				cursor += bytes;
+				source = WwiseT::CreateAudSource(id, name);
+				comp_aud_source->source = source;
+				// MUTE
+				bytes = sizeof(int);
+				memcpy(&mute, cursor, bytes);
+				cursor += bytes;
+				comp_aud_source->SetMuted(mute);
+				// PLAY ON AWAKE
+				bytes = sizeof(int);
+				memcpy(&play_on_awake, cursor, bytes);
+				cursor += bytes;
+				comp_aud_source->SetPlayOnAwake(play_on_awake);
+				// PRIORITY
+				bytes = sizeof(int);
+				memcpy(&priority, cursor, bytes);
+				cursor += bytes;
+				comp_aud_source->SetPriority(priority);
+				// VOLUME
+				bytes = sizeof(float);
+				memcpy(&volume, cursor, bytes);
+				cursor += bytes;
+				comp_aud_source->SetVolume(volume);
+				// PITCH
+				bytes = sizeof(float);
+				memcpy(&pitch, cursor, bytes);
+				cursor += bytes;
+				comp_aud_source->SetPitch(pitch);
+				// STEREO PAN L
+				bytes = sizeof(float);
+				memcpy(&stereo_pan_l, cursor, bytes);
+				cursor += bytes;
+				comp_aud_source->SetStereoPanLeft(stereo_pan_l);
+				// STEREO PAN R
+				bytes = sizeof(float);
+				memcpy(&stereo_pan_r, cursor, bytes);
+				cursor += bytes;
+				comp_aud_source->SetStereoPanRight(stereo_pan_r);
+				// MIN DISTANCE
+				bytes = sizeof(float);
+				memcpy(&min_distance, cursor, bytes);
+				cursor += bytes;
+				comp_aud_source->SetMinDistance(min_distance);
+				// MAX DISTANCE
+				bytes = sizeof(float);
+				memcpy(&max_distance, cursor, bytes);
+				cursor += bytes;
+				comp_aud_source->SetMaxDistance(max_distance);
+				
+				go->AddComponent(comp_aud_source);
 				break;
 			}
 			}

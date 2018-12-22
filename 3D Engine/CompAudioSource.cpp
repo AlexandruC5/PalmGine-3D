@@ -7,12 +7,14 @@
 CompAudioSource::CompAudioSource(GameObject * parent, COMP_TYPE type, const char* name) : Component(parent, type)
 {
 	source = WwiseT::CreateAudSource(name);
-	audio_source_id = source->GetID();
+}
+
+CompAudioSource::CompAudioSource(GameObject * parent, COMP_TYPE type) : Component(parent, type)
+{
 }
 
 CompAudioSource::~CompAudioSource()
 {
-	delete source;
 	audio_to_play.clear();
 }
 
@@ -189,4 +191,111 @@ void CompAudioSource::ResumeAudio()
 void CompAudioSource::StopAudio()
 {
 	source->StopEventByName(audio_to_play.c_str());
+}
+
+uint CompAudioSource::GetSize() const
+{
+	// GET SIZE FOR SERIALIZATION
+	uint size = 0;
+
+	// COMPONENT TYPE
+	size += sizeof(int);
+	// IS ACTIVE
+	size += sizeof(int);
+	// AUDIO TO PLAY
+	size += sizeof(char)*128;
+	// SOURCE ID
+	size += sizeof(uint);
+	// MUTE
+	size += sizeof(int);
+	// PLAY ON AWAKE
+	size += sizeof(int);
+	// PRIORITY
+	size += sizeof(int);
+	// VOLUME
+	size += sizeof(float);
+	// PITCH
+	size += sizeof(float);
+	// STEREO PAN L
+	size += sizeof(float);
+	// STEREO PAN R
+	size += sizeof(float);
+	// MIN DISTANCE
+	size += sizeof(float);
+	// MAX DISTANCE
+	size += sizeof(float);
+
+	return size;;
+}
+
+void CompAudioSource::WriteComponentData(char ** cursor)
+{
+	uint bytes = 0;
+
+	// COMPONENT TYPE
+	bytes = sizeof(int);
+	memcpy(cursor[0], &type, bytes);
+	cursor[0] += bytes;
+	// IS ACTIVE
+	bytes = sizeof(int);
+	int tmp_active = (int)active;
+	memcpy(cursor[0], &tmp_active, bytes);
+	cursor[0] += bytes;
+	// AUDIO TO PLAY
+	bytes = sizeof(char) * 128;
+	char* name = new char[128];
+	strcpy(name, audio_to_play.c_str());
+	memcpy(cursor[0], name, bytes);
+	cursor[0] += bytes;
+	// SOURCE ID
+	bytes = sizeof(uint);
+	uint tmp_id = (uint)source->GetID();
+	memcpy(cursor[0], &tmp_id, bytes);
+	cursor[0] += bytes;
+	// MUTE
+	bytes = sizeof(int);
+	int tmp_mute = (int)mute;
+	memcpy(cursor[0], &tmp_mute, bytes);
+	cursor[0] += bytes;
+	// PLAY ON AWAKE
+	bytes = sizeof(int);
+	int tmp_poa = (int)play_on_awake;
+	memcpy(cursor[0], &tmp_poa, bytes);
+	cursor[0] += bytes;
+	// PRIORITY
+	bytes = sizeof(int);
+	int tmp_priority = (int)priority;
+	memcpy(cursor[0], &tmp_priority, bytes);
+	cursor[0] += bytes;
+	// VOLUME
+	bytes = sizeof(float);
+	float tmp_volume = (float)volume;
+	memcpy(cursor[0], &tmp_volume, bytes);
+	cursor[0] += bytes;
+	// PITCH
+	bytes = sizeof(float);
+	float tmp_pitch = (float)pitch;
+	memcpy(cursor[0], &tmp_pitch, bytes);
+	cursor[0] += bytes;
+	// STEREO PAN L
+	bytes = sizeof(float);
+	float tmp_panl = (float)stereo_pan_l;
+	memcpy(cursor[0], &tmp_panl, bytes);
+	cursor[0] += bytes;
+	// STEREO PAN R
+	bytes = sizeof(float);
+	float tmp_panr = (float)stereo_pan_r;
+	memcpy(cursor[0], &tmp_panr, bytes);
+	cursor[0] += bytes;
+	// MIN DISTANCE
+	bytes = sizeof(float);
+	float tmp_min_distance = (float)min_distance;
+	memcpy(cursor[0], &tmp_min_distance, bytes);
+	cursor[0] += bytes;
+	// MAX DISTANCE
+	bytes = sizeof(float);
+	float tmp_max_distance = (float)max_distance;
+	memcpy(cursor[0], &tmp_max_distance, bytes);
+	cursor[0] += bytes;
+	
 }

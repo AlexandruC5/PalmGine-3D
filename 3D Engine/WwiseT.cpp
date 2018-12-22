@@ -200,6 +200,15 @@ WwiseT::AudioSource* WwiseT::CreateAudSource(const char * name)
 	return src;
 }
 
+WwiseT::AudioSource * WwiseT::CreateAudSource(uint id, const char * name)
+{
+	AudioSource* src = nullptr;
+
+	src = new AudioSource(id, name);
+
+	return src;
+}
+
 void WwiseT::StopAllEvents()
 {
 	AK::SoundEngine::StopAll();
@@ -208,6 +217,20 @@ void WwiseT::StopAllEvents()
 WwiseT::AudioSource::AudioSource(const char* event_name)
 {
 	id = GenRandomNumber();
+	name = new char[128];
+	name = event_name;
+	AKRESULT eResult = AK::SoundEngine::RegisterGameObj(id, name);
+	if (eResult != AK_Success)
+	{
+		assert(!"Could not register GameObject. See eResult variable to more info");
+		LOG("Could not register GameObject. See eResult variable to more info");
+	}
+}
+
+WwiseT::AudioSource::AudioSource(uint pre_id, const char * event_name)
+{
+	id = pre_id;
+	name = new char[128];
 	name = event_name;
 	AKRESULT eResult = AK::SoundEngine::RegisterGameObj(id, name);
 	if (eResult != AK_Success)
@@ -294,9 +317,14 @@ void WwiseT::AudioSource::SetListener()
 	}
 }
 
-uint WwiseT::AudioSource::GetID()
+uint WwiseT::AudioSource::GetID()const
 {
 	return id;
+}
+
+const char * WwiseT::AudioSource::GetName() const
+{
+	return name;
 }
 
 void WwiseT::AudioSource::SetPos(float pos_x, float pos_y, float pos_z, float front_rot_x, float front_rot_y, float front_rot_z, float top_rot_x, float top_rot_y, float top_rot_z)

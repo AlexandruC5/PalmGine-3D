@@ -20,9 +20,10 @@ public:
 	
 	WwiseT::AudioSource* test1 = nullptr;
 	WwiseT::AudioSource* test2 = nullptr;
+	WwiseT::AudioSource* listener;
+
 private:
 	std::list<WwiseT::AudioSource*> event_list;
-	// Keep listener?
 };
 
 #endif // !MODULEAUDIO_H

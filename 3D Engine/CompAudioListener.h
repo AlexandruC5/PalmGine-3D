@@ -16,9 +16,12 @@ public:
 
 	void UpdateListenerPos();
 
+	//Serialization
+	uint GetSize() const;
+	void WriteComponentData(char ** cursor);
+
 public:
 	WwiseT::AudioSource* listener;
-	uint audio_listener_id;
 };
 
 #endif // !COMCAMERA_H

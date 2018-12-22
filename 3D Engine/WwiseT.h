@@ -49,6 +49,7 @@ namespace WwiseT
 	{
 	public:
 		AudioSource(const char* name);
+		AudioSource(uint id, const char* name);
 		~AudioSource();
 
 		void PlayEventByName(const char* name);
@@ -62,7 +63,8 @@ namespace WwiseT
 		void SetStereo();
 		void SetPitch(float value);
 		void SetListener();
-		uint GetID();
+		uint GetID()const;
+		const char* GetName()const;
 		void SetPos(float pos_x, float pos_y, float pos_z, float front_rot_x, float front_rot_y, float front_rot_z, float top_rot_x, float top_rot_y, float top_rot_z);
 		void ApplyEnvReverb(AkReal32 desired_level, const char * target);
 		void ChangeState(const char* group_name, const char* new_state);
@@ -80,6 +82,7 @@ namespace WwiseT
 	void SetDefaultListener(uint id);
 	// Utils
 	AudioSource* CreateAudSource(const char* name);
+	AudioSource* CreateAudSource(uint id, const char* name);
 	void StopAllEvents();
 }
 // Make wwise methods here :)
