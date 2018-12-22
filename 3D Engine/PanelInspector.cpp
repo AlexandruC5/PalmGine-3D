@@ -235,11 +235,6 @@ void PanelInspector::Draw()
 						audio_source->SetVolume(volume);
 					}
 
-					bool mono = audio_source->isMono();
-					if (ImGui::Checkbox("Mono", &mono)) {
-						audio_source->SetMono(mono);
-					}
-
 					float pitch = audio_source->GetPitch();
 					if (ImGui::SliderFloat("Pitch", &pitch, 0, 15)) {
 						audio_source->SetPitch(pitch);
@@ -253,17 +248,6 @@ void PanelInspector::Draw()
 					if (ImGui::SliderInt("Pan Right difference", &stereo_pan_r, 0, 100)) {
 						audio_source->SetStereoPanRight(stereo_pan_r);
 					}
-					
-					float min_distance = audio_source->GetMinDistance();
-					if (ImGui::InputFloat("Min. Distance", &min_distance)) {
-						audio_source->SetMinDistance(min_distance);
-					}
-
-					float max_distance = audio_source->GetMaxDistance();
-					if (ImGui::InputFloat("Max. Distance", &max_distance)) {
-						audio_source->SetMaxDistance(max_distance);
-					}
-					
 				}
 			}
 
