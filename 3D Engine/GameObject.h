@@ -14,6 +14,7 @@ class CompCamera;
 class CompAudioListener;
 class CompAudioSource;
 class CompMovement;
+class CompReverbZone;
 
 class GameObject
 {
@@ -56,6 +57,7 @@ public:
 	CompAudioListener* GetCompAudioListener() const;
 	CompAudioSource* GetCompAudioSource() const;
 	CompMovement* GetCompMovement() const;
+	CompReverbZone* GetReverbZone() const;
 	Component* AddEmptyComponent(COMP_TYPE type);
 	void AddComponent(Component* comp);
 

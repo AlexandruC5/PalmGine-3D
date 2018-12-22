@@ -8,6 +8,8 @@
 #include "Component.h"
 #include "CompAudioListener.h"
 #include "CompAudioSource.h"
+#include "CompMovement.h"
+#include "CompReverbZone.h"
 #include "WwiseT.h"
 #include "MathGeoLib/MathGeoLib.h"
 #include <list>
@@ -62,6 +64,10 @@ bool ModuleSceneIntro::Start()
 	go->GetCompTransform()->SetPosition(math::float3(10,10,10));
 	CompAudioSource* a_source2 = new CompAudioSource(go, COMP_TYPE::C_AUDIO_SOURCE, "Source1");
 	go->AddComponent(a_source2);
+	CompMovement* movement = new CompMovement(go, COMP_TYPE::C_MOVEMENT);
+	go->AddComponent(movement);
+	CompReverbZone* rev_zone = new CompReverbZone(go, COMP_TYPE::C_REVERBZONE);
+	go->AddComponent(rev_zone);
 
 	if (game_running == true) 
 	{

@@ -140,6 +140,7 @@
     <ClInclude Include="CompMesh.h" />
     <ClInclude Include="CompMovement.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="CompReverbZone.h" />
     <ClInclude Include="CompTransform.h" />
     <ClInclude Include="Devil\include\config.h" />
     <ClInclude Include="Devil\include\devil_internal_exports.h" />
@@ -266,6 +267,7 @@
     <ClCompile Include="CompMesh.cpp" />
     <ClCompile Include="CompMovement.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="CompReverbZone.cpp" />
     <ClCompile Include="CompTransform.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Globals.cpp" />

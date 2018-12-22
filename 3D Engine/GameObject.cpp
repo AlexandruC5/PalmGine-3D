@@ -211,6 +211,11 @@ CompMovement* GameObject::GetCompMovement() const
 	return  (CompMovement*)FindComponent(COMP_TYPE::C_MOVEMENT);
 }
 
+CompReverbZone* GameObject::GetReverbZone() const
+{
+	return  (CompReverbZone*)FindComponent(COMP_TYPE::C_REVERBZONE);
+}
+
 Component * GameObject::AddEmptyComponent(COMP_TYPE type)
 {
 	if (CompAlreadyExists(type))

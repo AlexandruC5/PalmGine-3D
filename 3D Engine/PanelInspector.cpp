@@ -10,6 +10,7 @@
 #include "CompAudioListener.h"
 #include "CompAudioSource.h"
 #include "CompMovement.h"
+#include "CompReverbZone.h"
 #include "ImGuizmo-master/ImGuizmo.h"
 #include "ModuleInput.h"
 #include "GameObject.h"
@@ -63,6 +64,7 @@ void PanelInspector::Draw()
 			CompAudioListener* audio_listener = selected_go->GetCompAudioListener();
 			CompAudioSource* audio_source = selected_go->GetCompAudioSource();
 			CompMovement* comp_movement = selected_go->GetCompMovement();
+			CompReverbZone* reverb_zone = selected_go->GetReverbZone();
 
 			if (mesh != nullptr) {
 				//SetStatic
@@ -274,6 +276,23 @@ void PanelInspector::Draw()
 
 			if (comp_movement != nullptr) {
 				if (ImGui::CollapsingHeader("Movement")) {
+				}
+			}
+
+			if (reverb_zone != nullptr) {
+				if (ImGui::CollapsingHeader("Reverb Zone")) {
+					bool use_sphere = reverb_zone->UsingSphere();
+					if (ImGui::Checkbox("Use Sphere", &use_sphere)) {
+						reverb_zone->ShouldUseSphere(use_sphere);
+					}
+					bool use_cube = reverb_zone->UsingCube();
+					if (ImGui::Checkbox("Use Cube", &use_cube)) {
+						reverb_zone->ShouldUseCube(use_cube);
+					}
+					float radius = reverb_zone->GetRadius();
+					if (ImGui::SliderFloat("Radius", &radius, 1.0f, 50.0f)) {
+						reverb_zone->SetRadius(radius);
+					}
 				}
 			}
 

@@ -568,6 +568,9 @@
     <ClInclude Include="CompMovement.h">
       <Filter>Sources\Modules\Scene\Components</Filter>
     </ClInclude>
+    <ClInclude Include="CompReverbZone.h">
+      <Filter>Sources\Modules\Scene\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -833,6 +836,9 @@
       <Filter>Sources\Modules\Scene\Components</Filter>
     </ClCompile>
     <ClCompile Include="CompMovement.cpp">
+      <Filter>Sources\Modules\Scene\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CompReverbZone.cpp">
       <Filter>Sources\Modules\Scene\Components</Filter>
     </ClCompile>
   </ItemGroup>
