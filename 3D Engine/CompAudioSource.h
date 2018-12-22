@@ -52,6 +52,8 @@ public:
 	void ResumeAudio();
 	void StopAudio();
 
+	void DebugDraw();
+
 	//Serialization
 	uint GetSize() const;
 	void WriteComponentData(char ** cursor);

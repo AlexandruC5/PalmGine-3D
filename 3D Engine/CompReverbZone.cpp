@@ -87,41 +87,27 @@ void CompReverbZone::ShouldUseCube(bool should_use)
 //DebugDraw
 void CompReverbZone::DebugDrawSphere()
 {
-	glColor3f(0, 128, 128);
+	glLineWidth(3.0f);
+	glColor3f(2.0f, 2.0f, 2.0f);
 
-	glPushMatrix();
-	glMultMatrixf((GLfloat*) parent->GetCompTransform()->GetTransformationMatrix().ptr());
+	float radius = sphere.r;
+	float3 pos = sphere.pos;
+	float degInRad = 360.0f / 12;
+	degInRad *= DEGTORAD;
+	glBegin(GL_LINE_LOOP);
+	for (unsigned int i = 0; i < 12; i++)
+		glVertex3f(cos(degInRad * i) * radius + pos.x, pos.y, sin(degInRad * i) * radius + pos.z);
+	glEnd();
+	glBegin(GL_LINE_LOOP);
+	for (unsigned int i = 0; i < 12; i++)
+		glVertex3f(cos(degInRad * i) * radius + pos.x, sin(degInRad * i) * radius + pos.y, pos.z);
+	glEnd();
+	glBegin(GL_LINE_LOOP);
+	for (unsigned int i = 0; i < 12; i++)
+		glVertex3f(pos.x, sin(degInRad * i) * radius + pos.y, cos(degInRad * i) * radius + pos.z);
+	glEnd();
 
-	int stacks = MAX(5, (int)sphere.r * 10);
-	int slices = MAX(5, (int)sphere.r * 10);
-
-	int i, j;
-	for (j = 0; j < stacks; j++) {
-		double latitude1 = (math::pi / stacks) * j - math::pi / 2;
-		double latitude2 = (math::pi / stacks) * (j + 1) - math::pi / 2;
-		double sinLat1 = sin(latitude1);
-		double cosLat1 = cos(latitude1);
-		double sinLat2 = sin(latitude2);
-		double cosLat2 = cos(latitude2);
-		glBegin(GL_QUAD_STRIP);
-		for (i = 0; i <= slices; i++) {
-			double longitude = (2 * math::pi / slices) * i;
-			double sinLong = sin(longitude);
-			double cosLong = cos(longitude);
-			double x1 = cosLong * cosLat1;
-			double y1 = sinLong * cosLat1;
-			double z1 = sinLat1;
-			double x2 = cosLong * cosLat2;
-			double y2 = sinLong * cosLat2;
-			double z2 = sinLat2;
-			glNormal3d(x2, y2, z2);
-			glVertex3d(sphere.pos.x + sphere.r*x2, sphere.pos.y + sphere.r*y2, sphere.pos.z + sphere.r*z2);
-			glNormal3d(x1, y1, z1);
-			glVertex3d(sphere.pos.x + sphere.r*x1, sphere.pos.y + sphere.r*y1, sphere.pos.z + sphere.r*z1);
-		}
-		glEnd();
-	}
-	glPopMatrix();
+	glLineWidth(1.0f);
 }
 void CompReverbZone::DebugDrawCube()
 {

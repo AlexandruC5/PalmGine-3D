@@ -22,10 +22,7 @@ void CompAudioSource::Update(float dt)
 {
 	UpdateSourcePos();
 
-	if (audio_to_play != "" && loop == true) {
-		source->PlayEventByName(audio_to_play.c_str());
-	}
-
+	DebugDraw();
 }
 
 void CompAudioSource::UpdateSourcePos()
@@ -298,4 +295,33 @@ void CompAudioSource::WriteComponentData(char ** cursor)
 	memcpy(cursor[0], &tmp_max_distance, bytes);
 	cursor[0] += bytes;
 	
+}
+
+void CompAudioSource::DebugDraw() {
+	math::Sphere sphere;
+
+	sphere.pos = parent->GetCompTransform()->GetPosition();
+	sphere.r = 0.15;
+
+	glLineWidth(3.0f);
+	glColor3f(0.0f, 0.0f, 2.0f);
+
+	float radius = sphere.r;
+	float3 pos = sphere.pos;
+	float degInRad = 360.0f / 12;
+	degInRad *= DEGTORAD;
+	glBegin(GL_LINE_LOOP);
+	for (unsigned int i = 0; i < 12; i++)
+		glVertex3f(cos(degInRad * i) * radius + pos.x, pos.y, sin(degInRad * i) * radius + pos.z);
+	glEnd();
+	glBegin(GL_LINE_LOOP);
+	for (unsigned int i = 0; i < 12; i++)
+		glVertex3f(cos(degInRad * i) * radius + pos.x, sin(degInRad * i) * radius + pos.y, pos.z);
+	glEnd();
+	glBegin(GL_LINE_LOOP);
+	for (unsigned int i = 0; i < 12; i++)
+		glVertex3f(pos.x, sin(degInRad * i) * radius + pos.y, cos(degInRad * i) * radius + pos.z);
+	glEnd();
+
+	glLineWidth(1.0f);
 }

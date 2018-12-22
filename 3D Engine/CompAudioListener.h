@@ -20,6 +20,8 @@ public:
 	uint GetSize() const;
 	void WriteComponentData(char ** cursor);
 
+	void DebugDraw();
+
 public:
 	WwiseT::AudioSource* listener;
 };
