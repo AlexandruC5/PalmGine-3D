@@ -30,7 +30,7 @@ void CompReverbZone::Update(float dt)
 			{
 				if (sphere.Intersects(App->scene_intro->root_gameObjects->childs[i]->GetAABB()) == true) 
 				{
-					audio_source->source->ApplyEnvReverb(8, "tunnel");
+					audio_source->source->ApplyEnvReverb(12, "tunnel");
 				}
 				else 
 				{
@@ -49,7 +49,7 @@ void CompReverbZone::Update(float dt)
 			{
 				if (cube.Intersects(App->scene_intro->root_gameObjects->childs[i]->GetAABB()) == true) 
 				{
-					audio_source->source->ApplyEnvReverb(8, "tunnel");
+					audio_source->source->ApplyEnvReverb(12, "tunnel");
 				}
 				else 
 				{
