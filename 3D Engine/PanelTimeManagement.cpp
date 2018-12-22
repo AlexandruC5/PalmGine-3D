@@ -30,6 +30,7 @@ void PanelTimeManagement::Draw()
 			App->scene_intro->in_game_timer.Start();
 			App->scene_intro->game_running = true;
 			App->scene_intro->SerializeScene("auto_save_when_play");
+			App->audio->Play();
 		}
 	}
 	ImGui::SameLine();
@@ -60,6 +61,7 @@ void PanelTimeManagement::Draw()
 		{
 			App->scene_intro->in_game_timer.Start();
 			App->scene_intro->in_game_timer.Stop();
+			App->audio->Stop();
 			App->scene_intro->game_running = false;
 			App->scene_intro->LoadSceneData("auto_save_when_play");
 			std::string bin_path = "";
@@ -69,7 +71,6 @@ void PanelTimeManagement::Draw()
 			remove(bin_path.c_str());
 			bin_path.clear();
 			App->scene_intro->in_game_timer.ResetExtraTicks();
-			App->audio->Stop();
 		}
 	}
 	ImGui::SameLine();

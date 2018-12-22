@@ -7,6 +7,7 @@
 CompAudioSource::CompAudioSource(GameObject * parent, COMP_TYPE type, const char* name) : Component(parent, type)
 {
 	source = App->audio->CreateSoundEmitter(name);
+	App->audio->audio_sources.push_back(this);
 }
 
 CompAudioSource::CompAudioSource(GameObject * parent, COMP_TYPE type) : Component(parent, type)
