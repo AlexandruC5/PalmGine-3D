@@ -72,6 +72,7 @@ bool ModuleSceneIntro::Start()
 	a_source2->SetAudio("train");
 	CompMovement* movement = new CompMovement(go, COMP_TYPE::C_MOVEMENT);
 	go->AddComponent(movement);
+	a_source2->source->ApplyEnvReverb(12, "tunnel");
 	/*CompReverbZone* rev_zone = new CompReverbZone(go, COMP_TYPE::C_REVERBZONE);
 	go->AddComponent(rev_zone);*/
 
@@ -662,7 +663,7 @@ void ModuleSceneIntro::LoadSceneData(const char * path)
 			case COMP_TYPE::C_AUDIO_SOURCE:
 			{
 				//Add C_AUDIO_SOURCE parameters
-				CompAudioSource* comp_aud_source = new CompAudioSource(go, COMP_TYPE::C_AUDIO_SOURCE);
+				
 				WwiseT::AudioSource* source = nullptr;
 				char* name = new char[128];
 				int id = 0;
@@ -679,13 +680,12 @@ void ModuleSceneIntro::LoadSceneData(const char * path)
 				bytes = sizeof(char) * 128;
 				memcpy(name, cursor, bytes);
 				cursor += bytes;
-				comp_aud_source->SetAudio(name);
 				// SOURCE ID
 				bytes = sizeof(uint);
 				memcpy(&id, cursor, bytes);
 				cursor += bytes;
-				source = WwiseT::CreateAudSource(id, name);
-				comp_aud_source->source = source;
+				CompAudioSource* comp_aud_source = new CompAudioSource(go, COMP_TYPE::C_AUDIO_SOURCE, name);
+				comp_aud_source->SetAudio(name);
 				// MUTE
 				bytes = sizeof(int);
 				memcpy(&mute, cursor, bytes);

@@ -25,10 +25,13 @@ void CompReverbZone::Update(float dt)
 
 	if (use_sphere == true) {
 		DebugDrawSphere();
-		for (int i = 0; i < App->scene_intro->root_gameObjects->GetNumChilds(); ++i) {
+		for (int i = 0; i < App->scene_intro->root_gameObjects->GetNumChilds(); ++i) 
+		{
 			CompAudioSource* audio_source = App->scene_intro->root_gameObjects->childs[i]->GetCompAudioSource();
-			if (audio_source != nullptr) {
-				if (sphere.Intersects(App->scene_intro->root_gameObjects->childs[i]->GetAABB()) == true) {
+			if (audio_source != nullptr) 
+			{
+				if (sphere.Intersects(App->scene_intro->root_gameObjects->childs[i]->GetAABB()) == true) 
+				{
 					audio_source->source->ApplyEnvReverb(12, "tunnel");
 				}
 				else {
