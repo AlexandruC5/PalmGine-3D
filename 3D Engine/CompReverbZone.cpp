@@ -8,18 +8,13 @@
 #define MAX(a,b) ((a)>(b)) ? (a) : (b)
 
 CompReverbZone::CompReverbZone(GameObject * parent, COMP_TYPE type) : Component(parent, type)
-{
-	
-}
+{}
 
 CompReverbZone::~CompReverbZone()
-{
-	
-}
+{}
 
 void CompReverbZone::Update(float dt)
 {
-
 	sphere.pos = parent->GetCompTransform()->GetPosition();
 	cube.pos = parent->GetCompTransform()->GetPosition();
 
@@ -34,21 +29,27 @@ void CompReverbZone::Update(float dt)
 				{
 					audio_source->source->ApplyEnvReverb(12, "tunnel");
 				}
-				else {
+				else 
+				{
 					audio_source->source->ApplyEnvReverb(0, "tunnel");
 				}
 			}
 		}
 	}
-	else {
+	else 
+	{
 		DebugDrawCube();
-		for (int i = 0; i < App->scene_intro->root_gameObjects->GetNumChilds(); ++i) {
+		for (int i = 0; i < App->scene_intro->root_gameObjects->GetNumChilds(); ++i) 
+		{
 			CompAudioSource* audio_source = App->scene_intro->root_gameObjects->childs[i]->GetCompAudioSource();
-			if (audio_source != nullptr) {
-				if (cube.Intersects(App->scene_intro->root_gameObjects->childs[i]->GetAABB()) == true) {
+			if (audio_source != nullptr) 
+			{
+				if (cube.Intersects(App->scene_intro->root_gameObjects->childs[i]->GetAABB()) == true) 
+				{
 					audio_source->source->ApplyEnvReverb(12, "tunnel");
 				}
-				else {
+				else 
+				{
 					audio_source->source->ApplyEnvReverb(0, "tunnel");
 				}
 			}
@@ -71,7 +72,8 @@ bool CompReverbZone::UsingCube() const
 }
 
 //Setters
-void CompReverbZone::SetRadius(float rad) {
+void CompReverbZone::SetRadius(float rad) 
+{
 	radius = rad;
 	sphere.r = rad;
 	cube.r = math::float3(rad,rad,rad);
@@ -122,6 +124,7 @@ void CompReverbZone::DebugDrawSphere()
 
 	glLineWidth(1.0f);
 }
+
 void CompReverbZone::DebugDrawCube()
 {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -227,5 +230,4 @@ void CompReverbZone::WriteComponentData(char ** cursor)
 	int tmp_ubox = use_cube;
 	memcpy(cursor[0], &tmp_ubox, bytes);
 	cursor[0] += bytes;
-	
 }

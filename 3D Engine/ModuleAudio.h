@@ -19,11 +19,12 @@ public:
 	WwiseT::AudioSource* CreateSoundEmitter(const char * name);
 	uint GetListenerID()const;
 	
-	//
-	void Play()const;
+	// Utils
+	void PlayOnAwake()const;
 	void Stop()const;
 	void Pause()const;
 	void Resume()const;
+	void SetListener()const;
 	
 private:
 	std::list<WwiseT::AudioSource*> event_list;

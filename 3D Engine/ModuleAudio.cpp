@@ -49,11 +49,13 @@ uint ModuleAudio::GetListenerID() const
 	return listener->GetID();
 }
 
-void ModuleAudio::Play() const
+void ModuleAudio::PlayOnAwake() const
 {
 	std::list<CompAudioSource*>::const_iterator iterator;
-	for (iterator = App->audio->audio_sources.begin(); iterator != App->audio->audio_sources.end(); ++iterator) {
-		if (iterator._Ptr->_Myval->GetPlayOnAwake() == true) {
+	for (iterator = App->audio->audio_sources.begin(); iterator != App->audio->audio_sources.end(); ++iterator) 
+	{
+		if (iterator._Ptr->_Myval->GetPlayOnAwake() == true) 
+		{
 			iterator._Ptr->_Myval->PlayAudio();
 		}
 	}

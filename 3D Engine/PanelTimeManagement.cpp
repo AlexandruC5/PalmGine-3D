@@ -30,7 +30,7 @@ void PanelTimeManagement::Draw()
 			App->scene_intro->in_game_timer.Start();
 			App->scene_intro->game_running = true;
 			App->scene_intro->SerializeScene("auto_save_when_play");
-			App->audio->Play();
+			App->audio->PlayOnAwake();
 		}
 	}
 	ImGui::SameLine();
