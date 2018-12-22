@@ -33,6 +33,8 @@ ModuleSceneIntro::~ModuleSceneIntro()
 	{
 		delete to_delete[i];
 	}
+	// Close sound engine after emmiters
+	WwiseT::CloseSoundEngine();
 }
 
 // Load assets
@@ -53,21 +55,25 @@ bool ModuleSceneIntro::Start()
 	camera->SetName("MainCamera");
 	CompCamera* cameracomp = new CompCamera(camera, COMP_TYPE::C_CAMERA);
 	camera->AddComponent(cameracomp);
-	//
+	
+	//Listener
 	CompAudioListener* a_listener =  new CompAudioListener(camera, COMP_TYPE::C_AUDIOLISTENER);
 	camera->AddComponent(a_listener);
 	//TODO DeleteAudioSourceFromHere
 	CompAudioSource* a_source = new CompAudioSource(camera, COMP_TYPE::C_AUDIO_SOURCE, "Source1");
+	a_source->SetAudio("music_TheGrowlers_GoingGetsTuff");
 	camera->AddComponent(a_source);
 
 	GameObject* go = new GameObject(root_gameObjects);
+	go->SetName("Train");
 	go->GetCompTransform()->SetPosition(math::float3(10,10,10));
 	CompAudioSource* a_source2 = new CompAudioSource(go, COMP_TYPE::C_AUDIO_SOURCE, "Source1");
 	go->AddComponent(a_source2);
+	a_source2->SetAudio("train");
 	CompMovement* movement = new CompMovement(go, COMP_TYPE::C_MOVEMENT);
 	go->AddComponent(movement);
-	CompReverbZone* rev_zone = new CompReverbZone(go, COMP_TYPE::C_REVERBZONE);
-	go->AddComponent(rev_zone);
+	/*CompReverbZone* rev_zone = new CompReverbZone(go, COMP_TYPE::C_REVERBZONE);
+	go->AddComponent(rev_zone);*/
 
 	if (game_running == true) 
 	{
