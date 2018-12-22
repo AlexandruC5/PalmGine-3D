@@ -1,5 +1,6 @@
 Event	ID	Name			Wwise Object Path	Notes
 	452547817	Stop_All			\Default Work Unit\Stop_All	
+	1467305928	background_tracks			\Default Work Unit\background_tracks	
 	2607198564	music_TheDillards_Dooley			\Default Work Unit\music_TheDillards_Dooley	
 	3412057565	train			\Default Work Unit\train	
 	3585407402	music_TheGrowlers_GoingGetsTuff			\Default Work Unit\music_TheGrowlers_GoingGetsTuff	
@@ -11,13 +12,13 @@ State Group	ID	Name			Wwise Object Path	Notes
 
 State	ID	Name	State Group			Notes
 	0	None	swap_music			
-	930712164	Off	swap_music			
-	1651971902	On	swap_music			
+	1208172673	state1	swap_music			
+	1208172674	state2	swap_music			
 
 Custom State	ID	Name	State Group	Owner		Notes
-	454330767	Off	swap_music	\Actor-Mixer Hierarchy\Default Work Unit\The Dillards - Dooley		
-	702550394	Off	swap_music	\Actor-Mixer Hierarchy\Default Work Unit\The Growlers-Going Gets Tuff		
-	833841005	Off	swap_music	\Actor-Mixer Hierarchy\Default Work Unit\tunnel\train		
+	454330767	state2	swap_music	\Actor-Mixer Hierarchy\Default Work Unit\The Dillards - Dooley		
+	687525093	state1	swap_music	\Actor-Mixer Hierarchy\Default Work Unit\The Growlers-Going Gets Tuff		
+	833841005	state2	swap_music	\Actor-Mixer Hierarchy\Default Work Unit\tunnel\train		
 
 Game Parameter	ID	Name			Wwise Object Path	Notes
 	1879753049	PanLeft			\Default Work Unit\PanLeft	

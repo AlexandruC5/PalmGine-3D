@@ -61,7 +61,10 @@ bool ModuleSceneIntro::Start()
 	camera->AddComponent(a_listener);
 	//TODO DeleteAudioSourceFromHere
 	CompAudioSource* a_source = new CompAudioSource(camera, COMP_TYPE::C_AUDIO_SOURCE, "Source1");
-	a_source->SetAudio("music_TheGrowlers_GoingGetsTuff");
+	a_source->SetAudio("background_tracks");
+	// Swap state
+	a_source->source->ChangeState("swap_music", "state2");
+	
 	camera->AddComponent(a_source);
 
 	GameObject* go = new GameObject(root_gameObjects);

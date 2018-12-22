@@ -21,6 +21,7 @@
 			<ShortName>Assignment3</ShortName>
 			<Path>Assignment3.bnk</Path>
 			<IncludedEvents>
+				<Event Id="1467305928" Name="background_tracks" ObjectPath="\Events\Default Work Unit\background_tracks"/>
 				<Event Id="2607198564" Name="music_TheDillards_Dooley" ObjectPath="\Events\Default Work Unit\music_TheDillards_Dooley"/>
 				<Event Id="3585407402" Name="music_TheGrowlers_GoingGetsTuff" ObjectPath="\Events\Default Work Unit\music_TheGrowlers_GoingGetsTuff"/>
 				<Event Id="3864097025" Name="Pause_All" ObjectPath="\Events\Default Work Unit\Pause_All"/>
