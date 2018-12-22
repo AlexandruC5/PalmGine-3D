@@ -122,8 +122,8 @@ void CompAudioSource::SetAudio(const char* audio)
 {
 	audio_to_play = audio;
 	if (audio == "background_tracks") {
-		source->ChangeState("swap_music", "state2");
-		current_state = 2;
+		source->ChangeState("swap_music", "state1");
+		current_state = 1;
 		timer.Start();
 	}
 }

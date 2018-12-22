@@ -137,6 +137,7 @@ bool WwiseT::InitSoundEngine()
 	AK::SoundEngine::SetRTPCValue("PanRight", 0, AK_INVALID_GAME_OBJECT);
 	AK::SoundEngine::SetRTPCValue("HighPassFilter", 0, AK_INVALID_GAME_OBJECT);
 	AK::SoundEngine::SetRTPCValue("LowPassFilter", 0, AK_INVALID_GAME_OBJECT);
+	AK::SoundEngine::SetState("swap_music", "state2");
 	return true;
 }
 
