@@ -239,7 +239,9 @@ void PanelInspector::Draw()
 					if (ImGui::SliderFloat("Pitch", &pitch, 0, 15)) {
 						audio_source->SetPitch(pitch);
 					}
-
+					ImGui::Separator();
+					ImGui::Text("Only for 2D tracks:");
+					ImGui::Separator();
 					int stereo_pan_l = audio_source->GetStereoPanLeft();
 					if (ImGui::SliderInt("Pan Left difference", &stereo_pan_l, 0, 100)) {
 						audio_source->SetStereoPanLeft(stereo_pan_l);
