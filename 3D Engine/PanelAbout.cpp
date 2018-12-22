@@ -88,6 +88,10 @@ void PanelAbout::Draw()
 	{
 		ShellExecuteA(0, 0, "chrome.exe", "https://www.libsdl.org/", 0, SW_SHOWMAXIMIZED);
 	}
+	if (ImGui::MenuItem("- WWISE (v2017.2.6.6636)"))
+	{
+		ShellExecuteA(0, 0, "chrome.exe", "https://www.audiokinetic.com/library/2017.2.8_6698/?source=SDK&id=index.html", 0, SW_SHOWMAXIMIZED);
+	}
 
 
 	if (ImGui::BeginMenu("- OpenGL info"))
