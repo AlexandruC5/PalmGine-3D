@@ -26,7 +26,12 @@ void CompAudioSource::Update(float dt)
 {
 	UpdateSourcePos();
 
-	DebugDraw();
+	if (parent != App->scene_intro->camera) {
+		DebugDraw();
+	}
+	else if (App->scene_intro->game_running == false) {
+		DebugDraw();
+	}
 
 	if (timer.Read()/1000 >= time_to_swap) {
 		if (current_state == 1) {

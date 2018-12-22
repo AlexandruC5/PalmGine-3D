@@ -18,7 +18,12 @@ CompAudioListener::~CompAudioListener()
 void CompAudioListener::Update(float dt)
 {
 	UpdateListenerPos();
-	DebugDraw();
+	if (parent != App->scene_intro->camera) {
+		DebugDraw();
+	}
+	else if (App->scene_intro->game_running == false) {
+		DebugDraw();
+	}
 }
 
 void CompAudioListener::UpdateListenerPos()
