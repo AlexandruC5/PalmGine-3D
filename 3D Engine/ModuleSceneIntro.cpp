@@ -72,9 +72,8 @@ bool ModuleSceneIntro::Start()
 	a_source2->SetAudio("train");
 	CompMovement* movement = new CompMovement(go, COMP_TYPE::C_MOVEMENT);
 	go->AddComponent(movement);
-	a_source2->source->ApplyEnvReverb(12, "tunnel");
-	/*CompReverbZone* rev_zone = new CompReverbZone(go, COMP_TYPE::C_REVERBZONE);
-	go->AddComponent(rev_zone);*/
+	CompReverbZone* rev_zone = new CompReverbZone(go, COMP_TYPE::C_REVERBZONE);
+	go->AddComponent(rev_zone);
 
 	if (game_running == true) 
 	{
