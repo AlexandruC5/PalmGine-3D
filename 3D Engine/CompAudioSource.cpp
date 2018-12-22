@@ -18,7 +18,7 @@ CompAudioSource::CompAudioSource(GameObject * parent, COMP_TYPE type) : Componen
 
 CompAudioSource::~CompAudioSource()
 {
-	delete source;
+	RELEASE(source);
 	audio_to_play.clear();
 }
 

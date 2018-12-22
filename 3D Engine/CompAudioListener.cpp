@@ -12,7 +12,7 @@ CompAudioListener::CompAudioListener(GameObject * parent, COMP_TYPE type) : Comp
 
 CompAudioListener::~CompAudioListener()
 {
-	delete listener;
+	RELEASE(listener);
 }
 
 void CompAudioListener::Update(float dt)

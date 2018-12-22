@@ -4,9 +4,7 @@
 #include "CompAudioSource.h"
 
 ModuleAudio::ModuleAudio(bool start_enabled) : Module(start_enabled)
-{
-	
-}
+{}
 
 ModuleAudio::~ModuleAudio()
 {}
@@ -30,10 +28,10 @@ update_status ModuleAudio::PostUpdate(float dt)
 	return UPDATE_CONTINUE;
 }
 
-bool ModuleAudio::CleanUp() {
-	
+bool ModuleAudio::CleanUp() 
+{
 	audio_sources.clear();
-
+	event_list.clear();
 	return true;
 }
 
@@ -74,4 +72,9 @@ void ModuleAudio::Pause() const
 void ModuleAudio::Resume() const
 {
 	WwiseT::ResumeAll();
+}
+
+void ModuleAudio::SetListener(uint id) const
+{
+	WwiseT::SetDefaultListener(id);
 }

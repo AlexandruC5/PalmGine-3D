@@ -254,6 +254,7 @@ WwiseT::AudioSource::AudioSource(uint pre_id, const char * event_name)
 WwiseT::AudioSource::~AudioSource()
 {
 	AKRESULT eResult = AK::SoundEngine::UnregisterGameObj(id);
+	RELEASE_ARRAY(name);
 	if (eResult != AK_Success)
 	{
 		assert(!"Could not unregister GameObject. See eResult variable to more info");
