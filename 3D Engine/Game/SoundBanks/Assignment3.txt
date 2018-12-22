@@ -26,6 +26,15 @@ Game Parameter	ID	Name			Wwise Object Path	Notes
 	2647461264	HighPassFilter			\Default Work Unit\HighPassFilter	
 	4071927180	PanRight			\Default Work Unit\PanRight	
 
+Audio Bus	ID	Name			Wwise Object Path	Notes
+	3803692087	Master Audio Bus			\Default Work Unit\Master Audio Bus	
+
+Auxiliary Bus	ID	Name			Wwise Object Path	Notes
+	3059984139	tunnel			\Default Work Unit\Master Audio Bus\tunnel	
+
+Effect plug-ins	ID	Name	Type				Notes
+	602546716	Room_Large	Wwise RoomVerb			
+
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	5030772	The Growlers-Going Gets Tuff	D:\Documentos\WwiseProjects\Assignment3_2017v\.cache\Windows\SFX\The Growlers-Going Gets Tuff_F17FB28C.wem		\Actor-Mixer Hierarchy\Default Work Unit\The Growlers-Going Gets Tuff		36845820
 	352902853	The Dillards - Dooley	D:\Documentos\WwiseProjects\Assignment3_2017v\.cache\Windows\SFX\The Dillards - Dooley_F17FB28C.wem		\Actor-Mixer Hierarchy\Default Work Unit\The Dillards - Dooley		10850368
