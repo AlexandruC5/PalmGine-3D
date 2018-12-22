@@ -84,6 +84,8 @@ namespace WwiseT
 	AudioSource* CreateAudSource(const char* name);
 	AudioSource* CreateAudSource(uint id, const char* name);
 	void StopAllEvents();
+	void PauseAll();
+	void ResumeAll();
 }
 // Make wwise methods here :)
 // We will access all the functions in the engine from here

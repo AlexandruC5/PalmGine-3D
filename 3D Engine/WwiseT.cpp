@@ -214,6 +214,16 @@ void WwiseT::StopAllEvents()
 	AK::SoundEngine::StopAll();
 }
 
+void WwiseT::PauseAll()
+{
+	AK::SoundEngine::PostEvent("Pause_All", AK_INVALID_GAME_OBJECT);
+}
+
+void WwiseT::ResumeAll()
+{
+	AK::SoundEngine::PostEvent("Resume_All", AK_INVALID_GAME_OBJECT);
+}
+
 WwiseT::AudioSource::AudioSource(const char* event_name)
 {
 	id = GenRandomNumber();

@@ -1,7 +1,10 @@
 Event	ID	Name			Wwise Object Path	Notes
+	452547817	Stop_All			\Default Work Unit\Stop_All	
 	2607198564	music_TheDillards_Dooley			\Default Work Unit\music_TheDillards_Dooley	
 	3412057565	train			\Default Work Unit\train	
 	3585407402	music_TheGrowlers_GoingGetsTuff			\Default Work Unit\music_TheGrowlers_GoingGetsTuff	
+	3679762312	Resume_All			\Default Work Unit\Resume_All	
+	3864097025	Pause_All			\Default Work Unit\Pause_All	
 
 State Group	ID	Name			Wwise Object Path	Notes
 	128914588	swap_music			\Default Work Unit\swap_music	
