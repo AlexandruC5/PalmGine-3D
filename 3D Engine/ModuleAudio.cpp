@@ -61,24 +61,15 @@ void ModuleAudio::Play() const
 
 void ModuleAudio::Stop() const
 {
-	std::list<CompAudioSource*>::const_iterator iterator;
-	for (iterator = App->audio->audio_sources.begin(); iterator != App->audio->audio_sources.end(); ++iterator) {
-		iterator._Ptr->_Myval->StopAudio();
-	}
+	WwiseT::StopAllEvents();
 }
 
 void ModuleAudio::Pause() const
 {
-	std::list<CompAudioSource*>::const_iterator iterator;
-	for (iterator = App->audio->audio_sources.begin(); iterator != App->audio->audio_sources.end(); ++iterator) {
-		iterator._Ptr->_Myval->PauseAudio();
-	}
+	WwiseT::PauseAll();
 }
 
 void ModuleAudio::Resume() const
 {
-	std::list<CompAudioSource*>::const_iterator iterator;
-	for (iterator = App->audio->audio_sources.begin(); iterator != App->audio->audio_sources.end(); ++iterator) {
-		iterator._Ptr->_Myval->ResumeAudio();
-	}
+	WwiseT::ResumeAll();
 }
