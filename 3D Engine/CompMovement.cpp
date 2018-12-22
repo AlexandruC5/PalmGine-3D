@@ -65,3 +65,69 @@ void CompMovement::SetPosB(math::float3 posB)
 {
 	pos_b = posB;
 }
+
+void CompMovement::SetGoingA(bool going)
+{
+	going_a = going;
+}
+
+void CompMovement::SetGoingB(bool going)
+{
+	going_b = going;
+}
+
+uint CompMovement::GetSize() const
+{
+	// GET SIZE FOR SERIALIZATION
+	uint size = 0;
+
+	// COMPONENT TYPE
+	size += sizeof(int);
+	// IS ACTIVE
+	size += sizeof(int);
+	// POS A
+	size += sizeof(float3);
+	// POS B
+	size += sizeof(float3);
+	// GOING A
+	size += sizeof(int);
+	// GOING B
+	size += sizeof(int);
+
+	return size;
+}
+
+void CompMovement::WriteComponentData(char ** cursor)
+{
+	uint bytes = 0;
+
+	// COMPONENT TYPE
+	bytes = sizeof(int);
+	memcpy(cursor[0], &type, bytes);
+	cursor[0] += bytes;
+	// IS ACTIVE
+	bytes = sizeof(int);
+	int tmp_active = (int)active;
+	memcpy(cursor[0], &tmp_active, bytes);
+	cursor[0] += bytes;
+	// POS A
+	bytes = sizeof(float3);
+	float3 tmp_pos_a = pos_a;
+	memcpy(cursor[0], &tmp_pos_a, bytes);
+	cursor[0] += bytes;
+	// POS B
+	bytes = sizeof(float3);
+	float3 tmp_pos_b = pos_b;
+	memcpy(cursor[0], &tmp_pos_b, bytes);
+	cursor[0] += bytes;
+	// GOING A
+	bytes = sizeof(int);
+	int tmp_going_a = (int)going_a;
+	memcpy(cursor[0], &tmp_going_a, bytes);
+	cursor[0] += bytes;
+	// GOING B
+	bytes = sizeof(int);
+	int tmp_going_b = (int)going_b;
+	memcpy(cursor[0], &tmp_going_b, bytes);
+	cursor[0] += bytes;
+}

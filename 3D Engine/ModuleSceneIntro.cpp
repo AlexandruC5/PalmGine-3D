@@ -321,6 +321,11 @@ uint ModuleSceneIntro::GetSceneSize(GameObject* go, uint* go_num)
 			size += ((CompAudioSource*)go->components[i])->GetSize();
 			break;
 		}
+		case COMP_TYPE::C_MOVEMENT:
+		{
+			size += ((CompMovement*)go->components[i])->GetSize();
+			break;
+		}
 		// serialization
 		}
 	}
@@ -425,6 +430,11 @@ void ModuleSceneIntro::CreateData(char ** cursor, GameObject * go)
 		case COMP_TYPE::C_AUDIO_SOURCE:
 		{
 			((CompAudioSource*)go->components[i])->WriteComponentData(cursor);
+			break;
+		}
+		case COMP_TYPE::C_MOVEMENT:
+		{
+			((CompMovement*)go->components[i])->WriteComponentData(cursor);
 			break;
 		}
 		}
@@ -717,6 +727,39 @@ void ModuleSceneIntro::LoadSceneData(const char * path)
 				comp_aud_source->SetMaxDistance(max_distance);
 				
 				go->AddComponent(comp_aud_source);
+				break;
+			}
+			case COMP_TYPE::C_MOVEMENT:
+			{
+				//Add C_AUDIOLISTENER parameters
+				CompMovement* comp_movement = new CompMovement(go, COMP_TYPE::C_MOVEMENT);
+				float3 pos_a = { 0,0,0 };
+				float3 pos_b = { 0,0,0 };
+				int going_a = 0;
+				int going_b = 0;
+
+				// POS A
+				bytes = sizeof(float3);
+				memcpy(&pos_a, cursor, bytes);
+				cursor += bytes;
+				comp_movement->SetPosA(pos_a);
+				// POS B
+				bytes = sizeof(float3);
+				memcpy(&pos_b, cursor, bytes);
+				cursor += bytes;
+				comp_movement->SetPosA(pos_b);
+				// GOING A
+				bytes = sizeof(int);
+				memcpy(&going_a, cursor, bytes);
+				cursor += bytes;
+				comp_movement->SetGoingA(going_a);
+				// GOING B
+				bytes = sizeof(int);
+				memcpy(&going_b, cursor, bytes);
+				cursor += bytes;
+				comp_movement->SetGoingB(going_b);
+				
+				go->AddComponent(comp_movement);
 				break;
 			}
 			}

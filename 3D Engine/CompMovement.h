@@ -21,6 +21,12 @@ public:
 	//Setters
 	void SetPosA(math::float3 posA);
 	void SetPosB(math::float3 posB);
+	void SetGoingA(bool going);
+	void SetGoingB(bool going);
+
+	//Serialization
+	uint GetSize() const;
+	void WriteComponentData(char ** cursor);
 
 private:
 	math::float3 pos_a;
