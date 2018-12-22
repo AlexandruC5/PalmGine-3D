@@ -23,10 +23,16 @@ public:
 	void SetRadius(float rad);
 	void ShouldUseSphere(bool should_use);
 	void ShouldUseCube(bool should_use);
+	void SetSphere(math::Sphere s);
+	void SetCube(math::OBB c);
 
 	//DebugDraw
 	void DebugDrawSphere();
 	void DebugDrawCube();
+
+	//Serialization
+	uint GetSize() const;
+	void WriteComponentData(char ** cursor);
 
 private:
 	math::Sphere sphere;
@@ -36,7 +42,6 @@ private:
 
 	bool use_sphere = true;
 	bool use_cube = false;
-
 };
 
 #endif // !COMPREVERBZONE_H

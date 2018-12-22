@@ -87,6 +87,16 @@ void CompReverbZone::ShouldUseCube(bool should_use)
 	use_cube = should_use;
 }
 
+void CompReverbZone::SetSphere(math::Sphere s)
+{
+	sphere = s;
+}
+
+void CompReverbZone::SetCube(math::OBB c)
+{
+	cube = c;
+}
+
 //DebugDraw
 void CompReverbZone::DebugDrawSphere()
 {
@@ -155,4 +165,67 @@ void CompReverbZone::DebugDrawCube()
 	glColor4f(1.f, 1.f, 1.f, 1.f);
 	glEnd();
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
+uint CompReverbZone::GetSize() const
+{
+	// GET SIZE FOR SERIALIZATION
+	uint size = 0;
+
+	// COMPONENT TYPE
+	size += sizeof(int);
+	// IS ACTIVE
+	size += sizeof(int);
+	// SHPERE
+	size += sizeof(Sphere);
+	// CUBE
+	size += sizeof(OBB);
+	// RADIUS
+	size += sizeof(float);
+	// USE SPHERE
+	size += sizeof(int);
+	// USE CUBE
+	size += sizeof(int);
+	return size;
+}
+
+void CompReverbZone::WriteComponentData(char ** cursor)
+{
+	uint bytes = 0;
+
+	// COMPONENT TYPE
+	bytes = sizeof(int);
+	memcpy(cursor[0], &type, bytes);
+	cursor[0] += bytes;
+	// IS ACTIVE
+	bytes = sizeof(int);
+	int tmp_active = (int)active;
+	memcpy(cursor[0], &tmp_active, bytes);
+	cursor[0] += bytes;
+	// SHPERE
+	bytes = sizeof(Sphere);
+	Sphere tmp_sphere = sphere;
+	memcpy(cursor[0], &tmp_sphere, bytes);
+	cursor[0] += bytes;
+	// CUBE
+	bytes = sizeof(OBB);
+	OBB tmp_cube = cube;
+	memcpy(cursor[0], &tmp_cube, bytes);
+	cursor[0] += bytes;
+	// RADIUS
+	bytes = sizeof(float);
+	float tmp_rad = radius;
+	memcpy(cursor[0], &tmp_rad, bytes);
+	cursor[0] += bytes;
+	// USE SPHERE
+	bytes = sizeof(int);
+	int tmp_usphere = use_sphere;
+	memcpy(cursor[0], &tmp_usphere, bytes);
+	cursor[0] += bytes;
+	// USE CUBE
+	bytes = sizeof(int);
+	int tmp_ubox = use_cube;
+	memcpy(cursor[0], &tmp_ubox, bytes);
+	cursor[0] += bytes;
+	
 }

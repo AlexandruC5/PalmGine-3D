@@ -332,6 +332,11 @@ uint ModuleSceneIntro::GetSceneSize(GameObject* go, uint* go_num)
 			size += ((CompMovement*)go->components[i])->GetSize();
 			break;
 		}
+		case COMP_TYPE::C_REVERBZONE:
+		{
+			size += ((CompReverbZone*)go->components[i])->GetSize();
+			break;
+		}
 		// serialization
 		}
 	}
@@ -441,6 +446,11 @@ void ModuleSceneIntro::CreateData(char ** cursor, GameObject * go)
 		case COMP_TYPE::C_MOVEMENT:
 		{
 			((CompMovement*)go->components[i])->WriteComponentData(cursor);
+			break;
+		}
+		case COMP_TYPE::C_REVERBZONE:
+		{
+			((CompReverbZone*)go->components[i])->WriteComponentData(cursor);
 			break;
 		}
 		}
@@ -637,7 +647,6 @@ void ModuleSceneIntro::LoadSceneData(const char * path)
 			}
 			case COMP_TYPE::C_AUDIOLISTENER:
 			{
-				//Add C_AUDIOLISTENER parameters
 				CompAudioListener* comp_aud_listener = new CompAudioListener(go, COMP_TYPE::C_AUDIOLISTENER);
 				WwiseT::AudioSource* listener = nullptr;
 				uint listener_id;
@@ -661,8 +670,6 @@ void ModuleSceneIntro::LoadSceneData(const char * path)
 			}
 			case COMP_TYPE::C_AUDIO_SOURCE:
 			{
-				//Add C_AUDIO_SOURCE parameters
-				
 				WwiseT::AudioSource* source = nullptr;
 				char* name = new char[128];
 				int id = 0;
@@ -736,7 +743,6 @@ void ModuleSceneIntro::LoadSceneData(const char * path)
 			}
 			case COMP_TYPE::C_MOVEMENT:
 			{
-				//Add C_AUDIOLISTENER parameters
 				CompMovement* comp_movement = new CompMovement(go, COMP_TYPE::C_MOVEMENT);
 				float3 pos_a = { 0,0,0 };
 				float3 pos_b = { 0,0,0 };
@@ -765,6 +771,43 @@ void ModuleSceneIntro::LoadSceneData(const char * path)
 				comp_movement->SetGoingB(going_b);
 				
 				go->AddComponent(comp_movement);
+				break;
+			}
+			case COMP_TYPE::C_REVERBZONE:
+			{
+				CompReverbZone* comp_rev = new CompReverbZone(go, COMP_TYPE::C_REVERBZONE);
+				math::Sphere sphere;
+				math::OBB cube;
+				float size = 0.0f;
+				int use_sphere = 0;
+				int use_cube = 0;
+				// SPHERE
+				bytes = sizeof(math::Sphere);
+				memcpy(&sphere, cursor, bytes);
+				cursor += bytes;
+				comp_rev->SetSphere(sphere);
+				// CUBE
+				bytes = sizeof(math::OBB);
+				memcpy(&cube, cursor, bytes);
+				cursor += bytes;
+				comp_rev->SetCube(cube);
+				// RADIUS
+				bytes = sizeof(float);
+				memcpy(&size, cursor, bytes);
+				cursor += bytes;
+				comp_rev->SetRadius(size);
+				// USE SPH
+				bytes = sizeof(int);
+				memcpy(&use_sphere, cursor, bytes);
+				cursor += bytes;
+				comp_rev->ShouldUseSphere(use_sphere);
+				// USE CUBE
+				bytes = sizeof(int);
+				memcpy(&use_cube, cursor, bytes);
+				cursor += bytes;
+				comp_rev->ShouldUseCube(use_cube);
+
+				go->AddComponent(comp_rev);
 				break;
 			}
 			}
