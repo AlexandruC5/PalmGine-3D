@@ -25,7 +25,8 @@ void PanelTimeManagement::Draw()
 
 	//Buttons
 	if (ImGui::Button("Play")) {
-		if (App->scene_intro->game_running == false) {
+		if (App->scene_intro->game_running == false) 
+		{
 			App->scene_intro->in_game_timer.Start();
 			App->scene_intro->game_running = true;
 			App->scene_intro->SerializeScene("auto_save_when_play");
@@ -33,22 +34,30 @@ void PanelTimeManagement::Draw()
 	}
 	ImGui::SameLine();
 	if (App->scene_intro->in_game_timer.IsPaused() == false) {
-		if (ImGui::Button("Pause")) {
-			if (App->scene_intro->game_running == true) {
+		if (ImGui::Button("Pause")) 
+		{
+			if (App->scene_intro->game_running == true) 
+			{
+				App->audio->Pause();
 				App->scene_intro->in_game_timer.Pause();
 			}
 		}
 	}
 	else {
-		if (ImGui::Button("Continue")) {
-			if (App->scene_intro->game_running == true) {
+		if (ImGui::Button("Continue")) 
+		{
+			if (App->scene_intro->game_running == true) 
+			{
+				App->audio->Resume();
 				App->scene_intro->in_game_timer.UnPause();
 			}
 		}
 	}
 	ImGui::SameLine();
-	if (ImGui::Button("Stop")) {
-		if (App->scene_intro->game_running == true) {
+	if (ImGui::Button("Stop")) 
+	{
+		if (App->scene_intro->game_running == true) 
+		{
 			App->scene_intro->in_game_timer.Start();
 			App->scene_intro->in_game_timer.Stop();
 			App->scene_intro->game_running = false;
@@ -60,6 +69,7 @@ void PanelTimeManagement::Draw()
 			remove(bin_path.c_str());
 			bin_path.clear();
 			App->scene_intro->in_game_timer.ResetExtraTicks();
+			App->audio->Stop();
 		}
 	}
 	ImGui::SameLine();
