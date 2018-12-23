@@ -8,9 +8,11 @@ The high level system we’ve chosen is the implementation of an audio engine ca
 
 ### [Francisco Ruiz Giménez](https://github.com/botttos) (left member)
 
+This are Fran's main contribution to PalmGine3D.
 
 ### [Manel Mourelo Montero](https://github.com/manelmourelo) (right member)
 
+This are Manels' main contribution to PalmGine3D.
 * LOG Console.
 * Configuration Window.
 * Panel Inspector with information about all the components of the selected GamObject.
