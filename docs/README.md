@@ -21,6 +21,9 @@ The high level system we’ve chosen is the implementation of an audio engine ca
 ## Demo Video
 
 ## Links
+[Code Repository](https://github.com/botttos/PalmGine-3D)
+
+[Latest Release](https://github.com/botttos/PalmGine-3D/releases)
 
 ## License
 ### Palmgine 3D is under the [Apache License 2.0](https://opensource.org/licenses/Apache-2.0)
