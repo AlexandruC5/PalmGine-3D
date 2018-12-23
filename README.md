@@ -2,21 +2,34 @@
 
 To work with PalmGine 3D you must drag and drop the files on the window.
 
-To see the code of this assignment check branch called "Assignment2"
-Link: https://github.com/botttos/PalmGine-3D/tree/Assignment2
+To see the code of this assignment check branch called "Assignment3"
+Link: https://github.com/botttos/PalmGine-3D/tree/Assignment3
 
 Hope you like it. 
 
 # QUICK START #
 
-1) To use our engine drop one FBX file from "Models" folder.
-2) The proper resources will be generated in the engine.
-3) Go to "Assets" on the right panel (in-engine).
-4) Click on the Object you want to add to the hierarchy.
+1) To play with the audio scene demo go to File -> Load -> AudioScene
+2) You can find: 
+	- Listener GameObject with a listener and audiosource wich blends between two musics in loop. Music tracks are 2D.
+	- Train GameObject that is moving from point A to point B with a 3D spatial audio.
+	- Tunnel GameObject with audio distort. This zone can be a sphere or a cube. Size is modificable.
+3) Audio settings. You can:
+	- Introduce the name of the AudioClip.
+	- Time to swap between musics
+	- Play/stop
+	- Priority
+	- Volume
+	- Pitch
+	- Only 2D tracks: change pan.
+4) List of AudioClips loaded in the soundbank:
 
-# INNOVATION
-
-- Scene serialization in binary to make it faster.
+* MUSICS
+2D	music_TheDillards_Dooley
+2D	music_TheGrowlers_GoingGetsTuff
+2D	background_tracks -> Event that changes between two songs when the game state is changed.
+* TRACKS
+3D	train
 
 # CAMERA CONTROLS (Like Unity)
 
@@ -29,7 +42,8 @@ Hope you like it.
 - Shift to speed up the camera's velocity.
 
 # FEATURES
-
+- WWISE 2017 INTEGRATION
+- Listener, audio source, zones to distorsionate audio, component movement.
 - Configuration options (Application, window, scene, render, hardware, volume, camera, light and input).
 - Inspector shows and applies transform propierties, mesh information and texture information.
 - Console with LOG control.
@@ -48,6 +62,11 @@ Hope you like it.
 - Resource management:
    - “Asset” window that shows all user assets.
    - Upon start, all resources not managed inside Assets are generated in Library.
+
+# VERSION CONTROL
+## v.1.5
+- WWISE 2017 INTEGRATION
+- Listener, audio source, zones to distort audio, component movement.
 
 # VERSION CONTROL
 ## v.1.0
