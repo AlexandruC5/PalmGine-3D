@@ -208,7 +208,6 @@ void CompAudioSource::PlayAudio()
 {
 	source->PlayEventByName(audio_to_play.c_str());
 	timer.Start();
-	source->ChangeState("swap_music", "state1");
 }
 
 void CompAudioSource::PauseAudio()

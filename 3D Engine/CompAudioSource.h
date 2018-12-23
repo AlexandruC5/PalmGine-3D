@@ -81,7 +81,7 @@ private:
 	std::string audio_to_play;
 	Timer timer;
 	float time_to_swap = 30.0f;
-	int current_state = 1;
+	int current_state = 2;
 };
 
 #endif // !COMAUDIOSOURCE_H
