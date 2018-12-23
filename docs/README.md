@@ -38,34 +38,57 @@ Audio sub-system uses [Wwise](https://www.audiokinetic.com/products/wwise/) to r
 
 ### Audio Listener
 !["AudioListenerComponent"](Images/AudioListenerComponent.png)
+
 * This GameObject component allows you to set a GameObject as the listener of the scene.
+
 !["AudioListener"](Images/AudioListener.png)
 
 ### Audio Source
-!["AudioSourceComponent"](Images/AudioSourceComp.png)      
+!["AudioSourceComponent"](Images/AudioSourceComp.png) 
+
 * This GameObject component is the one that reproduces the audios.
-!["AudioSource"](Images/AudioSource.png)     
+
+!["AudioSource"](Images/AudioSource.png)   
+
 * It allows you to modify the clip you want it to reproduce.
+
 !["AudioClip"](Images/AudioClip.png) 
+
 * In case the clip has 2 audios attached to it you can set the time it will have to wait until it changes the audio.
+
 !["TimeToSwap"](Images/TimeToSwap.png) 
+
 * It allows you to play and stop the clip so you have a preview of how it will sound when you enter to the game-mode.
+
 !["Play-Stop"](Images/Play-Stop.png) 
+
 * It let's you mute the clip.
+
 !["Mute"](Images/MuteOption.png) 
+
 * It has the option to set the audio as PlayOnAwake, so it starts reproducing at the moment you enter to the game_mode.
+
 !["PlayOnAwake"](Images/PlayOnAwake.png) 
+
 * It lets you select the volume that the clip will have when it’s reproduced.
+
 !["Volume"](Images/Volume.png) 
+
 * It has the option to modify the pitch of the clip.
+
 !["Pitch"](Images/Pitch.png) 
+
 * If the clip is a 2D track it lets you choose the PAN of the audio.
+
 !["PAN"](Images/PAN.png) 
+
 * The audios can have a 3D positioning, so how they sound depends on where they are placed respect to the listener.
 
 ### Audio Reverb Zone
 !["AudioReverbZoneComp"](Images/ReverbZoneComp.png) 
+
 * This GameObject component allows you to create a zone (cube or sphere depending on users preference) that will affect the reverberation of the AudioSources that are inside it.
+
 !["AudioReverbZone"](Images/ReverbZonegif.gif) 
 
 ## Demo Video
