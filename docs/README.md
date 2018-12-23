@@ -1,5 +1,7 @@
 # Palmgine 3D
-PalmGine-3D is a game engine that has been done for the [Game Engines](https://www.upc.edu/estudispdf/guia_docent.php?codi=804246&lang=ing) subject in the 3rd year of the [Game Design and Development](https://www.citm.upc.edu/ing/estudis/graus-videojocs/) grade of [CITM](https://www.citm.upc.edu/ing/) ([UPC](https://www.upc.edu/en?set_language=en)).
+PalmGine-3D is a game engine that has been done for the [Game Engines](https://www.upc.edu/estudispdf/guia_docent.php?codi=804246&lang=ing) subject in the 3rd year of the [Game Design and Development](https://www.citm.upc.edu/ing/estudis/graus-videojocs/) grade of [CITM](https://www.citm.upc.edu/ing/) ([UPC](https://www.upc.edu/en?set_language=en)). It has been done in a four month period and tries to be a basic Unity like engine with one high level system.
+
+The high level system we’ve chosen is the implementation of an audio engine called [Wwise]( https://www.audiokinetic.com/products/wwise/), so in this engine you are able to create audio listeners, audio sources and audio reverb zones to give audio to the games made with it.
 
 To work with it you must drag and drop the files on the window.
 
