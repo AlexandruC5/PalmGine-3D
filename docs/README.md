@@ -9,18 +9,22 @@ The high level system we’ve chosen is the implementation of an audio engine ca
 ### [Francisco Ruiz Giménez](https://github.com/botttos) (left member)
 
 This are Fran's main contribution to PalmGine3D:
-* Unity like camera controls.
-* About menu.
-* FBX and texture importer.
+* OpenGL implementation
 * GameObjects.
 * GameObjects hierarchy.
-* Own format for meshes and textures.
-* Scene binary serialization.
+* Own file format for meshes and textures.
+* FBX and texture importer.
+* Scene binary serialization (save/load scene).
 * Resource Manager.
 * Wwise implementation.
-* Audio bank.
 * 3D audio.
 * Audio reverb zone.
+* Audio banks.
+* Audio states.
+* Transformation implementation (Not gizmos).
+* Unity like camera controls.
+* About menu.
+* UI design.
 * Bug solving.
 
 ### [Manel Mourelo Montero](https://github.com/manelmourelo) (right member)
@@ -28,7 +32,7 @@ This are Fran's main contribution to PalmGine3D:
 This are Manels' main contribution to PalmGine3D:
 * LOG Console.
 * Configuration Window.
-* Panel Inspector with information about all the components of the selected GamObject.
+* Panel Inspector with information about all the components of the selected GameObject.
 * Quadtree to contain all the static GameObjects.
 * Component Camera for GameObjects with camera culling.
 * Editor camera.
@@ -39,6 +43,7 @@ This are Manels' main contribution to PalmGine3D:
 * Audio Listener component.
 * Audio Source component.
 * Audio Reverb Zone Component.
+* Gizmos.
 * Bug solving.
 
 ## Main Core Sub-Systems
