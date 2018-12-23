@@ -9,11 +9,14 @@ CompAudioSource::CompAudioSource(GameObject * parent, COMP_TYPE type, const char
 	source = App->audio->CreateSoundEmitter(name);
 	App->audio->audio_sources.push_back(this);
 	timer.Start();
+
 }
 
 CompAudioSource::CompAudioSource(GameObject * parent, COMP_TYPE type) : Component(parent, type)
 {
 	source = App->audio->CreateSoundEmitter("");
+	App->audio->audio_sources.push_back(this);
+	timer.Start();
 }
 
 CompAudioSource::~CompAudioSource()
