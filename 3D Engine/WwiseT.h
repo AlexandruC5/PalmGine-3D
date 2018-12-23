@@ -66,7 +66,7 @@ namespace WwiseT
 		void SetMono();
 		void SetStereo();
 		void SetPitch(float value);
-		void SetListener();
+		void SetListener(uint listener_id);
 		void SetPos(float pos_x, float pos_y, float pos_z, float front_rot_x, float front_rot_y, float front_rot_z, float top_rot_x, float top_rot_y, float top_rot_z);
 		// Geters
 		uint GetID()const;

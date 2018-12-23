@@ -318,9 +318,9 @@ void WwiseT::AudioSource::SetPitch(float value) {
 	AK::SoundEngine::SetRTPCValue("Pitch", value, id);
 }
 
-void WwiseT::AudioSource::SetListener()
+void WwiseT::AudioSource::SetListener(uint listener_id)
 {
-	AkGameObjectID tmp = id;
+	AkGameObjectID tmp = listener_id;
 	AKRESULT eResult = AK::SoundEngine::SetListeners(id, &tmp, 1);
 	if (eResult != AK_Success)
 	{
