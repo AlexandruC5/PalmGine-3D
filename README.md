@@ -9,7 +9,7 @@ Hope you like it.
 
 1) To play with the audio scene demo go to File -> Load -> AudioScene
 2) You can find: 
-	- Listener GameObject with a listener and audiosource wich blends between two musics in loop. Music tracks are 2D.
+	- Listener GameObject with a listener and audiosource wich blends between two musics in loop. Music tracks are 2D positioned.
 	- Train GameObject that is moving from point A to point B with a 3D spatial audio.
 	- Tunnel GameObject with audio distort. This zone can be a sphere or a cube. Size is modificable.
 3) Audio settings. You can:
@@ -23,11 +23,11 @@ Hope you like it.
 4) List of AudioClips loaded in the soundbank:
 
 * MUSICS
-2D	music_TheDillards_Dooley
-2D	music_TheGrowlers_GoingGetsTuff
-2D	background_tracks -> Event that changes between two songs when the game state is changed.
-* TRACKS
-3D	train
+2D	"music_TheDillards_Dooley"
+2D	"music_TheGrowlers_GoingGetsTuff"
+2D	"background_tracks" -> Event that changes between two songs when the game state is changed.
+* FX
+3D	"train"
 
 # CAMERA CONTROLS (Like Unity)
 
