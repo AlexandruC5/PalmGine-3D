@@ -3,9 +3,13 @@ PalmGine-3D is a game engine that has been done for the [Game Engines](https://w
 
 The high level system we’ve chosen is the implementation of an audio engine called [Wwise]( https://www.audiokinetic.com/products/wwise/), so in this engine you are able to create audio listeners, audio sources and audio reverb zones to give audio to the games made with it.
 
-To work with it you must drag and drop the files on the window.
+## Team Members
 
-Hope you like it.  
+
+
+### Francisco Ruiz Giménez
+
+### Manel Mourelo Montero
 
 # CAMERA CONTROLS (Like Unity)
 
