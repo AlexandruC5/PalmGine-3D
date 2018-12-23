@@ -14,6 +14,8 @@ The high level system we’ve chosen is the implementation of an audio engine ca
 
 (guy in the right)
 
+## Main Core Sub-Systems
+
 # CAMERA CONTROLS (Like Unity)
 
 - Mouse right click: Move Camera with static position
