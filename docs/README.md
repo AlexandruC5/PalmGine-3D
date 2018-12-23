@@ -8,11 +8,11 @@ The high level system we’ve chosen is the implementation of an audio engine ca
 
 ### [Francisco Ruiz Giménez](https://github.com/botttos)
 
-(guy in the left)
+*Guy in the left
 
 ### [Manel Mourelo Montero](https://github.com/manelmourelo)
 
-(guy in the right)
+*Guy in the right
 
 * LOG Console.
 * Configuration Window.
