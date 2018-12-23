@@ -34,7 +34,12 @@ The high level system we’ve chosen is the implementation of an audio engine ca
 * It has an “Asset” window that shows all user assets.
 
 ## Audio Sub-System
-Audio sub-system uses [Wwise](https://www.audiokinetic.com/products/wwise/) to read and use the audio banks. 
+Audio sub-system uses [Wwise](https://www.audiokinetic.com/products/wwise/) to read and use the audio banks.
+### Audio Listener
+* This GameObject component allows you to set a GameObject as the listener of the scene.
+
+### Audio Source
+*
 
 ## Demo Video
 
