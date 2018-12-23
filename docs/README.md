@@ -7,8 +7,10 @@ The high level system we’ve chosen is the implementation of an audio engine ca
 !["TeamPhoto"](TemPhoto.png)
 
 ### [Francisco Ruiz Giménez](https://github.com/botttos)
+(guy in the left)
 
 ### [Manel Mourelo Montero](https://github.com/manelmourelo)
+(guy in the right)
 
 # CAMERA CONTROLS (Like Unity)
 
