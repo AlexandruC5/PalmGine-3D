@@ -16,32 +16,13 @@ The high level system we’ve chosen is the implementation of an audio engine ca
 
 ## Main Core Sub-Systems
 
-# CAMERA CONTROLS (Like Unity)
+## Audio Sub-System
 
-- Mouse right click: Move Camera with static position
-- Mouse left + Alt-left: Move Camera arround object (model)
-- Mouse wheel: Move Camera forward and backward
-- Mouse middle: Panning.
-- F: Center the Camera on an object
+## Demo Video
 
-# FEATURES
+## Links
 
-- Configuration options (Application, window, hardware, volume, camera and input).
-- Inspector shows transform propierties, mesh information and texture information.
-- Console with LOG control.
-- Load and visualization of geometry and textures.
-
-# VERSION CONTROL
-## v.0.5
-- Load and draw one .fbx or .obj file with one channel diffuse.
-- Configuration options (Application, Window, Scene, Hardware, Volume, Camera and Input).
-- Inspector shows transform propierties, mesh information and texture information.
-- Console with LOG control.
-- Drag and drop.
-- Unity-like camera.
-
----
-
+## License
 ### Palmgine 3D is under the Apache License 2.0
 
 #### Copyright (c) 2018 Fran Ruiz Giménez and Manel Mourelo Montero
