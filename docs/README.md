@@ -6,13 +6,10 @@ The high level system we’ve chosen is the implementation of an audio engine ca
 ## Team Members
 !["TeamPhoto"](TemPhoto.png)
 
-### [Francisco Ruiz Giménez](https://github.com/botttos)
+### [Francisco Ruiz Giménez](https://github.com/botttos) (left member)
 
-(Guy in the left)
 
-### [Manel Mourelo Montero](https://github.com/manelmourelo)
-
-(Guy in the right)
+### [Manel Mourelo Montero](https://github.com/manelmourelo) (right member)
 
 * LOG Console.
 * Configuration Window.
