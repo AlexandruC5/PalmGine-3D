@@ -2,8 +2,9 @@
 
 To see the code of this assignment check branch called "Assignment3"
 Link: https://github.com/botttos/PalmGine-3D/tree/Assignment3
+Web link: https://botttos.github.io/PalmGine-3D/
 
-Hope you like it. 
+Hope you like it.
 
 # QUICK START #
 
