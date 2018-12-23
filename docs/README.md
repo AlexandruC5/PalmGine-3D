@@ -49,6 +49,9 @@ Audio sub-system uses [Wwise](https://www.audiokinetic.com/products/wwise/) to r
 * It has the option to modify the pitch of the clip.
 * If the clip is a 2D track it lets you choose the PAN of the audio.
 
+### Audio Reverb Zone
+* This GameObject component allows you to create a zone (cube or sphere depending on users preference) that will affect the reverberation of the AudioSources that are inside it.
+
 ## Demo Video
 
 ## Links
