@@ -14,6 +14,19 @@ The high level system we’ve chosen is the implementation of an audio engine ca
 
 (guy in the right)
 
+* LOG Console.
+* Configuration Window.
+* Panel Inspector with information about all the components of the selected GamObject.
+* Quadtree to contain all the static GameObjects.
+* Component Camera for GameObjects with camera culling.
+* Editor camera.
+* Window Resize.
+* GameObject AABB.
+* Time manager to play/pause/stop the in-game mode.
+* Audio Listener component.
+* Audio Source component.
+* Audio Reverb Zone Component.
+
 ## Main Core Sub-Systems
 
 ### Module Scene
