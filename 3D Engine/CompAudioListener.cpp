@@ -7,7 +7,7 @@
 CompAudioListener::CompAudioListener(GameObject * parent, COMP_TYPE type) : Component(parent, type)
 {
 	listener = App->audio->CreateSoundEmitter("listener");
-	WwiseT::SetDefaultListener(listener->GetID());
+	App->audio->SetListener(listener);
 }
 
 CompAudioListener::~CompAudioListener()

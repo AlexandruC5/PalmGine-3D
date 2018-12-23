@@ -24,7 +24,7 @@ public:
 	void Stop()const;
 	void Pause()const;
 	void Resume()const;
-	void SetListener(uint id)const;
+	void SetListener(WwiseT::AudioSource* new_listener);
 	
 private:
 	std::list<WwiseT::AudioSource*> event_list;

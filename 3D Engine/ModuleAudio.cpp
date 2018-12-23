@@ -74,7 +74,8 @@ void ModuleAudio::Resume() const
 	WwiseT::ResumeAll();
 }
 
-void ModuleAudio::SetListener(uint id) const
+void ModuleAudio::SetListener(WwiseT::AudioSource* new_listener)
 {
-	WwiseT::SetDefaultListener(id);
+	listener = new_listener;
+	WwiseT::SetDefaultListener(new_listener->GetID());
 }
