@@ -16,6 +16,23 @@ The high level system we’ve chosen is the implementation of an audio engine ca
 
 ## Main Core Sub-Systems
 
+### Module Scene
+* Manage all the in the scene and the components attached to them.
+* It allows you to save and load scenes (in binary format)
+
+### File System
+* Manage the folders used during the execution of the engine.
+
+### Importer
+* It allows you to import models and images and convert them into our own format.
+
+### Time Manager
+* It allows you to start, pause and stop the game-mode and controlls the deltatime of the objects in the scene.
+
+### Resources Manager
+* It avoid that you import repeated files.
+* It has an “Asset” window that shows all user assets.
+
 ## Audio Sub-System
 
 ## Demo Video
