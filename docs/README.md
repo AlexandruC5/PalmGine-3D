@@ -35,6 +35,7 @@ The high level system we’ve chosen is the implementation of an audio engine ca
 
 ## Audio Sub-System
 Audio sub-system uses [Wwise](https://www.audiokinetic.com/products/wwise/) to read and use the audio banks.
+
 ### Audio Listener
 * This GameObject component allows you to set a GameObject as the listener of the scene.
 
@@ -48,6 +49,7 @@ Audio sub-system uses [Wwise](https://www.audiokinetic.com/products/wwise/) to r
 * It lets you select the volume that the clip will have when it’s reproduced.
 * It has the option to modify the pitch of the clip.
 * If the clip is a 2D track it lets you choose the PAN of the audio.
+* The audios can have a 3D positioning, so how they sound depends on where they are placed respect to the listener.
 
 ### Audio Reverb Zone
 * This GameObject component allows you to create a zone (cube or sphere depending on users preference) that will affect the reverberation of the AudioSources that are inside it.
