@@ -1,7 +1,5 @@
 # Palmgine 3D is a project consistent of creating a Game Engine.
 
-To work with PalmGine 3D you must drag and drop the files on the window.
-
 To see the code of this assignment check branch called "Assignment3"
 Link: https://github.com/botttos/PalmGine-3D/tree/Assignment3
 
