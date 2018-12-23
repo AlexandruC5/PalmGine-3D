@@ -1,5 +1,5 @@
-# Palmgine 3D is a project consistent of creating a Game Engine.
-At this moment, you can import your model (.fbx and .obj), load geometry and change or apply one texture on the model (.jpg, .png, .bmp or .dds).
+# Palmgine 3D
+PalmGine-3D is a game engine that has been done for the [Game Engines](https://www.upc.edu/estudispdf/guia_docent.php?codi=804246&lang=ing) subject in the 3rd year of the [Game Design and Development](https://www.citm.upc.edu/ing/estudis/graus-videojocs/) grade of [CITM](https://www.citm.upc.edu/ing/) ([UPC](https://www.upc.edu/en?set_language=en)).
 
 To work with it you must drag and drop the files on the window.
 
