@@ -83,7 +83,9 @@ void PanelInspector::Draw()
 			if (transform != nullptr)
 			{
 				//Enable guizmos
-				EnableGuizmos(selected_go);
+				if (App->scene_intro->game_running == false) {
+					EnableGuizmos(selected_go);
+				}
 			}
 
 			if (ImGui::CollapsingHeader("Transform"))
