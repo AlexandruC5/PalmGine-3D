@@ -39,7 +39,15 @@ Audio sub-system uses [Wwise](https://www.audiokinetic.com/products/wwise/) to r
 * This GameObject component allows you to set a GameObject as the listener of the scene.
 
 ### Audio Source
-*
+* This GameObject component is the one that reproduces the audios.
+* It allows you to modify the clip you want it to reproduce.
+* In case the clip has 2 audios attached to it you can set the time it will have to wait until it changes the audio.
+* It allows you to play and stop the clip so you have a preview of how it will sound when you enter to the game-mode.
+* It let's you mute the clip.
+* It has the option to set the audio as PlayOnAwake, so it starts reproducing at the moment you enter to the game_mode.
+* It lets you select the volume that the clip will have when it’s reproduced.
+* It has the option to modify the pitch of the clip.
+* If the clip is a 2D track it lets you choose the PAN of the audio.
 
 ## Demo Video
 
