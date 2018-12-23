@@ -38,7 +38,7 @@ The high level system we’ve chosen is the implementation of an audio engine ca
 
 ### Palmgine 3D is under the Apache License 2.0
 
-#### Copyright (c) 2018 Fran Ruiz Giménez and Manel Mourelo
+#### Copyright (c) 2018 Fran Ruiz Giménez and Manel Mourelo Montero
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
