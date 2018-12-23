@@ -22,9 +22,16 @@ void PanelLoadScene::Draw()
 	{
 		if (ImGui::Button(scenes[i].c_str()))
 		{
+			if (App->scene_intro->game_paused || App->scene_intro->game_running)
+			{
+				LOG("ERROR LOADING SCENE. Can't load scene on play mode.");
+			}
+			else
+			{
 				LOG("LOADING SCENE WITH NAME: %s", scenes[i].c_str());
 				App->scene_intro->LoadSceneData(scenes[i].c_str());
-				active = false;		
+				active = false;
+			}			
 		}
 	}
 	ImGui::End();
