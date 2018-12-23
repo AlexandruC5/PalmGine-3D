@@ -129,11 +129,6 @@ float CompAudioSource::GetMusicSwapTime()const
 void CompAudioSource::SetAudio(const char* audio)
 {
 	audio_to_play = audio;
-	if (audio == "background_tracks") {
-		source->ChangeState("swap_music", "state1");
-		current_state = 1;
-		timer.Start();
-	}
 }
 void CompAudioSource::SetMuted(bool must_mute)
 {
@@ -212,6 +207,8 @@ void CompAudioSource::SetMusicSwapTimer(float new_time)
 void CompAudioSource::PlayAudio()
 {
 	source->PlayEventByName(audio_to_play.c_str());
+	timer.Start();
+	source->ChangeState("swap_music", "state1");
 }
 
 void CompAudioSource::PauseAudio()
