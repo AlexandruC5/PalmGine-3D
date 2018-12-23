@@ -206,6 +206,7 @@ void CompAudioSource::SetMusicSwapTimer(float new_time)
 
 void CompAudioSource::PlayAudio()
 {
+	this->StopAudio();
 	source->PlayEventByName(audio_to_play.c_str());
 	timer.Start();
 }
