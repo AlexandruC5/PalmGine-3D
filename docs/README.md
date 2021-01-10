@@ -126,7 +126,7 @@ Audio sub-system uses [Wwise](https://www.audiokinetic.com/products/wwise/) to r
 ## Demo Video
 
 Here you can see a short video showing PalmGine3D functionality.
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Q6bMaU0ab6Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://youtu.be/5aWU25UBkmc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 If video is not showing properly click [here](https://www.youtube.com/watch?v=Q6bMaU0ab6Y). 
 
